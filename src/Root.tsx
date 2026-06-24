@@ -11,7 +11,7 @@ const total = beats.reduce((s, b) => s + b.durationInFrames, 0);
 const beat00 = beats.find((b) => b.id === "00")!;
 const shortTotal = beat00.durationInFrames + outro.durationInFrames;
 
-const root = {background: C.bg, fontFamily: INTER};
+const root = {background: C.bg, fontFamily: INTER, color: C.text};
 
 const LongForm: React.FC = () => {
   let off = 0;

@@ -2,43 +2,43 @@
   {
     "id": "00",
     "audio": "audio/beat-00.mp3",
-    "durationSec": 23.17,
-    "durationInFrames": 703
+    "durationSec": 15.33,
+    "durationInFrames": 467
   },
   {
     "id": "01",
     "audio": "audio/beat-01.mp3",
-    "durationSec": 30.98,
-    "durationInFrames": 937
+    "durationSec": 23.75,
+    "durationInFrames": 720
   },
   {
     "id": "02",
     "audio": "audio/beat-02.mp3",
-    "durationSec": 42.08,
-    "durationInFrames": 1270
+    "durationSec": 38.05,
+    "durationInFrames": 1149
   },
   {
     "id": "03",
     "audio": "audio/beat-03.mp3",
-    "durationSec": 33.12,
-    "durationInFrames": 1001
+    "durationSec": 37.28,
+    "durationInFrames": 1126
   },
   {
     "id": "04",
     "audio": "audio/beat-04.mp3",
-    "durationSec": 30.35,
-    "durationInFrames": 918
+    "durationSec": 38.04,
+    "durationInFrames": 1149
   },
   {
     "id": "05",
     "audio": "audio/beat-05.mp3",
-    "durationSec": 27.72,
-    "durationInFrames": 839
+    "durationSec": 26.57,
+    "durationInFrames": 804
   },
   {
     "id": "07",
     "audio": "audio/beat-07.mp3",
-    "durationSec": 19.77,
-    "durationInFrames": 601
+    "durationSec": 16.21,
+    "durationInFrames": 494
   }
 ]

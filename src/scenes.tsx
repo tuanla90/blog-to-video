@@ -1,19 +1,35 @@
 import React from "react";
-import {AbsoluteFill, useCurrentFrame, interpolate, Easing} from "remotion";
-import {C, MONO, useVmin, useAt, useCount, Bg, FadeUp} from "./ui";
+import {AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Easing} from "remotion";
+import {C, MONO, useVmin, useCount, Bg, FadeUp} from "./ui";
 
 const clamp = {extrapolateLeft: "clamp" as const, extrapolateRight: "clamp" as const};
+type Win = [number, number];
 
-const Moment: React.FC<{from: number; to: number; d?: number; children: React.ReactNode; style?: any}> =
-({from, to, d = 12, children, style}) => {
+const useSteps = (weights: number[]): Win[] => {
+  const {durationInFrames: D} = useVideoConfig();
+  const tot = weights.reduce((a, b) => a + b, 0) || 1;
+  let acc = 0; const out: Win[] = [];
+  for (const w of weights) {
+    const a = acc / tot; acc += w;
+    out.push([Math.round(D * a), Math.round(D * acc / tot)]);
+  }
+  return out;
+};
+
+const Moment: React.FC<{win: Win; children: React.ReactNode; style?: any}> = ({win, children, style}) => {
   const f = useCurrentFrame();
-  const o = interpolate(f, [from, from + d, to - d, to], [0, 1, 1, 0], clamp);
-  const ty = interpolate(f, [from, from + d], [26, 0], {...clamp, easing: Easing.out(Easing.cubic)});
-  const bl = interpolate(f, [from, from + d * 0.7], [7, 0], clamp);
+  const [from, to] = win;
+  const IN = Math.min(11, Math.round((to - from) * 0.28));
+  const OUT = Math.min(9, Math.round((to - from) * 0.24));
+  const ease = {...clamp, easing: Easing.out(Easing.cubic)};
+  const o = interpolate(f, [from, from + IN, to - OUT, to], [0, 1, 1, 0], clamp);
+  const ty = interpolate(f, [from, from + IN, to - OUT, to], [36, 0, 0, -26], ease);
+  const sc = interpolate(f, [from, from + IN, to - OUT, to], [0.96, 1, 1, 1.035], ease);
+  const bl = interpolate(f, [from, from + IN, to - OUT, to], [10, 0, 0, 8], clamp);
   return (
     <AbsoluteFill style={{alignItems: "center", justifyContent: "center", textAlign: "center",
-      padding: "0 7%", opacity: o, transform: `translateY(${ty}px)`, filter: `blur(${bl}px)`,
-      letterSpacing: "-0.015em", ...style}}>
+      padding: "0 7%", opacity: o, transform: `translateY(${ty}px) scale(${sc})`,
+      filter: `blur(${bl}px)`, letterSpacing: "-0.015em", ...style}}>
       {children}
     </AbsoluteFill>
   );
@@ -56,37 +72,42 @@ const Label: React.FC<{v: number; children: React.ReactNode}> = ({v, children}) 
 
 // ---------- BEAT 00 — clash ----------
 export const Scene00: React.FC = () => {
-  const v = useVmin(); const at = useAt();
-  const sales = useCount(at(0.30), 16, 0, 4.2);
-  const ke = useCount(at(0.34), 16, 0, 3.8);
+  const v = useVmin();
+  const S = useSteps([28, 38, 15, 19]);
   const f = useCurrentFrame();
-  const shake = interpolate(f, [at(0.62), at(0.66), at(0.70)], [0, 1, 0], clamp);
+  const sales = useCount(S[1][0] + 6, 18, 0, 4.2);
+  const ke = useCount(S[1][0] + 10, 18, 0, 3.8);
+  const shake = interpolate(f, [S[2][0], S[2][0] + 4, S[2][0] + 9], [0, 1, 0], clamp);
   return (
     <AbsoluteFill>
       <Bg label="SEMANTIX · DATA 101" />
-      <Moment from={at(0.0)} to={at(0.30)}>
+      <Moment win={S[0]}>
         <Label v={v}>SÁNG THỨ HAI · GIAO BAN</Label>
         <Big v={v} size={5.4}>“Doanh thu tháng này<br />bao nhiêu?”</Big>
       </Moment>
-      <Moment from={at(0.28)} to={at(0.62)}>
-        <div style={{display: "flex", gap: 5 * v, transform: `translateX(${shake * 6 - 3}px)`}}>
+      <Moment win={S[1]}>
+        <div style={{display: "flex", gap: 5 * v, transform: `translateX(${shake * 5 - 2.5}px)`}}>
           <Card v={v} label="Sales" value={vnd(sales)} color={C.accent} />
           <Card v={v} label="Kế toán" value={vnd(ke)} color={C.warn} />
         </div>
-        <div style={{color: C.muted, fontSize: 2.4 * v, marginTop: 4 * v}}>Cùng một công ty. Cùng một tháng.</div>
+        <FadeUp at={S[1][0] + 24} style={{color: C.muted, fontSize: 2.4 * v, marginTop: 4 * v}}>
+          Cùng một công ty. Cùng một tháng.
+        </FadeUp>
       </Moment>
-      <Moment from={at(0.60)} to={at(0.80)}>
-        <Big v={v} size={11} color={C.bad} style={{letterSpacing: 2}}>AI SAI?</Big>
+      <Moment win={S[2]}>
+        <Big v={v} size={11.5} color={C.bad} style={{letterSpacing: 2}}>AI SAI?</Big>
       </Moment>
-      <Moment from={at(0.78)} to={at(1.0)}>
+      <Moment win={S[3]}>
         <Big v={v} size={8}>KHÔNG AI<br />SAI CẢ</Big>
-        <div style={{color: C.muted, fontSize: 2.3 * v, marginTop: 3 * v}}>Cả ba đều đúng — theo định nghĩa của mình.</div>
+        <FadeUp at={S[3][0] + 14} style={{color: C.muted, fontSize: 2.3 * v, marginTop: 3 * v}}>
+          Cả ba đều đúng — theo định nghĩa của mình.
+        </FadeUp>
       </Moment>
     </AbsoluteFill>
   );
 };
 
-// ---------- BEAT 01 — concept / cube ----------
+// ---------- BEAT 01 — concept / cube (KPI tách khỏi khối) ----------
 const SlicesCube: React.FC<{v: number}> = ({v}) => {
   const f = useCurrentFrame();
   const ry = interpolate(f, [0, 200], [-22, 22]);
@@ -104,71 +125,91 @@ const SlicesCube: React.FC<{v: number}> = ({v}) => {
   );
 };
 export const Scene01: React.FC = () => {
-  const v = useVmin(); const at = useAt();
+  const v = useVmin();
+  const S = useSteps([28, 34, 38]);
   return (
     <AbsoluteFill>
       <Bg label="KHÁI NIỆM · RUBIK DỮ LIỆU" />
-      <Moment from={at(0.0)} to={at(0.32)}>
+      <Moment win={S[0]}>
         <Big v={v} size={4.6} color={C.muted}>Hiếm khi là cộng sai.</Big>
         <Big v={v} size={5.2} style={{marginTop: 2 * v}}>Ba người gọi <span style={{color: C.accent}}>ba thứ khác nhau</span><br />bằng đúng một từ.</Big>
       </Moment>
-      <Moment from={at(0.30)} to={at(0.66)}>
+      <Moment win={S[1]}>
         <div style={{display: "flex", gap: 3 * v, marginBottom: 6 * v}}>
-          <Chip t="METRIC" color={C.accent} v={v} />
-          <Chip t="DIMENSION" color={C.good} v={v} />
-          <Chip t="KPI" color={C.warn} v={v} />
+          {[["METRIC", C.accent], ["DIMENSION", C.good], ["KPI", C.warn]].map(([t, c], i) => (
+            <FadeUp key={t} at={S[1][0] + 6 + i * 6}><Chip t={t as string} color={c as string} v={v} /></FadeUp>
+          ))}
         </div>
         <SlicesCube v={v} />
-        <div style={{color: C.muted, fontSize: 2.4 * v, marginTop: 4 * v}}>Ba từ — ba việc hoàn toàn khác nhau.</div>
       </Moment>
-      <Moment from={at(0.64)} to={at(1.0)}>
-        <div style={{display: "grid", gap: 2.4 * v, textAlign: "left", fontSize: 3 * v, fontWeight: 700}}>
-          <div><span style={{color: C.accent}}>Metric</span> — con số trên mặt khối.</div>
-          <div><span style={{color: C.good}}>Dimension</span> — cách bạn xoay khối.</div>
-          <div><span style={{color: C.warn}}>KPI</span> — vạch mục tiêu trên tường.</div>
+      <Moment win={S[2]}>
+        <div style={{display: "grid", gap: 2.4 * v, textAlign: "left", fontSize: 2.9 * v, fontWeight: 700}}>
+          {[["Metric", C.accent, "con số trên mặt khối."],
+            ["Dimension", C.good, "cách bạn xoay khối để nhìn."],
+            ["KPI", C.warn, "không nằm trên khối — là cái đích phải chạm tới."]].map(([k, c, t], i) => (
+            <FadeUp key={k as string} at={S[2][0] + 6 + i * 9}>
+              <span style={{color: c as string, fontWeight: 800}}>{k}</span> — {t}
+            </FadeUp>
+          ))}
         </div>
       </Moment>
     </AbsoluteFill>
   );
 };
 
-// ---------- BEAT 02 — metric split ----------
+// ---------- BEAT 02 — metric: định nghĩa → chốt 3,8 ----------
 export const Scene02: React.FC = () => {
-  const v = useVmin(); const at = useAt();
+  const v = useVmin();
+  const S = useSteps([16, 10, 28, 22, 12, 16]);
   const traps = ["Đã chốt hay đã thu?", "Có trừ đơn hoàn?", "Có gồm phí ship?"];
   return (
     <AbsoluteFill>
       <Bg label="METRIC" />
-      <Moment from={at(0.0)} to={at(0.22)}>
+      <Moment win={S[0]}>
         <Big v={v} size={5.2}><span style={{color: C.accent}}>Metric</span> = một con số đo được.</Big>
-        <div style={{color: C.muted, fontSize: 2.4 * v, marginTop: 3 * v}}>Doanh thu · Số đơn · Khách mới</div>
+        <FadeUp at={S[0][0] + 12} style={{color: C.muted, fontSize: 2.4 * v, marginTop: 3 * v}}>Doanh thu · Số đơn · Khách mới</FadeUp>
       </Moment>
-      <Moment from={at(0.20)} to={at(0.30)}>
+      <Moment win={S[1]}>
         <Big v={v} size={5.6}>Nhưng cái bẫy<br />nằm ngay đây.</Big>
       </Moment>
-      <Moment from={at(0.28)} to={at(0.60)}>
+      <Moment win={S[2]}>
         <Big v={v} size={4.4} style={{marginBottom: 4 * v}}>“Doanh thu” — hỏi 5 người:</Big>
         <div style={{display: "grid", gap: 2 * v}}>
           {traps.map((t, i) => (
-            <FadeUp key={i} at={at(0.30 + i * 0.07)}
+            <FadeUp key={i} at={S[2][0] + 12 + i * 10}
               style={{fontFamily: MONO, color: C.warn, fontSize: 2.8 * v, fontWeight: 700}}>{t}</FadeUp>
           ))}
         </div>
       </Moment>
-      <Moment from={at(0.58)} to={at(0.84)}>
+      <Moment win={S[3]}>
         <div style={{display: "flex", gap: 5 * v}}>
           <Card v={v} label="Sales" value="4,2 tỷ" color={C.accent} sub="gồm ship · chưa trừ hoàn" />
           <Card v={v} label="Kế toán" value="3,8 tỷ" color={C.warn} sub="đã thu · trừ hoàn · không ship" />
         </div>
       </Moment>
-      <Moment from={at(0.82)} to={at(1.0)}>
-        <Big v={v} size={5.2}>Hai metric khác nhau —<br /><span style={{color: C.bad}}>chung một cái tên.</span></Big>
+      <Moment win={S[4]}>
+        <Big v={v} size={5.2}>Hai <span style={{color: C.bad}}>định nghĩa</span> khác nhau —<br />chung một cái tên.</Big>
+      </Moment>
+      <Moment win={S[5]}>
+        <Label v={v}>CHỐT MỘT ĐỊNH NGHĨA</Label>
+        <Card v={v} label="Cả công ty đồng ý" value="3,8 tỷ" color={C.good} sub="đã thu · đã trừ hoàn" />
       </Moment>
     </AbsoluteFill>
   );
 };
 
-// ---------- BEAT 03 — dimension bars ----------
+// ---------- BEAT 03 — dimension: CỘT NGÀY đổi số, rồi cắt theo kênh ----------
+const DateCard: React.FC<{dept: string; col: string; month: string; color: string; v: number}> =
+({dept, col, month, color, v}) => (
+  <div style={{background: `linear-gradient(160deg, ${C.cardHi}, ${C.card})`, border: `1px solid ${C.border}`,
+    borderRadius: 2 * v, padding: `${2 * v}px ${2.4 * v}px`, minWidth: 24 * v,
+    boxShadow: `0 ${1.2 * v}px ${3 * v}px rgba(0,0,0,0.45), 0 0 ${4 * v}px ${color}22`}}>
+    <div style={{color: C.text, fontSize: 2 * v, fontWeight: 700}}>{dept}</div>
+    <div style={{color: C.muted, fontSize: 1.6 * v, marginBottom: 1.2 * v}}>theo {col}</div>
+    <div style={{fontFamily: MONO, color, fontSize: 4.4 * v, fontWeight: 800,
+      textShadow: `0 0 ${2 * v}px ${color}66`}}>{month}</div>
+  </div>
+);
 const Bar: React.FC<{h: number; color: string; label: string; value: string; v: number}> =
 ({h, color, label, value, v}) => (
   <div style={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-end"}}>
@@ -180,95 +221,122 @@ const Bar: React.FC<{h: number; color: string; label: string; value: string; v: 
   </div>
 );
 export const Scene03: React.FC = () => {
-  const v = useVmin(); const at = useAt();
-  const g = useCount(at(0.46), 24, 0, 1);
+  const v = useVmin();
+  const S = useSteps([13, 36, 16, 35]);
+  const g = useCount(S[3][0] + 6, 22, 0, 1);
   return (
     <AbsoluteFill>
       <Bg label="DIMENSION" />
-      <Moment from={at(0.0)} to={at(0.26)}>
-        <Big v={v} size={5}><span style={{color: C.good}}>Dimension</span> = lát cắt,<br />không phải con số.</Big>
+      <Moment win={S[0]}>
+        <Big v={v} size={5.4}>Tưởng chốt định nghĩa<br />là xong? <span style={{color: C.warn}}>Chưa.</span></Big>
       </Moment>
-      <Moment from={at(0.24)} to={at(0.46)}>
-        <Bar h={26 * v} color={C.muted} label="Tổng" value="3,8 tỷ" v={v} />
-        <div style={{color: C.muted, fontSize: 2.3 * v, marginTop: 4 * v}}>Con số tổng → gần như vô dụng để quyết định.</div>
+      <Moment win={S[1]}>
+        <FadeUp at={S[1][0] + 6}>
+          <Chip t="CÙNG 1 ĐƠN — ĐỊNH NGHĨA Y HỆT" color={C.muted} v={v} />
+        </FadeUp>
+        <div style={{display: "flex", gap: 3 * v, marginTop: 4 * v}}>
+          {[["Kinh doanh", "ngày tạo đơn", "Th5", C.accent],
+            ["Kế toán", "ngày thanh toán", "Th6", C.good],
+            ["Vận hành", "ngày giao xong", "Th7", C.warn]].map((r, i) => (
+            <FadeUp key={i} at={S[1][0] + 14 + i * 9}>
+              <DateCard dept={r[0]} col={r[1]} month={r[2]} color={r[3]} v={v} />
+            </FadeUp>
+          ))}
+        </div>
+        <FadeUp at={S[1][0] + 42} style={{color: C.muted, fontSize: 2.2 * v, marginTop: 4 * v}}>
+          Cùng một đơn — rơi vào ba tháng khác nhau.
+        </FadeUp>
       </Moment>
-      <Moment from={at(0.44)} to={at(0.82)}>
+      <Moment win={S[2]}>
+        <Big v={v} size={4.8}>Cột ngày bạn chọn <span style={{color: C.good}}>cũng là dimension</span>.<br /><span style={{color: C.bad}}>Và nó đổi cả con số.</span></Big>
+      </Moment>
+      <Moment win={S[3]}>
         <div style={{display: "flex", gap: 7 * v, alignItems: "flex-end"}}>
           <Bar h={(8 + 20 * g) * v} color={C.accent} label="Shopee" value="1,9" v={v} />
           <Bar h={(6 + 15 * g) * v} color={C.good} label="TikTok Shop" value="1,4" v={v} />
           <Bar h={(4 + 5 * g) * v} color={C.warn} label="KiotViet" value="0,5" v={v} />
         </div>
-        <div style={{color: C.muted, fontSize: 2.1 * v, marginTop: 3.5 * v}}>Cắt theo kênh → lập tức kể một câu chuyện.</div>
-      </Moment>
-      <Moment from={at(0.80)} to={at(1.0)}>
-        <Big v={v} size={5}>Giờ bạn mới biết<br /><span style={{color: C.good}}>dồn ngân sách vào đâu.</span></Big>
+        <FadeUp at={S[3][0] + 30} style={{color: C.muted, fontSize: 2.1 * v, marginTop: 3.5 * v}}>
+          Chốt cột ngày → cắt theo kênh → thành câu chuyện.
+        </FadeUp>
       </Moment>
     </AbsoluteFill>
   );
 };
 
-// ---------- BEAT 04 — KPI target ----------
+// ---------- BEAT 04 — KPI (dẫn liền mạch: đo đúng để làm gì → mục tiêu) ----------
 export const Scene04: React.FC = () => {
-  const v = useVmin(); const at = useAt();
-  const pct = useCount(at(0.24), 26, 0, 95);
-  const barH = useCount(at(0.24), 26, 2, 23);
+  const v = useVmin();
+  const S = useSteps([13, 18, 16, 26, 14, 13]);
+  const pct = useCount(S[3][0] + 8, 26, 0, 95);
+  const barH = useCount(S[3][0] + 8, 26, 2, 23);
   return (
     <AbsoluteFill>
       <Bg label="KPI" />
-      <Moment from={at(0.0)} to={at(0.22)}>
-        <Big v={v} size={5}>Không phải metric nào<br />cũng là <span style={{color: C.warn}}>KPI</span>.</Big>
+      <Moment win={S[0]}>
+        <Big v={v} size={5}>Cả công ty cùng một số:<br /><span style={{color: C.good}}>3,8 tỷ</span>. Hết cãi.</Big>
       </Moment>
-      <Moment from={at(0.20)} to={at(0.54)}>
+      <Moment win={S[1]}>
+        <Big v={v} size={5}>Đo đúng rồi — để làm gì?</Big>
+        <FadeUp at={S[1][0] + 14}><Big v={v} size={5.4} style={{marginTop: 2.5 * v}}>3,8 — <span style={{color: C.warn}}>tốt hay chưa?</span></Big></FadeUp>
+      </Moment>
+      <Moment win={S[2]}>
+        <Big v={v} size={4.6} color={C.muted}>Một con số đứng một mình<br />không có tốt hay xấu.</Big>
+        <FadeUp at={S[2][0] + 14}><Big v={v} size={4.8} style={{marginTop: 2.5 * v}}>Cần đặt cạnh <span style={{color: C.warn}}>một mục tiêu</span>.</Big></FadeUp>
+      </Moment>
+      <Moment win={S[3]}>
         <div style={{position: "relative", height: 30 * v, display: "flex", alignItems: "flex-end"}}>
           <div style={{position: "absolute", bottom: 26 * v, width: 34 * v, left: -6 * v,
             borderTop: `2px dashed ${C.good}`}} />
           <div style={{position: "absolute", bottom: 26.5 * v, right: -10 * v, color: C.good,
             fontSize: 2 * v, fontWeight: 700}}>Mục tiêu 4 tỷ</div>
-          <div style={{width: 12 * v, height: barH * v, background: C.accent, borderRadius: 1 * v,
-            boxShadow: `0 0 ${3 * v}px ${C.accent}66`}} />
+          <div style={{width: 12 * v, height: barH * v, borderRadius: `${1 * v}px ${1 * v}px 0 0`,
+            background: `linear-gradient(180deg, ${C.accent}, ${C.accent}aa)`,
+            boxShadow: `0 0 ${3 * v}px ${C.accent}77, inset 0 ${1.4 * v}px 0 rgba(255,255,255,0.2)`}} />
         </div>
-        <div style={{fontFamily: MONO, fontSize: 6 * v, fontWeight: 800, color: C.good, marginTop: 3 * v}}>
-          {Math.round(pct)}%
-        </div>
-        <div style={{color: C.muted, fontSize: 2.1 * v}}>3,8 tỷ / 4 tỷ — giờ con số có một cái thước.</div>
+        <div style={{fontFamily: MONO, fontSize: 6 * v, fontWeight: 800, color: C.good, marginTop: 3 * v,
+          textShadow: `0 0 ${2.4 * v}px ${C.good}66`}}>{Math.round(pct)}%</div>
+        <div style={{color: C.muted, fontSize: 2.1 * v}}>KPI = số bạn phải ĐẠT, không phải số bạn đo.</div>
       </Moment>
-      <Moment from={at(0.52)} to={at(0.80)}>
+      <Moment win={S[4]}>
         <div style={{display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: 1.4 * v, marginBottom: 4 * v}}>
           {Array.from({length: 30}).map((_, i) => {
             const keep = i % 5 === 0;
             return <div key={i} style={{width: 5 * v, height: 5 * v, borderRadius: 1 * v,
               background: keep ? C.warn : C.card, border: `1px solid ${keep ? C.warn : C.border}`,
-              opacity: keep ? 1 : 0.25}} />;
+              opacity: keep ? 1 : 0.25, boxShadow: keep ? `0 0 ${1.6 * v}px ${C.warn}66` : "none"}} />;
           })}
         </div>
         <Big v={v} size={4}>Chọn <span style={{color: C.warn}}>5–10 KPI</span> — không phải 30.</Big>
       </Moment>
-      <Moment from={at(0.78)} to={at(1.0)}>
+      <Moment win={S[5]}>
         <Big v={v} size={4.8}>Mọi thứ đều then chốt<br />= <span style={{color: C.bad}}>không gì then chốt.</span></Big>
       </Moment>
     </AbsoluteFill>
   );
 };
 
-// ---------- BEAT 05 — replay ----------
+// ---------- BEAT 05 — replay (dimension = CỘT NGÀY) ----------
 export const Scene05: React.FC = () => {
-  const v = useVmin(); const at = useAt();
+  const v = useVmin();
+  const S = useSteps([20, 50, 30]);
   const rows = [
-    {n: "1", tag: "METRIC", color: C.accent, t: "“doanh thu” chưa có định nghĩa chung"},
-    {n: "2", tag: "DIMENSION", color: C.good, t: "mỗi người cầm một lát cắt khác"},
+    {n: "1", tag: "METRIC", color: C.accent, t: "chưa có một định nghĩa chung"},
+    {n: "2", tag: "DIMENSION", color: C.good, t: "mỗi phòng chọn một cột ngày khác"},
     {n: "3", tag: "KPI", color: C.warn, t: "không ai chốt mục tiêu để đối chiếu"},
   ];
   return (
     <AbsoluteFill>
       <Bg label="ĐỌC LẠI CUỘC CÃI VÃ" />
-      <Moment from={at(0.0)} to={at(0.2)}>
+      <Moment win={S[0]}>
         <Big v={v} size={5.2}>Cùng một cuộc cãi —<br />đọc lại bằng <span style={{color: C.accent}}>ba từ</span>.</Big>
       </Moment>
-      <Moment from={at(0.18)} to={at(0.70)}>
+      <Moment win={S[1]}>
         <div style={{display: "grid", gap: 3 * v, textAlign: "left"}}>
           {rows.map((r, i) => (
-            <FadeUp key={i} at={at(0.22 + i * 0.10)} style={{display: "flex", alignItems: "center", gap: 3 * v}}>
-              <div style={{fontFamily: MONO, color: r.color, fontSize: 4 * v, fontWeight: 800}}>{r.n}</div>
+            <FadeUp key={i} at={S[1][0] + 8 + i * 14} style={{display: "flex", alignItems: "center", gap: 3 * v}}>
+              <div style={{fontFamily: MONO, color: r.color, fontSize: 4 * v, fontWeight: 800,
+                textShadow: `0 0 ${2 * v}px ${r.color}66`}}>{r.n}</div>
               <div>
                 <div style={{color: r.color, fontWeight: 800, fontSize: 2.4 * v, letterSpacing: 1}}>{r.tag}</div>
                 <div style={{color: C.text, fontSize: 2.6 * v}}>{r.t}</div>
@@ -277,7 +345,7 @@ export const Scene05: React.FC = () => {
           ))}
         </div>
       </Moment>
-      <Moment from={at(0.66)} to={at(1.0)}>
+      <Moment win={S[2]}>
         <Big v={v} size={4.6}><span style={{color: C.accent}}>Metric nào</span> · <span style={{color: C.good}}>Dimension nào</span> · <span style={{color: C.warn}}>KPI nào?</span></Big>
       </Moment>
     </AbsoluteFill>
@@ -286,22 +354,24 @@ export const Scene05: React.FC = () => {
 
 // ---------- BEAT 07 — recap + CTA ----------
 export const Scene07: React.FC = () => {
-  const v = useVmin(); const at = useAt();
+  const v = useVmin();
+  const S = useSteps([50, 30, 20]);
   const rows = [
     {k: "Metric", color: C.accent, a: "Đại lượng đo được", b: "Doanh thu, số đơn"},
-    {k: "Dimension", color: C.good, a: "Lát cắt để nhìn", b: "Theo kênh, theo tháng"},
+    {k: "Dimension", color: C.good, a: "Lát cắt để nhìn", b: "Theo kênh · cột ngày"},
     {k: "KPI", color: C.warn, a: "Metric + mục tiêu", b: "“Đạt 4 tỷ — hiện 95%”"},
   ];
   return (
     <AbsoluteFill>
       <Bg label="TÓM LẠI" />
-      <Moment from={at(0.0)} to={at(0.5)}>
+      <Moment win={S[0]}>
         <div style={{display: "grid", gap: 2 * v}}>
           {rows.map((r, i) => (
-            <FadeUp key={i} at={at(0.05 + i * 0.10)}
+            <FadeUp key={i} at={S[0][0] + 6 + i * 12}
               style={{display: "grid", gridTemplateColumns: `${22 * v}px ${30 * v}px ${34 * v}px`,
-                gap: 2 * v, alignItems: "center", background: C.card, border: `1px solid ${C.border}`,
-                borderRadius: 1.6 * v, padding: `${2 * v}px ${2.6 * v}px`, textAlign: "left"}}>
+                gap: 2 * v, alignItems: "center", background: `linear-gradient(160deg, ${C.cardHi}, ${C.card})`,
+                border: `1px solid ${C.border}`, borderRadius: 1.6 * v, padding: `${2 * v}px ${2.6 * v}px`,
+                textAlign: "left", boxShadow: `0 ${1 * v}px ${3 * v}px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)`}}>
               <div style={{color: r.color, fontWeight: 800, fontSize: 2.8 * v}}>{r.k}</div>
               <div style={{color: C.text, fontSize: 2.2 * v}}>{r.a}</div>
               <div style={{color: C.muted, fontSize: 2 * v}}>{r.b}</div>
@@ -309,10 +379,10 @@ export const Scene07: React.FC = () => {
           ))}
         </div>
       </Moment>
-      <Moment from={at(0.46)} to={at(0.78)}>
+      <Moment win={S[1]}>
         <Big v={v} size={4.8}><span style={{color: C.accent}}>Metric nào</span> · <span style={{color: C.good}}>Dimension nào</span> · <span style={{color: C.warn}}>KPI nào?</span></Big>
       </Moment>
-      <Moment from={at(0.74)} to={at(1.0)}>
+      <Moment win={S[2]}>
         <div style={{display: "inline-flex", alignItems: "center", gap: 2 * v, border: `2px solid ${C.accent}`,
           color: C.accent, borderRadius: 100, padding: `${1.6 * v}px ${3.4 * v}px`, fontSize: 2.6 * v,
           fontWeight: 800, boxShadow: `0 0 ${3 * v}px ${C.accent}55`}}>▶ Theo dõi</div>
@@ -323,21 +393,22 @@ export const Scene07: React.FC = () => {
   );
 };
 
-// ---------- SHORT OUTRO — bridge to full video ----------
+// ---------- SHORT OUTRO ----------
 export const OutroShort: React.FC = () => {
-  const v = useVmin(); const at = useAt();
+  const v = useVmin();
+  const S = useSteps([48, 52]);
   return (
     <AbsoluteFill>
       <Bg label="SEMANTIX · DATA 101" />
-      <Moment from={at(0.0)} to={at(0.5)}>
+      <Moment win={S[0]}>
         <Big v={v} size={4.4} color={C.muted} style={{marginBottom: 4 * v}}>Câu trả lời nằm ở 3 từ:</Big>
         <div style={{display: "flex", flexDirection: "column", gap: 2.4 * v}}>
-          <Chip t="METRIC" color={C.accent} v={v} />
-          <Chip t="DIMENSION" color={C.good} v={v} />
-          <Chip t="KPI" color={C.warn} v={v} />
+          {[["METRIC", C.accent], ["DIMENSION", C.good], ["KPI", C.warn]].map(([t, c], i) => (
+            <FadeUp key={t} at={S[0][0] + 8 + i * 8}><Chip t={t as string} color={c as string} v={v} /></FadeUp>
+          ))}
         </div>
       </Moment>
-      <Moment from={at(0.46)} to={at(1.0)}>
+      <Moment win={S[1]}>
         <div style={{display: "inline-flex", alignItems: "center", gap: 2 * v, border: `2px solid ${C.accent}`,
           color: C.accent, borderRadius: 100, padding: `${1.8 * v}px ${3.6 * v}px`, fontSize: 3 * v,
           fontWeight: 800, boxShadow: `0 0 ${3 * v}px ${C.accent}55`}}>▶ Xem đầy đủ trên YouTube</div>
