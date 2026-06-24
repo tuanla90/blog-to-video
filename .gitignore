@@ -1,0 +1,6 @@
+node_modules/
+out/
+public/audio/
+.venv-whisper/
+__pycache__/
+*.pyc
