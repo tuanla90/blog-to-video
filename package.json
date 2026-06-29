@@ -3,15 +3,19 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "render:short": "remotion render Short out/metric-short.mp4",
-    "render:long": "remotion render LongForm out/metric-long.mp4"
+    "registry": "node scripts/gen-registry.mjs",
+    "studio": "remotion studio src/index.ts",
+    "edit": "node scripts/edit-server.mjs",
+    "build": "python scripts/build.py"
   },
   "dependencies": {
     "@remotion/cli": "4.0.290",
     "@remotion/google-fonts": "4.0.290",
-    "remotion": "4.0.290",
+    "@remotion/lottie": "^4.0.290",
+    "lottie-web": "^5.13.0",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "remotion": "4.0.290"
   },
   "devDependencies": {
     "@types/react": "19.0.0",

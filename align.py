@@ -1,12 +1,25 @@
 # Forced-align known text to Vbee audio using energy VAD (no ML).
+# Usage: python align.py <slug>
+#   reads videos/<slug>/content.py (BEATS, ORDER) + public/audio/<slug>/*.mp3
+#   writes videos/<slug>/timings.json
 # v2: maps words onto VOICED time only (skips internal pauses -> tight sync),
 #     and groups captions into BALANCED lines (no orphan single-word lines).
-import json, re, sys
+import json, re, sys, os, importlib.util
 import numpy as np
 import av
-from content import BEATS, ORDER
 
 MAXPERLINE = 5
+
+if len(sys.argv) < 2:
+    raise SystemExit("usage: python align.py <slug>")
+SLUG = sys.argv[1]
+
+def load_content(slug):
+    path = os.path.join("videos", slug, "content.py")
+    spec = importlib.util.spec_from_file_location(f"content_{slug.replace('-', '_')}", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.BEATS, mod.ORDER
 
 def decode_mono(path):
     container = av.open(path)
@@ -53,7 +66,6 @@ def map_to_voiced(weights, segs):
     durs = [e - s for s, e in segs]
     V = sum(durs) or 1.0
     tot = sum(weights) or 1.0
-    # prefix voiced->real time mapper
     def voiced_to_real(vt):
         acc = 0.0
         for (s, e), d in zip(segs, durs):
@@ -76,7 +88,6 @@ def build(text):
     return words, weights
 
 def group_lines(words, times):
-    # split into sentences at terminal punctuation, then balance each into <=MAXPERLINE lines
     sents = []; cur = []
     for w, t in zip(words, times):
         cur.append((w, t))
@@ -98,14 +109,18 @@ def group_lines(words, times):
             })
     return lines
 
+BEATS, ORDER = load_content(SLUG)
+audio_dir = os.path.join("public", "audio", SLUG)
+ids = ORDER + (["short-outro"] if "short-outro" in BEATS else [])
 out = {}
-for bid in ORDER + ["short-outro"]:
-    fn = f"public/audio/{'short-outro' if bid=='short-outro' else 'beat-'+bid}.mp3"
+for bid in ids:
+    fn = os.path.join(audio_dir, ("short-outro" if bid == "short-outro" else "beat-" + bid) + ".mp3")
     sig, sr = decode_mono(fn)
     segs = voiced_segments(sig, sr)
     words, weights = build(BEATS[bid])
     times = map_to_voiced(weights, segs)
     out[bid] = group_lines(words, times)
     sys.stdout.buffer.write((f"{bid}: {len(segs)} voiced segs, {len(words)} words, {len(out[bid])} lines\n").encode())
-json.dump(out, open("src/timings.json", "w", encoding="utf-8"), ensure_ascii=False)
-print("wrote src/timings.json")
+dest = os.path.join("videos", SLUG, "timings.json")
+json.dump(out, open(dest, "w", encoding="utf-8"), ensure_ascii=False)
+print("wrote " + dest)

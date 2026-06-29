@@ -2,6 +2,7 @@ import React from "react";
 import {AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Easing} from "remotion";
 import {loadFont as loadInter} from "@remotion/google-fonts/Inter";
 import {loadFont as loadMono} from "@remotion/google-fonts/JetBrainsMono";
+import {BRAND} from "./brand";
 
 // Vietnamese subset is REQUIRED or dấu becomes tofu boxes.
 const inter = loadInter("normal", {weights: ["400", "600", "700", "800"], subsets: ["latin", "vietnamese"]});
@@ -14,7 +15,7 @@ export const MONO = `${mono.fontFamily}, ${inter.fontFamily}, monospace`;
 export const C = {
   bg: "#08090C", card: "#15171C", cardHi: "#1B1E25", border: "#2A2D36",
   text: "#FAFAFA", muted: "#9CA3AF",
-  accent: "#3B82F6", good: "#00BC7D", warn: "#FE9A00", bad: "#FF6467", purple: "#AD46FF",
+  accent: BRAND.accent, good: "#00BC7D", warn: "#FE9A00", bad: "#FF6467", purple: "#AD46FF",
 };
 
 export const useVmin = () => {
@@ -77,10 +78,11 @@ const Orb: React.FC<{color: string; x: number; y: number; size: number; phase: n
   );
 };
 
-export const Bg: React.FC<{label?: string}> = ({label}) => {
+export const Bg: React.FC<{label?: string; base?: string}> = ({label, base}) => {
   const vmin = useVmin();
+  const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{background: `radial-gradient(120% 90% at 50% 38%, #101218 0%, ${C.bg} 60%, #050609 100%)`}}>
+    <AbsoluteFill style={{background: base ?? `radial-gradient(120% 90% at 50% 38%, #101218 0%, ${C.bg} 60%, #050609 100%)`}}>
       <Orb color={C.accent} x={26} y={32} size={62} phase={0} op={0.18} />
       <Orb color={C.purple} x={80} y={70} size={55} phase={2.2} op={0.12} />
       <Orb color={C.good} x={68} y={20} size={40} phase={4.1} op={0.08} amp={4} />
@@ -93,6 +95,21 @@ export const Bg: React.FC<{label?: string}> = ({label}) => {
       <AbsoluteFill style={{background: "radial-gradient(circle at 50% 42%, transparent 35%, rgba(0,0,0,0.55) 88%)"}} />
       <AbsoluteFill style={{backgroundImage: `url("${GRAIN}")`, backgroundSize: `${30 * vmin}px`,
         opacity: 0.05, mixBlendMode: "overlay"}} />
+      {/* drifting data particles — decorative (bokeh + sharp, clearly visible) */}
+      <AbsoluteFill style={{pointerEvents: "none"}}>
+        {Array.from({length: 26}).map((_, i) => {
+          const big = i % 4 === 0;
+          const px = (i * 47.3) % 100;
+          const py = 100 - ((f * (0.05 + (i % 5) * 0.012) + i * 13) % 118);
+          const sway = Math.sin(f / 60 + i) * 2.2;
+          const sz = (big ? 0.9 : 0.42) * vmin;
+          const op = (big ? 0.42 : 0.62) * (0.6 + 0.4 * Math.sin(f / 45 + i * 1.7));
+          const col = i % 3 === 0 ? C.accent : i % 5 === 0 ? C.good : i % 11 === 0 ? C.warn : C.purple;
+          return <div key={i} style={{position: "absolute", left: `${(px + sway + 100) % 100}%`, top: `${py}%`,
+            width: sz, height: sz, borderRadius: "50%", background: col, opacity: op,
+            filter: big ? `blur(${0.25 * vmin}px)` : "none", boxShadow: `0 0 ${sz * (big ? 2.4 : 1.6)}px ${col}`}} />;
+        })}
+      </AbsoluteFill>
       {label && (
         <div style={{position: "absolute", top: 5 * vmin, left: 6 * vmin, fontFamily: MONO,
           color: C.muted, fontSize: 1.7 * vmin, letterSpacing: 4, fontWeight: 600, opacity: 0.7}}>
@@ -103,9 +120,11 @@ export const Bg: React.FC<{label?: string}> = ({label}) => {
   );
 };
 
+// padding-bottom > top: đẩy nội dung lên khỏi vùng YouTube che (thanh tiến trình/timestamp
+// đáy ~8%, end-screen 20s cuối). Nội dung canh giữa-trên cho title-safe.
 export const Stage: React.FC<{children: React.ReactNode}> = ({children}) => (
   <AbsoluteFill style={{fontFamily: INTER, color: C.text, alignItems: "center",
-    justifyContent: "center", textAlign: "center", padding: "0 7%", letterSpacing: "-0.01em"}}>
+    justifyContent: "center", textAlign: "center", padding: "2% 7% 8%", letterSpacing: "-0.01em"}}>
     {children}
   </AbsoluteFill>
 );

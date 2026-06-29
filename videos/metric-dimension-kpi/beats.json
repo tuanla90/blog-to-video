@@ -1,0 +1,44 @@
+[
+  {
+    "id": "00",
+    "audio": "audio/metric-dimension-kpi/beat-00.mp3",
+    "durationSec": 21.94,
+    "durationInFrames": 680
+  },
+  {
+    "id": "01",
+    "audio": "audio/metric-dimension-kpi/beat-01.mp3",
+    "durationSec": 25.4,
+    "durationInFrames": 783
+  },
+  {
+    "id": "02",
+    "audio": "audio/metric-dimension-kpi/beat-02.mp3",
+    "durationSec": 43.6,
+    "durationInFrames": 1329
+  },
+  {
+    "id": "03",
+    "audio": "audio/metric-dimension-kpi/beat-03.mp3",
+    "durationSec": 33.07,
+    "durationInFrames": 1013
+  },
+  {
+    "id": "04",
+    "audio": "audio/metric-dimension-kpi/beat-04.mp3",
+    "durationSec": 29.27,
+    "durationInFrames": 900
+  },
+  {
+    "id": "05",
+    "audio": "audio/metric-dimension-kpi/beat-05.mp3",
+    "durationSec": 26.4,
+    "durationInFrames": 813
+  },
+  {
+    "id": "07",
+    "audio": "audio/metric-dimension-kpi/beat-07.mp3",
+    "durationSec": 23.33,
+    "durationInFrames": 721
+  }
+]

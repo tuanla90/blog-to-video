@@ -2,5 +2,8 @@ node_modules/
 out/
 public/audio/
 .venv-whisper/
+.venv-tts/
 __pycache__/
 *.pyc
+.env
+src/videos.gen.ts

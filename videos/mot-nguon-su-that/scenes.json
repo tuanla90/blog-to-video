@@ -1,0 +1,164 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "moments": [
+      {"w": 24, "gap": 3, "stack": [
+        {"el": "label", "text": "SÁNG THỨ HAI · GIAO BAN"},
+        {"el": "text", "value": "\"Doanh thu tháng vừa rồi[br]bao nhiêu?\"", "size": 5.4}
+      ]},
+      {"w": 40, "gap": 4, "stack": [
+        {"el": "cards", "countAt": 6, "gap": 4, "cards": [
+          {"label": "Sales", "countTo": 4.2, "unit": "tỷ", "color": "accent"},
+          {"label": "Finance", "countTo": 3.8, "unit": "tỷ", "color": "good"},
+          {"label": "Marketing", "countTo": 4.5, "unit": "tỷ", "color": "warn"}
+        ]},
+        {"el": "caption", "at": 26, "size": 2.4, "text": "Một công ty. Cùng một tháng."}
+      ]},
+      {"w": 16, "gap": 3, "stack": [
+        {"el": "text", "value": "BA CON SỐ", "size": 9, "color": "bad", "spacing": 2}
+      ]},
+      {"w": 20, "gap": 3, "stack": [
+        {"el": "text", "value": "Không ai sai cả.", "size": 6},
+        {"el": "caption", "at": 14, "size": 2.3, "text": "\"Gom hết về một chỗ\" — hiểu lầm đắt nhất."}
+      ]}
+    ]
+  },
+  "01": {
+    "bg": "MỘT NGUỒN SỰ THẬT",
+    "moments": [
+      {"w": 22, "gap": 3, "stack": [
+        {"el": "text", "value": "\"Một nguồn sự thật\"", "size": 5.4},
+        {"el": "caption", "at": 12, "size": 2.4, "text": "ai cũng tưởng là một cái kho."}
+      ]},
+      {"w": 24, "gap": 3, "stack": [
+        {"el": "text", "value": "Không phải nơi [muted:lưu] —[br]mà nơi [accent:định nghĩa].", "size": 5}
+      ]},
+      {"w": 34, "gap": 5, "stack": [
+        {"el": "chips", "at": 6, "stagger": 8, "items": [["THƯ VIỆN · lưu trữ", "muted"], ["TỪ ĐIỂN · định nghĩa", "accent"]]},
+        {"el": "caption", "at": 22, "size": 2.2, "text": "Triệu cuốn sách — vẫn năm sự thật nếu mỗi người hiểu một kiểu."}
+      ]},
+      {"w": 20, "gap": 3, "stack": [
+        {"el": "text", "value": "[accent:Tầng định nghĩa],[br]không phải [muted:tầng lưu trữ].", "size": 5}
+      ]}
+    ]
+  },
+  "02": {
+    "bg": "DATABASE ≠ SỰ THẬT",
+    "moments": [
+      {"w": 22, "gap": 3, "stack": [
+        {"el": "text", "value": "Bỏ vài trăm triệu[br]dựng kho dữ liệu.", "size": 5.2},
+        {"el": "caption", "at": 12, "size": 2.3, "text": "kéo Sales · Finance · Marketing về một chỗ."}
+      ]},
+      {"w": 16, "gap": 3, "stack": [
+        {"el": "text", "value": "Sáu tháng sau —[br][bad:vẫn ba con số.]", "size": 5.4}
+      ]},
+      {"w": 34, "gap": 4, "stack": [
+        {"el": "cards", "gap": 5, "cards": [
+          {"label": "Sales hỏi", "value": "4,2 tỷ", "color": "accent", "sub": "đơn đã chốt"},
+          {"label": "Finance hỏi", "value": "3,8 tỷ", "color": "good", "sub": "đã thu · trừ hoàn"}
+        ]},
+        {"el": "caption", "at": 24, "size": 2.1, "text": "Cùng một bảng đơn hàng. Cả hai chạy đúng, không một dòng lỗi."}
+      ]},
+      {"w": 18, "gap": 3, "stack": [
+        {"el": "text", "value": "Database [bad:không sửa được[br]cái đầu.]", "size": 5}
+      ]}
+    ]
+  },
+  "03": {
+    "bg": "NĂM NGUỒN TỰ MỌC",
+    "moments": [
+      {"w": 16, "gap": 3, "stack": [
+        {"el": "text", "value": "Không ai cố ý.[br]Chúng [warn:tự mọc.]", "size": 5.4}
+      ]},
+      {"w": 40, "stack": [
+        {"el": "list", "at": 6, "stagger": 9, "gap": 2.2, "rows": [
+          {"key": "Sales", "color": "accent", "text": "đơn đã chốt"},
+          {"key": "Finance", "color": "good", "text": "đã thu, trừ hoàn"},
+          {"key": "Marketing", "color": "warn", "text": "đơn cuối khách bấm"},
+          {"key": "Kho", "color": "bad", "text": "hàng đã xuất"},
+          {"key": "Kế hoạch", "color": "purple", "text": "gồm đơn đặt trước"}
+        ]}
+      ]},
+      {"w": 16, "gap": 3, "stack": [
+        {"el": "text", "value": "Năm định nghĩa.[br][muted:Không một dòng lỗi.]", "size": 5}
+      ]},
+      {"w": 24, "gap": 3, "stack": [
+        {"el": "text", "color": "muted", "size": 4.4, "value": "Tôi từng ngồi giữa[br]\"ba người ba số\"."},
+        {"el": "caption", "at": 14, "size": 2.2, "text": "Chữ \"doanh thu\" chưa từng được định nghĩa lấy một lần."}
+      ]}
+    ]
+  },
+  "04": {
+    "bg": "SỰ THẬT = THỎA THUẬN",
+    "moments": [
+      {"w": 16, "gap": 3, "stack": [
+        {"el": "text", "value": "Lời giải ở[br][accent:tầng định nghĩa.]", "size": 5.4}
+      ]},
+      {"w": 20, "gap": 3, "stack": [
+        {"el": "text", "value": "Một thỏa thuận —[br]viết [accent:một lần], mọi báo cáo đi qua.", "size": 4.8}
+      ]},
+      {"w": 30, "gap": 4, "stack": [
+        {"el": "text", "size": 4.2, "value": "Chốt dứt khoát:"},
+        {"el": "list", "at": 10, "stagger": 9, "gap": 2, "rows": [
+          {"text": "Gồm đơn chưa giao?", "mono": true, "color": "warn"},
+          {"text": "Trừ đơn hoàn?", "mono": true, "color": "warn"},
+          {"text": "Trừ chiết khấu?", "mono": true, "color": "warn"}
+        ]}
+      ]},
+      {"w": 16, "gap": 3, "stack": [
+        {"el": "lottie", "name": "check", "size": 14, "at": 2},
+        {"el": "text", "value": "[good:Một lần định nghĩa.[br]Dùng mãi mãi.]", "size": 5.4}
+      ]}
+    ]
+  },
+  "05": {
+    "bg": "SEMANTIC LAYER",
+    "moments": [
+      {"w": 22, "gap": 3, "stack": [
+        {"el": "label", "text": "TẦNG ĐỊNH NGHĨA"},
+        {"el": "text", "value": "Semantic Layer", "size": 6, "color": "accent"},
+        {"el": "caption", "at": 14, "size": 2.3, "text": "cuốn từ điển nghiệp vụ sống của tổ chức."}
+      ]},
+      {"w": 40, "stack": [
+        {"el": "list", "at": 8, "stagger": 12, "gap": 3, "rows": [
+          {"n": "1", "tag": "ĐỊNH NGHĨA MỘT LẦN", "color": "accent", "text": "kèm đúng quy tắc gồm và trừ"},
+          {"n": "2", "tag": "MỌI CÂU HỎI", "color": "good", "text": "dịch về cùng định nghĩa trước khi chạm data"},
+          {"n": "3", "tag": "ĐỔI MỘT CHỖ", "color": "warn", "text": "cả công ty cập nhật theo"}
+        ]}
+      ]},
+      {"w": 16, "gap": 3, "stack": [
+        {"el": "text", "value": "Không thêm [muted:một database] —[br]thêm một [accent:định nghĩa.]", "size": 4.8}
+      ]}
+    ]
+  },
+  "07": {
+    "bg": "TÓM LẠI",
+    "moments": [
+      {"w": 46, "gap": 3, "stack": [
+        {"el": "recap", "at": 6, "stagger": 12, "gap": 2, "rows": [
+          {"key": "Là gì", "color": "accent", "a": "định nghĩa chung", "b": "không phải database"},
+          {"key": "Sự thật ở", "color": "good", "a": "tầng định nghĩa", "b": "không phải lưu trữ"},
+          {"key": "Năm nguồn", "color": "warn", "a": "tự sinh", "b": "không ai cố ý"}
+        ]}
+      ]},
+      {"w": 28, "gap": 3, "stack": [
+        {"el": "text", "value": "Chữ \"doanh thu\":[br][accent:một] định nghĩa, hay [bad:năm?]", "size": 5}
+      ]},
+      {"w": 20, "gap": 3, "stack": [
+        {"el": "cta", "pill": "▶ Theo dõi", "tagline": "Mỗi tuần một khái niệm data — gỡ trong vài phút.", "brand": "TUẤN LA LAB"}
+      ]}
+    ]
+  },
+  "short-outro": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "moments": [
+      {"w": 46, "gap": 4, "stack": [
+        {"el": "text", "color": "muted", "size": 4.4, "value": "Một nguồn sự thật[br]không phải cái kho —"},
+        {"el": "text", "at": 14, "size": 5.2, "value": "mà một [accent:định nghĩa chung.]"}
+      ]},
+      {"w": 54, "stack": [
+        {"el": "cta", "pill": "▶ Xem đầy đủ trên YouTube", "tagline": "Theo dõi để không bỏ lỡ.", "size": 3, "padY": 1.8, "padX": 3.6, "tagSize": 2.4}
+      ]}
+    ]
+  }
+}
