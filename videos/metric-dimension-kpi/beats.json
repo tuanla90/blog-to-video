@@ -2,43 +2,43 @@
   {
     "id": "00",
     "audio": "audio/metric-dimension-kpi/beat-00.mp3",
-    "durationSec": 21.94,
-    "durationInFrames": 680
+    "durationSec": 27.79,
+    "durationInFrames": 855
   },
   {
     "id": "01",
     "audio": "audio/metric-dimension-kpi/beat-01.mp3",
-    "durationSec": 25.4,
-    "durationInFrames": 783
+    "durationSec": 35.64,
+    "durationInFrames": 1091
   },
   {
     "id": "02",
     "audio": "audio/metric-dimension-kpi/beat-02.mp3",
-    "durationSec": 43.6,
-    "durationInFrames": 1329
+    "durationSec": 42.84,
+    "durationInFrames": 1307
   },
   {
     "id": "03",
     "audio": "audio/metric-dimension-kpi/beat-03.mp3",
-    "durationSec": 33.07,
-    "durationInFrames": 1013
+    "durationSec": 39.85,
+    "durationInFrames": 1217
   },
   {
     "id": "04",
     "audio": "audio/metric-dimension-kpi/beat-04.mp3",
-    "durationSec": 29.27,
-    "durationInFrames": 900
+    "durationSec": 34.33,
+    "durationInFrames": 1052
   },
   {
     "id": "05",
     "audio": "audio/metric-dimension-kpi/beat-05.mp3",
-    "durationSec": 26.4,
-    "durationInFrames": 813
+    "durationSec": 26.69,
+    "durationInFrames": 822
   },
   {
-    "id": "07",
-    "audio": "audio/metric-dimension-kpi/beat-07.mp3",
-    "durationSec": 23.33,
-    "durationInFrames": 721
+    "id": "06",
+    "audio": "audio/metric-dimension-kpi/beat-06.mp3",
+    "durationSec": 24.51,
+    "durationInFrames": 757
   }
 ]

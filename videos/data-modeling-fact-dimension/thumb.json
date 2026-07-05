@@ -1,0 +1,14 @@
+{
+  "layout": "split",
+  "category": "Kiến Thức Nền Tảng",
+  "catLabel": "Kiến thức nền tảng",
+  "kicker": "Fact & Dimension · sắp bảng lại",
+  "left": {
+    "title": "1 BẢNG PHẲNG",
+    "sub": "lọc tay cả buổi vẫn bế tắc"
+  },
+  "right": {
+    "title": "FACT + DIMENSION",
+    "sub": "star schema, hỏi gì cũng vài giây"
+  }
+}

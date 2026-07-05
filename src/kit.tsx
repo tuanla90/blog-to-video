@@ -11,9 +11,10 @@
 // videos/<slug>/customs.tsx (a CUSTOMS map) and are referenced by { el: "custom", name }.
 import React from "react";
 import {AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Easing, Audio, Sequence, staticFile} from "remotion";
-import {C, MONO, useVmin, useCount, FadeUp, Bg} from "./ui";
+import {C, MONO, useVmin, useCount, FadeUp, Bg, Sparks, titleGrad} from "./ui";
 import {Lottie} from "@remotion/lottie";
 import {LOTTIES} from "./lotties";
+import {icons as LUCIDE} from "lucide-react";
 
 const clamp = {extrapolateLeft: "clamp" as const, extrapolateRight: "clamp" as const};
 type Win = [number, number];
@@ -36,7 +37,8 @@ const rich = (s: string): React.ReactNode[] => {
   while ((m = re.exec(s))) {
     if (m.index > last) out.push(s.slice(last, m.index));
     if (m[0] === "[br]") out.push(<br key={k++} />);
-    else out.push(<span key={k++} style={{color: col(m[1]), fontWeight: 800}}>{withBreaks(m[2])}</span>);
+    // WebkitTextFillColor: giữ màu span khi cha đang shimmer (background-clip: text + fill transparent)
+    else out.push(<span key={k++} style={{color: col(m[1]), WebkitTextFillColor: col(m[1]), fontWeight: 800}}>{withBreaks(m[2])}</span>);
     last = re.lastIndex;
   }
   if (last < s.length) out.push(s.slice(last));
@@ -99,7 +101,7 @@ const Moment: React.FC<{win: Win; gap: number; v: number; children: React.ReactN
   const f = useCurrentFrame();
   const [from, to] = win;
   const IN = Math.min(11, Math.round((to - from) * 0.28));
-  const OUT = Math.min(9, Math.round((to - from) * 0.24));
+  const OUT = Math.min(12, Math.round((to - from) * 0.24));   // đuôi fade dài hơn -> khớp XFADE, hoà dần không chớp
   const ease = {...clamp, easing: Easing.out(Easing.cubic)};
   const o = interpolate(f, [from, from + IN, to - OUT, to], [0, 1, 1, 0], clamp);
   const ty = interpolate(f, [from, from + IN, to - OUT, to], [36, 0, 0, -26], ease);
@@ -125,21 +127,28 @@ const Reveal: React.FC<{at: number | undefined; from: number; children: React.Re
 const vnd = (n: number, unit = "tỷ") => `${n.toFixed(1).replace(".", ",")} ${unit}`;
 const dec = (n: number) => n.toFixed(1).replace(".", ",");
 
-const Card: React.FC<{label: string; value: string; color: string; sub?: string; v: number; scale?: number}> =
-({label, value, color, sub, v, scale = 1}) => (
+const Card: React.FC<{label: string; value: string; color: string; sub?: string; v: number; scale?: number; icon?: string}> =
+({label, value, color, sub, v, scale = 1, icon}) => {
+  const f = useCurrentFrame();
+  // glow "thở" trong lúc hold — màn hình không đứng yên (phase lệch theo label để các card không thở đều nhau)
+  const g = 0.5 + 0.5 * Math.sin(f / 16 + label.length * 1.3);
+  return (
   <div style={{
     background: `linear-gradient(152deg, ${color}26, ${C.cardHi} 40%, ${C.card})`,
     border: `1px solid ${color}55`, borderRadius: 2.4 * v,
     padding: `${2.8 * v * scale}px ${3.6 * v * scale}px`, minWidth: 30 * v * scale, position: "relative", overflow: "hidden",
-    boxShadow: `0 ${1.8 * v}px ${4.5 * v}px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07), 0 0 ${6 * v}px ${color}24`}}>
-    <div style={{position: "absolute", top: 0, left: 0, right: 0, height: 3,
+    boxShadow: `0 ${1.8 * v}px ${4.5 * v}px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07), 0 0 ${(4.5 + 3.5 * g) * v}px ${color}2e`}}>
+    <div style={{position: "absolute", top: 0, left: 0, right: 0, height: 3, opacity: 0.65 + 0.35 * g,
       background: `linear-gradient(90deg, transparent, ${color}, transparent)`}} />
-    <div style={{color: C.muted, fontSize: 2 * v * scale, fontWeight: 600, marginBottom: 1 * v, letterSpacing: "0.03em"}}>{label}</div>
+    <div style={{color: C.muted, fontSize: 2 * v * scale, fontWeight: 600, marginBottom: 1 * v, letterSpacing: "0.03em",
+      display: "flex", alignItems: "center", justifyContent: "center", gap: 1 * v}}>
+      {icon ? <LIcon name={icon} color={color} size={2.4 * scale} v={v} /> : null}{label}</div>
     <div style={{fontFamily: MONO, fontSize: 7.5 * v * scale, fontWeight: 800, color, lineHeight: 1, whiteSpace: "nowrap",
       textShadow: `0 0 ${2.6 * v}px ${color}66`}}>{value}</div>
     {sub ? <div style={{color: C.muted, fontSize: 1.5 * v * scale, marginTop: 1.2 * v}}>{sub}</div> : null}
   </div>
-);
+  );
+};
 
 const DateCard: React.FC<{dept: string; col: string; month: string; color: string; v: number}> =
 ({dept, col: c, month, color, v}) => (
@@ -153,12 +162,90 @@ const DateCard: React.FC<{dept: string; col: string; month: string; color: strin
   </div>
 );
 
-const Chip: React.FC<{t: string; color: string; v: number}> = ({t, color, v}) => (
+// ---- lucide icons: scenes gọi theo tên ("database", "bar-chart-3", "Settings2" đều được) ----
+const iconByName = (name?: string) => {
+  if (!name) return null;
+  const pas = String(name).split(/[-_\s]+/).map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join("");
+  return (LUCIDE as Record<string, React.FC<any>>)[pas] || null;
+};
+
+// pha màu về phía trắng (amt 0..1) — giữ hue, chỉ sáng lên (hợp gu gradient đơn sắc)
+const mixWhite = (hex: string, amt: number) => {
+  const h = hex.replace("#", "");
+  const n = parseInt(h.length === 3 ? h.split("").map((c) => c + c).join("") : h, 16);
+  const f = (x: number) => Math.round(x + (255 - x) * amt).toString(16).padStart(2, "0");
+  return `#${f((n >> 16) & 255)}${f((n >> 8) & 255)}${f(n & 255)}`;
+};
+
+// icon lucide; grad=true -> stroke gradient (mặc định pha trắng -> màu gốc, đổi đầu sáng bằng color2)
+const LIcon: React.FC<{name: string; color: string; size: number; v: number; stroke?: number; grad?: boolean; color2?: string}> =
+({name, color, size, v, stroke = 2.5, grad, color2}) => {
+  const Cmp = iconByName(name);
+  if (!Cmp) return <span style={{color: C.bad, fontSize: 2 * v}}>?{name}</span>;
+  const glow = {filter: `drop-shadow(0 0 ${0.8 * v}px ${color}aa)`, flexShrink: 0} as const;
+  if (!grad) return <Cmp size={size * v} color={color} strokeWidth={stroke} style={glow} />;
+  const from = color2 ?? mixWhite(color, 0.62);
+  const id = `lg${(name + from + color).replace(/[^a-zA-Z0-9]/g, "")}`;
+  return (
+    <span style={{display: "inline-flex", flexShrink: 0}}>
+      <svg width={0} height={0} style={{position: "absolute"}} aria-hidden>
+        <defs><linearGradient id={id} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="24" y2="24">
+          <stop offset="0%" stopColor={from} /><stop offset="100%" stopColor={color} />
+        </linearGradient></defs>
+      </svg>
+      <Cmp size={size * v} color={`url(#${id})`} strokeWidth={stroke} style={glow} />
+    </span>
+  );
+};
+
+type IconVariant = "glass" | "none" | "soft" | "white" | "solid";
+
+// ô vuông bo góc chứa icon (kiểu tile "Model / Dữ liệu / Agent"), glow thở, label tuỳ chọn bên dưới.
+// variant: none=icon trơn | glass=kính tối (mặc định) | soft=nền màu nhạt | white=nền trắng trong nhẹ | solid=nền đặc + icon trắng
+const IconBadge: React.FC<{name: string; color: string; v: number; size?: number; label?: string;
+  variant?: IconVariant; grad?: boolean; color2?: string}> =
+({name, color, v, size = 12, label, variant = "glass", grad, color2}) => {
+  const f = useCurrentFrame();
+  const g = 0.5 + 0.5 * Math.sin(f / 15 + name.length);
+  const iconCol = variant === "solid" ? "#FFFFFF" : color;
+  const icon = <LIcon name={name} color={iconCol} size={size * 0.52} v={v} grad={grad} color2={color2} />;
+  const tile: Record<Exclude<IconVariant, "none">, any> = {
+    glass: {background: `linear-gradient(160deg, ${color}30, ${C.cardHi} 55%, ${C.card})`, border: `1px solid ${color}66`,
+      boxShadow: `0 ${1.2 * v}px ${3.6 * v}px rgba(0,0,0,0.5), 0 0 ${(3 + 3 * g) * v}px ${color}44, inset 0 1px 0 rgba(255,255,255,0.08)`},
+    soft: {background: `${color}22`, border: `1px solid ${color}50`,
+      boxShadow: `0 ${1.2 * v}px ${3.6 * v}px rgba(0,0,0,0.4), 0 0 ${(2.5 + 2.5 * g) * v}px ${color}33`},
+    white: {background: "rgba(255,255,255,0.86)", border: "1px solid rgba(255,255,255,0.55)",
+      boxShadow: `0 ${1.2 * v}px ${3.6 * v}px rgba(0,0,0,0.45), 0 0 ${(2 + 2 * g) * v}px rgba(255,255,255,0.3)`},
+    solid: {background: `linear-gradient(160deg, ${mixWhite(color, 0.2)}, ${color})`, border: `1px solid ${mixWhite(color, 0.4)}66`,
+      boxShadow: `0 ${1.4 * v}px ${4 * v}px rgba(0,0,0,0.5), 0 0 ${(4 + 3.5 * g) * v}px ${color}66, inset 0 1px 0 rgba(255,255,255,0.25)`},
+  };
+  return (
+    <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: 1.6 * v}}>
+      {variant === "none" ? (
+        <LIcon name={name} color={color} size={size * 0.62} v={v} grad={grad} color2={color2} />
+      ) : (
+        <div style={{width: size * v, height: size * v, borderRadius: 0.22 * size * v,
+          display: "flex", alignItems: "center", justifyContent: "center", ...tile[variant]}}>
+          {icon}
+        </div>
+      )}
+      {label ? <div style={{color: C.muted, fontSize: 2 * v, fontWeight: 600}}>{label}</div> : null}
+    </div>
+  );
+};
+
+const Chip: React.FC<{t: string; color: string; v: number; icon?: string}> = ({t, color, v, icon}) => {
+  const f = useCurrentFrame();
+  const g = 0.5 + 0.5 * Math.sin(f / 13 + t.length * 1.7);
+  return (
   <div style={{border: `1.5px solid ${color}`, color, borderRadius: 100, padding: `${1.4 * v}px ${3 * v}px`,
     fontSize: 2.8 * v, fontWeight: 800, letterSpacing: 1, background: `linear-gradient(${color}22, ${color}0a)`,
-    boxShadow: `0 0 ${3.6 * v}px ${color}55, inset 0 0 ${2 * v}px ${color}22`,
-    textShadow: `0 0 ${1.4 * v}px ${color}66`}}>{t}</div>
-);
+    display: "flex", alignItems: "center", gap: 1.4 * v,
+    boxShadow: `0 0 ${(2.4 + 2.4 * g) * v}px ${color}55, inset 0 0 ${2 * v}px ${color}22`,
+    textShadow: `0 0 ${1.4 * v}px ${color}66`}}>
+    {icon ? <LIcon name={icon} color={color} size={3.4} v={v} stroke={2.6} /> : null}{t}</div>
+  );
+};
 
 const BarCol: React.FC<{h: number; color: string; label: string; value: string; v: number}> =
 ({h, color, label, value, v}) => (
@@ -178,10 +265,15 @@ const Label: React.FC<{v: number; children: React.ReactNode}> = ({v, children}) 
   <div style={{fontFamily: MONO, color: C.muted, fontSize: 1.9 * v, letterSpacing: 4, fontWeight: 600}}>{children}</div>
 );
 
-const elText = (p: ElProps, v: number) => (
-  <div style={{fontSize: (p.size ?? 5) * v, fontWeight: 800, color: col(p.color), lineHeight: 1.12,
-    letterSpacing: p.spacing != null ? p.spacing : "-0.022em"}}>{rich(p.value)}</div>
-);
+// title lớn không chỉ định màu -> gradient đơn sắc trắng->xám (tĩnh); tắt bằng gradient:false, ép bằng gradient:true
+const elText = (p: ElProps, v: number) => {
+  const grad = p.gradient === true || (p.gradient !== false && !p.color && (p.size ?? 5) >= 4);
+  return (
+    <div style={{fontSize: (p.size ?? 5) * v, fontWeight: 800, lineHeight: 1.12,
+      letterSpacing: p.spacing != null ? p.spacing : "-0.022em",
+      ...(grad ? titleGrad : {color: col(p.color)})}}>{rich(p.value)}</div>
+  );
+};
 
 const elLabel = (p: ElProps, v: number) => <Label v={v}>{p.text}</Label>;
 
@@ -201,8 +293,11 @@ const ElCards: React.FC<{p: ElProps; from: number; v: number}> = ({p, from, v}) 
   return (
     <div style={{display: "flex", gap: gap * v * scale}}>
       {cards.map((c, i) => (
-        <Card key={i} v={v} scale={scale} label={c.label} color={col(c.color)} sub={c.sub}
-          value={c.countTo != null ? vnd(counts[i], c.unit ?? "tỷ") : c.value} />
+        <div key={i} style={{position: "relative"}}>
+          <Card v={v} scale={scale} label={c.label} color={col(c.color)} sub={c.sub} icon={c.icon}
+            value={c.countTo != null ? vnd(counts[i], c.unit ?? "tỷ") : c.value} />
+          <Sparks at={from + ((p.at as number) ?? 0) + 10 + i * 3} seed={c.label} spread={10} />
+        </div>
       ))}
     </div>
   );
@@ -211,7 +306,7 @@ const ElCards: React.FC<{p: ElProps; from: number; v: number}> = ({p, from, v}) 
 const elDateCards = (p: ElProps, from: number, v: number) => (
   <div style={{display: "flex", gap: (p.gap ?? 3) * v}}>
     {(p.rows as ElProps[]).map((r, i) => (
-      <FadeUp key={i} at={from + (p.at ?? 0) + i * (p.stagger ?? 9)}>
+      <FadeUp key={i} at={from + (p.at ?? 0) + i * (p.stagger ?? 9)} sparks={r.dept}>
         <DateCard dept={r.dept} col={r.col} month={r.month} color={col(r.color)} v={v} />
       </FadeUp>
     ))}
@@ -235,9 +330,22 @@ const ElBars: React.FC<{p: ElProps; from: number; v: number}> = ({p, from, v}) =
 
 const elChips = (p: ElProps, from: number, v: number) => (
   <div style={{display: "flex", flexDirection: p.dir === "col" ? "column" : "row", gap: (p.gap ?? 3) * v}}>
-    {(p.items as [string, string][]).map(([t, c], i) => (
-      <FadeUp key={t} at={from + (p.at ?? 0) + i * (p.stagger ?? 6)}>
-        <Chip t={t} color={col(c)} v={v} />
+    {(p.items as [string, string, string?][]).map(([t, c, ic], i) => (
+      <FadeUp key={t} at={from + (p.at ?? 0) + i * (p.stagger ?? 6)} sparks={t}>
+        <Chip t={t} color={col(c)} v={v} icon={ic} />
+      </FadeUp>
+    ))}
+  </div>
+);
+
+// hàng tile icon (kiểu "Model / Dữ liệu / Agent") — mỗi tile pop vào kèm sparks.
+// variant/grad/color2 đặt ở element làm mặc định, từng item override được.
+const elIcons = (p: ElProps, from: number, v: number) => (
+  <div style={{display: "flex", gap: (p.gap ?? 5) * v, alignItems: "flex-end"}}>
+    {(p.items as ElProps[]).map((it, i) => (
+      <FadeUp key={i} at={from + (p.at ?? 0) + i * (p.stagger ?? 8)} sparks={it.name}>
+        <IconBadge name={it.name} color={col(it.color || "accent")} v={v} size={it.size ?? p.size ?? 12} label={it.label}
+          variant={it.variant ?? p.variant} grad={it.grad ?? p.grad} color2={it.color2 ?? p.color2} />
       </FadeUp>
     ))}
   </div>
@@ -408,7 +516,7 @@ const listRow = (r: ElProps, v: number): React.ReactNode => {
   );
   if (r.key != null) return (
     <div style={{fontSize: 2.9 * v, fontWeight: 700}}>
-      <span style={{color: col(r.color), fontWeight: 800}}>{r.key}</span> — {r.text}
+      <span style={{color: col(r.color), fontWeight: 800}}>{r.key}</span>: {r.text}
     </div>
   );
   return (
@@ -484,13 +592,16 @@ const ElRecap: React.FC<{p: ElProps; from: number; v: number}> = ({p, from, v}) 
 );
 
 // ---- cta: a pill button + tagline + optional brand line ----
-const elCta = (p: ElProps, v: number) => {
+const ElCta: React.FC<{p: ElProps; v: number}> = ({p, v}) => {
+  const f = useCurrentFrame();
   const c = col(p.color || "accent");
+  const g = 0.5 + 0.5 * Math.sin(f / 15);
   return (
     <>
       <div style={{display: "inline-flex", alignItems: "center", gap: 2 * v, border: `2px solid ${c}`, color: c,
         borderRadius: 100, padding: `${(p.padY ?? 1.6) * v}px ${(p.padX ?? 3.4) * v}px`,
-        fontSize: (p.size ?? 2.6) * v, fontWeight: 800, boxShadow: `0 0 ${3 * v}px ${c}55`}}>{p.pill}</div>
+        fontSize: (p.size ?? 2.6) * v, fontWeight: 800, boxShadow: `0 0 ${(2 + 2.6 * g) * v}px ${c}66`}}>
+        {p.icon ? <LIcon name={p.icon} color={c} size={(p.size ?? 2.6) * 1.2} v={v} stroke={2.6} /> : null}{p.pill}</div>
       {p.tagline ? <div style={{color: C.muted, fontSize: (p.tagSize ?? 2.1) * v, marginTop: 3 * v}}>{rich(p.tagline)}</div> : null}
       {p.brand ? <div style={{fontFamily: MONO, color: C.muted, fontSize: 1.7 * v, letterSpacing: 4, marginTop: 4 * v}}>{p.brand}</div> : null}
     </>
@@ -566,11 +677,14 @@ const ElFlow: React.FC<{p: ElProps; from: number; v: number}> = ({p, from, v}) =
         return (
           <React.Fragment key={i}>
             {i > 0 && <div style={{opacity: arrowO, color: C.muted, fontSize: 4 * v, fontWeight: 800}}>→</div>}
-            <div style={{opacity: o, transform: `scale(${sc})`, border: `2px solid ${c}`, borderRadius: 2 * v,
+            <div style={{position: "relative", opacity: o, transform: `scale(${sc})`, border: `2px solid ${c}`, borderRadius: 2 * v,
               padding: `${1.8 * v}px ${2.4 * v}px`, background: `linear-gradient(160deg, ${c}26, ${C.card})`,
-              textAlign: "center", minWidth: 21 * v, boxShadow: `0 0 ${3 * v}px ${c}44`}}>
+              textAlign: "center", minWidth: 21 * v, boxShadow: `0 0 ${3 * v}px ${c}44`,
+              display: "flex", flexDirection: "column", alignItems: "center"}}>
+              {nd.icon ? <div style={{marginBottom: 0.8 * v}}><LIcon name={nd.icon} color={c} size={4.6} v={v} /></div> : null}
               <div style={{color: c, fontSize: 2.9 * v, fontWeight: 800}}>{nd.key}</div>
               <div style={{color: C.muted, fontSize: 1.85 * v, marginTop: 0.6 * v}}>{nd.sub}</div>
+              <Sparks at={a + 6} seed={nd.key} spread={9} />
             </div>
           </React.Fragment>
         );
@@ -589,8 +703,10 @@ const El: React.FC<{e: ElProps; from: number; v: number; customs: Record<string,
     case "text": return <Reveal at={e.at} from={from}>{elText(e, v)}</Reveal>;
     case "label": return <Reveal at={e.at} from={from}>{elLabel(e, v)}</Reveal>;
     case "caption": return <Reveal at={e.at} from={from}>{elCaption(e, v)}</Reveal>;
-    case "chip": return <Reveal at={e.at} from={from}><Chip t={e.text} color={col(e.color)} v={v} /></Reveal>;
+    case "chip": return <Reveal at={e.at} from={from}><Chip t={e.text} color={col(e.color)} v={v} icon={e.icon} /></Reveal>;
     case "chips": return elChips(e, from, v);
+    case "icon": return <Reveal at={e.at} from={from}><IconBadge name={e.name} color={col(e.color || "accent")} v={v} size={e.size} label={e.label} variant={e.variant} grad={e.grad} color2={e.color2} /></Reveal>;
+    case "icons": return elIcons(e, from, v);
     case "cards": return <Reveal at={e.at} from={from}><ElCards p={e} from={from} v={v} /></Reveal>;
     case "date-cards": return elDateCards(e, from, v);
     case "bars": return <Reveal at={e.at} from={from}><ElBars p={e} from={from} v={v} /></Reveal>;
@@ -601,7 +717,7 @@ const El: React.FC<{e: ElProps; from: number; v: number; customs: Record<string,
     case "dots": return <Reveal at={e.at} from={from}><ElDots p={e} v={v} /></Reveal>;
     case "gauge": return <ElGauge p={e} from={from} v={v} />;
     case "recap": return <ElRecap p={e} from={from} v={v} />;
-    case "cta": return <Reveal at={e.at} from={from}>{elCta(e, v)}</Reveal>;
+    case "cta": return <Reveal at={e.at} from={from}><ElCta p={e} v={v} /></Reveal>;
     case "sfx": {
       // SFX neo theo từ (atWord -> timings giọng) hoặc at frames trong moment
       let fr = from + (e.at ?? 0);
@@ -642,14 +758,21 @@ export const Beat: React.FC<{data: BeatData; customs?: Record<string, React.FC>;
 ({data, customs = {}, lines}) => {
   const v = useVmin();
   const S = useAnchoredSteps(data.moments, lines);
+  // XFADE: kéo đuôi mỗi moment chồng sang moment kế -> hai moment cùng animate (cũ mờ ra / mới hiện vào)
+  // = hoà dần, KHÔNG có nhịp gần-đen giữa hai cảnh. Moment cuối giữ nguyên (fade ra ở cuối beat).
+  const XFADE = 12;
   return (
     <AbsoluteFill>
       <Bg label={data.bg} />
-      {data.moments.map((m, i) => (
-        <Moment key={i} win={S[i]} gap={m.gap ?? 3} v={v}>
-          {m.stack.map((e, j) => <El key={j} e={e} from={S[i][0]} v={v} customs={customs} lines={lines} />)}
-        </Moment>
-      ))}
+      {data.moments.map((m, i) => {
+        const last = i === data.moments.length - 1;
+        const win: Win = last ? S[i] : [S[i][0], S[i][1] + XFADE];
+        return (
+          <Moment key={i} win={win} gap={m.gap ?? 3} v={v}>
+            {m.stack.map((e, j) => <El key={j} e={e} from={S[i][0]} v={v} customs={customs} lines={lines} />)}
+          </Moment>
+        );
+      })}
     </AbsoluteFill>
   );
 };

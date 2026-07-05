@@ -1,44 +1,44 @@
 [
   {
     "id": "00",
-    "audio": "audio/mot-nguon-su-that/beat-00.wav",
-    "durationSec": 21.13,
-    "durationInFrames": 634
+    "audio": "audio/mot-nguon-su-that/beat-00.mp3",
+    "durationSec": 20.88,
+    "durationInFrames": 648
   },
   {
     "id": "01",
-    "audio": "audio/mot-nguon-su-that/beat-01.wav",
-    "durationSec": 26.66,
-    "durationInFrames": 800
+    "audio": "audio/mot-nguon-su-that/beat-01.mp3",
+    "durationSec": 28.65,
+    "durationInFrames": 881
   },
   {
     "id": "02",
-    "audio": "audio/mot-nguon-su-that/beat-02.wav",
-    "durationSec": 29.07,
-    "durationInFrames": 872
+    "audio": "audio/mot-nguon-su-that/beat-02.mp3",
+    "durationSec": 26.55,
+    "durationInFrames": 818
   },
   {
     "id": "03",
-    "audio": "audio/mot-nguon-su-that/beat-03.wav",
-    "durationSec": 36.6,
-    "durationInFrames": 1098
+    "audio": "audio/mot-nguon-su-that/beat-03.mp3",
+    "durationSec": 39.56,
+    "durationInFrames": 1208
   },
   {
     "id": "04",
-    "audio": "audio/mot-nguon-su-that/beat-04.wav",
-    "durationSec": 28.19,
-    "durationInFrames": 846
+    "audio": "audio/mot-nguon-su-that/beat-04.mp3",
+    "durationSec": 33.89,
+    "durationInFrames": 1038
   },
   {
     "id": "05",
-    "audio": "audio/mot-nguon-su-that/beat-05.wav",
-    "durationSec": 24.43,
-    "durationInFrames": 733
+    "audio": "audio/mot-nguon-su-that/beat-05.mp3",
+    "durationSec": 27.05,
+    "durationInFrames": 833
   },
   {
-    "id": "07",
-    "audio": "audio/mot-nguon-su-that/beat-07.wav",
-    "durationSec": 22.25,
-    "durationInFrames": 667
+    "id": "06",
+    "audio": "audio/mot-nguon-su-that/beat-06.mp3",
+    "durationSec": 18.25,
+    "durationInFrames": 569
   }
 ]

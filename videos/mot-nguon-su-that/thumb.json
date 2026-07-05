@@ -1,8 +1,8 @@
 {
-  "category": "KIẾN THỨC NỀN TẢNG",
-  "kicker": "Cùng một công ty —",
-  "bigNum": "5",
-  "label": "con số\ndoanh thu",
-  "question": {"pre": "Số nào ", "em": "mới đúng?"},
-  "person": "thumb/tuan-crop.png"
+  "layout": "highlight",
+  "category": "Kiến Thức Nền Tảng",
+  "catLabel": "Kiến thức nền tảng",
+  "pre": "Ba con số,",
+  "hl": "một sự thật",
+  "kicker": "Vì sao công ty bạn có 3 con số doanh thu"
 }

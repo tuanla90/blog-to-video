@@ -1,0 +1,22 @@
+{
+  "layout": "cards",
+  "category": "Kiến Thức Nền Tảng",
+  "catLabel": "Kiến thức nền tảng",
+  "kicker": "Cùng 1 công ty · cùng 1 tháng",
+  "cards": [
+    {
+      "label": "SALES",
+      "value": "4,2 tỷ",
+      "color": "green"
+    },
+    {
+      "label": "KẾ TOÁN",
+      "value": "3,8 tỷ",
+      "color": "amber"
+    }
+  ],
+  "hook": {
+    "pre": "AI TÍNH",
+    "em": "SAI?"
+  }
+}

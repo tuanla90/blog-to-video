@@ -70,8 +70,8 @@ TONE = {
 "01": "Ấm, đời thường, thoáng tự trào (con mọn); câu cuối nối em bé lớn ↔ kho blog lớn, nhẹ và biết ơn.",
 "02": "Thành thật, hơi gấp khi tả AI đổi nhanh; 'thà chậm còn hơn vội' đọc chắc, dứt khoát.",
 "03": "Trăn trở, chùng xuống; 'còn chỗ đứng không?' buông lửng; '...chẳng biết nói gì' hạ giọng.",
-"04": "Vỡ oà, sáng lên ở chữ 'ngữ cảnh'; câu chốt 'kênh phải đổi hướng' chắc nịch, phấn chấn.",
+"04": "Vỡ oà, sáng lên ở chữ 'ngữ cảnh'; câu chốt 'kênh phải đổi hướng' chắc nịch, phấn chấn. Nếu chèn số khớp 98% vs 60% (domain knowledge): NÓI CHẬM, hạ giọng như kể bí mật nghề.",
 "05": "Quyết đoán, ấm, truyền cảm hứng; bắc cầu nhẹ (đừng phủ định Sheets cũ); 'ngữ cảnh là vua' đọc chậm, đóng đinh.",
-"07": "Ấm áp, biết ơn, mời gọi; câu hỏi mở đọc thân mật như hỏi bạn.",
+"07": "Ấm áp, biết ơn, mời gọi; câu hỏi mở đọc thân mật như hỏi bạn. Câu hook 'bạn có lo cho nghề data không?': nhìn thẳng ống kính, DỪNG 1-2s trước khi hỏi cho nặng.",
 "short-outro": "Gọn, dứt khoát, hơi tâm sự; 'ngữ cảnh' nhấn.",
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import {AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Easing} from "remotion";
+import {AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Easing, random} from "remotion";
 import {loadFont as loadInter} from "@remotion/google-fonts/Inter";
 import {loadFont as loadMono} from "@remotion/google-fonts/JetBrainsMono";
 import {BRAND} from "./brand";
@@ -30,23 +30,75 @@ export const useAt = () => {
   return (p: number) => Math.round(D * p);
 };
 
+// chùm hạt màu bung ra khi element xuất hiện (deterministic: random() của Remotion, không Math.random)
+export const Sparks: React.FC<{at: number; seed?: string; n?: number; spread?: number}> =
+({at, seed = "fx", n = 22, spread = 9}) => {
+  const f = useCurrentFrame();
+  const vmin = useVmin();
+  const LIFE = 22;
+  const t = f - at;
+  if (t < 0 || t > LIFE) return null;
+  const p = t / LIFE;
+  const fly = 1 - Math.pow(1 - p, 3);
+  const cols = [C.accent, C.good, C.warn, C.purple, "#FFD9A8", "#7DD3FC"];
+  return (
+    <div style={{position: "absolute", inset: 0, pointerEvents: "none"}}>
+      {/* vòng flash nở NHANH vượt mép element rồi tắt sớm — không đọng trên chữ */}
+      <div style={{position: "absolute", left: "50%", top: "50%",
+        width: spread * 1.6 * vmin * (0.25 + fly), height: spread * 1.6 * vmin * (0.25 + fly),
+        transform: "translate(-50%,-50%)", borderRadius: "50%",
+        border: `1.5px solid ${C.text}`, opacity: 0.35 * (1 - p) * (1 - p)}} />
+      {Array.from({length: n}).map((_, i) => {
+        const ang = random(`${seed}a${i}`) * Math.PI * 2;
+        const dist = spread * (0.45 + random(`${seed}r${i}`) * 0.55) * vmin * fly;
+        const sz = (0.35 + random(`${seed}s${i}`) * 0.4) * vmin;
+        const c = cols[i % cols.length];
+        return <div key={i} style={{position: "absolute", left: "50%", top: "50%",
+          width: sz, height: sz, borderRadius: "50%", background: c,
+          transform: `translate(-50%,-50%) translate(${Math.cos(ang) * dist}px, ${Math.sin(ang) * dist - 0.8 * vmin * p}px)`,
+          opacity: (1 - p) * 0.95, boxShadow: `0 0 ${sz * 1.8}px ${c}`}} />;
+      })}
+    </div>
+  );
+};
+
+// chữ title: gradient đơn sắc DỌC (trắng -> xám, cùng hue chỉ pha trắng/đen) — không quét, không đổi màu
+// để không chọi với span màu tím giữa câu. Span màu tự "đục lỗ" bằng WebkitTextFillColor (xem rich() trong kit).
+export const titleGrad = {
+  backgroundImage: "linear-gradient(180deg, #FFFFFF 12%, #E9EAEF 54%, #A2A7B6 100%)",
+  WebkitBackgroundClip: "text", backgroundClip: "text" as const,
+  color: "transparent", WebkitTextFillColor: "transparent" as const,
+} as const;
+
 // fade + slide-up + blur-in for a premium reveal
-export const FadeUp: React.FC<{at: number; d?: number; y?: number; style?: any; children: React.ReactNode}> =
-({at, d = 16, y = 38, style, children}) => {
+export const FadeUp: React.FC<{at: number; d?: number; y?: number; sparks?: string | boolean; style?: any; children: React.ReactNode}> =
+({at, d = 16, y = 38, sparks, style, children}) => {
   const f = useCurrentFrame();
   const o = interpolate(f, [at, at + d], [0, 1], clamp);
   const ty = interpolate(f, [at, at + d], [y, 0], {...clamp, easing: Easing.out(Easing.cubic)});
   const bl = interpolate(f, [at, at + d * 0.7], [8, 0], clamp);
-  return <div style={{opacity: o, transform: `translateY(${ty}px)`, filter: `blur(${bl}px)`, ...style}}>{children}</div>;
+  return (
+    <div style={{position: sparks ? "relative" : undefined, opacity: o,
+      transform: `translateY(${ty}px)`, filter: `blur(${bl}px)`, ...style}}>
+      {children}
+      {sparks ? <Sparks at={at + Math.round(d * 0.5)} seed={typeof sparks === "string" ? sparks : "fx"} /> : null}
+    </div>
+  );
 };
 
-export const Pop: React.FC<{at: number; d?: number; style?: any; children: React.ReactNode}> =
-({at, d = 14, style, children}) => {
+export const Pop: React.FC<{at: number; d?: number; sparks?: string | boolean; style?: any; children: React.ReactNode}> =
+({at, d = 14, sparks, style, children}) => {
   const f = useCurrentFrame();
   const o = interpolate(f, [at, at + d], [0, 1], clamp);
   const s = interpolate(f, [at, at + d], [0.72, 1], {...clamp, easing: Easing.out(Easing.back(1.5))});
   const bl = interpolate(f, [at, at + d * 0.6], [6, 0], clamp);
-  return <div style={{opacity: o, transform: `scale(${s})`, filter: `blur(${bl}px)`, ...style}}>{children}</div>;
+  return (
+    <div style={{position: sparks ? "relative" : undefined, opacity: o,
+      transform: `scale(${s})`, filter: `blur(${bl}px)`, ...style}}>
+      {children}
+      {sparks ? <Sparks at={at + Math.round(d * 0.5)} seed={typeof sparks === "string" ? sparks : "fx"} /> : null}
+    </div>
+  );
 };
 
 export const Until: React.FC<{to: number; d?: number; children: React.ReactNode; style?: any}> =
@@ -82,17 +134,17 @@ export const Bg: React.FC<{label?: string; base?: string}> = ({label, base}) => 
   const vmin = useVmin();
   const f = useCurrentFrame();
   return (
-    <AbsoluteFill style={{background: base ?? `radial-gradient(120% 90% at 50% 38%, #101218 0%, ${C.bg} 60%, #050609 100%)`}}>
-      <Orb color={C.accent} x={26} y={32} size={62} phase={0} op={0.18} />
-      <Orb color={C.purple} x={80} y={70} size={55} phase={2.2} op={0.12} />
-      <Orb color={C.good} x={68} y={20} size={40} phase={4.1} op={0.08} amp={4} />
+    <AbsoluteFill style={{background: base ?? `radial-gradient(120% 90% at 50% 38%, #1A1430 0%, #0D0B18 55%, #06050C 100%)`}}>
+      <Orb color={C.accent} x={26} y={32} size={62} phase={0} op={0.3} />
+      <Orb color={C.purple} x={80} y={70} size={55} phase={2.2} op={0.22} />
+      <Orb color={C.good} x={68} y={20} size={40} phase={4.1} op={0.13} amp={4} />
       <AbsoluteFill style={{
         backgroundImage:
           `linear-gradient(${C.border}40 1px, transparent 1px), linear-gradient(90deg, ${C.border}40 1px, transparent 1px)`,
         backgroundSize: `${9 * vmin}px ${9 * vmin}px`, opacity: 0.25,
         maskImage: "radial-gradient(circle at 50% 45%, black 30%, transparent 80%)",
         WebkitMaskImage: "radial-gradient(circle at 50% 45%, black 30%, transparent 80%)"}} />
-      <AbsoluteFill style={{background: "radial-gradient(circle at 50% 42%, transparent 35%, rgba(0,0,0,0.55) 88%)"}} />
+      <AbsoluteFill style={{background: "radial-gradient(circle at 50% 42%, transparent 35%, rgba(0,0,0,0.42) 88%)"}} />
       <AbsoluteFill style={{backgroundImage: `url("${GRAIN}")`, backgroundSize: `${30 * vmin}px`,
         opacity: 0.05, mixBlendMode: "overlay"}} />
       {/* drifting data particles — decorative (bokeh + sharp, clearly visible) */}

@@ -1,0 +1,22 @@
+{
+  "layout": "cards",
+  "category": "Kiến Thức Nền Tảng",
+  "catLabel": "Kiến thức nền tảng",
+  "kicker": "Máy vẫn tính ra · nhưng vô nghĩa",
+  "cards": [
+    {
+      "label": "MÃ ĐƠN",
+      "value": "10.847",
+      "color": "amber"
+    },
+    {
+      "label": "HÀI LÒNG",
+      "value": "3,4 sao",
+      "color": "green"
+    }
+  ],
+  "hook": {
+    "pre": "ĐỪNG TÍNH",
+    "em": "TRUNG BÌNH"
+  }
+}

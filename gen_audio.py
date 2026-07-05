@@ -157,7 +157,9 @@ def scale_alignment(al, f):
 
 def gen(bid, text):
     res = synth(text)
-    mp3 = os.path.join(audio_dir, f"beat-{bid}.mp3")
+    # short-outro ghi thẳng short-outro.mp3 (khớp outro.json); beat thường ghi beat-NN.mp3
+    fname = "short-outro" if bid == "short-outro" else f"beat-{bid}"
+    mp3 = os.path.join(audio_dir, f"{fname}.mp3")
     with open(mp3, "wb") as fh:                # đóng handle trước khi atempo (Windows hay khoá file)
         fh.write(base64.b64decode(res["audio_base64"]))
     al = res.get("alignment") or res.get("normalized_alignment")
@@ -175,13 +177,40 @@ BACK = {v: k for k, v in PRON.items() if " " not in v.strip() and v != k}  # res
 audio_dir = os.path.join("public", "audio", SLUG); os.makedirs(audio_dir, exist_ok=True)
 out_dir = os.path.join("videos", SLUG)
 
+# Re-voice TỪNG BEAT: python gen_audio.py <slug> <beat> [beat...]  -> chỉ gen beat đó,
+# giữ nguyên audio/timings các beat còn lại (đỡ credit + không đổi phần đã duyệt).
+ONLY = [b for b in sys.argv[2:] if not b.startswith("-")]
+beats_path = os.path.join(out_dir, "beats.json")
+timings_path = os.path.join(out_dir, "timings.json")
+
+if ONLY:
+    manifest = json.load(open(beats_path, encoding="utf-8"))
+    timings = json.load(open(timings_path, encoding="utf-8"))
+    by_id = {m["id"]: m for m in manifest}
+    for bid in ONLY:
+        if bid == "short-outro":
+            tl, dur, frames = gen("short-outro", prep(BEATS["short-outro"], PRON))
+            timings["short-outro"] = tl
+            json.dump({"audio": f"audio/{SLUG}/short-outro.mp3", "durationInFrames": frames},
+                      open(os.path.join(out_dir, "outro.json"), "w", encoding="utf-8"), ensure_ascii=False)
+        else:
+            tl, dur, frames = gen(bid, prep(BEATS[bid], PRON))
+            timings[bid] = tl
+            m = by_id.get(bid) or {"id": bid, "audio": f"audio/{SLUG}/beat-{bid}.mp3"}
+            m["durationSec"] = round(dur, 2); m["durationInFrames"] = frames
+            if bid not in by_id: manifest.append(m)
+    json.dump(manifest, open(beats_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    json.dump(timings, open(timings_path, "w", encoding="utf-8"), ensure_ascii=False)
+    print(f"\n[{SLUG}] re-voiced beat: {', '.join(ONLY)} (giữ nguyên phần còn lại)")
+    raise SystemExit(0)
+
 manifest, timings = [], {}
 for bid in ORDER:
     tl, dur, frames = gen(bid, prep(BEATS[bid], PRON))
     timings[bid] = tl
     manifest.append({"id": bid, "audio": f"audio/{SLUG}/beat-{bid}.mp3",
                      "durationSec": round(dur, 2), "durationInFrames": frames})
-json.dump(manifest, open(os.path.join(out_dir, "beats.json"), "w", encoding="utf-8"),
+json.dump(manifest, open(beats_path, "w", encoding="utf-8"),
           ensure_ascii=False, indent=2)
 
 if "short-outro" in BEATS:
@@ -190,7 +219,7 @@ if "short-outro" in BEATS:
     json.dump({"audio": f"audio/{SLUG}/short-outro.mp3", "durationInFrames": frames},
               open(os.path.join(out_dir, "outro.json"), "w", encoding="utf-8"), ensure_ascii=False)
 
-json.dump(timings, open(os.path.join(out_dir, "timings.json"), "w", encoding="utf-8"),
+json.dump(timings, open(timings_path, "w", encoding="utf-8"),
           ensure_ascii=False)
 
 tot = sum(m["durationInFrames"] for m in manifest)

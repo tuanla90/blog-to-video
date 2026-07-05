@@ -1,0 +1,14 @@
+{
+  "layout": "code",
+  "category": "AI & Công Nghệ",
+  "catLabel": "AI & công nghệ",
+  "kicker": "Text-to-SQL",
+  "hook": "AI [em]bịa[/em]<br>cả cột?",
+  "code": [
+    "<span style=\"color:#c084fc\">SELECT</span> customer_id,",
+    "       <span style=\"color:#FF3B4E;text-shadow:0 0 16px rgba(255,59,78,.7)\">customer_lifetime_value</span>",
+    "<span style=\"color:#c084fc\">FROM</span> orders",
+    "<span style=\"color:#c084fc\">WHERE</span> status = <span style=\"color:#34d399\">'paid'</span>;",
+    "<span style=\"color:#64748b\">-- cột không hề tồn tại</span>"
+  ]
+}

@@ -3,180 +3,892 @@
     "bg": "TUẤN LA LAB · DATA 101",
     "holdSec": 2,
     "moments": [
-      {"w": 24, "gap": 3, "stack": [ 
-        {"el": "sfx", "name": "impact", "atWord": "gõ", "volume": 0.13},
-        {"el": "lottie", "name": "question", "at": 2, "size": 13},
-        {"el": "label", "text": "SÁNG THỨ HAI · GIAO BAN"},
-        {"el": "text", "value": "\"Doanh thu tháng này[br]bao nhiêu?\"", "size": 5.4}
-      ]},
-      {"w": 48, "gap": 4, "stack": [
-        {"el": "sfx", "name": "pop", "at": 6, "volume": 0.12},
-        {"el": "cards", "countAt": 6, "cards": [
-          {"label": "Sales", "countTo": 4.2, "unit": "tỷ", "color": "accent"},
-          {"label": "Kế toán", "countTo": 3.8, "unit": "tỷ", "color": "warn"}
-        ]},
-        {"el": "caption", "at": 24, "size": 2.4, "text": "Cùng một công ty. Cùng một tháng."}
-      ]},
-      {"w": 18, "gap": 3, "atWord": "sai", "stack": [
-        {"el": "sfx", "name": "wrong", "at": 3, "volume": 0.02},
-        {"el": "text", "value": "AI SAI?", "size": 11.5, "color": "bad", "spacing": 2}
-      ]},
-      {"w": 11, "gap": 3, "atWord": "chẳng", "stack": [
-        {"el": "sfx", "name": "riser.mp3", "atWord": "chẳng", "lead": 4.5, "volume": 0.14},
-        {"el": "text", "value": "KHÔNG AI[br]SAI CẢ", "size": 8},
-        {"el": "caption", "at": 14, "size": 2.3, "text": "Cả ba đều đúng — theo định nghĩa của mình."}
-      ]}
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "sfx",
+            "name": "impact",
+            "atWord": "gõ",
+            "volume": 0.13
+          },
+          {
+            "el": "lottie",
+            "name": "question",
+            "at": 2,
+            "size": 13
+          },
+          {
+            "el": "label",
+            "text": "SÁNG THỨ HAI · GIAO BAN"
+          },
+          {
+            "el": "text",
+            "value": "\"Doanh thu tháng này[br]bao nhiêu?\"",
+            "size": 5.4
+          }
+        ]
+      },
+      {
+        "w": 48,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "sfx",
+            "name": "pop",
+            "at": 6,
+            "volume": 0.12
+          },
+          {
+            "el": "cards",
+            "countAt": 6,
+            "cards": [
+              {
+                "label": "Sales",
+                "countTo": 4.2,
+                "unit": "tỷ",
+                "color": "accent",
+                "icon": "briefcase"
+              },
+              {
+                "label": "Kế toán",
+                "countTo": 3.8,
+                "unit": "tỷ",
+                "color": "warn",
+                "icon": "calculator"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 24,
+            "size": 2.4,
+            "text": "Cùng một công ty. Cùng một tháng."
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "atWord": "sai",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "x",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "sfx",
+            "name": "wrong",
+            "at": 3,
+            "volume": 0.02
+          },
+          {
+            "el": "text",
+            "value": "AI SAI?",
+            "size": 11.5,
+            "color": "bad",
+            "spacing": 2
+          }
+        ]
+      },
+      {
+        "w": 11,
+        "gap": 3,
+        "atWord": "chẳng",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "scale",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "sfx",
+            "name": "riser.mp3",
+            "atWord": "chẳng",
+            "lead": 4.5,
+            "volume": 0.14
+          },
+          {
+            "el": "text",
+            "value": "KHÔNG AI[br]SAI CẢ",
+            "size": 8
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.3,
+            "text": "Cả ba đều đúng, theo định nghĩa của mình."
+          }
+        ]
+      }
     ]
   },
   "01": {
     "bg": "KHÁI NIỆM · BA TỪ KHÓA",
     "moments": [
-      {"w": 28, "gap": 2, "stack": [
-        {"el": "text", "color": "muted", "size": 4.6, "value": "Hiếm khi là cộng sai."},
-        {"el": "text", "size": 5.2, "value": "Ba người gọi [accent:ba thứ khác nhau][br]bằng đúng một từ."}
-      ]},
-      {"w": 22, "gap": 6, "stack": [
-        {"el": "chips", "at": 4, "stagger": 7, "items": [["METRIC", "accent"], ["DIMENSION", "good"], ["KPI", "warn"]]},
-        {"el": "caption", "at": 26, "size": 2.4, "text": "Hay bị dùng lẫn lộn — vai trò khác hẳn."}
-      ]},
-      {"w": 38, "stack": [
-        {"el": "list", "at": 6, "stagger": 9, "gap": 2.4, "rows": [
-          {"key": "Metric", "color": "accent", "text": "con số bạn đo được."},
-          {"key": "Dimension", "color": "good", "text": "cách cắt con số đó để nhìn rõ."},
-          {"key": "KPI", "color": "warn", "text": "con số đó + một cái đích phải đạt."}
-        ]}
-      ]}
-    ]
+      {
+        "w": 28,
+        "gap": 2,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "messages-square",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.6,
+            "value": "Hiếm khi là cộng sai."
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Ba người gọi [accent:ba thứ khác nhau][br]bằng đúng một từ."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 6,
+        "stack": [
+          {
+            "el": "icons",
+            "at": 4,
+            "stagger": 8,
+            "size": 13,
+            "gap": 6,
+            "variant": "glass",
+            "grad": true,
+            "items": [
+              {
+                "name": "gauge",
+                "color": "accent",
+                "label": "METRIC"
+              },
+              {
+                "name": "layers",
+                "color": "good",
+                "label": "DIMENSION"
+              },
+              {
+                "name": "target",
+                "color": "warn",
+                "label": "KPI"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 30,
+            "size": 2.4,
+            "text": "Hay bị dùng lẫn lộn, vai trò khác hẳn."
+          }
+        ]
+      },
+      {
+        "w": 38,
+        "stack": [
+          {
+            "el": "list",
+            "at": 6,
+            "stagger": 9,
+            "gap": 2.4,
+            "rows": [
+              {
+                "key": "Metric",
+                "color": "accent",
+                "text": "con số bạn đo được."
+              },
+              {
+                "key": "Dimension",
+                "color": "good",
+                "text": "cách cắt con số đó để nhìn rõ."
+              },
+              {
+                "key": "KPI",
+                "color": "warn",
+                "text": "con số đó + một cái đích phải đạt."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "holdSec": 1.0
   },
   "02": {
     "bg": "METRIC",
     "moments": [
-      {"w": 16, "gap": 3, "stack": [
-        {"el": "text", "size": 5.2, "value": "[accent:Metric] = một con số đo được."},
-        {"el": "caption", "at": 12, "size": 2.4, "text": "Doanh thu · Số đơn · Khách mới"}
-      ]},
-      {"w": 10, "stack": [{"el": "text", "size": 5.6, "value": "Nhưng cái bẫy[br]nằm ngay đây."}]},
-      {"w": 28, "gap": 4, "stack": [
-        {"el": "text", "size": 4.4, "value": "“Doanh thu” — hỏi 5 người:"},
-        {"el": "list", "at": 12, "stagger": 10, "gap": 2, "rows": [
-          {"text": "Đã chốt hay đã thu?", "mono": true, "color": "warn"},
-          {"text": "Có trừ đơn hoàn?", "mono": true, "color": "warn"},
-          {"text": "Có gồm phí ship?", "mono": true, "color": "warn"}
-        ]}
-      ]},
-      {"w": 22, "stack": [
-        {"el": "sfx", "name": "ding", "atWord": "tế", "volume": 0.13},
-        {"el": "cards", "cards": [
-          {"label": "Sales", "value": "4,2 tỷ", "color": "accent", "sub": "gồm ship · chưa trừ hoàn"},
-          {"label": "Kế toán", "value": "3,8 tỷ", "color": "warn", "sub": "đã thu · trừ hoàn · không ship"}
-        ]}
-      ]},
-      {"w": 12, "stack": [{"el": "text", "size": 5.2, "value": "Hai [bad:định nghĩa] khác nhau —[br]chung một cái tên."}]},
-      {"w": 16, "gap": 3, "stack": [
-        {"el": "sfx", "name": "ding", "at": 8, "volume": 0.1},
-        {"el": "lottie", "name": "check", "at": 6, "size": 11},
-        {"el": "label", "text": "CHỐT MỘT ĐỊNH NGHĨA"},
-        {"el": "cards", "cards": [{"label": "Cả công ty đồng ý", "value": "3,8 tỷ", "color": "good", "sub": "đã thu · đã trừ hoàn"}]}
-      ]}
-    ]
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "gauge",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "[accent:Metric] = một con số đo được."
+          },
+          {
+            "el": "caption",
+            "at": 12,
+            "size": 2.4,
+            "text": "Doanh thu · Số đơn · Khách mới"
+          }
+        ]
+      },
+      {
+        "w": 10,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.6,
+            "value": "Nhưng cái bẫy[br]nằm ngay đây."
+          }
+        ]
+      },
+      {
+        "w": 28,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "users",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.4,
+            "value": "“Doanh thu”, hỏi 5 người:"
+          },
+          {
+            "el": "list",
+            "at": 12,
+            "stagger": 10,
+            "gap": 2,
+            "rows": [
+              {
+                "text": "Đã chốt hay đã thu?",
+                "mono": true,
+                "color": "warn"
+              },
+              {
+                "text": "Có trừ đơn hoàn?",
+                "mono": true,
+                "color": "warn"
+              },
+              {
+                "text": "Có gồm phí ship?",
+                "mono": true,
+                "color": "warn"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "stack": [
+          {
+            "el": "sfx",
+            "name": "ding",
+            "atWord": "tế",
+            "volume": 0.13
+          },
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Sales",
+                "value": "4,2 tỷ",
+                "color": "accent",
+                "sub": "gồm ship · chưa trừ hoàn",
+                "icon": "briefcase"
+              },
+              {
+                "label": "Kế toán",
+                "value": "3,8 tỷ",
+                "color": "warn",
+                "sub": "đã thu · trừ hoàn · không ship",
+                "icon": "calculator"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 12,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "split",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Hai [bad:định nghĩa] khác nhau,[br]chung một cái tên."
+          }
+        ],
+        "gap": 3
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "sfx",
+            "name": "ding",
+            "at": 8,
+            "volume": 0.1
+          },
+          {
+            "el": "lottie",
+            "name": "check",
+            "at": 6,
+            "size": 11
+          },
+          {
+            "el": "label",
+            "text": "CHỐT MỘT ĐỊNH NGHĨA"
+          },
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Cả công ty đồng ý",
+                "value": "3,8 tỷ",
+                "color": "good",
+                "sub": "đã thu · đã trừ hoàn",
+                "icon": "handshake"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "holdSec": 1.0
   },
   "03": {
     "bg": "DIMENSION",
     "moments": [
-      {"w": 19, "gap": 3, "stack": [
-        {"el": "text", "value": "Tưởng chốt định nghĩa[br]là xong? [warn:Chưa.]", "size": 5.4}
-      ]},
-      {"w": 58, "gap": 4, "atWord": "cùng", "stack": [
-        {"el": "chip", "at": 6, "text": "CÙNG 1 ĐƠN — ĐỊNH NGHĨA Y HỆT", "color": "muted"},
-        {"el": "timeline", "marks": [
-          {"event": "Chốt đơn", "month": "Th5", "dept": "Kinh doanh", "color": "accent", "atWord": "kinh"},
-          {"event": "Khách trả tiền", "month": "Th6", "dept": "Kế toán", "color": "good", "atWord": "Kế"},
-          {"event": "Giao hàng", "month": "Th7", "dept": "Vận hành", "color": "warn", "atWord": "vận"}
-        ]},
-        {"el": "caption", "at": 510, "size": 2.2, "text": "Cùng một đơn — rơi vào ba tháng khác nhau."}
-      ]},
-      {"w": 22, "gap": 3, "atWord": "Dimension", "stack": [
-        {"el": "text", "value": "Cột ngày bạn chọn [good:cũng là dimension].[br][bad:Và nó đổi cả con số.]", "size": 4.8}
-      ]}
-    ]
+      {
+        "w": 19,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "x",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Tưởng chốt định nghĩa[br]là xong? [warn:Chưa.]",
+            "size": 5.4
+          }
+        ]
+      },
+      {
+        "w": 58,
+        "gap": 4,
+        "atWord": "cùng",
+        "stack": [
+          {
+            "el": "chip",
+            "at": 6,
+            "text": "CÙNG 1 ĐƠN, ĐỊNH NGHĨA Y HỆT",
+            "color": "muted",
+            "icon": "package"
+          },
+          {
+            "el": "timeline",
+            "marks": [
+              {
+                "event": "Chốt đơn",
+                "month": "Th5",
+                "dept": "Kinh doanh",
+                "color": "accent",
+                "atWord": "kinh"
+              },
+              {
+                "event": "Khách trả tiền",
+                "month": "Th6",
+                "dept": "Kế toán",
+                "color": "good",
+                "atWord": "Kế"
+              },
+              {
+                "event": "Giao hàng",
+                "month": "Th7",
+                "dept": "Vận hành",
+                "color": "warn",
+                "atWord": "vận"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 510,
+            "size": 2.2,
+            "text": "Cùng một đơn, rơi vào ba tháng khác nhau."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "Dimension",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "layers",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Cột ngày bạn chọn [good:cũng là dimension].[br][bad:Và nó đổi cả con số.]",
+            "size": 4.8
+          }
+        ]
+      }
+    ],
+    "holdSec": 1.0
   },
   "04": {
     "bg": "KPI",
     "moments": [
-      {"w": 13, "stack": [{"el": "text", "size": 5, "value": "Cả công ty cùng một số:[br][good:3,8 tỷ]. Hết cãi."}]},
-      {"w": 18, "gap": 2.5, "stack": [
-        {"el": "text", "size": 5, "value": "Đo đúng rồi — để làm gì?"},
-        {"el": "text", "at": 14, "size": 5.4, "value": "3,8 — [warn:tốt hay chưa?]"}
-      ]},
-      {"w": 16, "gap": 2.5, "stack": [
-        {"el": "text", "color": "muted", "size": 4.6, "value": "Một con số đứng một mình[br]không có tốt hay xấu."},
-        {"el": "text", "at": 14, "size": 4.8, "value": "Cần đặt cạnh [warn:một mục tiêu]."}
-      ]},
-      {"w": 26, "stack": [
-        {"el": "sfx", "name": "ding", "at": 30, "volume": 0.1},
-        {"el": "lottie", "name": "target", "at": 4, "size": 11},
-        {"el": "gauge", "at": 8, "pct": 95, "barMin": 2, "barMax": 23, "goalLabel": "Mục tiêu 4 tỷ", "sub": "KPI = số bạn phải ĐẠT, không phải số bạn đo."}
-      ]},
-      {"w": 14, "gap": 4, "stack": [
-        {"el": "dots", "total": 30, "cols": 6, "keepEvery": 5, "color": "warn"},
-        {"el": "text", "size": 4, "value": "Chọn [warn:5–10 KPI] — không phải 30."}
-      ]},
-      {"w": 13, "stack": [{"el": "text", "size": 4.8, "value": "Mọi thứ đều then chốt[br]= [bad:không gì then chốt.]"}]}
-    ]
+      {
+        "w": 13,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check-check",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Cả công ty cùng một số:[br][good:3,8 tỷ]. Hết cãi."
+          }
+        ],
+        "gap": 3
+      },
+      {
+        "w": 18,
+        "gap": 2.5,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "target",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Đo đúng rồi, để làm gì?"
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "size": 5.4,
+            "value": "3,8, [warn:tốt hay chưa?]"
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 2.5,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "scale",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.6,
+            "value": "Một con số đứng một mình[br]không có tốt hay xấu."
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "size": 4.8,
+            "value": "Cần đặt cạnh [warn:một mục tiêu]."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "stack": [
+          {
+            "el": "sfx",
+            "name": "ding",
+            "at": 30,
+            "volume": 0.1
+          },
+          {
+            "el": "lottie",
+            "name": "target",
+            "at": 4,
+            "size": 11
+          },
+          {
+            "el": "gauge",
+            "at": 8,
+            "pct": 95,
+            "barMin": 2,
+            "barMax": 23,
+            "goalLabel": "Mục tiêu 4 tỷ",
+            "sub": "KPI = số bạn phải ĐẠT, không phải số bạn đo."
+          }
+        ]
+      },
+      {
+        "w": 14,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "dots",
+            "total": 30,
+            "cols": 6,
+            "keepEvery": 5,
+            "color": "warn"
+          },
+          {
+            "el": "text",
+            "size": 4,
+            "value": "Chọn [warn:5-10 KPI], không phải 30."
+          }
+        ]
+      },
+      {
+        "w": 13,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "key",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Mọi thứ đều then chốt[br]= [bad:không gì then chốt.]"
+          }
+        ],
+        "gap": 3
+      }
+    ],
+    "holdSec": 1.0
   },
   "05": {
     "bg": "ĐỌC LẠI CUỘC CÃI VÃ",
     "moments": [
-      {"w": 20, "stack": [{"el": "text", "size": 5.2, "value": "Cùng một cuộc cãi —[br]đọc lại bằng [accent:ba từ]."}]},
-      {"w": 50, "stack": [
-        {"el": "list", "at": 8, "stagger": 14, "gap": 3, "rows": [
-          {"n": "1", "tag": "METRIC", "color": "accent", "text": "chưa có một định nghĩa chung"},
-          {"n": "2", "tag": "DIMENSION", "color": "good", "text": "mỗi phòng chọn một cột ngày khác"},
-          {"n": "3", "tag": "KPI", "color": "warn", "text": "không ai chốt mục tiêu để đối chiếu"}
-        ]}
-      ]},
-      {"w": 30, "stack": [{"el": "text", "size": 4.6, "value": "[accent:Metric nào] · [good:Dimension nào] · [warn:KPI nào?]"}]}
-    ]
+      {
+        "w": 20,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "list",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Cùng một cuộc cãi,[br]đọc lại bằng [accent:ba từ]."
+          }
+        ],
+        "gap": 3
+      },
+      {
+        "w": 50,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "list-checks",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "list",
+            "at": 8,
+            "stagger": 14,
+            "gap": 3,
+            "rows": [
+              {
+                "n": "1",
+                "tag": "METRIC",
+                "color": "accent",
+                "text": "chưa có một định nghĩa chung"
+              },
+              {
+                "n": "2",
+                "tag": "DIMENSION",
+                "color": "good",
+                "text": "mỗi phòng chọn một cột ngày khác"
+              },
+              {
+                "n": "3",
+                "tag": "KPI",
+                "color": "warn",
+                "text": "không ai chốt mục tiêu để đối chiếu"
+              }
+            ]
+          }
+        ],
+        "gap": 3
+      },
+      {
+        "w": 30,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "search",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "[accent:Metric nào] · [good:Dimension nào] · [warn:KPI nào?]"
+          }
+        ],
+        "gap": 3
+      }
+    ],
+    "holdSec": 1.0
   },
-  "07": {
+  "06": {
     "bg": "TÓM LẠI",
     "holdSec": 4.0,
     "moments": [
-      {"w": 50, "stack": [
-        {"el": "recap", "at": 6, "stagger": 12, "gap": 2, "rows": [
-          {"key": "Metric", "color": "accent", "a": "Đại lượng đo được", "b": "Doanh thu, số đơn"},
-          {"key": "Dimension", "color": "good", "a": "Lát cắt để nhìn", "b": "Theo kênh · cột ngày"},
-          {"key": "KPI", "color": "warn", "a": "Metric + mục tiêu", "b": "“Đạt 4 tỷ — hiện 95%”"}
-        ]}
-      ]},
-      {"w": 28, "stack": [
-        {"el": "flow", "at": 6, "stagger": 16, "nodes": [
-          {"key": "Metric", "sub": "con số thô", "color": "accent"},
-          {"key": "Dimension", "sub": "cắt / lọc lớp", "color": "good"},
-          {"key": "KPI", "sub": "so với đích", "color": "warn"}
-        ]}
-      ]},
-      {"w": 22, "atWord": "cãi", "stack": [
-        {"el": "text", "size": 4.6, "value": "Sales với Kế toán nhà bạn[br][warn:có hay cãi vì doanh thu?]"},
-        {"el": "caption", "at": 14, "size": 2.4, "text": "Kể mình nghe ở phần bình luận nhé!"}
-      ]},
-      {"w": 20, "stack": [
-        {"el": "lottie", "name": "subscribe", "at": 4, "size": 26},
-        {"el": "cta", "pill": "▶ Theo dõi", "tagline": "Mỗi tuần một khái niệm data — gỡ trong vài phút.", "brand": "TUẤN LA LAB"}
-      ]}
+      {
+        "w": 50,
+        "stack": [
+          {
+            "el": "recap",
+            "at": 6,
+            "stagger": 12,
+            "gap": 2,
+            "rows": [
+              {
+                "key": "Metric",
+                "color": "accent",
+                "a": "Đại lượng đo được",
+                "b": "Doanh thu, số đơn"
+              },
+              {
+                "key": "Dimension",
+                "color": "good",
+                "a": "Lát cắt để nhìn",
+                "b": "Theo kênh · cột ngày"
+              },
+              {
+                "key": "KPI",
+                "color": "warn",
+                "a": "Metric + mục tiêu",
+                "b": "“Đạt 4 tỷ, hiện 95%”"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 28,
+        "stack": [
+          {
+            "el": "flow",
+            "at": 6,
+            "stagger": 16,
+            "nodes": [
+              {
+                "key": "Metric",
+                "sub": "con số thô",
+                "color": "accent",
+                "icon": "gauge"
+              },
+              {
+                "key": "Dimension",
+                "sub": "cắt / lọc lớp",
+                "color": "good",
+                "icon": "layers"
+              },
+              {
+                "key": "KPI",
+                "sub": "so với đích",
+                "color": "warn",
+                "icon": "target"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "atWord": "cãi",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "users",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Sales với Kế toán nhà bạn[br][warn:có hay cãi vì doanh thu?]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Kể mình nghe ở phần bình luận nhé!"
+          }
+        ],
+        "gap": 3
+      },
+      {
+        "w": 20,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một khái niệm data, gỡ trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
     ]
   },
   "short-outro": {
     "bg": "TUẤN LA LAB · DATA 101",
     "moments": [
-      {"w": 48, "gap": 4, "stack": [
-        {"el": "text", "color": "muted", "size": 4.4, "value": "Câu trả lời nằm ở 3 từ:"},
-        {"el": "chips", "dir": "col", "at": 46, "stagger": 32, "gap": 2.4, "items": [["METRIC", "accent"], ["DIMENSION", "good"], ["KPI", "warn"]]}
-      ]},
-      {"w": 52, "atWord": "Xem", "stack": [
-        {"el": "lottie", "name": "subscribe", "at": 4, "size": 30},
-        {"el": "cta", "pill": "▶ Xem đầy đủ trên YouTube", "tagline": "Theo dõi để không bỏ lỡ.", "size": 3, "padY": 1.8, "padX": 3.6, "tagSize": 2.4}
-      ]}
+      {
+        "w": 48,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.4,
+            "value": "Câu trả lời nằm ở 3 từ:"
+          },
+          {
+            "el": "chips",
+            "dir": "col",
+            "at": 46,
+            "stagger": 32,
+            "gap": 2.4,
+            "items": [
+              [
+                "METRIC",
+                "accent",
+                "gauge"
+              ],
+              [
+                "DIMENSION",
+                "good",
+                "layers"
+              ],
+              [
+                "KPI",
+                "warn",
+                "target"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "w": 52,
+        "atWord": "Xem",
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 30
+          },
+          {
+            "el": "cta",
+            "pill": "Xem đầy đủ trên YouTube",
+            "tagline": "Theo dõi để không bỏ lỡ.",
+            "size": 3,
+            "padY": 1.8,
+            "padX": 3.6,
+            "tagSize": 2.4,
+            "icon": "play"
+          }
+        ]
+      }
     ]
   }
 }

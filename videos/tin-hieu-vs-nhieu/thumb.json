@@ -1,0 +1,22 @@
+{
+  "layout": "cards",
+  "category": "Phân Tích Dữ Liệu",
+  "catLabel": "Phân tích dữ liệu",
+  "kicker": "Cùng là giảm · một cái kệ, một cái ngẩng đầu",
+  "cards": [
+    {
+      "label": "GIẢM 8%",
+      "value": "KỆ NÓ",
+      "color": "amber"
+    },
+    {
+      "label": "GIẢM 18%",
+      "value": "NGẨNG ĐẦU",
+      "color": "red"
+    }
+  ],
+  "hook": {
+    "pre": "NHIỄU HAY",
+    "em": "TÍN HIỆU?"
+  }
+}
