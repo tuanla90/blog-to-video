@@ -1,0 +1,38 @@
+[
+  {
+    "id": "00",
+    "audio": "audio/tin-hieu-vs-nhieu/beat-00.wav",
+    "durationSec": 22.6,
+    "durationInFrames": 678
+  },
+  {
+    "id": "01",
+    "audio": "audio/tin-hieu-vs-nhieu/beat-01.wav",
+    "durationSec": 23.49,
+    "durationInFrames": 705
+  },
+  {
+    "id": "02",
+    "audio": "audio/tin-hieu-vs-nhieu/beat-02.wav",
+    "durationSec": 30.48,
+    "durationInFrames": 914
+  },
+  {
+    "id": "03",
+    "audio": "audio/tin-hieu-vs-nhieu/beat-03.wav",
+    "durationSec": 30.78,
+    "durationInFrames": 923
+  },
+  {
+    "id": "04",
+    "audio": "audio/tin-hieu-vs-nhieu/beat-04.wav",
+    "durationSec": 29.01,
+    "durationInFrames": 870
+  },
+  {
+    "id": "05",
+    "audio": "audio/tin-hieu-vs-nhieu/beat-05.wav",
+    "durationSec": 22.19,
+    "durationInFrames": 666
+  }
+]

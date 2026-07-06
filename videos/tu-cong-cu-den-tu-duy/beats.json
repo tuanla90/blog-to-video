@@ -1,0 +1,44 @@
+[
+  {
+    "id": "00",
+    "audio": "audio/tu-cong-cu-den-tu-duy/beat-00.wav",
+    "durationSec": 15.84,
+    "durationInFrames": 475
+  },
+  {
+    "id": "01",
+    "audio": "audio/tu-cong-cu-den-tu-duy/beat-01.wav",
+    "durationSec": 23.25,
+    "durationInFrames": 697
+  },
+  {
+    "id": "02",
+    "audio": "audio/tu-cong-cu-den-tu-duy/beat-02.wav",
+    "durationSec": 23.13,
+    "durationInFrames": 694
+  },
+  {
+    "id": "03",
+    "audio": "audio/tu-cong-cu-den-tu-duy/beat-03.wav",
+    "durationSec": 22.42,
+    "durationInFrames": 673
+  },
+  {
+    "id": "04",
+    "audio": "audio/tu-cong-cu-den-tu-duy/beat-04.wav",
+    "durationSec": 28.25,
+    "durationInFrames": 847
+  },
+  {
+    "id": "05",
+    "audio": "audio/tu-cong-cu-den-tu-duy/beat-05.wav",
+    "durationSec": 24.36,
+    "durationInFrames": 731
+  },
+  {
+    "id": "07",
+    "audio": "audio/tu-cong-cu-den-tu-duy/beat-07.wav",
+    "durationSec": 19.42,
+    "durationInFrames": 583
+  }
+]

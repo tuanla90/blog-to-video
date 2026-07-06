@@ -1,0 +1,878 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · HÀNH TRÌNH DATA",
+    "holdSec": 2,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "route",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "label",
+            "text": "MƯỜI NĂM LÀM DỮ LIỆU"
+          },
+          {
+            "el": "text",
+            "value": "Mình đi qua[br][accent:đủ thứ công cụ.]",
+            "size": 5.6
+          }
+        ]
+      },
+      {
+        "w": 28,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "chips",
+            "dir": "col",
+            "at": 4,
+            "stagger": 6,
+            "gap": 1.8,
+            "items": [
+              [
+                "Excel",
+                "accent",
+                "table"
+              ],
+              [
+                "Google Sheets",
+                "good",
+                "sheet"
+              ],
+              [
+                "Power BI",
+                "warn",
+                "chart-column"
+              ],
+              [
+                "Data Studio",
+                "purple",
+                "chart-line"
+              ],
+              [
+                "Superset · Metabase",
+                "muted",
+                "layout-dashboard"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "tường",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "brick-wall",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Mỗi cái, mình từng tin là điểm dừng.[br]Mỗi cái, [warn:đều đụng một bức tường.]",
+            "size": 4.8
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "atWord": "gỡ",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "brain",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Cái gỡ được mọi bức tường...[br][good:lại chẳng phải công cụ nào.]",
+            "size": 5
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "EXCEL · NGƯỜI THẦY ĐẦU TIÊN",
+    "holdSec": 1.5,
+    "moments": [
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "table",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Bắt đầu là [accent:Excel].[br]Mình mê nó thật lòng.",
+            "size": 5.4
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Ai cũng mở được. Gõ gì cũng được. Hỏi gì có ngay."
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "heart-handshake",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Nơi mình học [good:tư duy dữ liệu].[br]Tới giờ vẫn biết ơn.",
+            "size": 5
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "treo",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "hourglass",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Vài chục nghìn dòng... [warn:nó treo máy.][br]Gõ một ô, chờ năm giây.",
+            "size": 4.8
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "split",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Ba người đọc ra [bad:ba con số].[br]Không ai sai.",
+            "size": 5
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Chỉ là chữ “doanh thu”... chưa ai định nghĩa một lần."
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "POWER BI · DATA STUDIO",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icons",
+            "at": 4,
+            "stagger": 8,
+            "size": 13,
+            "gap": 6,
+            "variant": "glass",
+            "grad": true,
+            "items": [
+              {
+                "name": "chart-column",
+                "color": "warn",
+                "label": "POWER BI"
+              },
+              {
+                "name": "chart-line",
+                "color": "purple",
+                "label": "DATA STUDIO"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 24,
+            "size": 2.4,
+            "text": "Số của mình thành dashboard tự cập nhật."
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "sparkles",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Bấm vào lọc được.[br]Gửi một cái link, [good:cả công ty xem.]",
+            "size": 4.8
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "atWord": "hỏi",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "message-circle-question-mark",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Sếp hỏi một câu...[br][warn:mà dashboard chưa dựng sẵn.]",
+            "size": 5
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "dời",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "user-round",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Nút cổ chai không mất đi.[br]Nó dời từ cái file... [bad:sang chính mình.]",
+            "size": 4.8
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "SUPERSET · METABASE",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icons",
+            "at": 4,
+            "stagger": 8,
+            "size": 13,
+            "gap": 6,
+            "variant": "glass",
+            "grad": true,
+            "items": [
+              {
+                "name": "layout-dashboard",
+                "color": "accent",
+                "label": "SUPERSET"
+              },
+              {
+                "name": "database",
+                "color": "good",
+                "label": "METABASE"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 24,
+            "size": 2.4,
+            "text": "Cài 15 phút. Không mất đồng license. Dữ liệu trên máy mình."
+          }
+        ]
+      },
+      {
+        "w": 15,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "key-round",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Cảm giác [good:tự chủ] có thật.[br]Mình quý tới giờ.",
+            "size": 5
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "dọn",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "server-crash",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Đêm trước ngày họp, [warn:server hết dung lượng.][br]Dọn log tới một giờ sáng.",
+            "size": 4.6
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "atWord": "dời",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "move-right",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Công cụ thì miễn phí.[br]Chi phí [bad:chỉ dời chỗ.]",
+            "size": 5
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "TƯ VẤN · GOOGLE SHEETS → NOCOBASE",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "flow",
+            "at": 4,
+            "stagger": 12,
+            "nodes": [
+              {
+                "key": "Google Sheets",
+                "sub": "khởi đầu",
+                "color": "good",
+                "icon": "sheet"
+              },
+              {
+                "key": "AppSheet",
+                "sub": "lên app",
+                "color": "accent",
+                "icon": "smartphone"
+              },
+              {
+                "key": "Nocobase",
+                "sub": "tự dựng DB",
+                "color": "purple",
+                "icon": "database"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icons",
+            "at": 4,
+            "stagger": 7,
+            "size": 12,
+            "gap": 5,
+            "variant": "glass",
+            "grad": true,
+            "items": [
+              {
+                "name": "shirt",
+                "color": "accent",
+                "label": "XƯỞNG MAY"
+              },
+              {
+                "name": "stethoscope",
+                "color": "good",
+                "label": "PHÒNG KHÁM"
+              },
+              {
+                "name": "ship",
+                "color": "warn",
+                "label": "XUẤT NHẬP KHẨU"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 26,
+            "size": 2.4,
+            "text": "Mỗi nghề một cách tổ chức số liệu khác nhau."
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "atWord": "trần",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "panel-top",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Công cụ nào cũng mạnh.[br]Nhưng [warn:cái trần] lúc nào cũng giống nhau lạ kỳ.",
+            "size": 4.6
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "AHA · CÁI TRẦN CHUNG",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "eye",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Đứng lùi lại nhìn cả mười năm,[br]mình mới [accent:gọi tên được] cái trần.",
+            "size": 4.8
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "trophy",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Không công cụ nào thua vì yếu.[br]Excel, Power BI, Superset... [good:cái nào cũng giỏi.]",
+            "size": 4.6
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "cao",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "brain",
+            "color": "purple",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Cái chúng thiếu nằm [purple:cao hơn mọi công cụ]:[br]bạn đang đo cái gì, trong ngữ cảnh nào.",
+            "size": 4.6
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "circle-question-mark",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "list",
+            "at": 10,
+            "stagger": 12,
+            "gap": 2.2,
+            "rows": [
+              {
+                "text": "Chốt đơn hay đã thu tiền về?",
+                "mono": true,
+                "color": "warn"
+              },
+              {
+                "text": "Có gồm phí ship chưa?",
+                "mono": true,
+                "color": "warn"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 30,
+            "size": 2.4,
+            "text": "Không nằm trong phần mềm. Nằm trong đầu người hiểu nghề."
+          }
+        ]
+      }
+    ]
+  },
+  "06": {
+    "bg": "SEMANTIX · ĐỨNG TRÊN VAI",
+    "holdSec": 1.5,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "hammer",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Hiểu ra điều đó, mình ngồi xuống[br]tự xây [accent:Semantix].",
+            "size": 5
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icons",
+            "at": 4,
+            "stagger": 8,
+            "size": 12,
+            "gap": 5,
+            "variant": "glass",
+            "grad": true,
+            "items": [
+              {
+                "name": "table",
+                "color": "accent",
+                "label": "TỰ DO HỎI"
+              },
+              {
+                "name": "chart-column",
+                "color": "warn",
+                "label": "MÔ HÌNH HOÁ"
+              },
+              {
+                "name": "key-round",
+                "color": "good",
+                "label": "LÀM CHỦ DỮ LIỆU"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 28,
+            "size": 2.4,
+            "text": "Giữ cái hay của Excel, Power BI, Superset — đứng trên vai chúng."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "ngữ",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "layers",
+            "color": "purple",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Đặt lên trên một [purple:tầng ngữ cảnh],[br]để câu tiếng Việt không trả về số sai mà trông rất tròn.",
+            "size": 4.4
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "circle-off",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Đây không phải video bán hàng.[br][muted:Sợi chỉ đỏ ở dưới mới đáng mang về.]",
+            "size": 4.6
+          }
+        ]
+      }
+    ]
+  },
+  "07": {
+    "bg": "TÓM LẠI · NGỮ CẢNH LÀ VUA",
+    "holdSec": 4.0,
+    "moments": [
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "flow",
+            "at": 6,
+            "stagger": 14,
+            "nodes": [
+              {
+                "key": "Công cụ",
+                "sub": "đến rồi đi",
+                "color": "accent",
+                "icon": "route"
+              },
+              {
+                "key": "Cái trần",
+                "sub": "luôn giống nhau",
+                "color": "warn",
+                "icon": "panel-top"
+              },
+              {
+                "key": "Tư duy",
+                "sub": "nằm trên tất cả",
+                "color": "good",
+                "icon": "brain"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "handshake",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Theo mình từ thời Google Sheets?[br][good:Đừng bỏ mấy mẹo cũ] — vẫn đúng, vẫn dùng tốt.",
+            "size": 4.4
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "atWord": "vua",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "crown",
+            "color": "purple",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Sợi chỉ đỏ chỉ có một:[br][purple:ngữ cảnh là vua.]",
+            "size": 5.4
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một khái niệm data, gỡ trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  },
+  "short-outro": {
+    "bg": "TUẤN LA LAB · HÀNH TRÌNH DATA",
+    "moments": [
+      {
+        "w": 40,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.4,
+            "value": "Mười năm, một chồng công cụ:"
+          },
+          {
+            "el": "chips",
+            "dir": "col",
+            "at": 6,
+            "stagger": 8,
+            "gap": 1.8,
+            "items": [
+              [
+                "Excel · Sheets",
+                "accent",
+                "table"
+              ],
+              [
+                "Power BI",
+                "warn",
+                "chart-column"
+              ],
+              [
+                "Superset · Nocobase",
+                "good",
+                "database"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "gỡ",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "brain",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Thứ gỡ mọi bức tường không phải công cụ,[br][good:mà là ngữ cảnh.]",
+            "size": 4.8
+          }
+        ]
+      },
+      {
+        "w": 52,
+        "atWord": "Xem",
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 30
+          },
+          {
+            "el": "cta",
+            "pill": "Xem đầy đủ trên YouTube",
+            "tagline": "Theo dõi để không bỏ lỡ.",
+            "size": 3,
+            "padY": 1.8,
+            "padX": 3.6,
+            "tagSize": 2.4,
+            "icon": "play"
+          }
+        ]
+      }
+    ]
+  }
+}

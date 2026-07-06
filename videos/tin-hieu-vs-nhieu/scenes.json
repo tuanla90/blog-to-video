@@ -1,0 +1,582 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "holdSec": 2,
+    "moments": [
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "label",
+            "text": "SÁNG THỨ HAI · MỞ DASHBOARD"
+          },
+          {
+            "el": "icon",
+            "name": "trending-down",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Doanh thu tuần rồi[br][bad:giảm 8%.]",
+            "size": 5.6
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Họp khẩn sales?[br]Cắt luôn kênh quảng cáo?",
+            "size": 4.8
+          }
+        ]
+      },
+      {
+        "w": 34,
+        "gap": 4,
+        "atWord": "Khoan",
+        "stack": [
+          {
+            "el": "chips",
+            "at": 6,
+            "stagger": 8,
+            "gap": 2.2,
+            "items": [
+              [
+                "Tuần này −8%",
+                "bad",
+                "trending-down"
+              ],
+              [
+                "Tuần trước +6%",
+                "good",
+                "trending-up"
+              ],
+              [
+                "Trước nữa −5%",
+                "warn",
+                "trending-down"
+              ],
+              [
+                "Trước nữa +9%",
+                "good",
+                "trending-up"
+              ]
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 40,
+            "size": 2.4,
+            "text": "Cả chuỗi cứ nhấp nhô như thế."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "phản",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "audio-waveform",
+            "color": "muted",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Đừng phản ứng với[br][accent:mọi dao động] của con số.",
+            "size": 5.4
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "NHIỄU LÀ GÌ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "activity",
+            "color": "muted",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Không con số kinh doanh nào[br]đứng yên. Cứ nhấp nhô[br]quanh một mức trung bình.",
+            "size": 4.8
+          }
+        ]
+      },
+      {
+        "w": 28,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "label",
+            "text": "MỖI TUẦN = TỔNG CỦA TRĂM CHUYỆN VẶT"
+          },
+          {
+            "el": "chips",
+            "at": 6,
+            "stagger": 9,
+            "gap": 2.2,
+            "items": [
+              [
+                "Hôm đó trời mưa",
+                "muted",
+                "cloud-rain"
+              ],
+              [
+                "Một khách lớn đặt nhiều",
+                "accent",
+                "user-round"
+              ],
+              [
+                "Đối thủ chạy sale",
+                "warn",
+                "megaphone"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "w": 28,
+        "gap": 4,
+        "atWord": "nhiễu",
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "NHIỄU",
+                "value": "Nhấp nhô không mang tin",
+                "color": "muted",
+                "sub": "ngẫu nhiên · tự hồi",
+                "icon": "audio-waveform"
+              },
+              {
+                "label": "TÍN HIỆU",
+                "value": "Thay đổi thật, có nguyên nhân",
+                "color": "good",
+                "sub": "đáng để ngẩng đầu lên",
+                "icon": "activity"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "DẢI BÌNH THƯỜNG",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "kết",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Đừng bao giờ kết luận[br]từ [warn:một con số.]",
+            "size": 5.6
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "ruler",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "8% đứng một mình thì vô nghĩa.[br]Chỉ có nghĩa khi đặt cạnh[br][accent:một dải bình thường.]",
+            "size": 4.6
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "label",
+            "text": "8–12 TUẦN GẦN NHẤT"
+          },
+          {
+            "el": "list",
+            "at": 6,
+            "stagger": 10,
+            "gap": 2.4,
+            "rows": [
+              {
+                "key": "Tuần tệ nhất",
+                "color": "bad",
+                "text": "giảm bao nhiêu?"
+              },
+              {
+                "key": "Tuần đỉnh",
+                "color": "good",
+                "text": "tăng bao nhiêu?"
+              },
+              {
+                "key": "Lấy đó",
+                "color": "accent",
+                "text": "làm dải bình thường."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 4,
+        "atWord": "mười",
+        "stack": [
+          {
+            "el": "gauge",
+            "at": 6,
+            "pct": 90,
+            "barMin": 2,
+            "barMax": 22,
+            "goalLabel": "Dải bình thường",
+            "sub": "Trong dải đã từng xảy ra → gần như chắc là nhiễu."
+          },
+          {
+            "el": "caption",
+            "at": 40,
+            "size": 2.4,
+            "text": "Giảm 8 thì kệ. Giảm 18 mới ngẩng đầu."
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "CHUỖI CÙNG CHIỀU",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "trending-down",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Một tuần giảm là nhiễu.[br][warn:Bốn tuần liền giảm] thì khó ngẫu nhiên.",
+            "size": 5
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 4,
+        "atWord": "sấp",
+        "stack": [
+          {
+            "el": "dots",
+            "total": 4,
+            "cols": 4,
+            "keepEvery": 1,
+            "color": "warn"
+          },
+          {
+            "el": "text",
+            "at": 12,
+            "size": 4.4,
+            "value": "Giống tung đồng xu[br]ra [warn:sấp bốn lần liên tiếp.]"
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "activity",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Đó là [good:thay đổi có hệ thống]:[br]sản phẩm mất sức hút,[br]một kênh chết dần.",
+            "size": 4.6
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 4,
+        "atWord": "ngược",
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Hay làm ngược 1",
+                "value": "Hoảng vì cú sốc lẻ",
+                "color": "bad",
+                "sub": "thứ thường tự hồi sau một tuần",
+                "icon": "triangle-alert"
+              },
+              {
+                "label": "Hay làm ngược 2",
+                "value": "Quen dần đà giảm chậm",
+                "color": "warn",
+                "sub": "con ếch trong nồi nước nóng dần",
+                "icon": "trending-down"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "CÁI BẪY MÙA VỤ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "calendar-clock",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Một cái bẫy làm nhiễu[br]thêm rối: [warn:mùa vụ.]",
+            "size": 5.4
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "chips",
+            "at": 6,
+            "stagger": 9,
+            "gap": 2.2,
+            "items": [
+              [
+                "Cuối tuần cao hơn giữa tuần",
+                "muted",
+                "calendar"
+              ],
+              [
+                "Ngày đôi trên sàn vọt lên",
+                "accent",
+                "trending-up"
+              ],
+              [
+                "Tết bóp méo hết",
+                "warn",
+                "party-popper"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 4,
+        "atWord": "Tết",
+        "stack": [
+          {
+            "el": "label",
+            "text": "TẾT BÓP MÉO"
+          },
+          {
+            "el": "list",
+            "at": 6,
+            "stagger": 10,
+            "gap": 2.2,
+            "rows": [
+              {
+                "text": "Trước Tết: mua sắm cao điểm",
+                "color": "good"
+              },
+              {
+                "text": "Trong Tết: tụt sâu",
+                "color": "bad"
+              },
+              {
+                "text": "Sau Tết: hồi chậm",
+                "color": "warn"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "atWord": "cùng",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Đừng so tuần này với tuần trước.[br]So với [good:cùng kỳ năm ngoái] —[br]để mùa vụ tự triệt tiêu.",
+            "size": 4.6
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "TÓM LẠI",
+    "holdSec": 4.0,
+    "moments": [
+      {
+        "w": 26,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "activity",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Mỗi chỉ số là [accent:một cây kim đồng hồ],[br]lúc nào cũng rung nhẹ.",
+            "size": 5
+          }
+        ]
+      },
+      {
+        "w": 34,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "list",
+            "at": 6,
+            "stagger": 12,
+            "gap": 2.6,
+            "rows": [
+              {
+                "key": "Đừng chỉnh",
+                "color": "muted",
+                "text": "mỗi lần kim rung."
+              },
+              {
+                "key": "Chỉ chỉnh khi",
+                "color": "warn",
+                "text": "lệch hẳn khỏi vùng rung quen,"
+              },
+              {
+                "key": "hoặc",
+                "color": "bad",
+                "text": "trôi đều một chiều qua nhiều nhịp."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "hơi",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Phần lớn dao động là [good:hơi thở],[br]không phải [bad:triệu chứng.]",
+            "size": 5.2
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một khái niệm data, gỡ trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  }
+}

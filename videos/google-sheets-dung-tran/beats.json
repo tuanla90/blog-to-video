@@ -1,0 +1,44 @@
+[
+  {
+    "id": "00",
+    "audio": "audio/google-sheets-dung-tran/beat-00.wav",
+    "durationSec": 20.54,
+    "durationInFrames": 616
+  },
+  {
+    "id": "01",
+    "audio": "audio/google-sheets-dung-tran/beat-01.wav",
+    "durationSec": 30.42,
+    "durationInFrames": 913
+  },
+  {
+    "id": "02",
+    "audio": "audio/google-sheets-dung-tran/beat-02.wav",
+    "durationSec": 25.89,
+    "durationInFrames": 777
+  },
+  {
+    "id": "03",
+    "audio": "audio/google-sheets-dung-tran/beat-03.wav",
+    "durationSec": 39.54,
+    "durationInFrames": 1186
+  },
+  {
+    "id": "04",
+    "audio": "audio/google-sheets-dung-tran/beat-04.wav",
+    "durationSec": 22.25,
+    "durationInFrames": 667
+  },
+  {
+    "id": "05",
+    "audio": "audio/google-sheets-dung-tran/beat-05.wav",
+    "durationSec": 24.01,
+    "durationInFrames": 720
+  },
+  {
+    "id": "06",
+    "audio": "audio/google-sheets-dung-tran/beat-06.wav",
+    "durationSec": 27.01,
+    "durationInFrames": 810
+  }
+]

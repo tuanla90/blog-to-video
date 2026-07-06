@@ -1,0 +1,38 @@
+[
+  {
+    "id": "00",
+    "audio": "audio/4-loai-thang-do-du-lieu/beat-00.wav",
+    "durationSec": 32.01,
+    "durationInFrames": 960
+  },
+  {
+    "id": "01",
+    "audio": "audio/4-loai-thang-do-du-lieu/beat-01.wav",
+    "durationSec": 21.72,
+    "durationInFrames": 652
+  },
+  {
+    "id": "02",
+    "audio": "audio/4-loai-thang-do-du-lieu/beat-02.wav",
+    "durationSec": 21.9,
+    "durationInFrames": 657
+  },
+  {
+    "id": "03",
+    "audio": "audio/4-loai-thang-do-du-lieu/beat-03.wav",
+    "durationSec": 33.31,
+    "durationInFrames": 999
+  },
+  {
+    "id": "04",
+    "audio": "audio/4-loai-thang-do-du-lieu/beat-04.wav",
+    "durationSec": 29.31,
+    "durationInFrames": 879
+  },
+  {
+    "id": "05",
+    "audio": "audio/4-loai-thang-do-du-lieu/beat-05.wav",
+    "durationSec": 24.9,
+    "durationInFrames": 747
+  }
+]

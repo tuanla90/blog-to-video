@@ -1,0 +1,740 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · WAR STORY",
+    "holdSec": 2,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "layout-dashboard",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "label",
+            "text": "MỘT DASHBOARD MÌNH TỪNG TỰ HÀO"
+          },
+          {
+            "el": "text",
+            "value": "\"Chọn gì[br]cũng được.\"",
+            "size": 6.2
+          }
+        ]
+      },
+      {
+        "w": 28,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "chips",
+            "dir": "col",
+            "at": 4,
+            "stagger": 8,
+            "gap": 2.2,
+            "items": [
+              [
+                "Xem theo kênh? Bấm.",
+                "accent",
+                "sliders-horizontal"
+              ],
+              [
+                "Theo sản phẩm? Bấm.",
+                "good",
+                "sliders-horizontal"
+              ],
+              [
+                "Đổi chỉ số, đổi tỉ lệ? Bấm.",
+                "warn",
+                "sliders-horizontal"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "ngơ",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Rồi mình ngồi xem họ dùng.[br]Mặt ai cũng... [warn:ngơ ngác.]",
+            "size": 5
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "CÁI TEMPLATE VẠN NĂNG",
+    "holdSec": 1.5,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "layout-dashboard",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Một template Looker Studio,[br][accent:linh hoạt tối đa.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Hồi mình đi tư vấn cho doanh nghiệp."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "sliders-horizontal",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Cho người dùng tự chọn:"
+          },
+          {
+            "el": "list",
+            "at": 10,
+            "stagger": 7,
+            "gap": 2,
+            "rows": [
+              {
+                "text": "Chiều 1 · Chiều 2",
+                "mono": true,
+                "color": "accent"
+              },
+              {
+                "text": "Chỉ số 1 · Chỉ số 2",
+                "mono": true,
+                "color": "good"
+              },
+              {
+                "text": "Cả tỉ lệ",
+                "mono": true,
+                "color": "warn"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "chìa",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "key",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Trên giấy thì quá đẹp.[br]Mình nghĩ vừa trao [good:chìa khoá vạn năng]."
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "HỌ MỞ LÊN MỘT LẦN, RỒI THÔI",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "key",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Chìa khoá vạn năng đó,[br]đa số [warn:không biết cắm vào ổ nào.]"
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "sliders-horizontal",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Mở lên: năm sáu cái ô,[br]mỗi ô một danh sách [warn:dài dằng dặc.]"
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "circle-question-mark",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "list",
+            "at": 8,
+            "stagger": 10,
+            "gap": 2.2,
+            "rows": [
+              {
+                "text": "Chọn chiều nào?",
+                "mono": true,
+                "color": "warn"
+              },
+              {
+                "text": "Ghép với chỉ số nào?",
+                "mono": true,
+                "color": "warn"
+              },
+              {
+                "text": "Ra câu trả lời có nghĩa?",
+                "mono": true,
+                "color": "warn"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 32,
+            "size": 2.4,
+            "text": "Họ không biết. Mà đó đâu phải việc của họ."
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "atWord": "thôi",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "x",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Chạy ngon. Không lỗi gì.[br][bad:Mở một lần, rồi thôi.]"
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "LINH HOẠT QUÁ HOÁ RỐI",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "search",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Tệ nhất là khoản đào sâu.[br]Muốn xem kỹ một chỗ bất thường?"
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "rotate-ccw",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Lại phải tự chọn lại từ đầu:"
+          },
+          {
+            "el": "chips",
+            "dir": "col",
+            "at": 10,
+            "stagger": 8,
+            "gap": 2,
+            "items": [
+              [
+                "Chiều này",
+                "warn",
+                "sliders-horizontal"
+              ],
+              [
+                "Lọc kia",
+                "warn",
+                "funnel"
+              ],
+              [
+                "Đổi chỉ số nọ",
+                "warn",
+                "sliders-horizontal"
+              ]
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 30,
+            "size": 2.4,
+            "text": "Hỏi sâu thêm một câu = dựng lại từ số không."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "rối",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Mình thiết kế để [accent:LINH HOẠT.][br]Với người dùng: [bad:tự bơi đi.]",
+            "size": 4.8
+          },
+          {
+            "el": "text",
+            "at": 16,
+            "size": 6.4,
+            "value": "Linh hoạt quá...[br][bad:hoá rối.]"
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "HỌ THIẾU NGỮ CẢNH",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "lightbulb",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Mãi sau mình mới thấm:[br]đưa [accent:công cụ], quên đưa [good:tư duy.]"
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "sliders-horizontal",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.4,
+            "value": "Mấy ô chọn đó chỉ có nghĩa khi bạn đã biết:"
+          },
+          {
+            "el": "list",
+            "at": 12,
+            "stagger": 9,
+            "gap": 2,
+            "rows": [
+              {
+                "text": "Đang đo cái gì?",
+                "mono": true,
+                "color": "accent"
+              },
+              {
+                "text": "Cắt theo chiều nào?",
+                "mono": true,
+                "color": "good"
+              },
+              {
+                "text": "Trong bối cảnh nào?",
+                "mono": true,
+                "color": "warn"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "CẢNH",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Mình đếm thiếu một thứ.[br]Không phải thiếu [muted:nút bấm.]",
+            "size": 4.8
+          },
+          {
+            "el": "text",
+            "at": 16,
+            "size": 6,
+            "value": "Họ thiếu [good:NGỮ CẢNH.]"
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "TÍNH NĂNG DỄ CỘNG · TƯ DUY THÌ KHÓ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "scale",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Looker Studio [good:không có lỗi gì.][br]Dashboard vẫn tuyệt cho thứ theo dõi đều."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Thêm nút bấm",
+                "value": "+ tính năng",
+                "color": "muted",
+                "sub": "ai cũng cộng thêm được",
+                "icon": "sliders-horizontal"
+              },
+              {
+                "label": "Cái trần thật",
+                "value": "tư duy",
+                "color": "accent",
+                "sub": "nằm phía sau câu hỏi",
+                "icon": "target"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "sparkles",
+            "color": "purple",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Đó là thứ mình nung nấu khi xây [purple:Semantix]:[br]hỏi thẳng tiếng Việt, ngữ cảnh cài sẵn một lần."
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "atWord": "tư",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "brain",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Tính năng ai cũng cộng thêm.[br]Thứ khó cộng, là [accent:tư duy.]"
+          }
+        ]
+      }
+    ]
+  },
+  "07": {
+    "bg": "TÓM LẠI",
+    "holdSec": 4.0,
+    "moments": [
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "hand",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Định nhồi thêm nút bấm[br]cho dashboard xịn hơn? [warn:Khoan đã.]"
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "circle-question-mark",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Hỏi trước: người mở nó lên[br]có biết mình [accent:tìm câu trả lời cho câu hỏi gì] không?"
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Linh hoạt KHÔNG phải",
+                "value": "cho chọn mọi thứ",
+                "color": "bad",
+                "icon": "sliders-horizontal"
+              },
+              {
+                "label": "Linh hoạt LÀ",
+                "value": "dẫn đúng người tới đúng câu trả lời",
+                "color": "good",
+                "icon": "target"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "sau",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "users",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Tuần sau: một con số doanh thu[br][warn:mà ba phòng cãi nhau.]"
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một chuyện nghề data, kể trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  },
+  "short-outro": {
+    "bg": "TUẤN LA LAB · WAR STORY",
+    "moments": [
+      {
+        "w": 40,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.4,
+            "value": "Tự hào vì dashboard cho chọn mọi thứ."
+          },
+          {
+            "el": "text",
+            "at": 20,
+            "size": 5.2,
+            "value": "User mở lên, ngơ ngác,[br][warn:dùng một lần rồi bỏ.]"
+          }
+        ]
+      },
+      {
+        "w": 44,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Bài học: [warn:linh hoạt quá hoá rối.][br]Họ thiếu không phải nút bấm, mà là [good:ngữ cảnh.]"
+          }
+        ]
+      },
+      {
+        "w": 52,
+        "atWord": "đầy",
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 30
+          },
+          {
+            "el": "cta",
+            "pill": "Xem đầy đủ trên YouTube",
+            "tagline": "Theo dõi để không bỏ lỡ.",
+            "size": 3,
+            "padY": 1.8,
+            "padX": 3.6,
+            "tagSize": 2.4,
+            "icon": "play"
+          }
+        ]
+      }
+    ]
+  }
+}

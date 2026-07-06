@@ -1,0 +1,670 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "holdSec": 2,
+    "moments": [
+      {
+        "w": 30,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "question",
+            "at": 2,
+            "size": 12
+          },
+          {
+            "el": "label",
+            "text": "MƯỜI MỘT GIỜ ĐÊM · CUỐI THÁNG"
+          },
+          {
+            "el": "text",
+            "value": "Copy số từ Shopee[br]dán sang một sheet khác.",
+            "size": 5
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "table",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Số rải ở [warn:năm cái file],[br]mỗi nơi một kiểu."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Mai sếp cần báo cáo."
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "clock",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 6,
+            "value": "Cảnh này[br][muted:quen không?]"
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "SHEETS · CÔNG BẰNG MÀ NÓI",
+    "holdSec": 1.5,
+    "moments": [
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "table",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Google Sheets là một trong[br]những phần mềm [good:vĩ đại nhất]."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 2.5,
+        "stack": [
+          {
+            "el": "list",
+            "at": 6,
+            "stagger": 10,
+            "gap": 2.4,
+            "rows": [
+              {
+                "text": "Mở lên là dùng.",
+                "color": "good"
+              },
+              {
+                "text": "Không cần cài, không cần học.",
+                "color": "good"
+              },
+              {
+                "text": "Không cần xin ai cấp quyền.",
+                "color": "good"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Shop nhỏ, một nguồn, vài người:[br]dashboard Sheets là [good:đủ]."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Và miễn phí. Đừng vẽ rắn thêm chân."
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "CÁI NGHỊCH LÝ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Cái khiến Sheets [good:tiện hôm nay],[br]biến nó thành [warn:nợ ngày mai.]"
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 2.5,
+        "stack": [
+          {
+            "el": "list",
+            "at": 6,
+            "stagger": 11,
+            "gap": 2.4,
+            "rows": [
+              {
+                "text": "Một ô là bất cứ thứ gì → không gì ép nhất quán.",
+                "color": "warn",
+                "mono": true
+              },
+              {
+                "text": "Ai cũng sửa được → không gì giữ định nghĩa đứng yên.",
+                "color": "warn",
+                "mono": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Con dao đa năng Thuỵ Sĩ.[br]Tiện trăm việc nhỏ."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Nhưng đừng dùng nó để xây nhà."
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "BỐN CÁI TRẦN",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.4,
+            "value": "Dữ liệu lớn thành ngôi nhà,[br]nó đụng đúng [warn:bốn cái trần.]"
+          }
+        ]
+      },
+      {
+        "w": 40,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icons",
+            "at": 4,
+            "stagger": 9,
+            "size": 12,
+            "gap": 5,
+            "variant": "glass",
+            "grad": true,
+            "items": [
+              {
+                "name": "hand",
+                "color": "warn",
+                "label": "THỦ CÔNG"
+              },
+              {
+                "name": "clock",
+                "color": "warn",
+                "label": "BÁO CÁO TRỄ"
+              },
+              {
+                "name": "x",
+                "color": "bad",
+                "label": "DỄ SAI"
+              },
+              {
+                "name": "user",
+                "color": "bad",
+                "label": "MỘT NGƯỜI GÁNH"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 40,
+            "size": 2.4,
+            "text": "Không cái nào là lỗi của Sheets."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "hand",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "[warn:Trần 1 · Thủ công.][br]Mỗi tháng lại copy, lại dán, lại VLOOKUP."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "clock",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "[warn:Trần 2 · Báo cáo trễ.][br]Lái xe bằng cách nhìn gương chiếu hậu."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "x",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "[bad:Trần 3 · Dễ sai.][br]Sales bảo 1,2 tỷ · kế toán cãi 1,08."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "File không bao giờ la làng khi nó sai."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "user",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "[bad:Trần 4 · Một người gánh.][br]Người đó nghỉ một hôm, cả công ty mù."
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "CÙNG MỘT GỐC",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "layers",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Bốn cái trần đó,[br]tất cả cùng một [accent:gốc.]"
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 2.5,
+        "stack": [
+          {
+            "el": "text",
+            "size": 4.4,
+            "value": "Bạn quên hỏi:"
+          },
+          {
+            "el": "list",
+            "at": 10,
+            "stagger": 9,
+            "gap": 2.2,
+            "rows": [
+              {
+                "text": "Con số này đo cái gì?",
+                "color": "accent",
+                "mono": true
+              },
+              {
+                "text": "Trong ngữ cảnh nào?",
+                "color": "accent",
+                "mono": true
+              },
+              {
+                "text": "Ai được sửa, ai được xem?",
+                "color": "accent",
+                "mono": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Cái thiếu không phải công thức xịn.[br]Cái thiếu là [good:cấu trúc.]"
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "SEMANTIX",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "layers",
+            "color": "purple",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Mình đang xây một thứ tên[br][purple:Semantix], đi đúng từ chỗ đau này."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "table",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Không bắt bạn bỏ Sheets.[br]Sheets là [good:cánh cửa vào], không phải cái trần."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Định nghĩa doanh thu [good:đúng một lần, một chỗ.][br]Ai hỏi cũng ra cùng một số."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Nhưng đó là chuyện của mấy video sau."
+          }
+        ]
+      }
+    ]
+  },
+  "06": {
+    "bg": "TÓM LẠI",
+    "holdSec": 4.0,
+    "moments": [
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Theo mình từ thời Sheets?[br]Mấy mẹo cũ [good:vẫn đúng], đừng bỏ."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Đụng trần là [good:tin vui] —[br]nghĩa là bạn đang lớn."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "layers",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Không phải con dao to hơn.[br]Mà là một [accent:cách tư duy mới về dữ liệu.]"
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một khái niệm data, gỡ trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  },
+  "short-outro": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "moments": [
+      {
+        "w": 44,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.4,
+            "value": "Sheets chỉ đụng bốn cái trần khi bạn lớn:"
+          },
+          {
+            "el": "icons",
+            "at": 20,
+            "stagger": 8,
+            "size": 11,
+            "gap": 4,
+            "variant": "glass",
+            "grad": true,
+            "items": [
+              {
+                "name": "hand",
+                "color": "warn",
+                "label": "THỦ CÔNG"
+              },
+              {
+                "name": "clock",
+                "color": "warn",
+                "label": "TRỄ"
+              },
+              {
+                "name": "x",
+                "color": "bad",
+                "label": "SAI"
+              },
+              {
+                "name": "user",
+                "color": "bad",
+                "label": "MỘT NGƯỜI"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 52,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 30
+          },
+          {
+            "el": "cta",
+            "pill": "Xem đầy đủ trên YouTube",
+            "tagline": "Theo dõi để không bỏ lỡ.",
+            "size": 3,
+            "padY": 1.8,
+            "padX": 3.6,
+            "tagSize": 2.4,
+            "icon": "play"
+          }
+        ]
+      }
+    ]
+  }
+}

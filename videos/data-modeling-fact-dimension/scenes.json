@@ -1,0 +1,642 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "holdSec": 2,
+    "moments": [
+      {
+        "w": 30,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "question",
+            "at": 2,
+            "size": 13
+          },
+          {
+            "el": "label",
+            "text": "SẾP HỎI · GIAO BAN"
+          },
+          {
+            "el": "text",
+            "value": "\"Doanh thu áo khoác,[br]TikTok Shop, khách Hà Nội,[br]tháng Ba — bao nhiêu?\"",
+            "size": 4.8
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "database",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Bạn có [good:đủ dữ liệu].[br]Từng đơn, từng đồng."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Nằm gọn trong file."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Lọc tay cả buổi,[br]con số vẫn [warn:không chắc đúng.]"
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "table",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Đủ số, đủ công cụ.[br]Hỏi được câu nào nằm ở[br][accent:cách bạn sắp mấy cái bảng.]",
+            "size": 4.6
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "BẢNG PHẲNG · GIẤU BOM",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "table",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Người mới nhồi tất cả[br]vào [muted:một bảng duy nhất]."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Mỗi dòng một đơn, kèm luôn tên khách, tỉnh, tên kênh."
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "bomb",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.6,
+            "value": "Trông gọn.[br][bad:Nhưng giấu sẵn bom.]"
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "copy-x",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "list",
+            "at": 8,
+            "stagger": 11,
+            "gap": 2.2,
+            "rows": [
+              {
+                "text": "Lan đổi địa chỉ → sửa hàng trăm dòng",
+                "mono": true,
+                "color": "warn"
+              },
+              {
+                "text": "Sót một dòng → số sai",
+                "mono": true,
+                "color": "bad"
+              },
+              {
+                "text": "\"Tik Tok\" ≠ \"TikTok Shop\" → chia đôi doanh thu",
+                "mono": true,
+                "color": "bad"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "trending-down",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Bảng phẳng bế tắc đúng lúc[br][bad:câu hỏi bắt đầu khó.]"
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "BẢNG FACT · ĐỘNG TỪ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "split",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Lối ra: [accent:tách bảng làm hai loại.]"
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "table",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "[accent:Bảng fact] = chuyện đã xảy ra."
+          },
+          {
+            "el": "caption",
+            "at": 12,
+            "size": 2.4,
+            "text": "Mỗi dòng một sự kiện: một đơn hàng, một giao dịch."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Cột của fact",
+                "value": "Số cộng được",
+                "color": "accent",
+                "sub": "doanh thu · số lượng",
+                "icon": "package"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 16,
+            "size": 2.4,
+            "text": "Nghĩ cho dễ nhớ: bảng fact là động từ."
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "arrow-down-narrow-wide",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Gầy mà dài.[br][accent:Ít cột, cực nhiều dòng.]"
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "BẢNG DIMENSION · TÍNH TỪ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "layers",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "[good:Bảng dimension] =[br]phần mô tả để cắt lát."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 5,
+        "stack": [
+          {
+            "el": "icons",
+            "at": 4,
+            "stagger": 8,
+            "size": 13,
+            "gap": 5,
+            "variant": "glass",
+            "grad": true,
+            "items": [
+              {
+                "name": "package",
+                "color": "accent",
+                "label": "SẢN PHẨM"
+              },
+              {
+                "name": "users",
+                "color": "good",
+                "label": "KHÁCH"
+              },
+              {
+                "name": "calendar",
+                "color": "warn",
+                "label": "THỜI GIAN"
+              },
+              {
+                "name": "megaphone",
+                "color": "purple",
+                "label": "KÊNH BÁN"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 36,
+            "size": 2.4,
+            "text": "Nếu fact là động từ, dimension là tính từ: của ai, loại nào, khi nào."
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "arrow-up-wide-narrow",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Béo mà ngắn.[br][good:Nhiều cột, ít dòng.]"
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "scale",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "list",
+            "at": 8,
+            "stagger": 12,
+            "gap": 2.4,
+            "rows": [
+              {
+                "key": "Cộng · đếm · trung bình",
+                "color": "accent",
+                "text": "cho vào fact"
+              },
+              {
+                "key": "Lọc theo · nhóm theo",
+                "color": "good",
+                "text": "cho vào dimension"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "STAR SCHEMA",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 30,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "star",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "flow",
+            "at": 8,
+            "stagger": 12,
+            "nodes": [
+              {
+                "key": "Sản phẩm",
+                "sub": "dimension",
+                "color": "accent",
+                "icon": "package"
+              },
+              {
+                "key": "Đơn hàng",
+                "sub": "FACT",
+                "color": "warn",
+                "icon": "table"
+              },
+              {
+                "key": "Khách",
+                "sub": "dimension",
+                "color": "good",
+                "icon": "users"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 44,
+            "size": 2.4,
+            "text": "Fact ở giữa, nối ra các dimension bằng khoá chung: hình ngôi sao."
+          }
+        ]
+      },
+      {
+        "w": 28,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "circle-question-mark",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "chips",
+            "at": 6,
+            "stagger": 10,
+            "gap": 2,
+            "items": [
+              [
+                "Áo khoác",
+                "accent",
+                "package"
+              ],
+              [
+                "TikTok Shop",
+                "purple",
+                "megaphone"
+              ],
+              [
+                "Hà Nội",
+                "good",
+                "users"
+              ],
+              [
+                "Tháng Ba",
+                "warn",
+                "calendar"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "zap",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Lọc qua bốn dimension,[br]cộng cột doanh thu.[br][good:Một con số, chuyện vài giây.]"
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "repeat",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Sắp bảng đúng một lần,[br][accent:hỏi được vô số câu.]"
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "TÓM LẠI",
+    "holdSec": 4.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "hand",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Đừng vội biến mình[br]thành [muted:công ty dữ liệu.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Vài nghìn đơn không cần data warehouse mười tầng."
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "recap",
+            "at": 6,
+            "stagger": 14,
+            "gap": 2.2,
+            "rows": [
+              {
+                "key": "Fact",
+                "color": "accent",
+                "a": "Số đo · đã xảy ra",
+                "b": "Động từ · gầy mà dài"
+              },
+              {
+                "key": "Dimension",
+                "color": "good",
+                "a": "Mô tả · để cắt lát",
+                "b": "Tính từ · béo mà ngắn"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "circle-question-mark",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Không bắt đầu từ sơ đồ,[br]mà từ [warn:nghiệp vụ:][br]việc gì ở đây đáng đếm nhất?"
+          },
+          {
+            "el": "caption",
+            "at": 16,
+            "size": 2.4,
+            "text": "Trả lời được — đó là bảng fact, phần còn lại tự rơi vào dimension."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một khái niệm data, gỡ trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  }
+}

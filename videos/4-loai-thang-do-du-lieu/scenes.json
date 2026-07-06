@@ -1,0 +1,587 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "holdSec": 1.8,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "x",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "label",
+            "text": "MẸO EXCEL AI KHÔNG DẠY BẠN"
+          },
+          {
+            "el": "text",
+            "value": "Đừng tính [bad:trung bình][br]mã sản phẩm.",
+            "size": 5.6
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Bôi cột [accent:mức hài lòng] (1–5),[br]gõ AVERAGE:"
+          },
+          {
+            "el": "cards",
+            "at": 10,
+            "cards": [
+              {
+                "label": "AVERAGE(hài lòng)",
+                "value": "3,4 sao",
+                "color": "good",
+                "sub": "đẹp · khoa học · vào báo cáo",
+                "icon": "star"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "hash",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Bôi cột [warn:mã đơn hàng],[br]cũng gõ AVERAGE:"
+          },
+          {
+            "el": "cards",
+            "at": 10,
+            "cards": [
+              {
+                "label": "AVERAGE(mã đơn)",
+                "value": "10.847",
+                "color": "warn",
+                "sub": "mã đơn trung bình — vô nghĩa",
+                "icon": "hash"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "cpu",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Với máy, [muted:hai phép tính y hệt nhau.][br]Nó chỉ thấy số."
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "CÁI BẪY · BỐN THANG ĐO",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Máy [warn:luôn tính được],[br]kể cả khi phép tính vô nghĩa."
+          },
+          {
+            "el": "caption",
+            "at": 12,
+            "size": 2.4,
+            "text": "3,4 sao đáng tin không, không nằm ở con số."
+          }
+        ]
+      },
+      {
+        "w": 34,
+        "gap": 6,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "chart-column",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Nó nằm ở chỗ [accent:dữ liệu thuộc loại nào].[br]Mọi con số rơi vào một trong [accent:4 thang đo]."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "ruler",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Bốn nấc xếp thành [good:một cái thang].[br]Leo mỗi nấc, [good:được làm thêm một phép tính.]"
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "NẤC 1 · ĐỊNH DANH",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "tag",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Nấc thấp nhất: [accent:định danh].[br]Con số chỉ đóng vai cái tên."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 6,
+        "stack": [
+          {
+            "el": "chips",
+            "at": 4,
+            "stagger": 8,
+            "items": [
+              [
+                "Mã sản phẩm",
+                "accent",
+                "tag"
+              ],
+              [
+                "Kênh bán",
+                "accent",
+                "store"
+              ],
+              [
+                "Mã tỉnh",
+                "accent",
+                "map-pin"
+              ],
+              [
+                "Nhóm máu",
+                "accent",
+                "droplet"
+              ]
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 26,
+            "size": 2.4,
+            "text": "Mã đơn trông như số, nhưng là cái nhãn tình cờ."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "x",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Cộng hai mã đơn [bad:vô nghĩa][br]như cộng hai số điện thoại."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "list-checks",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.4,
+            "value": "Loại này chỉ được:"
+          },
+          {
+            "el": "list",
+            "at": 10,
+            "stagger": 10,
+            "gap": 2.2,
+            "rows": [
+              {
+                "key": "Đếm",
+                "color": "good",
+                "text": "mỗi nhóm bao nhiêu"
+              },
+              {
+                "key": "Mode",
+                "color": "good",
+                "text": "cái xuất hiện nhiều nhất"
+              },
+              {
+                "key": "Trung bình",
+                "color": "bad",
+                "text": "không bao giờ"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "NẤC 2 · THỨ BẬC",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "list-ordered",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Lên một nấc: [accent:thứ bậc].[br]Đúng chỗ [warn:3,4 sao] bị lật tẩy."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 5,
+        "stack": [
+          {
+            "el": "chips",
+            "at": 4,
+            "stagger": 9,
+            "items": [
+              [
+                "Sao 1→5",
+                "accent",
+                "star"
+              ],
+              [
+                "Đồng · Bạc · Vàng",
+                "warn",
+                "medal"
+              ],
+              [
+                "Có thứ tự rõ ràng",
+                "good",
+                "arrow-up-narrow-wide"
+              ]
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 28,
+            "size": 2.4,
+            "text": "5 sao thì hơn 4 sao — cái đó ai cũng biết."
+          }
+        ]
+      },
+      {
+        "w": 28,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "move-horizontal",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Nhưng [bad:khoảng cách các bậc không đều].[br]“Rất ghét → ghét” ≠ “hài lòng → rất hài lòng”."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Cộng rồi chia = coi bước dài ngắn như nhau.[br][bad:Sai từ gốc.] Đo bằng [good:trung vị], không phải trung bình."
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "NẤC 3 & 4 · KHOẢNG · TỈ LỆ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "thermometer",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Nấc ba: [accent:khoảng].[br]Khoảng cách đều thật, nhưng [warn:số 0 chỉ là quy ước.]"
+          }
+        ]
+      },
+      {
+        "w": 28,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "thermometer",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "20→21 độ đúng bằng 30→31 độ.[br]Nhưng [bad:40 độ KHÔNG nóng gấp đôi 20 độ] —[br]không có gốc 0 thật để so gấp mấy lần."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "scale",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Nấc trên cùng: [good:tỉ lệ] — có [good:gốc 0 thật].[br]Doanh thu 0 = không bán được gì. Nên [good:4 tỷ đúng là gấp đôi 2 tỷ.]"
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check-check",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Loại này [good:làm gì cũng được].[br]Và may thay, đa số số ra quyết định [good:nằm ở đây.]"
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "TÓM LẠI · HỎI TRƯỚC KHI TÍNH",
+    "holdSec": 4.0,
+    "moments": [
+      {
+        "w": 40,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "flow",
+            "at": 6,
+            "stagger": 14,
+            "nodes": [
+              {
+                "key": "Định danh",
+                "sub": "đếm · mode",
+                "color": "accent",
+                "icon": "tag"
+              },
+              {
+                "key": "Thứ bậc",
+                "sub": "trung vị",
+                "color": "warn",
+                "icon": "list-ordered"
+              },
+              {
+                "key": "Khoảng",
+                "sub": "cộng trừ",
+                "color": "good",
+                "icon": "thermometer"
+              },
+              {
+                "key": "Tỉ lệ",
+                "sub": "làm gì cũng được",
+                "color": "purple",
+                "icon": "scale"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "circle-question-mark",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Trước khi bấm AVERAGE, hỏi trước:[br][accent:cột này là thang đo gì, phép tính này có được phép không?]"
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "trophy",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Trả lời được câu đó, bạn đã đứng trên [good:phần lớn người bôi một cột rồi bấm trung bình.]"
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một khái niệm data, gỡ trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  }
+}

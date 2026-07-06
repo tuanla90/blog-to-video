@@ -1,0 +1,784 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · AI & DATA",
+    "holdSec": 2,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "question",
+            "at": 2,
+            "size": 13
+          },
+          {
+            "el": "label",
+            "text": "BẠN HỎI AI"
+          },
+          {
+            "el": "text",
+            "value": "\"LTV trung bình[br]của khách VIP?\"",
+            "size": 5.4
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "terminal",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Vài giây sau: một câu SQL[br]gọn gàng, [accent:đúng cú pháp]."
+          },
+          {
+            "el": "list",
+            "at": 12,
+            "stagger": 8,
+            "gap": 1.8,
+            "rows": [
+              {
+                "text": "SELECT AVG(ltv_khach_vip)",
+                "mono": true,
+                "color": "muted"
+              },
+              {
+                "text": "FROM khach_hang",
+                "mono": true,
+                "color": "muted"
+              },
+              {
+                "text": "WHERE hang = 'VIP';",
+                "mono": true,
+                "color": "muted"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "cột",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "x",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Cái cột nó gọi tới,[br][bad:không hề tồn tại.]"
+          }
+        ]
+      },
+      {
+        "w": 14,
+        "gap": 3,
+        "atWord": "bịa",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 6.2,
+            "value": "AI VỪA BỊA[br]RA MỘT CỘT",
+            "color": "warn"
+          },
+          {
+            "el": "caption",
+            "at": 12,
+            "size": 2.3,
+            "text": "Rất tự tin. Không một dòng cảnh báo."
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "VÌ SAO AI BỊA",
+    "holdSec": 1.5,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "refresh-cw",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.8,
+            "value": "Phản xạ đầu: \"chắc model yếu,[br]đổi con xịn hơn.\""
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "atWord": "bản",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "bot",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Không phải lỗi vặt.[br][warn:Là bản chất mọi LLM.]"
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "sparkles",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "LLM [bad:không tra database.][br]Nó [accent:đoán chữ tiếp theo]."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Chữ nào nghe hợp lý nhất, từ hàng tỷ dòng đã đọc."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "atWord": "nghìn",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "database",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Trên mạng có cả nghìn kho[br]đặt cột đúng cái tên đó."
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "size": 4.8,
+            "value": "Nên với nó, [warn:viết ra là hợp lý] —[br]bất kể kho bạn có hay không."
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "NHÂN VIÊN MỚI, KHÔNG SƠ ĐỒ KHO",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "user-round",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "AI như một nhân viên mới[br][accent:cực tự tin] — ngày đầu đi làm."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Không ai đưa sơ đồ kho."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "B7",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "package-search",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "\"Lấy giúp anh số ở [warn:kệ B7].\""
+          },
+          {
+            "el": "caption",
+            "at": 12,
+            "size": 2.4,
+            "text": "Kho nào cậu từng làm cũng có kệ B7."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "gật",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "package-check",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Cậu gật đầu chắc nịch,[br]bê về một thùng. [muted:Trông chuyên nghiệp.]"
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "B5",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Kho bạn đánh tới [bad:B5 là hết.]"
+          },
+          {
+            "el": "text",
+            "at": 12,
+            "size": 4.8,
+            "value": "Cậu lấp khoảng trống bằng[br][warn:thứ nghe hợp lý] — không phải thứ có thật."
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "KIỂU BỊA ĐÁNG SỢ NHẤT",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "shield-check",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Bịa cột còn [good:dễ] —[br]chạy lên là văng lỗi ngay."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "atWord": "chạy",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Đáng sợ: [bad:chạy ngon mà số vẫn sai.]"
+          },
+          {
+            "el": "list",
+            "at": 12,
+            "stagger": 9,
+            "gap": 2,
+            "rows": [
+              {
+                "text": "Nối nhầm hai bảng",
+                "mono": true,
+                "color": "warn"
+              },
+              {
+                "text": "Mỗi đơn bị đếm lặp",
+                "mono": true,
+                "color": "warn"
+              },
+              {
+                "text": "Doanh thu thổi phồng, không ai hay",
+                "mono": true,
+                "color": "bad"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "atWord": "định",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "book-open",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Đắt nhất: [warn:đoán định nghĩa nghiệp vụ.]"
+          },
+          {
+            "el": "list",
+            "at": 12,
+            "stagger": 9,
+            "gap": 2,
+            "rows": [
+              {
+                "text": "Trừ chiết khấu chưa?",
+                "mono": true,
+                "color": "warn"
+              },
+              {
+                "text": "Tính đơn hoàn không?",
+                "mono": true,
+                "color": "warn"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 30,
+            "size": 2.4,
+            "text": "AI không biết. Nó đoán."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "lệch",
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Lần này",
+                "value": "gộp",
+                "color": "accent",
+                "sub": "chưa trừ chiết khấu",
+                "icon": "terminal"
+              },
+              {
+                "label": "Lần sau",
+                "value": "-15%",
+                "color": "warn",
+                "sub": "đã trừ chiết khấu",
+                "icon": "terminal"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 12,
+            "size": 2.4,
+            "text": "Cả hai đúng cú pháp. Bạn không biết lần nào theo định nghĩa thật."
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "MÌNH GẶP MỖI NGÀY",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "building-2",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Mình gặp đúng cái bẫy này[br]mỗi ngày, ở [accent:một ngân hàng]."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "atWord": "doanh",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "split",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Chữ [warn:\"doanh thu\"] không có một nghĩa:"
+          },
+          {
+            "el": "list",
+            "at": 12,
+            "stagger": 8,
+            "gap": 2,
+            "rows": [
+              {
+                "text": "Theo sản phẩm",
+                "color": "muted"
+              },
+              {
+                "text": "Theo thời điểm ghi nhận",
+                "color": "muted"
+              },
+              {
+                "text": "Đơn đã tất toán hay chưa",
+                "color": "muted"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "neo",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Gắn thẳng LLM vào kho[br]mà [bad:không có lớp neo định nghĩa] —"
+          },
+          {
+            "el": "text",
+            "at": 12,
+            "size": 4.8,
+            "value": "nó đoán bừa một nhánh, trả về[br]con số [warn:trông rất dứt khoát.]"
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "atWord": "thông",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "brain",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Cách chặn [bad:không phải] tìm[br]một AI thông minh hơn."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Model to hơn vẫn đoán — chỉ bịa mượt hơn, khó phát hiện hơn."
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "THU HẸP CHỖ CHO NÓ BỊA",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "sparkles",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Làm ngược lại: đừng làm AI giỏi hơn —[br][accent:thu hẹp chỗ nó được xoay xở.]"
+          }
+        ]
+      },
+      {
+        "w": 32,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "shield-check",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "list",
+            "at": 8,
+            "stagger": 12,
+            "gap": 2.4,
+            "rows": [
+              {
+                "n": "1",
+                "color": "good",
+                "text": "Đưa đúng danh sách bảng, cột có thật"
+              },
+              {
+                "n": "2",
+                "color": "good",
+                "text": "Khai báo sẵn quan hệ giữa các bảng"
+              },
+              {
+                "n": "3",
+                "color": "good",
+                "text": "Định nghĩa doanh thu một lần, buộc nó dùng"
+              },
+              {
+                "n": "4",
+                "color": "good",
+                "text": "Không chắc thì dừng lại hỏi, đừng đoán"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "atWord": "sơ",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "database",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Cậu nhân viên đáng tin[br]không vì [muted:thông minh hơn] —"
+          },
+          {
+            "el": "text",
+            "at": 12,
+            "size": 4.8,
+            "value": "mà vì cuối cùng có ai đưa cậu[br][good:sơ đồ kho thật.]"
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "hỏi",
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "question",
+            "at": 4,
+            "size": 11
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Ai hứa gắn AI thẳng vào DB[br]là hỏi gì cũng trả lời được?"
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "size": 5,
+            "value": "Hỏi lại: [warn:\"Khi không chắc,[br]nó đoán hay nó dừng lại?\"]"
+          }
+        ]
+      }
+    ]
+  },
+  "short-outro": {
+    "bg": "TUẤN LA LAB · AI & DATA",
+    "moments": [
+      {
+        "w": 30,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "AI viết SQL đẹp long lanh —[br][bad:gọi tới cột chẳng hề tồn tại.]"
+          },
+          {
+            "el": "caption",
+            "at": 16,
+            "size": 2.4,
+            "text": "Ảo giác là bản chất của máy đoán chữ."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.4,
+            "value": "Cách chặn không phải AI thông minh hơn:"
+          },
+          {
+            "el": "chips",
+            "dir": "col",
+            "at": 20,
+            "stagger": 22,
+            "gap": 2.4,
+            "items": [
+              [
+                "CỘT CÓ THẬT",
+                "good",
+                "database"
+              ],
+              [
+                "ĐỊNH NGHĨA CHUẨN",
+                "accent",
+                "book-open"
+              ],
+              [
+                "KHÔNG CHẮC THÌ DỪNG",
+                "warn",
+                "shield-check"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "w": 52,
+        "atWord": "Xem",
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 30
+          },
+          {
+            "el": "cta",
+            "pill": "Xem đầy đủ trên YouTube",
+            "tagline": "Theo dõi để không bỏ lỡ.",
+            "size": 3,
+            "padY": 1.8,
+            "padX": 3.6,
+            "tagSize": 2.4,
+            "icon": "play"
+          }
+        ]
+      }
+    ]
+  }
+}

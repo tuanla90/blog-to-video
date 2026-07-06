@@ -1,0 +1,38 @@
+[
+  {
+    "id": "00",
+    "audio": "audio/trung-binh-noi-doi/beat-00.wav",
+    "durationSec": 27.6,
+    "durationInFrames": 828
+  },
+  {
+    "id": "01",
+    "audio": "audio/trung-binh-noi-doi/beat-01.wav",
+    "durationSec": 27.54,
+    "durationInFrames": 826
+  },
+  {
+    "id": "02",
+    "audio": "audio/trung-binh-noi-doi/beat-02.wav",
+    "durationSec": 28.01,
+    "durationInFrames": 840
+  },
+  {
+    "id": "03",
+    "audio": "audio/trung-binh-noi-doi/beat-03.wav",
+    "durationSec": 30.89,
+    "durationInFrames": 927
+  },
+  {
+    "id": "04",
+    "audio": "audio/trung-binh-noi-doi/beat-04.wav",
+    "durationSec": 28.42,
+    "durationInFrames": 853
+  },
+  {
+    "id": "05",
+    "audio": "audio/trung-binh-noi-doi/beat-05.wav",
+    "durationSec": 26.48,
+    "durationInFrames": 794
+  }
+]

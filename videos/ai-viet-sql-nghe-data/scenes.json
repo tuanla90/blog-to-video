@@ -1,0 +1,651 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "holdSec": 2,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "bot",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "label",
+            "text": "MÌNH GÕ MỘT CÂU HỎI CHO AI"
+          },
+          {
+            "el": "text",
+            "value": "\"Doanh thu quý vừa rồi[br]theo kênh.\"",
+            "size": 5.2
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "terminal",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Vài giây. Một câu [good:SQL] gọn gàng,[br]đúng cú pháp từng dấu phẩy."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Cái câu ngày xưa mình ngồi hì hục cả buổi sáng."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "atWord": "đực",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "user",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.4,
+            "value": "Vậy mình còn ngồi đây[br][muted:để làm gì nữa?]"
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "NỖI SỢ CHUNG",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Lướt mạng đâu cũng thấy:[br][warn:AI thay thế Data Analyst]tới nơi rồi."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "bot",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Mình thừa nhận thẳng: phần viết query,[br][accent:AI làm nhanh hơn mình thật.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Cú pháp, hàm, join bảng... nhả ra trong vài giây."
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "user",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Nếu nghề data chỉ có nhiêu đó,[br]thì ừ, [muted:mình lo là phải.]"
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "THỬ MỘT CÂU KHÓ HƠN",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 14,
+        "gap": 3,
+        "atWord": "khoan",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "circle-question-mark",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.6,
+            "value": "Nhưng khoan.[br]Thử một câu [accent:khó hơn]."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "terminal",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "\"Giá trị vòng đời của khách VIP.\""
+          },
+          {
+            "el": "caption",
+            "at": 12,
+            "size": 2.4,
+            "text": "AI trả lời cái rụp, một câu SQL đẹp long lanh."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "atWord": "bịa",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Cái cột nó gọi tới,[br][bad:database của mình không hề có.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Nó tự bịa ra. Tự tin, không một lời cảnh báo."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "AI",
+                "value": "Đoán",
+                "color": "warn",
+                "sub": "cái gì nghe hợp lý nhất",
+                "icon": "bot"
+              },
+              {
+                "label": "Dữ liệu thật",
+                "value": "Tra",
+                "color": "good",
+                "sub": "cái gì thật sự có trong DB",
+                "icon": "user"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 16,
+            "size": 2.4,
+            "text": "Đoán thì có lúc trúng, có lúc bịa."
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "NGỮ CẢNH",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 6,
+        "atWord": "ngữ",
+        "stack": [
+          {
+            "el": "icons",
+            "at": 4,
+            "stagger": 9,
+            "size": 13,
+            "gap": 6,
+            "variant": "glass",
+            "grad": true,
+            "items": [
+              {
+                "name": "terminal",
+                "color": "good",
+                "label": "AI GIỎI: CÚ PHÁP"
+              },
+              {
+                "name": "compass",
+                "color": "warn",
+                "label": "AI MÙ: NGỮ CẢNH"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 2,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "user",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.4,
+            "value": "\"Doanh thu tháng này\" — nhưng:"
+          },
+          {
+            "el": "list",
+            "at": 12,
+            "stagger": 9,
+            "gap": 2,
+            "rows": [
+              {
+                "text": "Trừ chiết khấu chưa?",
+                "mono": true,
+                "color": "warn"
+              },
+              {
+                "text": "Tính đơn hoàn không?",
+                "mono": true,
+                "color": "warn"
+              },
+              {
+                "text": "Chốt đơn hay đã thu tiền?",
+                "mono": true,
+                "color": "warn"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "compass",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "AI đoán bừa một nhánh.[br]Ngữ cảnh — [good:chỉ người hiểu nghề mới cấp.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Đó là phần của bạn."
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "NGHỀ ĐANG DỊCH CHUYỂN",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 16,
+        "gap": 3,
+        "atWord": "chết",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "user",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.4,
+            "value": "Nghề data không chết.[br][good:Nó đang dịch chuyển.]"
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "flow",
+            "at": 4,
+            "stagger": 14,
+            "nodes": [
+              {
+                "key": "Viết query nhanh nhất",
+                "sub": "cái AI làm thay",
+                "color": "muted",
+                "icon": "terminal"
+              },
+              {
+                "key": "Định nghĩa ngữ cảnh",
+                "sub": "đặt đúng câu hỏi",
+                "color": "good",
+                "icon": "compass"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Cứ để máy gánh",
+                "value": "Việc lặp",
+                "color": "muted",
+                "sub": "bưng số · dọn dữ liệu bẩn",
+                "icon": "bot"
+              },
+              {
+                "label": "Phần của bạn",
+                "value": "Ý nghĩa",
+                "color": "good",
+                "sub": "đo gì · bối cảnh nào · quyết định gì",
+                "icon": "user"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "NGỮ CẢNH LÀ VUA",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "user",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Mình loay hoay chuyện này lâu rồi,[br]suốt cả loạt bài blog vừa qua."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Rồi thành ý tưởng cho thứ mình đang xây, Semantix."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "compass",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Lõi không nằm ở công cụ.[br]Nó nằm ở [good:tư duy]."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Dạy AI ngữ cảnh trước, để nó hết chỗ mà bịa."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "atWord": "vua",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "key",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 6.4,
+            "value": "[warn:Ngữ cảnh là vua.]",
+            "spacing": 1
+          },
+          {
+            "el": "caption",
+            "at": 12,
+            "size": 2.4,
+            "text": "Mỗi tuần, một khái niệm data — gọn trong vài phút."
+          }
+        ]
+      }
+    ]
+  },
+  "07": {
+    "bg": "TÓM LẠI",
+    "holdSec": 4.0,
+    "moments": [
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "key",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Thứ AI không lấy được của bạn[br]là [accent:cái bạn hiểu về công việc.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Việc của tụi mình từ giờ là mài cho sắc đúng cái đó."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "atWord": "bình",
+        "stack": [
+          {
+            "el": "icon",
+            "name": "circle-question-mark",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Bạn đang lo, hay thấy AI[br][warn:mở ra nhiều cửa hơn?]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Kể mình nghe ở phần bình luận. Mình đọc hết."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một khái niệm data, gỡ trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  },
+  "short-outro": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "moments": [
+      {
+        "w": 48,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.4,
+            "value": "AI viết SQL nhanh hơn, nhưng:"
+          },
+          {
+            "el": "chips",
+            "dir": "col",
+            "at": 46,
+            "stagger": 30,
+            "gap": 2.4,
+            "items": [
+              [
+                "KHÔNG BIẾT NGỮ CẢNH",
+                "warn",
+                "compass"
+              ],
+              [
+                "BỊA CỘT KHÔNG TỒN TẠI",
+                "bad",
+                "triangle-alert"
+              ],
+              [
+                "NGHỀ DỊCH SANG NGỮ CẢNH",
+                "good",
+                "key"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "w": 52,
+        "atWord": "Xem",
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 30
+          },
+          {
+            "el": "cta",
+            "pill": "Xem đầy đủ trên YouTube",
+            "tagline": "Theo dõi để không bỏ lỡ.",
+            "size": 3,
+            "padY": 1.8,
+            "padX": 3.6,
+            "tagSize": 2.4,
+            "icon": "play"
+          }
+        ]
+      }
+    ]
+  }
+}

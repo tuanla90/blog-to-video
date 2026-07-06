@@ -1,0 +1,44 @@
+[
+  {
+    "id": "00",
+    "audio": "audio/phan-tram-vs-diem-phan-tram/beat-00.wav",
+    "durationSec": 24.19,
+    "durationInFrames": 726
+  },
+  {
+    "id": "01",
+    "audio": "audio/phan-tram-vs-diem-phan-tram/beat-01.wav",
+    "durationSec": 29.66,
+    "durationInFrames": 890
+  },
+  {
+    "id": "02",
+    "audio": "audio/phan-tram-vs-diem-phan-tram/beat-02.wav",
+    "durationSec": 25.36,
+    "durationInFrames": 761
+  },
+  {
+    "id": "03",
+    "audio": "audio/phan-tram-vs-diem-phan-tram/beat-03.wav",
+    "durationSec": 29.25,
+    "durationInFrames": 877
+  },
+  {
+    "id": "04",
+    "audio": "audio/phan-tram-vs-diem-phan-tram/beat-04.wav",
+    "durationSec": 27.89,
+    "durationInFrames": 837
+  },
+  {
+    "id": "05",
+    "audio": "audio/phan-tram-vs-diem-phan-tram/beat-05.wav",
+    "durationSec": 29.07,
+    "durationInFrames": 872
+  },
+  {
+    "id": "06",
+    "audio": "audio/phan-tram-vs-diem-phan-tram/beat-06.wav",
+    "durationSec": 31.78,
+    "durationInFrames": 953
+  }
+]

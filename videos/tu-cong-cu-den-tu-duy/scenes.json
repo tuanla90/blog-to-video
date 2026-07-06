@@ -1,0 +1,589 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB",
+    "holdSec": 2.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "rotate-ccw",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "label",
+            "text": "MỞ LẠI KÊNH"
+          },
+          {
+            "el": "text",
+            "value": "Video gần nhất...[br]đăng [muted:hơn một năm trước.]",
+            "size": 5.2
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "message-circle",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.6,
+            "value": "\"Anh ơi, anh[br]bỏ kênh rồi à?\""
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "message-square-heart",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Mình nợ các bạn[br]một câu trả lời thật.",
+            "size": 5.2
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Thật ra... có tới ba lý do."
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "LÝ DO THỨ NHẤT",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "baby",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Nhà mình đón thêm[br]một [good:em bé.]",
+            "size": 5.4
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "video-off",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.8,
+            "value": "Quay là phải nói to.[br]Bé đang ngủ, giật mình dậy."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.3,
+            "text": "Thế là mình đành gác máy quay."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "pen-line",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Không biến mất.[br]Mình chuyển qua [accent:viết.]",
+            "size": 5.2
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.3,
+            "text": "Bé lớn dần. Kho blog cũng lớn theo."
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "LÝ DO THỨ HAI",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "bot",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Làn sóng AI ập tới,[br][warn:nhanh đến chóng mặt.]",
+            "size": 5.2
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "flask-conical",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.8,
+            "value": "Cái gì mới cũng muốn thử tận tay.[br]Thử tới nơi, rồi tiêu hoá..."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.3,
+            "text": "ngốn thời gian kinh khủng."
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "hourglass",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Thà [accent:chậm lên video],[br]còn hơn vội.",
+            "size": 5.4
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "LÝ DO THỨ BA",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "heart-crack",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Lý do khiến mình[br][bad:trăn trở nhất.]",
+            "size": 5.4
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "bot",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "AI viết SQL... [warn:nhoay nhoáy.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.3,
+            "text": "Câu mình hì hục cả buổi, giờ nó ra trong vài giây."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "circle-question-mark",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.8,
+            "value": "Dân phân tích, dân BI như mình...[br]còn [muted:chỗ đứng] không?"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.3,
+            "text": "Mình bí câu đó một thời gian dài."
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "NGỮ CẢNH",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "compass",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Một thứ AI[br]không tự làm được:",
+            "size": 5,
+            "color": "muted"
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "value": "[accent:ngữ cảnh.]",
+            "size": 7
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "bot",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "AI viết được câu query.[br]Nhưng [bad:không biết]..."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.3,
+            "text": "doanh thu công ty bạn tính gồm ship hay chưa, chốt đơn hay đã thu tiền."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "lightbulb",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Chỉ người hiểu nghề[br]mới cấp được.",
+            "size": 5
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.3,
+            "text": "Rồi thành ý tưởng cho thứ mình đang xây: Semantix."
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "ĐỔI HƯỚNG KÊNH",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 28,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icons",
+            "at": 4,
+            "stagger": 10,
+            "size": 14,
+            "gap": 6,
+            "variant": "glass",
+            "grad": true,
+            "items": [
+              {
+                "name": "wrench",
+                "color": "muted",
+                "label": "CÔNG CỤ"
+              },
+              {
+                "name": "brain",
+                "color": "accent",
+                "label": "TƯ DUY"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 24,
+            "size": 2.4,
+            "text": "Từ chia sẻ công cụ... sang chia sẻ cách tư duy."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "table-2",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.6,
+            "value": "Mẹo Google Sheets ngày xưa?[br]Vẫn đúng, đừng bỏ."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.3,
+            "text": "Nhưng thứ mình muốn nói nằm trước mọi công cụ."
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "compass",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "[accent:Ngữ cảnh là vua.]",
+            "size": 6.4
+          }
+        ]
+      }
+    ]
+  },
+  "07": {
+    "bg": "MÌNH QUAY LẠI RỒI",
+    "holdSec": 3.5,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "heart-handshake",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Theo kênh từ thời[br]Google Sheets? [accent:Cảm ơn đã chờ.]",
+            "size": 5
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.3,
+            "text": "Mới biết mình thì rất vui được gặp."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "question",
+            "at": 2,
+            "size": 12
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Thời AI này, bạn có đang[br][warn:lo cho nghề data] không?"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.3,
+            "text": "Kể mình nghe ở phần bình luận. Mình đọc hết."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một khái niệm data, gỡ trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  },
+  "short-outro": {
+    "bg": "TUẤN LA LAB",
+    "moments": [
+      {
+        "w": 46,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "compass",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.4,
+            "value": "Mình nghỉ quay hơn một năm.[br]Câu trả lời gói trong một từ:"
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "size": 6,
+            "value": "[accent:ngữ cảnh.]"
+          }
+        ]
+      },
+      {
+        "w": 54,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 30
+          },
+          {
+            "el": "cta",
+            "pill": "Xem đầy đủ trên YouTube",
+            "tagline": "Theo dõi để không bỏ lỡ.",
+            "size": 3,
+            "padY": 1.8,
+            "padX": 3.6,
+            "tagSize": 2.4,
+            "icon": "play"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,622 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "holdSec": 2,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "car",
+            "color": "accent",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "label",
+            "text": "HOOK · TAY LÁI CÔNG TY"
+          },
+          {
+            "el": "text",
+            "value": "Lái xe bằng[br][accent:gương chiếu hậu.]",
+            "size": 5.6
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "history",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Nhiều người lái cả công ty[br]y hệt vậy."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Mở báo cáo doanh thu quý rồi mới quyết."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "cards",
+            "countAt": 6,
+            "cards": [
+              {
+                "label": "Doanh thu quý",
+                "countTo": -18,
+                "unit": "%",
+                "color": "bad",
+                "sub": "chuỗi cà phê Hà Nội",
+                "icon": "trending-down"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 16,
+            "size": 2.4,
+            "text": "Anh họp gấp, cắt khuyến mãi, đổi menu."
+          }
+        ]
+      },
+      {
+        "w": 12,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.4,
+            "value": "Con số vừa đập vào mắt[br]là [warn:tin của ba tháng trước.]"
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "TÍN HIỆU BỊ BỎ LỠ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "users",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Khách thưa dần từ[br]giữa tháng một."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Ghé ít hơn, ngồi ngắn hơn, đơn nhỏ lại."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "eye-off",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Tín hiệu nằm đó [warn:mười tuần.][br]Không ai đo nó."
+          }
+        ]
+      },
+      {
+        "w": 14,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "car",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Doanh thu quý chốt sổ,[br]xe đã [bad:qua khúc cua.]"
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Doanh thu quý [accent:rõ nhất, chắc nhất.][br]Ai cũng dán mắt vào."
+          },
+          {
+            "el": "caption",
+            "at": 16,
+            "size": 2.4,
+            "text": "Nhưng lúc nó rõ, thì đã muộn để làm gì."
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "HAI LOẠI CHỈ SỐ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 12,
+        "gap": 6,
+        "stack": [
+          {
+            "el": "icons",
+            "at": 4,
+            "stagger": 8,
+            "size": 13,
+            "gap": 6,
+            "variant": "glass",
+            "grad": true,
+            "items": [
+              {
+                "name": "history",
+                "color": "warn",
+                "label": "CHỈ SỐ TRỄ"
+              },
+              {
+                "name": "compass",
+                "color": "good",
+                "label": "CHỈ SỐ DẪN"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "history",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "[warn:Chỉ số trễ] = cái đã rồi."
+          },
+          {
+            "el": "list",
+            "at": 12,
+            "stagger": 9,
+            "gap": 2,
+            "rows": [
+              {
+                "text": "Doanh thu quý",
+                "color": "warn",
+                "mono": true
+              },
+              {
+                "text": "Lợi nhuận năm",
+                "color": "warn",
+                "mono": true
+              },
+              {
+                "text": "Số khách mất trong tháng",
+                "color": "warn",
+                "mono": true
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 40,
+            "size": 2.3,
+            "text": "Chính xác, không cãi được. Nhưng là kết quả."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "compass",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "[good:Chỉ số dẫn] đến trước."
+          },
+          {
+            "el": "list",
+            "at": 12,
+            "stagger": 9,
+            "gap": 2,
+            "rows": [
+              {
+                "text": "Khách dùng thử tuần này",
+                "color": "good",
+                "mono": true
+              },
+              {
+                "text": "Tỷ lệ quay lại trong 7 ngày",
+                "color": "good",
+                "mono": true
+              },
+              {
+                "text": "Số đơn mua lần hai",
+                "color": "good",
+                "mono": true
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 40,
+            "size": 2.3,
+            "text": "Ồn hơn, kém chắc hơn, nhưng đi trước vài tuần."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Gương chiếu hậu",
+                "value": "sắc nét",
+                "color": "warn",
+                "sub": "đoạn đường đã đi qua",
+                "icon": "history"
+              },
+              {
+                "label": "Kính chắn gió",
+                "value": "mờ, rung",
+                "color": "good",
+                "sub": "khúc cua đang tới",
+                "icon": "eye"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "LỌC LẤY 1-2 CHỈ SỐ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "dots",
+            "total": 40,
+            "cols": 8,
+            "keepEvery": 20,
+            "color": "warn"
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Dựng dashboard [warn:bốn chục ô][br]rồi gọi là \"theo dữ liệu\"."
+          },
+          {
+            "el": "caption",
+            "at": 16,
+            "size": 2.4,
+            "text": "Cách chắc nhất để không ai nhìn cái nào."
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "funnel",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.4,
+            "value": "Một chỉ số dẫn tử tế[br]phải qua [accent:ba cửa]:"
+          },
+          {
+            "el": "list",
+            "at": 12,
+            "stagger": 12,
+            "gap": 2.4,
+            "rows": [
+              {
+                "n": "1",
+                "color": "good",
+                "text": "đổi trước khi doanh thu đổi"
+              },
+              {
+                "n": "2",
+                "color": "good",
+                "text": "có việc cụ thể tác động ngay tuần này"
+              },
+              {
+                "n": "3",
+                "color": "good",
+                "text": "đo được đều đặn, ngày hoặc tuần"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "target",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Quán cà phê: [good:số khách[br]quay lại trong 14 ngày.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Một, nhiều nhất là hai. Còn lại là tiếng ồn."
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "BUỘC CHỈ SỐ VÀO HÀNH ĐỘNG",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "sparkles",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.8,
+            "value": "Báo trước cỡ nào mà[br]không gắn với hành động"
+          },
+          {
+            "el": "text",
+            "at": 12,
+            "size": 5,
+            "value": "cũng chỉ là [warn:chỉ số đẹp mã.]"
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "flow",
+            "at": 6,
+            "stagger": 14,
+            "nodes": [
+              {
+                "key": "NẾU",
+                "sub": "quay lại < 30% · 2 tuần liền",
+                "color": "warn",
+                "icon": "trending-down"
+              },
+              {
+                "key": "THÌ",
+                "sub": "gọi lại 20 khách cũ vừa im lặng",
+                "color": "good",
+                "icon": "phone-call"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 34,
+            "size": 2.4,
+            "text": "Buộc con số vào việc: một quy tắc nếu–thì."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "message-square-quote",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Con số khiến người ta nhấc máy[br]khi nó thành [accent:câu chuyện.]"
+          },
+          {
+            "el": "caption",
+            "at": 16,
+            "size": 2.3,
+            "text": "\"Khách rơi tuần thứ ba, đây là 20 cái tên vừa biến mất.\""
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "CÂU HỎI TRƯỚC MỖI QUYẾT ĐỊNH",
+    "holdSec": 4.0,
+    "moments": [
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "circle-question-mark",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.4,
+            "value": "Trước khi mở báo cáo quý để quyết,[br]hỏi lại mình một câu:"
+          },
+          {
+            "el": "recap",
+            "at": 14,
+            "stagger": 14,
+            "gap": 2,
+            "rows": [
+              {
+                "key": "Dẫn?",
+                "color": "good",
+                "a": "Cho thấy đường phía trước",
+                "b": "còn lái được"
+              },
+              {
+                "key": "Trễ?",
+                "color": "warn",
+                "a": "Kể lại đoạn vừa đi qua",
+                "b": "hết lái"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "compass",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.6,
+            "value": "Mỗi chỉ số đáng theo dõi[br]phải trả lời:"
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "size": 5,
+            "value": "[good:Hôm nay tôi làm gì khác đi?]"
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một khái niệm data, gỡ trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  }
+}

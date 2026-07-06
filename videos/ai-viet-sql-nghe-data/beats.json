@@ -1,0 +1,44 @@
+[
+  {
+    "id": "00",
+    "audio": "audio/ai-viet-sql-nghe-data/beat-00.wav",
+    "durationSec": 18.31,
+    "durationInFrames": 549
+  },
+  {
+    "id": "01",
+    "audio": "audio/ai-viet-sql-nghe-data/beat-01.wav",
+    "durationSec": 22.25,
+    "durationInFrames": 667
+  },
+  {
+    "id": "02",
+    "audio": "audio/ai-viet-sql-nghe-data/beat-02.wav",
+    "durationSec": 23.95,
+    "durationInFrames": 719
+  },
+  {
+    "id": "03",
+    "audio": "audio/ai-viet-sql-nghe-data/beat-03.wav",
+    "durationSec": 25.31,
+    "durationInFrames": 759
+  },
+  {
+    "id": "04",
+    "audio": "audio/ai-viet-sql-nghe-data/beat-04.wav",
+    "durationSec": 21.42,
+    "durationInFrames": 643
+  },
+  {
+    "id": "05",
+    "audio": "audio/ai-viet-sql-nghe-data/beat-05.wav",
+    "durationSec": 25.84,
+    "durationInFrames": 775
+  },
+  {
+    "id": "07",
+    "audio": "audio/ai-viet-sql-nghe-data/beat-07.wav",
+    "durationSec": 22.07,
+    "durationInFrames": 662
+  }
+]

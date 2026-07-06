@@ -1,0 +1,50 @@
+[
+  {
+    "id": "00",
+    "audio": "audio/hanh-trinh-cong-cu/beat-00.wav",
+    "durationSec": 18.54,
+    "durationInFrames": 556
+  },
+  {
+    "id": "01",
+    "audio": "audio/hanh-trinh-cong-cu/beat-01.wav",
+    "durationSec": 23.31,
+    "durationInFrames": 699
+  },
+  {
+    "id": "02",
+    "audio": "audio/hanh-trinh-cong-cu/beat-02.wav",
+    "durationSec": 24.84,
+    "durationInFrames": 745
+  },
+  {
+    "id": "03",
+    "audio": "audio/hanh-trinh-cong-cu/beat-03.wav",
+    "durationSec": 24.48,
+    "durationInFrames": 734
+  },
+  {
+    "id": "04",
+    "audio": "audio/hanh-trinh-cong-cu/beat-04.wav",
+    "durationSec": 24.48,
+    "durationInFrames": 734
+  },
+  {
+    "id": "05",
+    "audio": "audio/hanh-trinh-cong-cu/beat-05.wav",
+    "durationSec": 24.6,
+    "durationInFrames": 738
+  },
+  {
+    "id": "06",
+    "audio": "audio/hanh-trinh-cong-cu/beat-06.wav",
+    "durationSec": 28.07,
+    "durationInFrames": 842
+  },
+  {
+    "id": "07",
+    "audio": "audio/hanh-trinh-cong-cu/beat-07.wav",
+    "durationSec": 21.54,
+    "durationInFrames": 646
+  }
+]

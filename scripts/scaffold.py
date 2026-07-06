@@ -64,6 +64,14 @@ for bid in ids:
     else:
         beats.append({"id": bid, "audio": rel, "durationSec": round(dur, 2), "durationInFrames": frames})
 
+# bài KHÔNG có short-outro: tạo outro placeholder câm 1s để Short không vỡ + registry hợp lệ
+if outro is None:
+    dur = 1.0; frames = round(dur * FPS); fn = "short-outro.wav"
+    with wave.open(os.path.join(adir, fn), "wb") as wf:
+        wf.setnchannels(1); wf.setsampwidth(2); wf.setframerate(SR)
+        wf.writeframes(b"\x00\x00" * int(dur * SR))
+    outro = {"audio": f"audio/{slug}/{fn}", "durationInFrames": frames}
+
 d = os.path.join("videos", slug)
 json.dump(beats, open(os.path.join(d, "beats.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 json.dump(timings, open(os.path.join(d, "timings.json"), "w", encoding="utf-8"), ensure_ascii=False)

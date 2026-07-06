@@ -1,0 +1,662 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "holdSec": 2,
+    "moments": [
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "question",
+            "at": 2,
+            "size": 13
+          },
+          {
+            "el": "label",
+            "text": "BÁO CÁO CUỐI THÁNG · SHOP MỸ PHẨM"
+          },
+          {
+            "el": "text",
+            "value": "\"Khách chi trung bình[br][accent:500k] một đơn.\"",
+            "size": 5.4
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "party-popper",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Chị chủ mừng rơn:[br][good:\"Khách mình sộp thật!\"]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Gom hết tiền, nhập lô combo cao cấp gần 600k."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "package-x",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Một tháng sau,[br]lô combo [bad:nằm đắp chiếu.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Bóc từng đơn: phần lớn khách chỉ chi ~150k."
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Con số 500k[br]không sai một ly.[br][warn:Nhưng nó đánh lừa.]"
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "MEAN DỄ BỊ BẮT NẠT",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Cái 500k ở đâu ra?[br]Từ [warn:vài đơn sỉ] chục triệu."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Mấy chị bán lại, ôm 5-10 triệu một lần, kéo lệch cả tệp."
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "divide",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Nói [accent:trung bình],[br]ai cũng nghĩ tới [accent:mean]."
+          },
+          {
+            "el": "caption",
+            "at": 12,
+            "size": 2.4,
+            "text": "Cộng hết lại rồi chia đều."
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "chevrons-up",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "dots",
+            "at": 6,
+            "total": 10,
+            "cols": 10,
+            "keepEvery": 10,
+            "color": "warn"
+          },
+          {
+            "el": "text",
+            "at": 16,
+            "size": 4.4,
+            "value": "1 đơn sỉ [bad:10 triệu] lọt vào giữa[br]9 đơn 150k → mean [bad:phình lên cả triệu.]"
+          }
+        ],
+        "gap": 3
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "user-x",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "[warn:9/10 khách] chẳng dính gì tới con số đó.[br]Vậy mà nó đại diện cho cả tệp."
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "MEDIAN · TRUNG VỊ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "compass",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Có một cái la bàn tỉnh hơn:[br][good:median], hay trung vị."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "align-center-vertical",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Median chỉ hỏi một câu:"
+          },
+          {
+            "el": "text",
+            "at": 12,
+            "size": 4.6,
+            "value": "Xếp tất cả từ thấp lên cao,[br][good:người đứng chính giữa] chi bao nhiêu?"
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "shield-check",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Nên nó [good:miễn nhiễm][br]với mấy ông ngoại lai."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Ở shop trên, median chỉ khoảng 150k."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Mean",
+                "value": "500k",
+                "color": "bad",
+                "sub": "tổng chia đều · bị đơn sỉ kéo",
+                "icon": "divide"
+              },
+              {
+                "label": "Median",
+                "value": "150k",
+                "color": "good",
+                "sub": "người ở giữa thật sự",
+                "icon": "scale"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 14,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "check",
+            "color": "good",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Dữ liệu mà lệch,[br]median mới là [good:đứa nói thật.]"
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "SO MEAN VỚI MEDIAN",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "split",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Mẹo dùng được ngay:[br]đừng nhìn [accent:mean] một mình."
+          }
+        ]
+      },
+      {
+        "w": 34,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "scale",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "list",
+            "at": 8,
+            "stagger": 12,
+            "gap": 2.6,
+            "rows": [
+              {
+                "key": "Sát nhau",
+                "color": "good",
+                "text": "dữ liệu cân — mean dùng thoải mái."
+              },
+              {
+                "key": "Lệch xa",
+                "color": "warn",
+                "text": "150k với 1 triệu → còi báo động."
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 34,
+            "size": 2.4,
+            "text": "Có đuôi dài, có ông ngoại lai đang kéo."
+          }
+        ],
+        "gap": 3
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "percent",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Trung bình chưa phải[br]kẻ nói dối duy nhất."
+          },
+          {
+            "el": "caption",
+            "at": 12,
+            "size": 2.4,
+            "text": "Người anh em: phần trăm trên nền nhỏ."
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Báo cáo hét lên",
+                "value": "+300%",
+                "color": "warn",
+                "sub": "nghe như tên lửa",
+                "icon": "rocket"
+              },
+              {
+                "label": "Sự thật",
+                "value": "1 → 4 đơn",
+                "color": "muted",
+                "sub": "thêm đúng 3 cái đơn",
+                "icon": "package"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "NGHỊCH LÝ SIMPSON",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "search",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Nghe % gây sốc, hỏi ngay[br][accent:con số tuyệt đối] đứng sau."
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Tăng bao nhiêu đơn, trên bao nhiêu khách?"
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Cái bẫy cuối tinh vi tới mức[br]có hẳn tên riêng:[br][warn:nghịch lý Simpson.]"
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "split",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "list",
+            "at": 8,
+            "stagger": 12,
+            "gap": 2.6,
+            "rows": [
+              {
+                "key": "Khách mới",
+                "color": "good",
+                "text": "Kênh A chốt tốt hơn."
+              },
+              {
+                "key": "Khách cũ",
+                "color": "good",
+                "text": "Kênh A cũng tốt hơn."
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 32,
+            "size": 2.4,
+            "text": "Kênh A thắng cả hai nhóm."
+          }
+        ],
+        "gap": 3
+      },
+      {
+        "w": 26,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "paint-bucket",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Vậy mà gộp chung,[br]kênh A [bad:trông thua.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Như trộn hai xô sơn xong chẳng còn biết xô nào màu gì."
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "TÓM LẠI",
+    "holdSec": 4.0,
+    "moments": [
+      {
+        "w": 24,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "layers",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Điểm chung của cả ba bẫy:[br]co [accent:câu chuyện nhiều lớp][br]thành [warn:một con số phẳng.]"
+          }
+        ]
+      },
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "eye-off",
+            "color": "warn",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.4,
+            "value": "Trung bình không nói dối vì nó sai.[br]Nó nói dối vì [warn:nó bỏ bớt.]"
+          }
+        ]
+      },
+      {
+        "w": 40,
+        "stack": [
+          {
+            "el": "recap",
+            "at": 6,
+            "stagger": 12,
+            "gap": 2,
+            "rows": [
+              {
+                "key": "Mean",
+                "color": "bad",
+                "a": "Tổng chia đều",
+                "b": "Bị ngoại lai kéo lệch"
+              },
+              {
+                "key": "Median",
+                "color": "good",
+                "a": "Người ở giữa",
+                "b": "Miễn nhiễm ngoại lai"
+              },
+              {
+                "key": "Hỏi thêm",
+                "color": "accent",
+                "a": "Số tuyệt đối + phân phối",
+                "b": "Cho tôi xem từng người"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "target",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Lần tới cầm một con số trung bình,[br]hỏi thêm một câu: [accent:cho xem cả phân phối.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Nhà bạn từng bị con số trung bình lừa chưa? Kể mình nghe nhé!"
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một khái niệm data, gỡ trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  }
+}

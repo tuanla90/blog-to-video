@@ -1,0 +1,637 @@
+{
+  "00": {
+    "bg": "TUẤN LA LAB · DATA 101",
+    "holdSec": 2,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "question",
+            "at": 2,
+            "size": 13
+          },
+          {
+            "el": "label",
+            "text": "SÁNG THỨ HAI · PHÒNG HỌP"
+          },
+          {
+            "el": "text",
+            "value": "Tỷ lệ chốt đơn nhích[br]từ [muted:18%] lên [accent:22%].",
+            "size": 5.2
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "cards",
+            "countAt": 4,
+            "cards": [
+              {
+                "label": "Tháng trước",
+                "countTo": 18,
+                "unit": "%",
+                "color": "muted",
+                "icon": "percent"
+              },
+              {
+                "label": "Tháng này",
+                "countTo": 22,
+                "unit": "%",
+                "color": "accent",
+                "icon": "trending-up"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 26,
+            "size": 2.4,
+            "text": "Bạn viết trong báo cáo: “tăng 4%”."
+          }
+        ]
+      },
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "x",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "18% → 22%[br]KHÔNG phải [bad:tăng 10%].",
+            "size": 6,
+            "spacing": 1
+          }
+        ]
+      },
+      {
+        "w": 14,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "git-compare",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "value": "Cùng một con số,[br][warn:hai cách nói, hai số phận.]",
+            "size": 5.2
+          }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "% VS ĐIỂM %",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "split",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Hai thứ khác nhau[br]trốn trong một chữ [accent:“phần trăm”.]"
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Điểm phần trăm",
+                "value": "22 − 18 = 4",
+                "color": "good",
+                "sub": "khoảng cách giữa hai tỷ lệ",
+                "icon": "minus"
+              },
+              {
+                "label": "Thay đổi tương đối",
+                "value": "4 ÷ 18 ≈ 22%",
+                "color": "accent",
+                "sub": "so với cái nền 18",
+                "icon": "percent"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Nói [warn:“tăng 4%”], tai người nghe[br]tưởng nhích tí xíu —"
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "size": 5.2,
+            "value": "trong khi tỷ lệ đã [good:to lên gần ¼.]"
+          }
+        ]
+      }
+    ]
+  },
+  "02": {
+    "bg": "QUY TẮC MỘT CHỮ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "check",
+            "at": 4,
+            "size": 11
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Trừ hai tỷ lệ cho nhau,[br]kết quả luôn là [good:điểm %.]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Không phải phần trăm."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "triangle-alert",
+            "color": "bad",
+            "size": 15,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Viết [bad:“tăng 20 điểm”] mà đọc thành[br]“tăng 20%” —"
+          },
+          {
+            "el": "cards",
+            "at": 14,
+            "cards": [
+              {
+                "label": "Người ta tưởng",
+                "value": "10 → 30",
+                "color": "bad",
+                "sub": "sai gấp 10 lần thực tế",
+                "icon": "x"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "book-open",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "color": "muted",
+            "size": 4.6,
+            "value": "Hồi mình còn ráp báo cáo bằng Excel,[br]một chữ [warn:“điểm”] bị bỏ quên"
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "size": 4.8,
+            "value": "là đủ để sếp duyệt [bad:sai cả một khoản ngân sách.]"
+          }
+        ]
+      }
+    ]
+  },
+  "03": {
+    "bg": "BẪY GIẢM 50% RỒI TĂNG 50%",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 16,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "tag",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5.2,
+            "value": "Món này giá [accent:100.000đ.]"
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "cards",
+            "cards": [
+              {
+                "label": "Giảm 50%",
+                "value": "50.000đ",
+                "color": "warn",
+                "sub": "xả hàng",
+                "icon": "trending-down"
+              },
+              {
+                "label": "Tăng lại 50%",
+                "value": "75.000đ",
+                "color": "bad",
+                "sub": "KHÔNG về 100.000đ",
+                "icon": "trending-up"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 26,
+            "size": 2.4,
+            "text": "Về đúng 100 nghìn chứ gì? Không nhé."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "scale",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Lần giảm bám [muted:nền 100,][br]lần tăng bám [muted:nền 50.]"
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "size": 4.8,
+            "value": "% tăng với % giảm [bad:không triệt tiêu nhau] —[br]vì đứng trên hai cái nền khác cỡ."
+          }
+        ]
+      }
+    ]
+  },
+  "04": {
+    "bg": "TĂNG TỪ NỀN NHỎ",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "trending-up",
+            "color": "bad",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Đơn từ Zalo [bad:tăng 100%!]"
+          },
+          {
+            "el": "caption",
+            "at": 12,
+            "size": 2.4,
+            "text": "Cái bẫy hay gặp nhất."
+          }
+        ]
+      },
+      {
+        "w": 24,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "cards",
+            "countAt": 4,
+            "cards": [
+              {
+                "label": "Tháng trước",
+                "countTo": 1,
+                "unit": "đơn",
+                "color": "muted",
+                "icon": "package"
+              },
+              {
+                "label": "Tháng này",
+                "countTo": 2,
+                "unit": "đơn",
+                "color": "accent",
+                "icon": "package"
+              }
+            ]
+          },
+          {
+            "el": "caption",
+            "at": 26,
+            "size": 2.4,
+            "text": "“100%” nghe như phép màu — thật ra tăng đúng 1 đơn."
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "shield-check",
+            "color": "good",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Cách tự vệ chỉ gồm một câu hỏi:[br][good:“Từ bao nhiêu lên bao nhiêu?”]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Ai né con số gốc, gần như chắc cái nền đang bé."
+          }
+        ]
+      }
+    ]
+  },
+  "05": {
+    "bg": "BÌNH QUÂN CÁC PHẦN TRĂM",
+    "holdSec": 1.0,
+    "moments": [
+      {
+        "w": 18,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "calculator",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Còn một bẫy âm thầm hơn:[br][warn:bình quân các phần trăm.]"
+          }
+        ]
+      },
+      {
+        "w": 30,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "list",
+            "at": 6,
+            "stagger": 10,
+            "gap": 2.4,
+            "rows": [
+              {
+                "key": "Shopee",
+                "color": "accent",
+                "text": "hoàn 4% · 1.000 đơn",
+                "mono": true
+              },
+              {
+                "key": "TikTok Shop",
+                "color": "good",
+                "text": "hoàn 10% · 100 đơn",
+                "mono": true
+              }
+            ]
+          },
+          {
+            "el": "cards",
+            "at": 30,
+            "cards": [
+              {
+                "label": "Trung bình = 7%?",
+                "value": "SAI",
+                "color": "bad",
+                "sub": "thật ra 4,5%",
+                "icon": "x"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "scale",
+            "color": "muted",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Mỗi tỷ lệ đứng trên [muted:một cái nền to nhỏ khác.]"
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "size": 4.8,
+            "value": "Muốn gộp đúng, phải [good:đánh trọng số theo nền.]"
+          }
+        ]
+      }
+    ]
+  },
+  "06": {
+    "bg": "TÓM LẠI",
+    "holdSec": 4.0,
+    "moments": [
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "anchor",
+            "color": "accent",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 5,
+            "value": "Một con số % [accent:không bao giờ][br]tự đứng một mình —"
+          },
+          {
+            "el": "text",
+            "at": 14,
+            "size": 5,
+            "value": "nó luôn dính vào [warn:một cái nền.]"
+          }
+        ]
+      },
+      {
+        "w": 26,
+        "gap": 4,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "check",
+            "at": 4,
+            "size": 11
+          },
+          {
+            "el": "label",
+            "text": "LIỀU VẮC-XIN ĐƠN GIẢN NHẤT"
+          },
+          {
+            "el": "recap",
+            "at": 10,
+            "stagger": 12,
+            "gap": 2,
+            "rows": [
+              {
+                "key": "Ghi cả nền",
+                "color": "muted",
+                "a": "Từ 18% lên 22%",
+                "b": "hai con số gốc"
+              },
+              {
+                "key": "Điểm %",
+                "color": "good",
+                "a": "cộng 4 điểm",
+                "b": "hiệu hai tỷ lệ"
+              },
+              {
+                "key": "Tương đối",
+                "color": "accent",
+                "a": "hoặc cộng ~22%",
+                "b": "so với nền cũ"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "w": 22,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "icon",
+            "name": "search",
+            "color": "warn",
+            "size": 14,
+            "variant": "glass",
+            "grad": true
+          },
+          {
+            "el": "text",
+            "size": 4.8,
+            "value": "Lần tới đọc một con số % trong báo cáo,[br]hỏi luôn: [warn:“nó đứng trên nền nào?”]"
+          },
+          {
+            "el": "caption",
+            "at": 14,
+            "size": 2.4,
+            "text": "Trả lời được, bạn đã đi trước phần lớn người đọc số."
+          }
+        ]
+      },
+      {
+        "w": 20,
+        "gap": 3,
+        "stack": [
+          {
+            "el": "lottie",
+            "name": "subscribe",
+            "at": 4,
+            "size": 26
+          },
+          {
+            "el": "cta",
+            "pill": "Theo dõi",
+            "tagline": "Mỗi tuần một khái niệm data, gỡ trong vài phút.",
+            "brand": "TUẤN LA LAB",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  }
+}
