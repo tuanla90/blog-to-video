@@ -1,0 +1,60 @@
+{
+  "slug": "llm-bia-sql",
+  "beats": [
+    {
+      "id": "00",
+      "text": "Bạn hỏi AI: giá trị vòng đời trung bình của khách VIP là bao nhiêu?\nVài giây sau nó trả về một câu SQL gọn gàng, thụt lề chuẩn, đúng cú pháp từng dấu phẩy.\n[surprised] Chỉ có một vấn đề nhỏ: cái cột nó gọi tới, trong database của bạn không hề tồn tại.\nAI vừa bịa ra một cái cột. Rất tự tin. Không một dòng cảnh báo là tôi không chắc."
+    },
+    {
+      "id": "01",
+      "text": "Phản xạ đầu tiên của bạn thường là: chắc model còn yếu, đổi con xịn hơn là xong.\n[confident] Nhưng đây không phải lỗi vặt của một model dở, mà là bản chất của cách mọi LLM hoạt động.\nLLM không tra database của bạn. Nó đoán chữ tiếp theo nào nghe hợp lý nhất, dựa trên hàng tỷ dòng nó từng đọc.\nNó thấy trên mạng cả nghìn cái database có cột tên như thế. Nên với nó, viết ra là hợp lý nhất, bất kể kho của bạn có hay không."
+    },
+    {
+      "id": "02",
+      "text": "[thoughtful] Mình hình dung AI như một nhân viên mới cực kỳ tự tin, ngày đầu đi làm mà không ai đưa sơ đồ kho.\nBạn bảo: lấy giúp anh số ở kệ B7. Cậu chưa từng thấy kho của bạn, nhưng kho nào cậu từng làm cũng có kệ B7.\nThế là cậu gật đầu chắc nịch, đi thẳng tới chỗ lẽ ra là B7, bê về một thùng hàng. Trông rất chuyên nghiệp.\nChỉ là kho của bạn đánh số tới B5 là hết. Cậu lấp khoảng trống bằng thứ nghe hợp lý, không phải thứ có thật."
+    },
+    {
+      "id": "03",
+      "text": "Mà ảo giác kiểu bịa cột thì còn dễ, chạy lên là văng lỗi ngay.\n[annoyed] Đáng sợ là mấy kiểu chạy ngon mà số vẫn sai. Nối nhầm hai bảng, mỗi đơn bị đếm lặp, doanh thu thổi phồng mà không ai hay.\nHay đắt nhất: đoán định nghĩa nghiệp vụ. Bạn hỏi doanh thu tháng này. Trừ chiết khấu chưa? Tính đơn hoàn không? AI không biết, nó đoán.\nLần này lấy số gộp, lần sau trừ chiết khấu. Hai con số lệch nhau mười lăm phần trăm, cả hai đều đúng cú pháp. Bạn không cách nào biết lần nào theo định nghĩa thật của mình."
+    },
+    {
+      "id": "04",
+      "text": "[thoughtful] Mình gặp đúng cái bẫy này mỗi ngày ở một ngân hàng mình đang làm.\nNghiệp vụ phức tạp tới mức chữ doanh thu không có một nghĩa. Nó tách theo sản phẩm, theo thời điểm ghi nhận, theo đơn đã tất toán hay chưa.\nGắn thẳng LLM vào kho dữ liệu mà không có lớp neo định nghĩa, nó sẽ đoán bừa một nhánh rồi trả về con số trông rất dứt khoát.\nNên cách chặn không phải đi tìm một AI thông minh hơn. Model to hơn vẫn đoán, nó chỉ bịa mượt hơn thôi, khó phát hiện hơn."
+    },
+    {
+      "id": "05",
+      "text": "[confident] Cách làm ngược lại: đừng làm AI giỏi hơn, mà thu hẹp không gian nó được phép xoay xở, tới khi gần như hết chỗ bịa.\nĐưa cho nó đúng danh sách bảng cột có thật. Khai báo sẵn quan hệ giữa các bảng. Định nghĩa doanh thu một lần, chuẩn, buộc nó phải dùng. Không chắc thì dừng lại hỏi, đừng đoán.\nCái nhân viên mới ở đầu không đáng tin hơn vì được tuyển người thông minh hơn. Cậu đáng tin vì cuối cùng có ai đưa cho cậu sơ đồ kho thật.\nNên lần tới ai hứa gắn AI thẳng vào database là hỏi gì cũng trả lời được, bạn hỏi lại một câu thôi: thế khi nó không chắc, nó đoán hay nó dừng lại?"
+    }
+  ],
+  "shortOutro": "[confident] AI viết SQL đẹp long lanh, nhưng gọi tới một cột chẳng hề tồn tại. Ảo giác không phải lỗi model dở, nó là bản chất của máy đoán chữ.\nCách chặn không phải AI thông minh hơn, mà thu hẹp chỗ cho nó bịa. Xem đầy đủ trên YouTube, theo dõi để không bỏ lỡ nhé.",
+  "pron": [
+    {
+      "word": "Semantix",
+      "say": "Sơ-men-tích"
+    },
+    {
+      "word": "SQL",
+      "say": "ét-quèo"
+    },
+    {
+      "word": "LLM",
+      "say": "eo-eo-em"
+    },
+    {
+      "word": "VIP",
+      "say": "víp"
+    },
+    {
+      "word": "database",
+      "say": "đây-ta-bây"
+    },
+    {
+      "word": "B7",
+      "say": "bê bảy"
+    },
+    {
+      "word": "B5",
+      "say": "bê năm"
+    }
+  ]
+}

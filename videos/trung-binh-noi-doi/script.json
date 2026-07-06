@@ -1,0 +1,43 @@
+{
+  "slug": "trung-binh-noi-doi",
+  "beats": [
+    {
+      "id": "00",
+      "text": "Khách chi trung bình năm trăm nghìn một đơn. Một chị chủ shop mỹ phẩm ở Hà Nội đọc dòng đó trong báo cáo cuối tháng, mừng rơn.\nChị nghĩ ngay: khách mình sộp thật. Thế là gom hết tiền hàng, nhập một lô combo cao cấp gần sáu trăm nghìn.\nMột tháng sau, lô combo nằm đắp chiếu. Bóc từng đơn ra xem, phần lớn khách chỉ chi quanh một trăm rưỡi nghìn.\n[thoughtful] Con số năm trăm nghìn ấy không sai một ly về số học. Đúng, mà vẫn đánh lừa chị."
+    },
+    {
+      "id": "01",
+      "text": "Cái năm trăm nghìn đó ở đâu ra? Từ vài đơn sỉ. Mấy chị bán lại, ôm năm mười triệu một lần, kéo lệch cả mặt bằng.\nĐây là chỗ mình hay nhầm. Nói trung bình, ai cũng nghĩ tới mean, tức cộng hết lại rồi chia đều.\n[annoyed] Mà mean thì dễ bị bắt nạt lắm. Chỉ một đơn sỉ mười triệu lọt vào giữa chín đơn một trăm rưỡi, nó phình lên cả triệu ngay.\nChín trên mười khách chẳng dính gì tới con số đó. Vậy mà nó lại đứng ra đại diện cho cả tệp."
+    },
+    {
+      "id": "02",
+      "text": "Có một cái la bàn tỉnh hơn, tên là median, hay gọi trung vị.\nMedian không quan tâm ông sỉ chi mười triệu hay trăm triệu. Nó chỉ hỏi một câu: xếp tất cả từ thấp lên cao, người đứng chính giữa hàng chi bao nhiêu?\nNên nó miễn nhiễm với mấy ông ngoại lai. Ở shop trên, median chỉ khoảng một trăm rưỡi nghìn.\nMean cho bạn biết tổng chia đều. [confident] Median cho bạn biết người ở giữa thật sự thế nào. Dữ liệu mà lệch, median mới là đứa nói thật."
+    },
+    {
+      "id": "03",
+      "text": "Mẹo dùng được ngay: đừng bao giờ nhìn mean một mình. Xem mean với median cạnh nhau.\nHai số sát nhau thì dữ liệu cân, mean dùng thoải mái. Lệch xa nhau, kiểu một trăm rưỡi với một triệu, đấy là còi báo động: có đuôi dài, có ông ngoại lai đang kéo.\nMà trung bình chưa phải kẻ nói dối duy nhất đâu. Còn người anh em của nó: phần trăm trên nền nhỏ.\n[sarcastic] Tháng trước bán một đơn, tháng này bán bốn đơn, báo cáo hét lên: tăng ba trăm phần trăm. Nghe như tên lửa, hoá ra thêm đúng ba cái đơn."
+    },
+    {
+      "id": "04",
+      "text": "Nên hễ nghe một phần trăm gây sốc, hỏi ngay con số tuyệt đối đứng sau. Tăng bao nhiêu đơn, trên bao nhiêu khách?\nCòn cái bẫy cuối, tinh vi tới mức có hẳn tên riêng: nghịch lý Simpson.\nBạn chạy hai kênh quảng cáo. Kênh A chốt tốt hơn ở khách mới, lại tốt hơn cả ở khách cũ. Thắng cả hai nhóm.\n[surprised] Vậy mà gộp chung lại, kênh A có thể trông thua. Con số gộp giấu mất tỷ trọng từng nhóm, như trộn hai xô sơn xong bạn chẳng còn biết xô nào màu gì."
+    },
+    {
+      "id": "05",
+      "text": "[thoughtful] Điểm chung của cả ba cái bẫy: chúng co một câu chuyện nhiều lớp thành một con số phẳng.\nTrung bình không nói dối vì nó sai. Nó nói dối vì nó bỏ bớt.\nMỗi con số tóm tắt là một bức ảnh chụp đám đông từ trên cao. Bạn thấy hình dạng chung, nhưng không thấy ai đang đứng ở đâu.\nNên lần tới cầm một con số trung bình, đừng vứt bức ảnh đi. Hỏi thêm một câu thôi: cho tôi xem cả phân phối, cho tôi xem từng người."
+    }
+  ],
+  "pron": [
+    {
+      "word": "median",
+      "say": "mê đi ừn"
+    },
+    {
+      "word": "mean",
+      "say": "min"
+    },
+    {
+      "word": "Simpson",
+      "say": "xim sần"
+    }
+  ]
+}

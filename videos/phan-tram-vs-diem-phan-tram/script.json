@@ -1,0 +1,55 @@
+{
+  "slug": "phan-tram-vs-diem-phan-tram",
+  "beats": [
+    {
+      "id": "00",
+      "text": "[thoughtful] Sáng thứ Hai, phòng họp. Bạn khoe tỷ lệ chốt đơn nhích từ mười tám phần trăm lên hai mươi hai phần trăm.\nBạn viết trong báo cáo: tăng bốn phần trăm. Sếp gật gù, thấy thường.\n[surprised] Nhưng cái nhích đó, viết cho đúng, là tăng hơn hai mươi phần trăm.\nMười tám lên hai mươi hai, không phải tăng mười phần trăm như nhiều người tưởng. Cùng một con số, hai cách nói, hai số phận."
+    },
+    {
+      "id": "01",
+      "text": "Vấn đề nằm ở hai thứ khác nhau cùng trốn trong một chữ, phần trăm.\nCách một: lấy tỷ lệ mới trừ tỷ lệ cũ. Hai mươi hai trừ mười tám, ra bốn. Cái này gọi là điểm phần trăm. Là khoảng cách giữa hai tỷ lệ.\nCách hai: bốn đó so với cái nền mười tám. Bốn chia mười tám, ra hơn hai mươi phần trăm. Cái này là thay đổi tương đối.\nCả hai đều đúng. Nhưng khi bạn nói tăng bốn phần trăm, tai người nghe hiểu là nhích tí xíu, trong khi tỷ lệ chốt đã to lên gần một phần tư."
+    },
+    {
+      "id": "02",
+      "text": "[confident] Nhớ một quy tắc thôi: khi bạn trừ hai tỷ lệ cho nhau, kết quả luôn là điểm phần trăm. Không phải phần trăm.\nNghe nhỏ nhặt, nhưng sai một chữ này là cả phòng họp hiểu lệch mức độ.\nViết tăng hai mươi điểm là người ta tưởng nhảy từ mười lên ba mươi. Sai gấp mười lần thực tế.\n[thoughtful] Hồi mình còn ngồi ráp báo cáo bằng Excel, một chữ điểm bị bỏ quên là đủ để sếp duyệt sai cả một khoản ngân sách."
+    },
+    {
+      "id": "03",
+      "text": "Cho bạn một cái bẫy thử ngay tại quán cà phê. Món này giá một trăm nghìn.\nXả hàng, giảm năm mươi phần trăm, còn năm mươi nghìn. Hết đợt, bạn tăng lại năm mươi phần trăm. Về đúng một trăm nghìn chứ gì?\n[surprised] Không nhé. Năm mươi nghìn mà tăng năm mươi phần trăm thì chỉ lên bảy mươi lăm nghìn thôi.\nVì lần giảm bám vào nền một trăm, lần tăng bám vào nền năm mươi. Phần trăm tăng với phần trăm giảm không triệt tiêu nhau, vì chúng đứng trên hai cái nền khác cỡ."
+    },
+    {
+      "id": "04",
+      "text": "Cái bẫy hay gặp nhất: tăng từ nền nhỏ.\nTháng trước cửa hàng có một đơn từ Zalo. Tháng này hai đơn. Bạn báo cáo, đơn từ Zalo tăng một trăm phần trăm.\n[sarcastic] Đúng về số học. Nhưng nền chỉ là một, nên con số nghe như phép màu lại đang giấu một sự thật bé tí: bạn tăng đúng một đơn.\nCách tự vệ chỉ gồm một câu hỏi. Tăng một trăm phần trăm, nhưng từ bao nhiêu lên bao nhiêu? Người báo cáo mà né con số gốc, gần như chắc chắn cái nền đang bé."
+    },
+    {
+      "id": "05",
+      "text": "Còn một bẫy nữa, âm thầm hơn: bình quân các phần trăm.\nShop bạn bán hai kênh. Tỷ lệ hoàn Shopee bốn phần trăm, TikTok Shop mười phần trăm. Trung bình toàn shop là bảy phần trăm chứ gì? Sai.\nGiả sử Shopee một nghìn đơn, TikTok Shop chỉ một trăm đơn. Tỷ lệ hoàn thật là bốn phẩy năm phần trăm, không phải bảy.\nVì mỗi tỷ lệ đứng trên một cái nền to nhỏ khác nhau. Chia đều là coi kênh nhỏ nặng ngang kênh lớn. Muốn gộp đúng, phải đánh trọng số theo nền."
+    },
+    {
+      "id": "06",
+      "text": "Nói cho gọn: một con số phần trăm không bao giờ tự đứng một mình. Nó luôn dính vào một cái nền.\nKhi cái nền bị giấu đi, con số thành công cụ đánh lừa hoàn hảo.\nNên liều vắc-xin đơn giản nhất là ghi luôn cả hai con số gốc. Từ mười tám lên hai mươi hai, rồi mới nói thêm cộng bốn điểm hay cộng hai mươi phần trăm.\nLần tới đọc một con số phần trăm trong báo cáo, hỏi luôn: nó đang đứng trên cái nền nào? Trả lời được câu đó, bạn đã đi trước phần lớn người đọc số. Thấy hữu ích thì theo dõi kênh nhé."
+    }
+  ],
+  "pron": [
+    {
+      "word": "Semantix",
+      "say": "Xê-man-tít"
+    },
+    {
+      "word": "Shopee",
+      "say": "Sốp-pi"
+    },
+    {
+      "word": "TikTok Shop",
+      "say": "Tíc-tóc Sốp"
+    },
+    {
+      "word": "Zalo",
+      "say": "Za-lô"
+    },
+    {
+      "word": "Excel",
+      "say": "Ếch-xeo"
+    }
+  ]
+}

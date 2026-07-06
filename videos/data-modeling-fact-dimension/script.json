@@ -1,0 +1,51 @@
+{
+  "slug": "data-modeling-fact-dimension",
+  "beats": [
+    {
+      "id": "00",
+      "text": "Sếp hỏi: doanh thu áo khoác, bán qua TikTok Shop, cho khách Hà Nội, tháng Ba, được bao nhiêu?\nBạn có đủ dữ liệu. Từng đơn, từng đồng, nằm gọn trong file.\nVậy mà ngồi lọc tay cả buổi, con số ra vẫn không chắc đúng.\n[thoughtful] Đủ số, đủ công cụ rồi, cái quyết định bạn hỏi được câu nào lại nằm ở cách bạn sắp mấy cái bảng."
+    },
+    {
+      "id": "01",
+      "text": "Người mới hay nhồi tất cả vào một bảng duy nhất. Mỗi dòng một đơn, kèm luôn tên khách, tỉnh, tên kênh.\nTrông thì gọn. [annoyed] Nhưng nó là bảng phẳng, và giấu sẵn bom.\nKhách Lan đổi địa chỉ, bạn phải sửa hàng trăm dòng, sót một dòng là số sai. Gõ nhầm Tik Tok chỗ này, TikTok Shop chỗ kia, máy tính coi là hai kênh, doanh thu bị chia đôi mà không ai hay.\nBảng phẳng không sai khi dữ liệu còn bé. Nó bế tắc đúng lúc câu hỏi bắt đầu khó."
+    },
+    {
+      "id": "02",
+      "text": "Lối ra là tách bảng làm hai loại.\nLoại thứ nhất là bảng fact, ghi lại chuyện đã xảy ra. Mỗi dòng một sự kiện: một đơn hàng, một giao dịch. Cột của nó là mấy con số cộng được, doanh thu với số lượng.\n[confident] Nghĩ đơn giản thế này cho dễ nhớ: bảng fact là động từ. Đã bán cái gì, bao nhiêu.\nNó gầy mà dài. Ít cột, cực nhiều dòng, và gần như không chứa chữ mô tả."
+    },
+    {
+      "id": "03",
+      "text": "Loại thứ hai là bảng dimension, phần mô tả để cắt lát.\nSản phẩm, khách hàng, thời gian, kênh bán, mỗi thứ một bảng riêng. [confident] Nếu fact là động từ, thì dimension là tính từ. Của ai, loại nào, ở đâu, khi nào.\nBảng này béo mà ngắn: nhiều cột mô tả, nhưng ít dòng. Mỗi khách, mỗi kênh chỉ tồn tại đúng một dòng gốc.\nMẹo phân biệt cho nhanh: thứ bạn muốn cộng, đếm, tính trung bình thì cho vào fact. Thứ bạn muốn lọc theo, nhóm theo thì cho vào dimension."
+    },
+    {
+      "id": "04",
+      "text": "Đặt bảng fact vào giữa, nối ra các bảng dimension bằng khoá chung, bạn được một hình ngôi sao. Người ta gọi là star schema.\nGiờ quay lại câu hỏi của sếp. Áo khoác, TikTok Shop, khách Hà Nội, tháng Ba.\nChỉ là lấy bảng đơn hàng, lọc qua bốn dimension đó, rồi cộng cột doanh thu. [excited] Bốn lát cắt, một con số, chuyện vài giây.\nĐổi sang câu hỏi khác cũng vẫn bộ bảng đó, chỉ xoay sang chiều khác. Sắp bảng đúng một lần, hỏi được vô số câu."
+    },
+    {
+      "id": "05",
+      "text": "[thoughtful] Đừng vội biến mình thành công ty dữ liệu. Cửa hàng vài nghìn đơn không cần data warehouse mười tầng.\nCái cần chỉ là phân biệt được số đo với mô tả, để dữ liệu lớn lên bạn không tự nhốt mình trong một sheet khổng lồ.\nVà fact với dimension không bắt đầu từ sơ đồ, mà từ nghiệp vụ. Cứ ngồi hỏi: việc gì ở đây đáng đếm nhất? Trả lời được câu đó, đó chính là bảng fact, phần còn lại tự rơi vào dimension.\nThấy hữu ích thì theo dõi kênh. Mỗi tuần một khái niệm data, mình gỡ trong vài phút."
+    }
+  ],
+  "pron": [
+    {
+      "word": "dimension",
+      "say": "đai-men-sần"
+    },
+    {
+      "word": "star schema",
+      "say": "sờ-ta xkê-ma"
+    },
+    {
+      "word": "data warehouse",
+      "say": "đây-ta que-hao"
+    },
+    {
+      "word": "TikTok Shop",
+      "say": "Tíc Tóc Sóp"
+    },
+    {
+      "word": "data",
+      "say": "đây-ta"
+    }
+  ]
+}

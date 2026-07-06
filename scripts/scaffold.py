@@ -8,6 +8,13 @@ import json, os, re, sys, importlib.util, wave
 MAXPERLINE, FPS, SR = 5, 30, 16000
 
 def load_content(slug):
+    js = os.path.join("videos", slug, "script.json")   # ưu tiên script.json (Decap sửa được)
+    if os.path.exists(js):
+        d = json.load(open(js, encoding="utf-8"))
+        BEATS = {b["id"]: b["text"] for b in d.get("beats", [])}
+        ORDER = [b["id"] for b in d.get("beats", [])]
+        if d.get("shortOutro"): BEATS["short-outro"] = d["shortOutro"]
+        return BEATS, ORDER
     path = os.path.join("videos", slug, "content.py")
     spec = importlib.util.spec_from_file_location("c_" + slug.replace("-", "_"), path)
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)

@@ -1,0 +1,39 @@
+{
+  "slug": "4-loai-thang-do-du-lieu",
+  "beats": [
+    {
+      "id": "00",
+      "text": "[thoughtful] Đừng tính trung bình mã sản phẩm. Nghe thì hiển nhiên, đúng không?\nVậy thử cái này với mình. Bôi đen cột mức hài lòng trong Excel, toàn số một tới năm, gõ AVERAGE. Máy nhả ra ba phẩy bốn sao. Đẹp, khoa học, đưa thẳng vào báo cáo.\nGiờ bôi cột mã đơn hàng, cũng gõ AVERAGE. Máy lại ra một số đẹp không kém: mười nghìn tám trăm bốn bảy. Mã đơn trung bình. Bạn thấy ngay nó vô nghĩa.\nNhưng với máy, hai phép tính y hệt nhau. Nó không biết cái nào có nghĩa. Nó chỉ thấy số, mà số thì cộng chia được tuốt."
+    },
+    {
+      "id": "01",
+      "text": "[thoughtful] Đây là cái bẫy ít người để ý: máy luôn tính được, kể cả khi phép tính đó vô nghĩa.\nChuyện ba phẩy bốn sao có đáng tin không, không nằm ở con số. Nó nằm ở chỗ dữ liệu ấy thuộc loại nào.\nMọi con số trong bảng của bạn đều rơi vào một trong bốn thang đo. Bốn cái này xếp thành một cái thang, leo lên mỗi nấc bạn được làm thêm một phép tính."
+    },
+    {
+      "id": "02",
+      "text": "Nấc thấp nhất là định danh. Con số chỉ đóng vai cái tên.\nMã sản phẩm, kênh bán, mã tỉnh, nhóm máu. Mã đơn tuy trông như số, nhưng nó là cái nhãn tình cờ làm bằng chữ số. Cộng hai mã đơn cũng vô nghĩa như cộng hai số điện thoại.\nVới loại này bạn chỉ được đếm mỗi nhóm bao nhiêu, và tìm cái xuất hiện nhiều nhất. Trung bình thì không bao giờ."
+    },
+    {
+      "id": "03",
+      "text": "Lên một nấc là thứ bậc. [surprised] Và đây đúng chỗ ba phẩy bốn sao bị lật tẩy.\nSao hài lòng một tới năm, hạng thành viên đồng bạc vàng kim cương, đều có thứ tự rõ ràng. Năm sao thì hơn bốn sao, cái đó ai cũng biết.\nNhưng khoảng cách giữa các bậc không đều nhau. Từ rất ghét lên ghét, trong đầu ông khách, không bằng từ hài lòng lên rất hài lòng đâu.\nVậy mà cộng hết lại rồi chia, là bạn đang coi mấy bước dài ngắn khác nhau như thể bằng nhau. [confident] Sai từ gốc. Loại này đo bằng trung vị, tức giá trị đứng giữa, chứ không phải trung bình."
+    },
+    {
+      "id": "04",
+      "text": "Nấc ba là khoảng. Khoảng cách đã đều thật, nhưng số không chỉ là quy ước.\nNhiệt độ chẳng hạn. Từ hai mươi lên hai mốt độ đúng bằng từ ba mươi lên ba mốt. Nhưng bốn mươi độ không nóng gấp đôi hai mươi độ, vì không có gốc không thật để mà so gấp mấy lần.\nNấc trên cùng mới là tỉ lệ: có gốc không thật. Doanh thu không đồng nghĩa là không bán được gì. Nên bốn tỷ đúng là gấp đôi hai tỷ. Loại này làm gì cũng được. [confident] Và may thay, đa số số bạn cần ra quyết định nằm ở đây."
+    },
+    {
+      "id": "05",
+      "text": "Con số trong bảng không tự khai nó thuộc thang nào. Còn máy thì sẵn sàng cộng chia bất cứ thứ gì trông như số.\nNên lần tới, trước khi bấm AVERAGE, đừng vội hỏi máy tính ra bao nhiêu. Hỏi trước đã: cột này là thang đo gì, và phép tính mình sắp làm có thật sự được phép không.\n[confident] Chỉ cần trả lời được câu đó thôi, bạn đã đứng trên phần lớn người bôi một cột rồi bấm trung bình mà không chớp mắt."
+    }
+  ],
+  "pron": [
+    {
+      "word": "AVERAGE",
+      "say": "ơ vơ rịt"
+    },
+    {
+      "word": "Excel",
+      "say": "ếch xeo"
+    }
+  ]
+}

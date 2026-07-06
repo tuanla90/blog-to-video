@@ -1,0 +1,40 @@
+{
+  "slug": "tu-cong-cu-den-tu-duy",
+  "beats": [
+    {
+      "id": "00",
+      "text": "Mình vừa mở lại kênh. Video gần nhất... đăng cách đây hơn một năm.\nHơn một năm. Không một video mới nào.\nNhiều người nhắn thẳng: Anh ơi, anh bỏ kênh rồi à?\n[thoughtful] Mình nợ các bạn một câu trả lời thật. Mà thật ra... có tới ba lý do."
+    },
+    {
+      "id": "01",
+      "text": "Lý do đầu, đời thường thôi: nhà mình đón thêm một em bé.\nMà quay video thì phải nói to, phải thu âm, bé đang ngủ là giật mình dậy ngay. Thế là mình đành gác máy quay.\nNhưng mình không biến mất. Mình chuyển qua viết, lặng lẽ ra hết bài blog này đến bài khác.\nBé thì lớn dần. Kho blog cũng lớn theo, và đó chính là cái nền cho mọi thứ mình sắp kể ở đây."
+    },
+    {
+      "id": "02",
+      "text": "Lý do thứ hai: làn sóng AI ập tới, nhanh đến chóng mặt.\nMình chưa bao giờ ngừng cập nhật, nhưng thú thật, không tài nào theo kịp tốc độ nó đổi.\nCái gì mới ra mình cũng muốn thử tận tay. Mà thử cho tới nơi, rồi tiêu hoá thành cái của mình... ngốn thời gian kinh khủng.\nMình thà chậm lên video, còn hơn vội vàng nói về thứ chính mình chưa thử tới nơi."
+    },
+    {
+      "id": "03",
+      "text": "Nhưng lý do thứ ba mới là cái khiến mình trăn trở nhất.\nCàng học, mình càng thấy AI viết SQL... nhoay nhoáy. Câu truy vấn mình hì hục cả buổi, giờ nó ra trong vài giây.\nMình ngồi tự hỏi: vậy dân phân tích dữ liệu, dân BI như mình... còn chỗ đứng không?\n[thoughtful] Thật lòng, mình bí câu đó một thời gian dài. Bí tới mức chẳng biết quay lại nói gì."
+    },
+    {
+      "id": "04",
+      "text": "Cho tới khi mình chạm vào một thứ mà AI không tự làm được: ngữ cảnh. Cái bối cảnh nghiệp vụ của riêng bạn.\nAI viết được câu query. Nhưng nó không biết doanh thu công ty bạn tính gồm ship hay chưa, là chốt đơn hay đã thu tiền về.\nCái đó, chỉ người hiểu nghề mới cấp được. Và đó cũng là điều mình nung nấu suốt loạt bài blog vừa rồi, rồi thành ý tưởng cho thứ mình đang xây, Semantix.\n[excited] Hiểu ra điều đó, mình biết: kênh này phải đổi hướng."
+    },
+    {
+      "id": "05",
+      "text": "Từ chia sẻ công cụ... sang chia sẻ cách tư duy.\nMấy mẹo Google Sheets ngày xưa á? Vẫn đúng, vẫn dùng tốt, đừng bỏ. Nhưng thứ mình muốn nói tới bây giờ nằm trước mọi công cụ: bạn đang đo cái gì, trong bối cảnh nào.\nSắp tới, mỗi tuần mình gỡ một khái niệm data, gọn trong vài phút. Toàn chuyện công sở Việt mình gặp thật.\nSợi chỉ đỏ xuyên suốt chỉ có một: ngữ cảnh là vua."
+    },
+    {
+      "id": "07",
+      "text": "Nếu bạn theo kênh từ thời Google Sheets, cảm ơn bạn đã chờ. Mình quay lại thật rồi.\nCòn nếu mới biết mình, thì rất vui được gặp.\nKể mình nghe ở phần bình luận: thời AI này, bạn có đang lo cho nghề data của mình không? Mình đọc hết.\nTheo dõi để không bỏ lỡ. Mỗi tuần, một khái niệm data."
+    }
+  ],
+  "shortOutro": "Mình nghỉ quay hơn một năm: vì con nhỏ, vì AI đổi nhanh quá phải thử cho kịp, và vì đi tìm lại chỗ đứng cho nghề data.\nCâu trả lời gói gọn trong một từ: ngữ cảnh. Xem đầy đủ trên YouTube, theo dõi để không bỏ lỡ nhé.",
+  "pron": [
+    {
+      "word": "Semantix",
+      "say": "Sơ-men-tích"
+    }
+  ]
+}

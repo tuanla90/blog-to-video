@@ -1,0 +1,92 @@
+{
+  "slug": "hanh-trinh-cong-cu",
+  "beats": [
+    {
+      "id": "00",
+      "text": "Mười năm làm dữ liệu, mình đi qua đủ thứ công cụ.\nExcel. Google Sheets. Power BI. Data Studio. Superset. Metabase. Nocobase.\n[thoughtful] Mỗi cái, mình từng tin là điểm dừng. Mỗi cái, mình đều đụng một bức tường.\nVà cái thứ gỡ được mọi bức tường đó... lại chẳng phải một công cụ nào."
+    },
+    {
+      "id": "01",
+      "text": "Bắt đầu là Excel. Mình mê nó thật lòng. Ai cũng mở được, gõ gì cũng được, hỏi gì là có ngay.\nExcel là nơi mình học tư duy dữ liệu. Tới giờ vẫn biết ơn.\nNhưng tới ngày cái file phình lên vài chục nghìn dòng... nó treo máy. Gõ một ô, chờ năm giây.\nRồi ba người đọc ra ba con số doanh thu. Không ai sai. Chỉ là chữ doanh thu... chưa ai định nghĩa một lần."
+    },
+    {
+      "id": "02",
+      "text": "Thế là mình lên Power BI, lên Data Studio. Lần đầu thấy số của mình thành dashboard tự cập nhật, mình mừng phát khóc.\nBiểu đồ bấm vào lọc được. Sáng ra số đã mới. Gửi một cái link là cả công ty xem.\nMình tưởng xong. Cho tới khi sếp hỏi một câu... mà dashboard chưa dựng sẵn.\n\"Để em về dựng thêm.\" Và mình nhận ra: nút cổ chai không mất đi. Nó dời từ cái file... sang chính mình."
+    },
+    {
+      "id": "03",
+      "text": "Mình tìm tới mã nguồn mở. Superset, Metabase. Cài mười lăm phút, license không mất đồng nào, dữ liệu nằm trên máy của mình.\nCảm giác tự chủ đó có thật, và mình quý tới giờ.\nRồi tháng thứ ba, một đêm trước ngày họp, con server hết dung lượng. Mình ngồi dọn log tới một giờ sáng.\nCông cụ thì miễn phí. Đêm đó của mình thì không. Chi phí không biến mất đâu... nó chỉ dời chỗ."
+    },
+    {
+      "id": "04",
+      "text": "Song song, mình đi tư vấn chuyển đổi số cho nhiều doanh nghiệp. Từ Google Sheets, qua AppSheet, giờ là Nocobase.\nTự tay dựng cơ sở dữ liệu cho xưởng may, cho phòng khám, cho công ty xuất nhập khẩu.\nMỗi nghề một cách tổ chức số liệu khác nhau. Cái đó dạy mình một điều mà không phần mềm nào dạy được.\n[thoughtful] Công cụ nào cũng mạnh. Nhưng cái trần... lúc nào cũng giống nhau lạ kỳ."
+    },
+    {
+      "id": "05",
+      "text": "Đứng lùi lại nhìn cả mười năm, mình mới gọi tên được cái trần đó.\nKhông công cụ nào thua vì yếu. Excel, Power BI, Superset... cái nào cũng giỏi.\nCái chúng thiếu nằm cao hơn mọi công cụ: bạn đang đo cái gì, và đo trong ngữ cảnh nào.\nDoanh thu của bạn là chốt đơn, hay đã thu tiền về? Có gồm phí ship chưa? Cái đó... không nằm trong phần mềm. Nó nằm trong đầu người hiểu nghề."
+    },
+    {
+      "id": "06",
+      "text": "Hiểu ra điều đó, mình ngồi xuống tự xây thứ mình đang làm, Semantix.\nKhông phải để chê công cụ cũ. Mà để đứng trên vai chúng: giữ sự tự do hỏi của Excel, kỷ luật mô hình hoá của Power BI, quyền làm chủ dữ liệu của Superset.\nRồi đặt lên trên một tầng ngữ cảnh, để câu hỏi tiếng Việt không bị trả về một con số sai mà trông rất tròn.\nNhưng đây không phải video bán hàng. Mình kể chuyện này vì sợi chỉ đỏ ở dưới mới là thứ đáng mang về."
+    },
+    {
+      "id": "07",
+      "text": "Nếu bạn theo mình từ thời Google Sheets, đừng bỏ mấy mẹo cũ. Chúng vẫn đúng, vẫn dùng tốt.\nChỉ là sắp tới, mình muốn nói về thứ nằm trước mọi công cụ: cách tư duy về số.\nMỗi tuần một khái niệm, gọn trong vài phút, toàn chuyện công sở Việt mình gặp thật.\nSợi chỉ đỏ chỉ có một: ngữ cảnh là vua. Theo dõi để không bỏ lỡ nhé."
+    }
+  ],
+  "shortOutro": "Mười năm mình đi qua Excel, Sheets, Power BI, Superset, Nocobase. Cái nào cũng đụng một bức tường.\nVà thứ gỡ được mọi bức tường lại không phải công cụ nào, mà là ngữ cảnh. Bản đầy đủ trên YouTube, theo dõi để không bỏ lỡ.",
+  "pron": [
+    {
+      "word": "Semantix",
+      "say": "Sơ-men-tích"
+    },
+    {
+      "word": "Excel",
+      "say": "Ếch-xeo"
+    },
+    {
+      "word": "Google Sheets",
+      "say": "Gu-gồ Síts"
+    },
+    {
+      "word": "Power BI",
+      "say": "Pao-ơ Bi-Ai"
+    },
+    {
+      "word": "Data Studio",
+      "say": "Đây-ta Sờ-tu-đi-ô"
+    },
+    {
+      "word": "Superset",
+      "say": "Su-pơ-sét"
+    },
+    {
+      "word": "Metabase",
+      "say": "Mê-ta-bây"
+    },
+    {
+      "word": "Nocobase",
+      "say": "Nô-cô-bây"
+    },
+    {
+      "word": "AppSheet",
+      "say": "Ép-sít"
+    },
+    {
+      "word": "dashboard",
+      "say": "đát-bo"
+    },
+    {
+      "word": "license",
+      "say": "lai-xừn"
+    },
+    {
+      "word": "server",
+      "say": "sơ-vơ"
+    },
+    {
+      "word": "log",
+      "say": "lốc"
+    }
+  ]
+}

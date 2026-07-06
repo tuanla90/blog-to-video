@@ -1,0 +1,56 @@
+{
+  "slug": "google-sheets-dung-tran",
+  "beats": [
+    {
+      "id": "00",
+      "text": "Mười một giờ đêm, cuối tháng. Phòng làm việc tắt gần hết đèn.\nBạn vẫn ngồi đó, copy số từ Shopee dán sang một sheet, từ TikTok Shop dán sang sheet khác.\nMai sếp cần báo cáo. Mà số thì rải ở năm cái file, mỗi nơi một kiểu.\n[thoughtful] Cảnh này quen không? Mình kể bạn nghe, vì sao nó cứ lặp lại... tháng nào cũng vậy."
+    },
+    {
+      "id": "01",
+      "text": "Mà khoan. Trước khi chê, mình nói sòng phẳng một câu: Google Sheets là một trong những phần mềm vĩ đại nhất từng có.\nMở lên là dùng. Không cần cài, không cần học mô hình dữ liệu, không cần xin ai cấp quyền.\nMình đi tư vấn chuyển đổi số bao nhiêu năm, khách đủ ngành, lần nào cũng bắt đầu từ Sheets. Và đó là lựa chọn đúng.\nVới shop nhỏ, một nguồn, vài người dùng, hỏi đi hỏi lại mươi câu cố định, thì một dashboard Sheets dựng tốt là đủ. Và miễn phí. Đừng vẽ rắn thêm chân."
+    },
+    {
+      "id": "02",
+      "text": "Nhưng đây là cái nghịch lý mình muốn bạn thấy.\nCái khiến Sheets tiện hôm nay, lại chính là cái biến nó thành nợ ngày mai.\nVì một ô có thể là bất cứ thứ gì, nên không gì ép bạn nhất quán. Vì ai cũng sửa được, nên không gì giữ một định nghĩa đứng yên.\n[thoughtful] Sheets không thua vì nó yếu. Nó thua vì nó quá vạn năng. Nó giống con dao đa năng Thuỵ Sĩ. Tiện cho trăm việc nhỏ. Nhưng đừng dùng nó để xây nhà."
+    },
+    {
+      "id": "03",
+      "text": "Và khi dữ liệu của bạn lớn thành một ngôi nhà, nó đụng đúng bốn cái trần. Mình đếm cho bạn.\nTrần thứ nhất: thủ công, tốn công. Mỗi tháng lại copy, lại dán, lại VLOOKUP. Cảnh nửa đêm lúc nãy đấy.\nTrần thứ hai: báo cáo luôn trễ. Số xong thì chuyện đã xảy ra rồi. Bạn lái xe bằng cách nhìn gương chiếu hậu.\nTrần thứ ba: dễ sai, nhiều phiên bản. Sales bảo một phẩy hai tỷ, kế toán cãi một phẩy không tám. Cùng một file, ba người ba số. Mà file thì không bao giờ la làng khi nó sai.\nTrần thứ tư: một người gánh tất. Cái file thần thánh đó chỉ một người hiểu công thức bên trong. Người đó nghỉ một hôm... là cả công ty mù."
+    },
+    {
+      "id": "04",
+      "text": "Bốn cái trần đó, để ý mà xem, không cái nào là lỗi của Sheets.\nCopy tay, báo cáo trễ, ba người ba số, một người gánh... Tất cả đều là cùng một gốc.\nĐó là khi bạn quên hỏi: con số này đo cái gì, trong ngữ cảnh nào, ai được sửa, ai được xem.\n[thoughtful] Cái thiếu không phải một công thức xịn hơn. Cái thiếu là cấu trúc. Là cách tư duy về dữ liệu."
+    },
+    {
+      "id": "05",
+      "text": "Mình đang xây một thứ tên là Semantix, đi đúng từ chỗ đau này.\nNó không bắt bạn bỏ Google Sheets. Sheets vẫn là cánh cửa vào, không phải cái trần.\nÝ tưởng gọn thôi: định nghĩa doanh thu đúng một lần, ở một chỗ. Rồi bạn, kế toán, sếp, ai hỏi cũng ra cùng một con số.\nNhưng đó là chuyện của mấy video sau. Hôm nay mình chỉ muốn bạn nhìn ra bốn cái trần kia trước đã."
+    },
+    {
+      "id": "06",
+      "text": "Nên nếu bạn theo mình từ thời Google Sheets, nghe này: mấy mẹo cũ vẫn đúng, vẫn dùng tốt, đừng bỏ.\nSheets là điểm khởi đầu hoàn hảo. Nó chỉ đụng trần khi bạn lớn lên. Và đụng trần là tin vui, nghĩa là bạn đang lớn.\nLúc đó, thứ bạn cần không phải con dao to hơn. Mà là một cách tư duy mới về dữ liệu.\nTheo dõi kênh nhé. Mỗi tuần mình gỡ một khái niệm data, gọn trong vài phút, toàn chuyện công sở Việt mình gặp thật."
+    }
+  ],
+  "shortOutro": "Google Sheets tuyệt để bắt đầu. Nó chỉ đụng bốn cái trần khi bạn lớn lên: copy tay tốn công, báo cáo trễ, ba người ba số, và một người gánh tất.\nLúc đó cái bạn thiếu không phải công thức xịn hơn, mà là cách tư duy về dữ liệu. Xem đầy đủ trên YouTube, theo dõi để không bỏ lỡ nhé.",
+  "pron": [
+    {
+      "word": "Semantix",
+      "say": "Sơ-men-tích"
+    },
+    {
+      "word": "Google Sheets",
+      "say": "Gu-gồ Sít"
+    },
+    {
+      "word": "TikTok Shop",
+      "say": "Tích-tóc Sốp"
+    },
+    {
+      "word": "Shopee",
+      "say": "Sốp-pi"
+    },
+    {
+      "word": "VLOOKUP",
+      "say": "vê-lúc-úp"
+    }
+  ]
+}

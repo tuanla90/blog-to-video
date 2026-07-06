@@ -1,0 +1,44 @@
+{
+  "slug": "dashboard-linh-hoat-hoa-roi",
+  "beats": [
+    {
+      "id": "00",
+      "text": "Mình từng làm một cái dashboard mà mình tự hào kinh khủng. Chọn gì cũng được.\nBạn muốn xem theo kênh? Bấm. Theo sản phẩm? Bấm. Đổi chỉ số, đổi tỉ lệ? Bấm hết.\nMình bàn giao, ngực ưỡn ra, kiểu: đây, mọi câu hỏi của anh chị nằm trong này hết rồi.\n[thoughtful] Rồi mình ngồi xem họ dùng thật. Và mặt ai cũng... ngơ ngác."
+    },
+    {
+      "id": "01",
+      "text": "Đây là cái mình làm trên Looker Studio, hồi đi tư vấn cho mấy doanh nghiệp.\nMột template duy nhất, nhưng linh hoạt tối đa. Cho người dùng tự chọn chiều thứ nhất, chiều thứ hai, chỉ số một, chỉ số hai, rồi cả tỉ lệ.\nTrên giấy thì quá đẹp. Một cái dashboard trả lời được cả nghìn câu hỏi.\nMình nghĩ mình vừa trao cho họ chiếc chìa khoá vạn năng."
+    },
+    {
+      "id": "02",
+      "text": "Vấn đề là... chiếc chìa khoá vạn năng đó, đa số người dùng không biết cắm vào ổ nào.\nHọ mở lên, thấy năm sáu cái ô để chọn, mỗi ô một danh sách dài dằng dặc.\n[thoughtful] Chọn chiều nào? Ghép với chỉ số nào thì ra câu trả lời có nghĩa? Họ không biết. Mà thật ra, đó đâu phải việc của họ.\nCái dashboard chạy ngon. Không lỗi gì cả. Nhưng người ta mở lên một lần, rồi thôi."
+    },
+    {
+      "id": "03",
+      "text": "Tệ nhất là cái khoản đào sâu. Muốn xem kỹ một chỗ bất thường á?\nHọ lại phải tự đi chọn lại từ đầu: chiều này, lọc kia, đổi chỉ số nọ. Mỗi lần hỏi sâu thêm một câu là một lần dựng lại từ con số không.\nMình thiết kế ra để LINH HOẠT. Nhưng với người dùng, linh hoạt nghĩa là: không có lối đi sẵn, tự bơi đi.\n[thoughtful] Linh hoạt quá... hoá rối."
+    },
+    {
+      "id": "04",
+      "text": "Mãi sau mình mới thấm: mình đã đưa cho họ cái công cụ, mà quên mất phải đưa cái tư duy.\nMấy ô chọn đó chỉ có nghĩa khi bạn đã biết mình đang đo cái gì, cắt theo chiều nào, trong bối cảnh nào.\nMà cái biết đó, người làm kinh doanh không có nghĩa vụ phải biết. Đó là phần của người làm data.\nMình đếm thiếu một thứ: không phải họ thiếu nút bấm. Họ thiếu NGỮ CẢNH."
+    },
+    {
+      "id": "05",
+      "text": "Looker Studio không có lỗi gì hết. Dashboard cũng vậy, vẫn tuyệt cho thứ mình theo dõi đều đặn.\nCái trần nó đụng phải nằm ở chỗ khác: thêm bao nhiêu nút bấm, thêm bao nhiêu tính năng... cũng không thay được cái tư duy nằm phía sau câu hỏi.\nVà đó đúng là thứ mình đang nung nấu khi xây Semantix: để người ta hỏi thẳng bằng tiếng Việt, còn ngữ cảnh thì cài sẵn bên dưới, một lần.\n[excited] Tính năng thì ai cũng cộng thêm được. Thứ khó cộng, là tư duy."
+    },
+    {
+      "id": "07",
+      "text": "Nên nếu bạn đang định nhồi thêm nút bấm vào cái dashboard cho nó xịn... khoan đã.\nHỏi trước: người mở nó lên có biết mình đang tìm câu trả lời cho câu hỏi gì không?\nLinh hoạt không phải là cho chọn mọi thứ. Linh hoạt là dẫn đúng người tới đúng câu trả lời.\nTuần sau mình kể chuyện một con số doanh thu mà ba phòng cãi nhau. Theo dõi để không bỏ lỡ nhé."
+    }
+  ],
+  "shortOutro": "Mình từng tự hào vì cái dashboard cho chọn mọi thứ. Rồi user mở lên, ngơ ngác, dùng một lần rồi bỏ.\nBài học: linh hoạt quá hoá rối. Cái họ thiếu không phải nút bấm, mà là ngữ cảnh. Bản đầy đủ trên YouTube nhé.",
+  "pron": [
+    {
+      "word": "Semantix",
+      "say": "Sơ-men-tích"
+    },
+    {
+      "word": "Looker Studio",
+      "say": "Lúc-cơ x-tu-đi-ô"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "slug": "mot-nguon-su-that",
+  "beats": [
+    {
+      "id": "00",
+      "text": "[thoughtful] Sáng thứ Hai, trong phòng họp, sếp hỏi đúng một câu: doanh thu tháng vừa rồi bao nhiêu?\nSales mở file ra, bốn phẩy hai tỷ.\nFinance bảo ba phẩy tám.\nMarketing chiếu dashboard, bốn phẩy năm.\n[surprised] Ba con số cho cùng một công ty. Mười lăm phút sau, cuộc họp thành phiên tòa xử xem đứa nào sai.\nMà thật ra chẳng ai sai cả. Cái phản xạ gom hết mọi thứ về một chỗ mới là hiểu lầm đắt nhất."
+    },
+    {
+      "id": "01",
+      "text": "Hiểu lầm đó nằm ngay ở cái tên. Nói tới một nguồn sự thật, ai cũng tưởng nó là một cái kho: một database, một file Excel master.\nThật ra không phải. Nó không nằm ở chỗ dữ liệu được lưu, mà ở chỗ dữ liệu được định nghĩa.\nGiống thư viện với cuốn từ điển vậy. Nhồi cả triệu cuốn sách vào một thư viện, nhưng mỗi người hiểu chữ doanh thu một kiểu, thì bạn vẫn có năm sự thật trong cùng một tòa nhà.\nSự thật nằm ở cuốn từ điển treo ngoài cửa kìa. Đó là tầng định nghĩa, chứ không phải cái kho lưu trữ."
+    },
+    {
+      "id": "02",
+      "text": "Công ty bỏ vài trăm triệu dựng kho dữ liệu, kéo Sales, Finance, Marketing về một chỗ. Thế là yên tâm, một nguồn rồi.\nSáu tháng sau, giao ban vẫn ba con số.\nVì mỗi phòng vẫn hỏi theo định nghĩa riêng. Cùng một kho, cùng một bảng đơn hàng, mà Sales đếm đơn đã chốt, còn Finance đếm đơn đã thu rồi trừ hoàn.\n[hesitant] Hai câu trả lời khác nhau, cả hai đều chạy đúng, không một dòng lỗi. Cái kho chỉ làm dữ liệu nằm gần nhau, chứ không ép ai hiểu giống nhau. Database không sửa được cái đầu."
+    },
+    {
+      "id": "03",
+      "text": "Đáng sợ nhất là chẳng ai ngồi quyết định tạo ra năm nguồn cả. Chúng tự xuất hiện theo nhu cầu của phòng ban.\nSales cần báo cáo gấp thì dựng file theo cách hợp lý với mình. Finance làm thuế thì lấy số đã thu thật. Marketing đo quảng cáo thì gán theo đơn cuối khách bấm. Kho tính theo hàng đã xuất. Kế hoạch thì gộp cả đơn đặt trước.\nNăm phòng, năm file, năm định nghĩa doanh thu. Chẳng có lỗi cú pháp, chẳng có cảnh báo nào, chúng cứ lệch nhau lặng lẽ cho tới đúng sáng thứ Hai.\n[thoughtful] Tôi từng ở đúng cái cảnh đó. Hồi còn ngồi ráp báo cáo bằng Excel, tôi kẹt giữa đúng ba người ba số. Mất gần cả buổi mới hiểu ra: chữ doanh thu chưa từng được định nghĩa lấy một lần. Không ai ẩu, cũng không ai gian."
+    },
+    {
+      "id": "04",
+      "text": "Đã vậy thì gốc vấn đề nằm ở định nghĩa, nên lời giải cũng phải nằm ở tầng định nghĩa.\nMột nguồn sự thật thực ra là một thỏa thuận: viết ra một lần, ở một chỗ, và mọi công cụ làm báo cáo đều phải vào đó lấy công thức đem đi tính.\nNó chốt dứt khoát mấy câu mà giờ mỗi phòng đang tự trả lời một kiểu: doanh thu có gồm đơn chưa giao không, có trừ đơn hoàn không, có trừ chiết khấu không.\nĐã chốt một câu trả lời chung, thì Sales hay Finance hay Marketing mở báo cáo lên, con số bắt buộc phải ra giống nhau. [confident] Định nghĩa một lần, rồi dùng mãi."
+    },
+    {
+      "id": "05",
+      "text": "Tầng định nghĩa đó có tên: Semantic Layer, cuốn từ điển nghiệp vụ sống của tổ chức.\nBạn định nghĩa doanh thu, lợi nhuận sau phí, khách quay lại, mỗi thứ một lần, kèm đúng quy tắc gồm gì trừ gì. Từ đó, báo cáo nào nối vào nó, chạy trên Looker Studio hay Power BI, đều hỏi qua cùng một định nghĩa gốc rồi mới chạm vào dữ liệu.\nCần đổi định nghĩa thì sửa đúng một chỗ, các báo cáo nối vào đều cập nhật theo. Không còn cảnh mỗi phòng tự sửa một kiểu."
+    },
+    {
+      "id": "06",
+      "text": "Lần tới khi hai báo cáo lệch nhau, đừng vội đi tìm lỗi cộng trừ.\nHỏi một câu thôi: chữ doanh thu trong công ty mình có đúng một định nghĩa, hay năm?\nTrả lời được câu đó, bạn biết mình đang có một nguồn sự thật, hay năm nguồn đang âm thầm chờ va vào nhau.\nThấy hữu ích thì theo dõi kênh nhé, mỗi tuần mình gỡ một khái niệm data trong vài phút."
+    }
+  ],
+  "shortOutro": "Một nguồn sự thật không phải cái kho, mà là một định nghĩa chung.\nXem đầy đủ trên YouTube, và theo dõi để không bỏ lỡ."
+}

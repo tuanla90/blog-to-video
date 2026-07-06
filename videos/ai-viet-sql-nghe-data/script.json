@@ -1,0 +1,48 @@
+{
+  "slug": "ai-viet-sql-nghe-data",
+  "beats": [
+    {
+      "id": "00",
+      "text": "Mình gõ một câu hỏi cho AI: doanh thu quý vừa rồi theo kênh.\nVài giây. Nó trả về một câu SQL gọn gàng, đúng cú pháp từng dấu phẩy.\nCái câu mà ngày xưa mình ngồi hì hục cả buổi sáng mới ra.\n[thoughtful] Mình ngồi đực ra một lúc. Rồi tự hỏi: vậy... mình còn ngồi đây để làm gì nữa?"
+    },
+    {
+      "id": "01",
+      "text": "Mình tin là bạn cũng đang lo đúng câu đó. Lướt mạng đâu cũng thấy: AI thay thế Data Analyst tới nơi rồi.\nMình không né. Mình thừa nhận thẳng: cái phần viết query, AI làm nhanh hơn mình thật.\nCú pháp, hàm, join bảng... nó nhả ra trong vài giây, không kêu mệt, không đòi nghỉ trưa.\nNếu nghề data chỉ có nhiêu đó, thì ừ, mình lo là phải."
+    },
+    {
+      "id": "02",
+      "text": "Nhưng khoan. Mình thử một câu khó hơn xem sao.\nMình hỏi giá trị vòng đời của khách VIP. AI trả lời cái rụp, một câu SQL đẹp long lanh.\nCó điều... cái cột nó gọi tới, trong database của mình không hề tồn tại. Nó tự bịa ra. Tự tin, không một lời cảnh báo.\n[thoughtful] Đấy. AI không tra dữ liệu của bạn. Nó đoán cái gì nghe hợp lý nhất. Mà đoán thì... có lúc trúng, có lúc bịa."
+    },
+    {
+      "id": "03",
+      "text": "Mới thấy: thứ AI giỏi là cú pháp. Thứ nó mù tịt là ngữ cảnh.\nBạn hỏi doanh thu tháng này. Nhưng doanh thu công ty bạn là gì? Trừ chiết khấu chưa? Tính đơn hoàn không? Là chốt đơn, hay đã thu tiền về?\nAI không biết. Nó đoán bừa một nhánh, rồi trả về con số trông rất dứt khoát. Bạn không cách nào biết nó theo định nghĩa nào.\nCái đó, chỉ người hiểu nghề mới cấp được. Đó là phần của bạn."
+    },
+    {
+      "id": "04",
+      "text": "Thế là mình nhẹ cả người. Nghề data không chết. Nó đang dịch chuyển.\nTừ người viết query nhanh nhất... sang người định nghĩa được ngữ cảnh và đặt đúng câu hỏi.\nPhần bưng số lặp đi lặp lại, phần dọn dữ liệu bẩn, cứ để máy gánh. Mệt mỏi mà.\nCòn bạn? Bạn lo phần ý nghĩa. Đo cái gì, trong bối cảnh nào, để ra quyết định gì."
+    },
+    {
+      "id": "05",
+      "text": "Mình loay hoay với chuyện này lâu lắm rồi, suốt cả loạt bài blog vừa qua, rồi thành ý tưởng cho thứ mình đang xây, Semantix.\nNhưng cái lõi không nằm ở công cụ. Nó nằm ở tư duy: dạy AI ngữ cảnh trước, để nó hết chỗ mà bịa.\nVà đó đúng là thứ kênh này sắp làm. Mỗi tuần, mình gỡ một khái niệm data, gọn trong vài phút. Toàn chuyện công sở Việt mình gặp thật.\nSợi chỉ đỏ chỉ có một: ngữ cảnh là vua."
+    },
+    {
+      "id": "07",
+      "text": "Nên nếu bạn đang lo AI cướp nghề, mình nói thật lòng: thứ AI không lấy được của bạn, là cái bạn hiểu về công việc của mình.\nViệc của tụi mình từ giờ là mài cho sắc đúng cái đó.\nKể mình nghe ở phần bình luận: bạn đang lo, hay thấy AI mở ra nhiều cửa hơn cho nghề? Mình đọc hết.\nTheo dõi để không bỏ lỡ. Mỗi tuần, một khái niệm data."
+    }
+  ],
+  "shortOutro": "Tóm lại: AI viết SQL nhanh hơn bạn, đúng. Nhưng nó không biết doanh thu công ty bạn tính kiểu gì, còn bịa ra cột không tồn tại.\nNghề data đang dịch từ viết query sang định nghĩa ngữ cảnh. Xem đầy đủ trên YouTube, theo dõi để không bỏ lỡ nhé.",
+  "pron": [
+    {
+      "word": "Semantix",
+      "say": "Sơ-men-tích"
+    },
+    {
+      "word": "SQL",
+      "say": "ét-quèo"
+    },
+    {
+      "word": "VIP",
+      "say": "víp"
+    }
+  ]
+}
