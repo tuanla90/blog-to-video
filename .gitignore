@@ -1,12 +1,11 @@
 node_modules/
+dist/
 out/
-public/audio/
-.venv-whisper/
-.venv-tts/
 __pycache__/
 *.pyc
 .env
-src/videos.gen.ts
+.venv*/
 
-# test artifacts (local)
-voice-test/
+# registry + asset sinh tự động cho example
+examples/src/videos.gen.ts
+examples/public/

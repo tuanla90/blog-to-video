@@ -1,0 +1,139 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><title>Sửa script video (local) · Tuấn LA Lab</title>
+<style>
+ *{box-sizing:border-box} html,body{height:100%;margin:0}
+ body{font-family:Inter,'Segoe UI',Arial,sans-serif;display:flex;flex-direction:column;background:#0f172a;color:#e2e8f0}
+ header{display:flex;align-items:center;gap:12px;padding:10px 16px;background:#111a2e;border-bottom:1px solid #243049;flex-wrap:wrap}
+ header b{color:#fff;font-size:14px}
+ select{background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:6px 10px;font:inherit;max-width:340px}
+ .status{font-size:13px;font-weight:600;color:#8b9ab3;min-width:120px}
+ .status.ok{color:#5eead4} .status.err{color:#fca5a5} .status.saving{color:#fcd34d}
+ .spacer{flex:1}
+ .hint{font-size:12px;color:#64748b}
+ a.nav{color:#c4b5fd;text-decoration:none;font-size:13px;font-weight:600} a.nav:hover{text-decoration:underline}
+ main{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:0}
+ .pane{min-height:0;display:flex;flex-direction:column}
+ .pane-h{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:#64748b;padding:6px 14px;background:#0b1120;border-bottom:1px solid #243049;display:flex;justify-content:space-between}
+ .pane-h .meta{color:#8b9ab3;text-transform:none;letter-spacing:0;font-weight:600}
+ textarea{flex:1;border:0;border-right:1px solid #243049;background:#0b1120;color:#dbe3ee;
+   font:13px/1.7 'JetBrains Mono','Consolas','Courier New',monospace;padding:16px;resize:none;outline:none;white-space:pre;tab-size:2}
+ .preview{flex:1;overflow:auto;padding:18px 22px;background:#0f1729}
+ .beat{margin-bottom:22px}
+ .bk{display:inline-block;font:700 11px/1 'JetBrains Mono',monospace;color:#fff;background:#783ABF;padding:4px 9px;border-radius:6px;letter-spacing:.5px}
+ .tone{font-size:12.5px;color:#fcd34d;font-style:italic;margin:7px 0 6px;line-height:1.5}
+ .btext{font-size:15.5px;line-height:1.8;color:#e9eef6}
+ .tag{color:#5eead4;font-weight:700;font-size:13px}
+ .empty{color:#64748b;font-size:14px}
+</style></head><body>
+<header>
+ <b>🎬 Sửa script video (local)</b>
+ <select id="pick" title="Chọn video"></select>
+ <span id="status" class="status">—</span>
+ <span class="spacer"></span>
+ <span class="hint">Tự lưu khi ngừng gõ · Ctrl+S lưu ngay</span>
+ <a class="nav" href="/">✏️ Sửa blog →</a>
+</header>
+<main>
+ <div class="pane">
+   <div class="pane-h"><span>content.py — sửa là tự ghi vào file</span></div>
+   <textarea id="ed" spellcheck="false" placeholder="Chọn video ở thanh trên..."></textarea>
+ </div>
+ <div class="pane">
+   <div class="pane-h"><span>Lời thoại (bóc từ BEATS)</span><span class="meta" id="stat"></span></div>
+   <div class="preview" id="preview"></div>
+ </div>
+</main>
+<script>
+const $ = s => document.querySelector(s);
+const ed = $('#ed'), pick = $('#pick'), statusEl = $('#status'), stat = $('#stat'), preview = $('#preview');
+let slug = new URLSearchParams(location.search).get('slug') || '';
+let timer = null, loading = false;
+
+const pad = n => String(n).padStart(2,'0');
+const now = () => { const d = new Date(); return pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds()); };
+const setStatus = (t, cls) => { statusEl.textContent = t; statusEl.className = 'status ' + (cls||''); };
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+// ---- parse content.py (đủ dùng cho format protocol: ORDER list, BEATS/TONE dict, string nối liền) ----
+function unesc(s){ return s.replace(/\\n/g,'\n').replace(/\\t/g,'\t').replace(/\\"/g,'"').replace(/\\\\/g,'\\'); }
+function dictBody(src, name){
+  const m = new RegExp(name + '\\s*=\\s*\\{').exec(src);
+  if(!m) return '';
+  const open = src.indexOf('{', m.index); let depth = 0;
+  for(let j = open; j < src.length; j++){
+    if(src[j] === '{') depth++;
+    else if(src[j] === '}'){ depth--; if(depth === 0) return src.slice(open+1, j); }
+  }
+  return '';
+}
+function pyDict(body){
+  const keyRe = /"((?:[^"\\]|\\.)*)"\s*:/g; const keys = []; let m;
+  while((m = keyRe.exec(body))) keys.push({ key: unesc(m[1]), valStart: keyRe.lastIndex, kStart: m.index });
+  const out = {};
+  for(let i = 0; i < keys.length; i++){
+    const end = i+1 < keys.length ? keys[i+1].kStart : body.length;
+    const seg = body.slice(keys[i].valStart, end);
+    out[keys[i].key] = [...seg.matchAll(/"((?:[^"\\]|\\.)*)"/g)].map(x => unesc(x[1])).join('');
+  }
+  return out;
+}
+function pyList(src, name){
+  const m = new RegExp(name + '\\s*=\\s*\\[').exec(src);
+  if(!m) return [];
+  const open = src.indexOf('[', m.index), close = src.indexOf(']', open);
+  if(open < 0 || close < 0) return [];
+  return [...src.slice(open, close).matchAll(/"([^"]+)"/g)].map(x => x[1]);
+}
+function renderScript(){
+  const src = ed.value;
+  const beats = pyDict(dictBody(src, 'BEATS'));
+  const tone = pyDict(dictBody(src, 'TONE'));
+  const order = pyList(src, 'ORDER');
+  const keys = [...order.filter(k => k in beats), ...Object.keys(beats).filter(k => !order.includes(k))];
+  let chars = 0, pauses = 0;
+  const out = keys.map(k => {
+    const raw = beats[k] || '';
+    chars += raw.replace(/\[[^\]]+\]/g,'').length;
+    pauses += (raw.match(/\n/g) || []).length;
+    const txt = esc(raw).split('\n').join('<br>').replace(/\[([^\]]+)\]/g, '<span class="tag">[$1]</span>');
+    const t = tone[k] ? `<div class="tone">▸ ${esc(tone[k])}</div>` : '';
+    return `<div class="beat"><span class="bk">${esc(k)}</span>${t}<div class="btext">${txt}</div></div>`;
+  }).join('');
+  const secs = Math.round(chars/17 + pauses*0.4);
+  stat.textContent = keys.length ? `${keys.length} beat · ~${chars} ký tự · ~${secs}s` : '';
+  preview.innerHTML = out || '<div class="empty">Chưa bóc được BEATS - kiểm tra cú pháp content.py.</div>';
+}
+
+async function loadList(){
+  const { slugs } = await (await fetch('/api/video-list')).json();
+  if (!slug && slugs.length) slug = slugs[0];
+  pick.innerHTML = slugs.map(s => `<option value="${s}"${s===slug?' selected':''}>${s}</option>`).join('');
+}
+async function loadSlug(s){
+  loading = true; slug = s; setStatus('đang mở...', 'saving');
+  const d = await (await fetch('/api/video-load?slug=' + encodeURIComponent(s))).json();
+  if (d.error){ setStatus('lỗi: ' + d.error, 'err'); loading = false; return; }
+  ed.value = d.content; renderScript();
+  history.replaceState(null, '', '?slug=' + s);
+  setStatus('đã mở', 'ok'); loading = false;
+}
+async function save(){
+  if (loading || !slug) return;
+  setStatus('đang lưu...', 'saving');
+  try{
+    const d = await (await fetch('/api/video-save', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ slug, content: ed.value })
+    })).json();
+    setStatus(d.ok ? 'đã lưu ' + now() : 'lỗi: ' + (d.error||'?'), d.ok ? 'ok' : 'err');
+  }catch(e){ setStatus('lỗi mạng: ' + e, 'err'); }
+}
+
+ed.addEventListener('input', () => {
+  renderScript();
+  clearTimeout(timer); setStatus('chưa lưu...', 'saving'); timer = setTimeout(save, 700);
+});
+ed.addEventListener('keydown', e => { if ((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='s'){ e.preventDefault(); clearTimeout(timer); save(); } });
+pick.addEventListener('change', () => loadSlug(pick.value));
+
+(async () => { await loadList(); if (slug) await loadSlug(slug); })();
+</script></body></html>

@@ -1,25 +1,57 @@
 {
-  "name": "semantix-video",
-  "version": "1.0.0",
-  "private": true,
+  "name": "blog2video",
+  "version": "0.1.0",
+  "description": "Dây chuyền bài viết → video kinetic typography: Remotion kit + TTS + căn timing + thumbnail YouTube.",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    "./kit": "./dist/kit.js",
+    "./root": "./dist/root.js",
+    "./ui": "./dist/ui.js",
+    "./caption": "./dist/Caption.js",
+    "./thumb": "./dist/thumb.js",
+    "./config": "./dist/config.js",
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/kit.d.ts",
+  "bin": {
+    "blog2video": "./bin/blog2video.mjs"
+  },
+  "files": [
+    "dist",
+    "src",
+    "scripts",
+    "assets",
+    "bin",
+    "templates",
+    "docs",
+    "video.config.schema.json"
+  ],
   "scripts": {
-    "registry": "node scripts/gen-registry.mjs",
-    "studio": "remotion studio src/index.ts",
-    "edit": "node scripts/edit-server.mjs",
-    "build": "python scripts/build.py"
+    "build:lib": "node scripts/build-lib.mjs",
+    "prepare": "node scripts/build-lib.mjs",
+    "studio": "remotion studio examples/src/index.ts",
+    "example": "node bin/blog2video.mjs build _example --no-render"
   },
   "dependencies": {
-    "@remotion/cli": "4.0.290",
     "@remotion/google-fonts": "4.0.290",
     "@remotion/lottie": "^4.0.290",
     "lottie-web": "^5.13.0",
-    "lucide-react": "^1.23.0",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "remotion": "4.0.290"
+    "lucide-react": "^1.23.0"
+  },
+  "peerDependencies": {
+    "@remotion/cli": ">=4.0.290",
+    "react": ">=19",
+    "react-dom": ">=19",
+    "remotion": ">=4.0.290"
   },
   "devDependencies": {
+    "@remotion/cli": "4.0.290",
     "@types/react": "19.0.0",
+    "esbuild": "^0.25.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.290",
     "typescript": "5.6.3"
   }
 }
