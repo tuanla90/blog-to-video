@@ -27,10 +27,10 @@ Engine lo phần còn lại: gọi TTS, căn caption tới từng từ, dựng c
 
 ## Bắt đầu
 
-Engine chưa lên npm, nên lấy về trước:
+Engine chưa lên npm — cài thẳng từ GitHub:
 
 ```bash
-git clone <url-repo-blog2video> ~/blog2video && cd ~/blog2video && npm install
+git clone https://github.com/tuanla90/blog-to-video ~/blog2video && cd ~/blog2video && npm install
 ```
 
 Rồi dựng dự án video:
@@ -43,7 +43,15 @@ npm run sync-assets
 npm run studio
 ```
 
-`init` tự dò: engine có remote GitHub thì dep ghi `github:owner/repo#vX.Y.Z`, chưa push thì ghi `file:` trỏ thẳng thư mục engine. Sau khi publish lên npm thì bước đầu gọn lại còn `npx blog2video init`.
+`init` tự dò remote của engine và ghi dep là `github:tuanla90/blog-to-video#v0.1.0` (chưa push thì ghi `file:` trỏ thẳng thư mục engine).
+
+Không muốn clone thì khai thẳng trong `package.json` của bạn:
+
+```json
+"dependencies": { "blog2video": "github:tuanla90/blog-to-video#v0.1.0" }
+```
+
+Tên gói (`blog2video`) khác tên repo (`blog-to-video`) — npm không sao. Cài kiểu này mất ~2 phút vì npm kéo devDeps rồi chạy `prepare` để build `dist/`.
 
 `init` dựng sẵn `package.json`, `video.config.json`, `tsconfig.json`, `remotion.config.ts`, `src/index.ts`, `.gitignore` và **một slug mẫu** `videos/vi-du/`. Sau `sync-assets` là mở Studio thấy video mẫu chạy ngay — đó là cách xác nhận engine ok trước khi viết gì.
 
