@@ -12,7 +12,7 @@ Tách ra từ `semantix-docs` (2026-07) để dùng lại cho dự án khác. Re
 | `scripts/` | `gen_audio.py` (TTS), `align.py` (forced-align theo năng lượng), `scaffold.py` (dựng khung khi chưa có voice), `build.py` (driver batch), `gen-registry.mjs`, `gen-thumb.mjs` (9 layout), `edit-server.mjs`, bộ `tts_*.py`, tool lottie |
 | `assets/lottie/` | 27 icon lottie đã recolor theo accent (bản gốc ở `_src/`) |
 | `docs/` | `PIPELINE.md` (gotcha khi dựng — đọc trước khi debug), `SCRIPT-PROTOCOL.md` (chẻ bài viết thành beat), `LOTTIE-LIST.md`, `CONFIG.md` |
-| `examples/_example/` | 1 slug tối giản để smoke-test engine độc lập |
+| `skills/`, `workflows/` | plugin Claude Code: skill `video-forge` (cách viết bundle) + workflow batch script/thumbnail |
 
 ## Mô hình
 
@@ -47,6 +47,19 @@ npx blog2video studio            # mở Remotion Studio
 
 Cấu hình đầy đủ: [docs/CONFIG.md](docs/CONFIG.md). Gotcha môi trường (Chrome CDN bị chặn, onnxruntime, proxy MITM, cp1252): [docs/PIPELINE.md](docs/PIPELINE.md).
 
+## Plugin Claude Code
+
+```bash
+claude plugin marketplace add D:/Users/tuanla2/blog2video
+```
+
+Cho skill `video-forge` + workflow `video-pipeline` (truyền `ctx` giọng của dự án qua args — engine không giữ giọng của ai).
+
 ## Trạng thái
 
-v0.1 — vừa tách khỏi `semantix-docs`, giữ nguyên history của phần máy móc. Bản dùng thật đầu tiên là kênh "Tuấn LA Lab" (14 video).
+v0.1 — vừa tách khỏi `semantix-docs`, giữ nguyên history của phần máy móc. Bản dùng thật đầu tiên là kênh "Tuấn LA Lab" (14 video), đã đối chứng parity từng byte.
+
+Còn nợ:
+- `examples/` chưa có — engine mới chỉ chạy qua dự án tiêu dùng thật, chưa smoke-test độc lập.
+- `docs/SCRIPT-PROTOCOL.md` còn lẫn ví dụ riêng của kênh Tuấn LA Lab, cần dọn thành bản chung.
+- Chưa publish lên GitHub; consumer đang nối bằng `file:` link.

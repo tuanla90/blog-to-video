@@ -1,0 +1,11 @@
+{
+  "name": "blog2video",
+  "owner": {"name": "Lê Anh Tuấn"},
+  "plugins": [
+    {
+      "name": "blog2video",
+      "source": "./",
+      "description": "Skill + workflow cho dây chuyền bài viết → video kinetic typography (Remotion + TTS + thumbnail)."
+    }
+  ]
+}
