@@ -14,6 +14,7 @@ import {AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Easing, Audi
 import {C, MONO, useVmin, useCount, FadeUp, Bg, Sparks, titleGrad} from "./ui";
 import {Lottie} from "@remotion/lottie";
 import {LOTTIES} from "./lotties";
+import {CONFIG} from "./config";
 import {icons as LUCIDE} from "lucide-react";
 
 const clamp = {extrapolateLeft: "clamp" as const, extrapolateRight: "clamp" as const};
@@ -724,12 +725,13 @@ const El: React.FC<{e: ElProps; from: number; v: number; customs: Record<string,
       if (e.atWord && lines) {
         const key = String(e.atWord).toLowerCase();
         const hit = lines.flatMap((L: any) => L.words || []).find((w: any) => String(w.w).toLowerCase().includes(key));
-        if (hit) fr = Math.round(0.4 * fps) + Math.round(hit.s * fps) - Math.round((e.lead ?? 0) * fps);  // lead: bắt đầu sớm (riser build-up)
+        // + leadIn vì caption/voice trong beat bị đẩy đi ngần ấy (xem Root.tsx)
+        if (hit) fr = Math.round(CONFIG.pacing.leadIn * fps) + Math.round(hit.s * fps) - Math.round((e.lead ?? 0) * fps);  // lead: bắt đầu sớm (riser build-up)
       }
       fr = Math.max(0, fr);
       return (
         <Sequence from={fr} layout="none">
-          <Audio src={staticFile(`audio/sfx/${String(e.name).includes(".") ? e.name : e.name + ".wav"}`)} volume={e.volume ?? 0.1} />
+          <Audio src={staticFile(`${CONFIG.audio.sfxDir}/${String(e.name).includes(".") ? e.name : e.name + ".wav"}`)} volume={e.volume ?? 0.1} />
         </Sequence>
       );
     }

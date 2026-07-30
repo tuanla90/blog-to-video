@@ -20,17 +20,9 @@ try:
 except Exception:
     pass
 
-# --- .env loader (chạy gen_audio.py trực tiếp vẫn đọc được key) ---
-ROOT = os.path.dirname(os.path.abspath(__file__))
-def load_env():
-    p = os.path.join(ROOT, ".env")
-    if not os.path.exists(p): return
-    for line in open(p, encoding="utf-8"):
-        line = line.strip()
-        if line and not line.startswith("#") and "=" in line:
-            k, v = line.split("=", 1)
-            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
-load_env()
+# --- gốc dự án + .env (chạy trực tiếp vẫn đọc được key) ---
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _project import ROOT, VIDEOS, PUBLIC, CONFIG   # noqa: E402  (chdir vào gốc dự án khi import)
 
 if len(sys.argv) < 2:
     raise SystemExit("usage: python gen_audio.py <slug>")
@@ -51,8 +43,9 @@ VOICE_SETTINGS = {
     "use_speaker_boost": True,
 }
 
-FPS = 30
-LEAD_IN = 0.4   # PHẢI khớp LEAD_IN trong Root.tsx (nghỉ sau chuyển cảnh, voice lùi vào)
+FPS = CONFIG.get("fps", 30)
+# nghỉ sau chuyển cảnh, voice lùi vào — lấy CÙNG nguồn với Root.tsx nên không lệch được nữa
+LEAD_IN = CONFIG.get("pacing", {}).get("leadIn", 0.4)
 TAIL = 0.3      # đệm đuôi cho hết câu trước khi cắt
 SPEED = float(os.environ.get("ELEVENLABS_SPEED", "1.0"))  # đọc nhanh hơn HẬU KỲ (v3 ko hỗ trợ speed API) — atempo giữ cao độ
 NPX = "npx.cmd" if os.name == "nt" else "npx"
@@ -62,7 +55,7 @@ SENT_END = re.compile(r"[.!?:…]$")
 
 def load_content(slug):
     # NGUỒN lời thoại: ưu tiên script.json (sửa được qua Decap CMS), fallback content.py.
-    js = os.path.join("videos", slug, "script.json")
+    js = os.path.join(VIDEOS, slug, "script.json")
     if os.path.exists(js):
         d = json.load(open(js, encoding="utf-8"))
         BEATS = {b["id"]: b["text"] for b in d.get("beats", [])}
@@ -70,7 +63,7 @@ def load_content(slug):
         if d.get("shortOutro"): BEATS["short-outro"] = d["shortOutro"]
         PRON = {p["word"]: p["say"] for p in (d.get("pron") or [])}
         return BEATS, ORDER, PRON
-    path = os.path.join("videos", slug, "content.py")
+    path = os.path.join(VIDEOS, slug, "content.py")
     spec = importlib.util.spec_from_file_location(f"content_{slug.replace('-', '_')}", path)
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
     return mod.BEATS, mod.ORDER, getattr(mod, "PRON", {})
@@ -194,8 +187,8 @@ def gen(bid, text):
 
 BEATS, ORDER, PRON = load_content(SLUG)
 BACK = {v: k for k, v in PRON.items() if " " not in v.strip() and v != k}  # respelling -> chữ gốc cho caption
-audio_dir = os.path.join("public", "audio", SLUG); os.makedirs(audio_dir, exist_ok=True)
-out_dir = os.path.join("videos", SLUG)
+audio_dir = os.path.join(PUBLIC, "audio", SLUG); os.makedirs(audio_dir, exist_ok=True)
+out_dir = os.path.join(VIDEOS, SLUG)
 
 # Re-voice TỪNG BEAT: python gen_audio.py <slug> <beat> [beat...]  -> chỉ gen beat đó,
 # giữ nguyên audio/timings các beat còn lại (đỡ credit + không đổi phần đã duyệt).

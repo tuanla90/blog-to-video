@@ -6,11 +6,11 @@
   "license": "MIT",
   "exports": {
     "./kit": "./dist/kit.js",
-    "./root": "./dist/root.js",
+    "./root": "./dist/Root.js",
     "./ui": "./dist/ui.js",
     "./caption": "./dist/Caption.js",
-    "./thumb": "./dist/thumb.js",
     "./config": "./dist/config.js",
+    "./types": "./dist/types.js",
     "./package.json": "./package.json"
   },
   "types": "./dist/kit.d.ts",
@@ -29,15 +29,14 @@
   ],
   "scripts": {
     "build:lib": "node scripts/build-lib.mjs",
-    "prepare": "node scripts/build-lib.mjs",
-    "studio": "remotion studio examples/src/index.ts",
-    "example": "node bin/blog2video.mjs build _example --no-render"
+    "prepare": "node scripts/build-lib.mjs"
   },
   "dependencies": {
     "@remotion/google-fonts": "4.0.290",
     "@remotion/lottie": "^4.0.290",
     "lottie-web": "^5.13.0",
-    "lucide-react": "^1.23.0"
+    "lucide-react": "^1.23.0",
+    "puppeteer-core": "^25.2.1"
   },
   "peerDependencies": {
     "@remotion/cli": ">=4.0.290",

@@ -2,7 +2,7 @@ import React from "react";
 import {AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Easing, random} from "remotion";
 import {loadFont as loadInter} from "@remotion/google-fonts/Inter";
 import {loadFont as loadMono} from "@remotion/google-fonts/JetBrainsMono";
-import {BRAND} from "./brand";
+import {BRAND} from "./config";
 
 // Vietnamese subset is REQUIRED or dấu becomes tofu boxes.
 const inter = loadInter("normal", {weights: ["400", "600", "700", "800"], subsets: ["latin", "vietnamese"]});
@@ -12,10 +12,13 @@ export const INTER = `${inter.fontFamily}, sans-serif`;
 // mono is used for numbers/ASCII; Vietnamese glyphs fall back to Inter.
 export const MONO = `${mono.fontFamily}, ${inter.fontFamily}, monospace`;
 
+// accent là GETTER: bảng màu này dựng ở module scope, mà applyConfig() chỉ chạy sau khi
+// mọi import đã xong -> đọc lười thì call-site `C.accent` khắp kit mới thấy màu của config.
 export const C = {
   bg: "#08090C", card: "#15171C", cardHi: "#1B1E25", border: "#2A2D36",
   text: "#FAFAFA", muted: "#9CA3AF",
-  accent: BRAND.accent, good: "#00BC7D", warn: "#FE9A00", bad: "#FF6467", purple: "#AD46FF",
+  get accent() { return BRAND.accent; },
+  good: "#00BC7D", warn: "#FE9A00", bad: "#FF6467", purple: "#AD46FF",
 };
 
 export const useVmin = () => {

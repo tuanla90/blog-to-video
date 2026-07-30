@@ -1,30 +1,28 @@
 // Sinh thumbnail YouTube (1280x720) data-driven từ videos/<slug>/thumb.json.
 // 9 layout: cards | bignum | question | vs | highlight | chart | mockup | split | code.
-// Màu theo category (chung bảng với cover). Lưu source thumb-src/<slug>.html, render out/<slug>/thumb.png.
-// Chạy: node scripts/gen-thumb.mjs [slug ...]   (không slug = mọi videos/*/thumb.json)
+// Màu theo category (khai trong video.config.json). Lưu source thumb-src/<slug>.html, render out/<slug>/thumb.png.
+// Chạy: npx blog2video thumb [slug ...]   (không slug = mọi videos/*/thumb.json)
 import fs from 'node:fs';
 import path from 'node:path';
 import puppeteer from 'puppeteer-core';
+import { findProjectRoot, loadConfig, p as ppath } from './lib/project.mjs';
 
-const ROOT = path.resolve(process.cwd());
-const VIDEOS = path.join(ROOT, 'video-remotion/videos');
-const OUTBASE = path.join(ROOT, 'video-remotion/out');
-const SRC = path.join(ROOT, 'thumb-src');
-const CHROME = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const FILE = (rel) => 'file:///' + path.join(ROOT, rel).replace(/\\/g, '/');
-const PERSON = FILE('video-remotion/public/thumb/tuan-crop.png');
-const LOGO = FILE('video-remotion/public/thumb/logo-LA.svg');
+const cfg = loadConfig(findProjectRoot());
+const ROOT = cfg.root;
+const VIDEOS = ppath(cfg, 'videos');
+const OUTBASE = ppath(cfg, 'out');
+const SRC = ppath(cfg, 'thumbSrc');
+const CHROME = process.env.CHROME || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const FILE = (rel) => 'file:///' + path.resolve(ROOT, rel).replace(/\\/g, '/');
+// ảnh người dẫn + logo: đường dẫn trong public/ của dự án (giống staticFile của Remotion)
+const PERSON = FILE(path.join(cfg.paths.public, cfg.thumb?.person ?? 'thumb/person.png'));
+const LOGO = FILE(path.join(cfg.paths.public, cfg.thumb?.logo ?? 'thumb/logo.svg'));
+const BRAND_NAME = cfg.brand?.name ?? '';
+const BRAND_ACCENT = cfg.brand?.accent ?? '#783ABF';
 fs.mkdirSync(SRC, { recursive: true });
 
-const CAT = {
-  'Kiến Thức Nền Tảng':   { accT: '#C4B5FD', acc: '#8B5CF6', acc2: '#6366F1' },
-  'Phân Tích Dữ Liệu':    { accT: '#67E8F9', acc: '#22D3EE', acc2: '#0891B2' },
-  'Hướng Dẫn Thực Chiến': { accT: '#6EE7B7', acc: '#10B981', acc2: '#34D399' },
-  'AI & Công Nghệ':       { accT: '#F0ABFC', acc: '#D946EF', acc2: '#A855F7' },
-  'So Sánh & Lựa Chọn':   { accT: '#FCD34D', acc: '#F59E0B', acc2: '#FB923C' },
-  'Câu Chuyện & Use Case':{ accT: '#FDA4AF', acc: '#FB7185', acc2: '#F43F5E' },
-};
-const DEF = CAT['Kiến Thức Nền Tảng'];
+const CAT = Object.fromEntries((cfg.categories ?? []).map(c => [c.name, c]));
+const DEF = (cfg.categories ?? [])[0] ?? { accT: '#C4B5FD', acc: '#8B5CF6', acc2: '#6366F1' };
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const CLR = { green: '#34D399', red: '#FF3B4E', cyan: '#22D3EE', violet: '#8B5CF6', amber: '#FBBF24' };
 
@@ -93,7 +91,7 @@ function buildHtml(slug, d) {
   const chartScript = r.chart ? `<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script><script>window.addEventListener('load',function(){if(!window.echarts)return;var co=['T10','T11','T12','T1','T2','T3','T4'],y=co.slice().reverse(),pts=[],seed=[15,6,3,1.6,1,0.7,0.4];co.forEach(function(x,ci){for(var p=0;p<7-ci;p++){pts.push([p,y.indexOf(x),+(seed[p]*(0.7+(ci%3)*0.45)).toFixed(1)]);}});echarts.init(document.getElementById('chart')).setOption({animation:false,backgroundColor:'transparent',grid:{left:2,right:2,top:2,bottom:2},xAxis:{type:'category',data:[1,2,3,4,5,6,7],show:false},yAxis:{type:'category',data:y,show:false},visualMap:{show:false,min:0,max:16,inRange:{color:['#064e3b','#047857','#10b981','#34d399']}},series:[{type:'heatmap',data:pts,itemStyle:{borderColor:'#0f172a',borderWidth:3,borderRadius:4},label:{show:true,fontFamily:'Inter',fontSize:14,fontWeight:700,color:'#fff',formatter:function(p){return p.value[2]+'%';}}}]});});</script>` : '';
   const frame = r.noframe ? '' : `<div class="dots"></div><div class="glowP"></div>
    <div class="cat">${esc(d.catLabel || d.category || '')}</div>`;
-  const brand = `<div class="brand"><img src="${LOGO}"><span>Tuấn LA Lab</span></div>`;
+  const brand = `<div class="brand"><img src="${LOGO}"><span>${esc(BRAND_NAME)}</span></div>`;
   return `<!doctype html><meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">${chartScript}
@@ -105,7 +103,7 @@ function buildHtml(slug, d) {
  .glowP{position:absolute;right:-58px;bottom:-72px;width:446px;height:576px;border-radius:50%;background:radial-gradient(circle at 50% 42%,color-mix(in srgb,var(--acc) 55%,transparent),transparent 62%)}
  .cat{position:absolute;left:44px;top:36px;border:2px solid var(--acc);color:var(--accT);border-radius:100px;padding:8px 20px;font-size:19px;font-weight:800;letter-spacing:1px;background:color-mix(in srgb,var(--acc) 14%,transparent);z-index:5;text-transform:uppercase}
  .lbl{position:absolute;left:44px;top:38px;font-size:15px;font-weight:800;letter-spacing:2px;color:#64748b;z-index:9}
- .brand{position:absolute;right:44px;top:36px;display:flex;align-items:center;gap:12px;background:#783ABF;border-radius:15px;padding:9px 20px 9px 16px;z-index:5}
+ .brand{position:absolute;right:44px;top:36px;display:flex;align-items:center;gap:12px;background:${BRAND_ACCENT};border-radius:15px;padding:9px 20px 9px 16px;z-index:5}
  .brand img{height:38px} .brand span{font-weight:800;font-size:21px;color:#fff}
  .kick{display:inline-block;background:color-mix(in srgb,var(--acc) 20%,transparent);border:1px solid color-mix(in srgb,var(--accT) 45%,transparent);color:var(--accT);font-size:21px;font-weight:800;padding:9px 18px;border-radius:100px}
  h1{font-weight:900} .rd{color:#FF3B4E;text-shadow:0 0 30px rgba(255,59,78,.6)} .rd.big{color:#FF2740;text-shadow:0 0 40px rgba(255,39,64,.85),0 4px 8px #000}

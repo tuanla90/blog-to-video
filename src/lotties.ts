@@ -1,20 +1,20 @@
 // Shared Lottie animations, referenced from scenes.json via { el: "lottie", name }.
-// Tier 1 (đã recolor về brand — xem scripts/recolor_tier1.py; gốc ở public/lottie/_src/).
-// Thêm mới: thả .json vào public/lottie/ + recolor + thêm 1 dòng ở đây.
-import check from "../public/lottie/check.json";
-import cross from "../public/lottie/cross.json";
-import question from "../public/lottie/question.json";
-import idea from "../public/lottie/idea.json";
-import alert from "../public/lottie/alert.json";
-import error from "../public/lottie/error.json";
-import target from "../public/lottie/target.json";
-import search from "../public/lottie/search.json";
-import loading from "../public/lottie/loading.json";
-import progress from "../public/lottie/progress.json";
-import arrowUp from "../public/lottie/arrow-up.json";
-import arrowDown from "../public/lottie/arrow-down.json";
-import subscribe from "../public/lottie/subscribe.json";
-import swipe from "../public/lottie/swipe.json";
+// Tier 1 (đã recolor về brand — xem scripts/recolor_tier1.py; gốc ở assets/lottie/_src/).
+// Thêm mới: thả .json vào assets/lottie/ + recolor + thêm 1 dòng ở đây.
+import check from "../assets/lottie/check.json";
+import cross from "../assets/lottie/cross.json";
+import question from "../assets/lottie/question.json";
+import idea from "../assets/lottie/idea.json";
+import alert from "../assets/lottie/alert.json";
+import error from "../assets/lottie/error.json";
+import target from "../assets/lottie/target.json";
+import search from "../assets/lottie/search.json";
+import loading from "../assets/lottie/loading.json";
+import progress from "../assets/lottie/progress.json";
+import arrowUp from "../assets/lottie/arrow-up.json";
+import arrowDown from "../assets/lottie/arrow-down.json";
+import subscribe from "../assets/lottie/subscribe.json";
+import swipe from "../assets/lottie/swipe.json";
 
 export const LOTTIES: Record<string, unknown> = {
   check,       // tick xanh — "đúng/chốt"

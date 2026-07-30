@@ -8,6 +8,9 @@ import json, re, sys, os, importlib.util
 import numpy as np
 import av
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _project import VIDEOS, PUBLIC   # noqa: E402  (chdir vào gốc dự án khi import)
+
 MAXPERLINE = 5
 
 if len(sys.argv) < 2:
@@ -15,7 +18,7 @@ if len(sys.argv) < 2:
 SLUG = sys.argv[1]
 
 def load_content(slug):
-    path = os.path.join("videos", slug, "content.py")
+    path = os.path.join(VIDEOS, slug, "content.py")
     spec = importlib.util.spec_from_file_location(f"content_{slug.replace('-', '_')}", path)
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
@@ -110,7 +113,7 @@ def group_lines(words, times):
     return lines
 
 BEATS, ORDER = load_content(SLUG)
-audio_dir = os.path.join("public", "audio", SLUG)
+audio_dir = os.path.join(PUBLIC, "audio", SLUG)
 ids = ORDER + (["short-outro"] if "short-outro" in BEATS else [])
 out = {}
 for bid in ids:
@@ -121,6 +124,6 @@ for bid in ids:
     times = map_to_voiced(weights, segs)
     out[bid] = group_lines(words, times)
     sys.stdout.buffer.write((f"{bid}: {len(segs)} voiced segs, {len(words)} words, {len(out[bid])} lines\n").encode())
-dest = os.path.join("videos", SLUG, "timings.json")
+dest = os.path.join(VIDEOS, SLUG, "timings.json")
 json.dump(out, open(dest, "w", encoding="utf-8"), ensure_ascii=False)
 print("wrote " + dest)

@@ -26,33 +26,23 @@ import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)  # video-remotion/
-VIDEOS_DIR = os.path.join(ROOT, "videos")
+HERE = os.path.dirname(os.path.abspath(__file__))   # scripts/ của engine
+sys.path.insert(0, HERE)
+from _project import ROOT, VIDEOS, OUT, CONFIG      # noqa: E402  (chdir vào gốc dự án, nạp .env)
 
-# align.py needs numpy + av -> the project venv. gen_audio.py is stdlib-only but we
-# run both through the same interpreter for consistency. Fall back to the current python.
-VENV_PY = os.path.join(ROOT, ".venv-whisper", "Scripts", "python.exe")
+VIDEOS_DIR = os.path.join(ROOT, VIDEOS)
+SRC_ENTRY = os.path.join(CONFIG["paths"]["src"], "index.ts").replace("\\", "/")
+
+# align.py cần numpy + av -> venv của DỰ ÁN. gen_audio.py chỉ dùng stdlib nhưng chạy chung
+# một interpreter cho nhất quán. Không có venv thì dùng python đang chạy.
+# Đổi bằng biến môi trường B2V_PYTHON nếu venv để chỗ khác.
+VENV_PY = os.environ.get("B2V_PYTHON") or os.path.join(ROOT, ".venv-whisper", "Scripts", "python.exe")
 PY = VENV_PY if os.path.exists(VENV_PY) else sys.executable
 
-CHROME = os.environ.get(
-    "CHROME", r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-)
+# Máy nào bị chặn CDN Chromium thì set CHROME trỏ Chrome cài sẵn (xem docs/PIPELINE.md).
+CHROME = os.environ.get("CHROME", "")
 NPX = "npx.cmd" if os.name == "nt" else "npx"
 NODE = "node"
-
-
-def load_dotenv():
-    """Minimal .env loader (KEY=VALUE lines). Does not override already-set vars."""
-    path = os.path.join(ROOT, ".env")
-    if not os.path.exists(path):
-        return
-    for line in open(path, encoding="utf-8"):
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        k, v = line.split("=", 1)
-        os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 
 
 def discover_slugs():
@@ -95,21 +85,21 @@ def pooled(fn, slugs, workers, stage):
 
 
 def stage_audio(slug):
-    run([PY, "gen_audio.py", slug], f"audio:{slug}")
+    run([PY, os.path.join(HERE, "gen_audio.py"), slug], f"audio:{slug}")
 
 
 def stage_align(slug):
-    run([PY, "align.py", slug], f"align:{slug}")
+    run([PY, os.path.join(HERE, "align.py"), slug], f"align:{slug}")
 
 
 def stage_render(slug):
     # one folder per video: out/<slug>/{long,short}.mp4
-    os.makedirs(os.path.join(ROOT, "out", slug), exist_ok=True)
-    common = ["--browser-executable=" + CHROME]
-    run([NPX, "remotion", "render", "src/index.ts", f"{slug}-Long",
-         f"out/{slug}/long.mp4", *common], f"render-long:{slug}")
-    run([NPX, "remotion", "render", "src/index.ts", f"{slug}-Short",
-         f"out/{slug}/short.mp4", *common], f"render-short:{slug}")
+    os.makedirs(os.path.join(ROOT, OUT, slug), exist_ok=True)
+    common = ["--browser-executable=" + CHROME] if CHROME else []
+    run([NPX, "remotion", "render", SRC_ENTRY, f"{slug}-Long",
+         f"{OUT}/{slug}/long.mp4", *common], f"render-long:{slug}")
+    run([NPX, "remotion", "render", SRC_ENTRY, f"{slug}-Short",
+         f"{OUT}/{slug}/short.mp4", *common], f"render-short:{slug}")
 
 
 def main():
@@ -129,8 +119,7 @@ def main():
                     help="concurrent renders; each render is multi-core (default 2)")
     args = ap.parse_args()
 
-    load_dotenv()
-    slugs = args.slugs or discover_slugs()
+    slugs = args.slugs or discover_slugs()   # .env đã nạp lúc import _project
     if not slugs:
         raise SystemExit("no slugs found in videos/ (need a content.py)")
     missing = [s for s in slugs if not os.path.isdir(os.path.join(VIDEOS_DIR, s))]
@@ -150,7 +139,7 @@ def main():
 
     # BARRIER: every bundle is complete -> regenerate the one shared registry, once.
     print("\n=== REGISTRY (gen-registry.mjs, 1 lan) ===", flush=True)
-    print(run([NODE, "scripts/gen-registry.mjs"], "registry").strip(), flush=True)
+    print(run([NODE, os.path.join(HERE, "gen-registry.mjs")], "registry").strip(), flush=True)
 
     if args.no_render:
         print("\nDone (no render). Preview: npm run studio", flush=True)

@@ -5,17 +5,21 @@
 # Usage: python scripts/scaffold.py <slug>
 import json, os, re, sys, importlib.util, wave
 
-MAXPERLINE, FPS, SR = 5, 30, 16000
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from _project import VIDEOS, PUBLIC, CONFIG   # noqa: E402  (chdir vào gốc dự án khi import)
+
+MAXPERLINE, SR = 5, 16000
+FPS = CONFIG.get("fps", 30)
 
 def load_content(slug):
-    js = os.path.join("videos", slug, "script.json")   # ưu tiên script.json (Decap sửa được)
+    js = os.path.join(VIDEOS, slug, "script.json")   # ưu tiên script.json (Decap sửa được)
     if os.path.exists(js):
         d = json.load(open(js, encoding="utf-8"))
         BEATS = {b["id"]: b["text"] for b in d.get("beats", [])}
         ORDER = [b["id"] for b in d.get("beats", [])]
         if d.get("shortOutro"): BEATS["short-outro"] = d["shortOutro"]
         return BEATS, ORDER
-    path = os.path.join("videos", slug, "content.py")
+    path = os.path.join(VIDEOS, slug, "content.py")
     spec = importlib.util.spec_from_file_location("c_" + slug.replace("-", "_"), path)
     mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
     return mod.BEATS, mod.ORDER
@@ -56,7 +60,7 @@ def build_lines(text, dur):
 slug = sys.argv[1]
 BEATS, ORDER = load_content(slug)
 ids = ORDER + (["short-outro"] if "short-outro" in BEATS else [])
-adir = os.path.join("public", "audio", slug); os.makedirs(adir, exist_ok=True)
+adir = os.path.join(PUBLIC, "audio", slug); os.makedirs(adir, exist_ok=True)
 beats, timings, outro = [], {}, None
 for bid in ids:
     dur = est_dur(BEATS[bid]); frames = round(dur * FPS)
@@ -79,7 +83,7 @@ if outro is None:
         wf.writeframes(b"\x00\x00" * int(dur * SR))
     outro = {"audio": f"audio/{slug}/{fn}", "durationInFrames": frames}
 
-d = os.path.join("videos", slug)
+d = os.path.join(VIDEOS, slug)
 json.dump(beats, open(os.path.join(d, "beats.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 json.dump(timings, open(os.path.join(d, "timings.json"), "w", encoding="utf-8"), ensure_ascii=False)
 json.dump(outro, open(os.path.join(d, "outro.json"), "w", encoding="utf-8"), ensure_ascii=False)

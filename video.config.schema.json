@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "blog2video project config",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "fps": {"type": "integer", "default": 30},
+    "brand": {
+      "type": "object",
+      "required": ["name", "label", "sig", "accent"],
+      "properties": {
+        "name": {"type": "string", "description": "tên kênh, hiện trên thumbnail"},
+        "label": {"type": "string", "description": "nhãn góc trên-trái mọi frame"},
+        "sig": {"type": "string", "description": "chữ ký góc dưới-phải mọi frame"},
+        "accent": {"type": "string", "description": "màu chính (hex)"},
+        "bubble": {"type": "string", "description": "accent phụ nhạt hơn (hex)"},
+        "wordmark": {
+          "type": "object",
+          "description": "wordmark scene intro/outro: pre + [em tô accent] + post",
+          "properties": {"pre": {"type": "string"}, "em": {"type": "string"}, "post": {"type": "string"}}
+        },
+        "tagline": {"type": "string"}
+      }
+    },
+    "audio": {
+      "type": "object",
+      "properties": {
+        "bed": {"type": ["string", "null"], "description": "nhạc nền trong public/; null = không có"},
+        "bedVolume": {"type": "number", "default": 0.15},
+        "sfxDir": {"type": "string", "default": "audio/sfx"},
+        "whoosh": {"type": ["string", "null"], "default": "whoosh.wav"}
+      }
+    },
+    "pacing": {
+      "type": "object",
+      "description": "nhịp thở, tính bằng GIÂY",
+      "properties": {
+        "introPad": {"type": "number"},
+        "sectionGap": {"type": "number"},
+        "outroPad": {"type": "number"},
+        "shortGap": {"type": "number"},
+        "shortTail": {"type": "number"},
+        "leadIn": {"type": "number", "description": "dùng chung bởi Root.tsx, kit.tsx và gen_audio.py"},
+        "whooshLead": {"type": "number"}
+      }
+    },
+    "thumb": {
+      "type": "object",
+      "properties": {
+        "person": {"type": "string", "description": "ảnh người dẫn đã tách nền, đường dẫn trong public/"},
+        "logo": {"type": "string"},
+        "logoWhite": {"type": "string"}
+      }
+    },
+    "categories": {
+      "type": "array",
+      "description": "bảng màu thumbnail theo chủ đề; phần tử đầu là mặc định",
+      "items": {
+        "type": "object",
+        "required": ["name", "accT", "acc", "acc2"],
+        "properties": {
+          "name": {"type": "string"},
+          "accT": {"type": "string"},
+          "acc": {"type": "string"},
+          "acc2": {"type": "string"}
+        }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "properties": {
+        "videos": {"type": "string", "default": "videos"},
+        "out": {"type": "string", "default": "out"},
+        "public": {"type": "string", "default": "public"},
+        "src": {"type": "string", "default": "src"},
+        "thumbSrc": {"type": "string", "default": "thumb-src"}
+      }
+    }
+  }
+}

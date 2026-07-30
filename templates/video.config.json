@@ -1,0 +1,44 @@
+{
+  "$schema": "./node_modules/blog2video/video.config.schema.json",
+  "fps": 30,
+  "brand": {
+    "name": "Kênh của bạn",
+    "label": "KÊNH CỦA BẠN · CHỦ ĐỀ",
+    "sig": "Kênh của bạn",
+    "accent": "#783ABF",
+    "bubble": "#C4B5FD",
+    "wordmark": { "pre": "Kênh ", "em": "của", "post": " bạn" },
+    "tagline": "MÔ TẢ NGẮN · MỖI TUẦN MỘT TẬP"
+  },
+  "audio": {
+    "bed": null,
+    "bedVolume": 0.15,
+    "sfxDir": "audio/sfx",
+    "whoosh": "whoosh.wav"
+  },
+  "pacing": {
+    "introPad": 2.2,
+    "sectionGap": 0.8,
+    "outroPad": 4.5,
+    "shortGap": 0.33,
+    "shortTail": 1.2,
+    "leadIn": 0.4,
+    "whooshLead": 0.89
+  },
+  "thumb": {
+    "person": "thumb/person.png",
+    "logo": "thumb/logo.svg",
+    "logoWhite": "thumb/logo-white.png"
+  },
+  "categories": [
+    { "name": "Kiến Thức Nền Tảng", "accT": "#C4B5FD", "acc": "#8B5CF6", "acc2": "#6366F1" },
+    { "name": "Phân Tích Dữ Liệu", "accT": "#67E8F9", "acc": "#22D3EE", "acc2": "#0891B2" }
+  ],
+  "paths": {
+    "videos": "videos",
+    "out": "out",
+    "public": "public",
+    "src": "src",
+    "thumbSrc": "thumb-src"
+  }
+}
