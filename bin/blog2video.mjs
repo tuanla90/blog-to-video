@@ -41,7 +41,9 @@ const run = (file, args, opts = {}) => {
   process.exit(r.status ?? 1);
 };
 
-const runPy = (script, args) => run(python(), [join(SCRIPTS, script), ...args]);
+// PYTHONUTF8=1: console Windows mặc định cp1252, in tiếng Việt là UnicodeEncodeError
+const runPy = (script, args) =>
+  run(python(), [join(SCRIPTS, script), ...args], {env: {...process.env, PYTHONUTF8: "1"}});
 const runNode = (script, args) => run(process.execPath, [join(SCRIPTS, script), ...args]);
 
 // copy đệ quy, bỏ qua file đã tồn tại và mới hơn nguồn

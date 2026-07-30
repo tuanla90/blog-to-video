@@ -7,24 +7,29 @@
 #   [once]              node scripts/gen-registry.mjs -> src/videos.gen.ts   (the ONLY shared file)
 #   [pool: --render-conc] npx remotion render <slug>-Long / <slug>-Short -> out/
 #
-# Why phased pools instead of one per-slug pipeline: TTS (Vbee, networked, rate-limited)
-# wants low concurrency; align (CPU) and render (heavy) want their own caps. Stage
-# boundaries double as the barrier so gen-registry sees every finished bundle exactly once.
+# Why phased pools instead of one per-slug pipeline: TTS (networked, rate-limited) wants low
+# concurrency; align (CPU) and render (heavy) want their own caps. Stage boundaries double as
+# the barrier so gen-registry sees every finished bundle exactly once.
 #
-# Usage (run from the video-remotion root, or anywhere — script locates root itself):
-#   python scripts/build.py                      # all complete-or-buildable slugs in videos/
-#   python scripts/build.py metric-dimension-kpi another-slug
-#   python scripts/build.py --skip-audio         # reuse existing mp3/beats.json, just re-align+render
-#   python scripts/build.py --no-render          # stop after timings.json (preview in studio)
-#   python scripts/build.py --tts-conc 2 --render-conc 3
+# Usage (chạy trong dự án tiêu dùng — script tự leo lên tìm video.config.json):
+#   npx blog2video build                         # mọi slug dựng được trong videos/
+#   npx blog2video build slug-a slug-b
+#   npx blog2video build --skip-audio            # dùng lại mp3/beats.json, chỉ align + render
+#   npx blog2video build --no-render             # dừng ở timings.json (xem trước trong studio)
+#   npx blog2video build --tts-conc 2 --render-conc 3
 #
-# Credentials for gen_audio.py (Vbee) come from the environment; this driver loads a
-# sibling .env if present. See .env.example.
+# Key ElevenLabs cho gen_audio.py lấy từ .env ở gốc dự án (xem .env.example của engine).
 import argparse
 import os
 import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8")        # console cp1252 không in được dấu tiếng Việt
+    sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 
 HERE = os.path.dirname(os.path.abspath(__file__))   # scripts/ của engine
 sys.path.insert(0, HERE)
@@ -103,7 +108,7 @@ def stage_render(slug):
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Batch-build Semantix videos in parallel.")
+    ap = argparse.ArgumentParser(description="Batch-build videos in parallel.")
     ap.add_argument("slugs", nargs="*", help="slugs to build (default: all in videos/)")
     ap.add_argument("--skip-audio", action="store_true",
                     help="reuse existing mp3/beats.json/timings.json; skip ElevenLabs TTS")
