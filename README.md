@@ -224,6 +224,10 @@ Cho skill `video-forge` (cách viết bundle) + workflow `video-pipeline` (batch
 
 ---
 
+## Giấy phép
+
+Mã nguồn MIT. **Asset trong `assets/` thì không** — lottie và sfx là của bên thứ ba, xuất xứ chưa rà đủ. Xem [`LICENSE.md`](LICENSE.md) trước khi mở public hoặc phát hành lại.
+
 ## Trạng thái
 
 v0.1. Tách khỏi repo `semantix-docs` tháng 7/2026, giữ nguyên history phần máy móc. Bản dùng thật đầu tiên: kênh "Tuấn LA Lab", 14 video — đã đối chứng frame trước/sau khi tách, khớp từng byte.
