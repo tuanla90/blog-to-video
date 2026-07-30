@@ -14,9 +14,14 @@ const OUTBASE = ppath(cfg, 'out');
 const SRC = ppath(cfg, 'thumbSrc');
 const CHROME = process.env.CHROME || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const FILE = (rel) => 'file:///' + path.resolve(ROOT, rel).replace(/\\/g, '/');
-// ảnh người dẫn + logo: đường dẫn trong public/ của dự án (giống staticFile của Remotion)
-const PERSON = FILE(path.join(cfg.paths.public, cfg.thumb?.person ?? 'thumb/person.png'));
-const LOGO = FILE(path.join(cfg.paths.public, cfg.thumb?.logo ?? 'thumb/logo.svg'));
+// ảnh người dẫn + logo: đường dẫn trong public/ của dự án (giống staticFile của Remotion).
+// Dự án mới chưa có 2 ảnh này -> bỏ hẳn thẻ <img>, đừng để hiện icon ảnh vỡ.
+const asset = (rel) => {
+  const abs = path.resolve(ROOT, cfg.paths.public, rel);
+  return fs.existsSync(abs) ? FILE(path.join(cfg.paths.public, rel)) : null;
+};
+const PERSON = asset(cfg.thumb?.person ?? 'thumb/person.png');
+const LOGO = asset(cfg.thumb?.logo ?? 'thumb/logo.svg');
 const BRAND_NAME = cfg.brand?.name ?? '';
 const BRAND_ACCENT = cfg.brand?.accent ?? '#783ABF';
 fs.mkdirSync(SRC, { recursive: true });
@@ -27,7 +32,7 @@ const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').re
 const CLR = { green: '#34D399', red: '#FF3B4E', cyan: '#22D3EE', violet: '#8B5CF6', amber: '#FBBF24' };
 
 const kick = t => t ? `<div class="kick">${esc(t)}</div>` : '';
-const person = on => on === false ? '' : `<img class="person" src="${PERSON}">`;
+const person = on => (on === false || !PERSON) ? '' : `<img class="person" src="${PERSON}">`;
 
 // ── layout renderers: trả {body, chart?} ──
 const L = {
@@ -91,7 +96,9 @@ function buildHtml(slug, d) {
   const chartScript = r.chart ? `<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script><script>window.addEventListener('load',function(){if(!window.echarts)return;var co=['T10','T11','T12','T1','T2','T3','T4'],y=co.slice().reverse(),pts=[],seed=[15,6,3,1.6,1,0.7,0.4];co.forEach(function(x,ci){for(var p=0;p<7-ci;p++){pts.push([p,y.indexOf(x),+(seed[p]*(0.7+(ci%3)*0.45)).toFixed(1)]);}});echarts.init(document.getElementById('chart')).setOption({animation:false,backgroundColor:'transparent',grid:{left:2,right:2,top:2,bottom:2},xAxis:{type:'category',data:[1,2,3,4,5,6,7],show:false},yAxis:{type:'category',data:y,show:false},visualMap:{show:false,min:0,max:16,inRange:{color:['#064e3b','#047857','#10b981','#34d399']}},series:[{type:'heatmap',data:pts,itemStyle:{borderColor:'#0f172a',borderWidth:3,borderRadius:4},label:{show:true,fontFamily:'Inter',fontSize:14,fontWeight:700,color:'#fff',formatter:function(p){return p.value[2]+'%';}}}]});});</script>` : '';
   const frame = r.noframe ? '' : `<div class="dots"></div><div class="glowP"></div>
    <div class="cat">${esc(d.catLabel || d.category || '')}</div>`;
-  const brand = `<div class="brand"><img src="${LOGO}"><span>${esc(BRAND_NAME)}</span></div>`;
+  const brand = BRAND_NAME || LOGO
+    ? `<div class="brand">${LOGO ? `<img src="${LOGO}">` : ''}<span>${esc(BRAND_NAME)}</span></div>`
+    : '';
   return `<!doctype html><meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">${chartScript}

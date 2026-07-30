@@ -54,7 +54,14 @@ Hệ quả cần nhớ: **đừng import `CONFIG` rồi đọc giá trị ở mo
 ## `sync-assets` — đừng quên
 
 ```bash
-npx blog2video sync-assets
+npm run sync-assets
 ```
 
-Remotion `staticFile()` chỉ đọc `public/` của project đang chạy, **không** với tới `node_modules`. Lệnh này copy lottie của engine vào `public/lottie/`. Chạy lại sau mỗi lần nâng cấp engine.
+Remotion `staticFile()` chỉ đọc `public/` của project đang chạy, **không** với tới `node_modules`. Lệnh này copy:
+
+- `assets/lottie` → `public/lottie/`
+- `assets/sfx` → `public/<audio.sfxDir>/` (mặc định `public/audio/sfx/`)
+
+Quên chạy = render gãy vì thiếu `whoosh.wav`. Chạy lại sau mỗi lần nâng cấp engine.
+
+**Nhạc nền không đi kèm** — chọn track của bạn, bỏ vào `public/audio/music/`, trỏ `audio.bed`. Để `null` là tắt hẳn nhạc nền.

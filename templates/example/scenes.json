@@ -1,0 +1,46 @@
+{
+  "00": {
+    "bg": "VÍ DỤ · BLOG2VIDEO",
+    "holdSec": 1,
+    "moments": [
+      {
+        "w": 10,
+        "gap": 3,
+        "stack": [
+          { "el": "lottie", "name": "check", "at": 2, "size": 13 },
+          { "el": "label", "text": "ENGINE ĐÃ CHẠY" },
+          { "el": "text", "value": "Video mẫu của [accent:blog2video]", "size": 6 }
+        ]
+      }
+    ]
+  },
+  "01": {
+    "bg": "VÍ DỤ · BLOG2VIDEO",
+    "moments": [
+      {
+        "w": 10,
+        "gap": 3,
+        "stack": [
+          { "el": "text", "value": "Một video = [good:hai file][br]trong videos/<slug>/", "size": 5.5 },
+          {
+            "el": "chips",
+            "at": 20,
+            "items": [["content.py", "accent", "mic"], ["scenes.json", "good", "layers"]]
+          }
+        ]
+      }
+    ]
+  },
+  "short-outro": {
+    "bg": "VÍ DỤ · BLOG2VIDEO",
+    "moments": [
+      {
+        "w": 10,
+        "stack": [
+          { "el": "text", "value": "Tới lượt [accent:bạn]", "size": 6 },
+          { "el": "cta", "at": 14, "pill": "VIẾT SLUG ĐẦU TIÊN", "icon": "arrow-right" }
+        ]
+      }
+    ]
+  }
+}
