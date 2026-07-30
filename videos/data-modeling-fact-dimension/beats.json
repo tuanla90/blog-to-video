@@ -1,38 +1,38 @@
 [
   {
     "id": "00",
-    "audio": "audio/data-modeling-fact-dimension/beat-00.wav",
-    "durationSec": 20.84,
-    "durationInFrames": 625
+    "audio": "audio/data-modeling-fact-dimension/beat-00.mp3",
+    "durationSec": 19.2,
+    "durationInFrames": 597
   },
   {
     "id": "01",
-    "audio": "audio/data-modeling-fact-dimension/beat-01.wav",
-    "durationSec": 27.72,
-    "durationInFrames": 832
+    "audio": "audio/data-modeling-fact-dimension/beat-01.mp3",
+    "durationSec": 27.49,
+    "durationInFrames": 846
   },
   {
     "id": "02",
-    "audio": "audio/data-modeling-fact-dimension/beat-02.wav",
-    "durationSec": 23.36,
-    "durationInFrames": 701
+    "audio": "audio/data-modeling-fact-dimension/beat-02.mp3",
+    "durationSec": 21.9,
+    "durationInFrames": 678
   },
   {
     "id": "03",
-    "audio": "audio/data-modeling-fact-dimension/beat-03.wav",
-    "durationSec": 28.89,
-    "durationInFrames": 867
+    "audio": "audio/data-modeling-fact-dimension/beat-03.mp3",
+    "durationSec": 26.62,
+    "durationInFrames": 820
   },
   {
     "id": "04",
-    "audio": "audio/data-modeling-fact-dimension/beat-04.wav",
-    "durationSec": 27.95,
-    "durationInFrames": 839
+    "audio": "audio/data-modeling-fact-dimension/beat-04.mp3",
+    "durationSec": 28.65,
+    "durationInFrames": 881
   },
   {
     "id": "05",
-    "audio": "audio/data-modeling-fact-dimension/beat-05.wav",
-    "durationSec": 31.13,
-    "durationInFrames": 934
+    "audio": "audio/data-modeling-fact-dimension/beat-05.mp3",
+    "durationSec": 25.45,
+    "durationInFrames": 785
   }
 ]

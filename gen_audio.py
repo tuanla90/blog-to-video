@@ -93,13 +93,24 @@ def synth(text):
         body["voice_settings"] = VOICE_SETTINGS
     if LANG and ("turbo" in MODEL or "flash" in MODEL):
         body["language_code"] = LANG   # buộc đọc đúng tiếng Việt thay vì auto-detect ra tiếng Anh
-    r = urllib.request.Request(url, data=json.dumps(body).encode(),
-        headers={"xi-api-key": API_KEY, "Content-Type": "application/json"}, method="POST")
-    try:
-        with urllib.request.urlopen(r, timeout=180) as x:
-            return json.loads(x.read().decode())
-    except urllib.error.HTTPError as e:
-        raise SystemExit(f"ElevenLabs HTTP {e.code}: {e.read().decode()[:400]}")
+    data = json.dumps(body).encode()
+    last = None
+    for attempt in range(4):                        # retry lỗi mạng/5xx (proxy MITM máy này hay chập giữa batch dài)
+        r = urllib.request.Request(url, data=data,
+            headers={"xi-api-key": API_KEY, "Content-Type": "application/json"}, method="POST")
+        try:
+            with urllib.request.urlopen(r, timeout=180) as x:
+                return json.loads(x.read().decode())
+        except urllib.error.HTTPError as e:
+            body_txt = e.read().decode()[:400]
+            if e.code < 500:                        # 4xx = lỗi thật (key sai / text lỗi / hết quota) — fail ngay, đừng phí lần thử
+                raise SystemExit(f"ElevenLabs HTTP {e.code}: {body_txt}")
+            last = f"HTTP {e.code}: {body_txt}"      # 5xx server — thử lại
+        except (urllib.error.URLError, ConnectionError, TimeoutError) as e:
+            last = repr(e)                           # ConnectionReset / timeout / proxy rớt — thử lại
+        if attempt < 3:
+            time.sleep(2 * (attempt + 1))           # backoff 2s, 4s, 6s
+    raise SystemExit(f"ElevenLabs lỗi mạng sau 4 lần thử: {last}")
 
 def to_timings(alignment):
     """character-level -> [{text,start,end,words:[{w,s,e}]}] (giây, relative beat start)."""

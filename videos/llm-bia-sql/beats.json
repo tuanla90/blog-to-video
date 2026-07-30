@@ -1,38 +1,38 @@
 [
   {
     "id": "00",
-    "audio": "audio/llm-bia-sql/beat-00.wav",
-    "durationSec": 21.54,
-    "durationInFrames": 646
+    "audio": "audio/llm-bia-sql/beat-00.mp3",
+    "durationSec": 20.8,
+    "durationInFrames": 645
   },
   {
     "id": "01",
-    "audio": "audio/llm-bia-sql/beat-01.wav",
-    "durationSec": 26.78,
-    "durationInFrames": 803
+    "audio": "audio/llm-bia-sql/beat-01.mp3",
+    "durationSec": 24.07,
+    "durationInFrames": 744
   },
   {
     "id": "02",
-    "audio": "audio/llm-bia-sql/beat-02.wav",
-    "durationSec": 27.42,
-    "durationInFrames": 823
+    "audio": "audio/llm-bia-sql/beat-02.mp3",
+    "durationSec": 21.67,
+    "durationInFrames": 672
   },
   {
     "id": "03",
-    "audio": "audio/llm-bia-sql/beat-03.wav",
-    "durationSec": 31.66,
-    "durationInFrames": 950
+    "audio": "audio/llm-bia-sql/beat-03.mp3",
+    "durationSec": 29.38,
+    "durationInFrames": 903
   },
   {
     "id": "04",
-    "audio": "audio/llm-bia-sql/beat-04.wav",
-    "durationSec": 29.36,
-    "durationInFrames": 881
+    "audio": "audio/llm-bia-sql/beat-04.mp3",
+    "durationSec": 24.87,
+    "durationInFrames": 768
   },
   {
     "id": "05",
-    "audio": "audio/llm-bia-sql/beat-05.wav",
-    "durationSec": 36.6,
-    "durationInFrames": 1098
+    "audio": "audio/llm-bia-sql/beat-05.mp3",
+    "durationSec": 32.8,
+    "durationInFrames": 1005
   }
 ]

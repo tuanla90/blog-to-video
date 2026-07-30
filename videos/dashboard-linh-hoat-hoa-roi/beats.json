@@ -1,44 +1,44 @@
 [
   {
     "id": "00",
-    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-00.wav",
-    "durationSec": 20.54,
-    "durationInFrames": 616
+    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-00.mp3",
+    "durationSec": 15.85,
+    "durationInFrames": 497
   },
   {
     "id": "01",
-    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-01.wav",
-    "durationSec": 22.78,
-    "durationInFrames": 683
+    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-01.mp3",
+    "durationSec": 18.55,
+    "durationInFrames": 578
   },
   {
     "id": "02",
-    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-02.wav",
-    "durationSec": 23.66,
-    "durationInFrames": 710
+    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-02.mp3",
+    "durationSec": 21.82,
+    "durationInFrames": 676
   },
   {
     "id": "03",
-    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-03.wav",
-    "durationSec": 22.07,
-    "durationInFrames": 662
+    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-03.mp3",
+    "durationSec": 20.37,
+    "durationInFrames": 633
   },
   {
     "id": "04",
-    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-04.wav",
-    "durationSec": 23.78,
-    "durationInFrames": 713
+    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-04.mp3",
+    "durationSec": 20.44,
+    "durationInFrames": 635
   },
   {
     "id": "05",
-    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-05.wav",
-    "durationSec": 28.54,
-    "durationInFrames": 856
+    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-05.mp3",
+    "durationSec": 21.45,
+    "durationInFrames": 665
   },
   {
     "id": "07",
-    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-07.wav",
-    "durationSec": 23.31,
-    "durationInFrames": 699
+    "audio": "audio/dashboard-linh-hoat-hoa-roi/beat-07.mp3",
+    "durationSec": 19.27,
+    "durationInFrames": 600
   }
 ]

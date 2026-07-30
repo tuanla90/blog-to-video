@@ -1,38 +1,38 @@
 [
   {
     "id": "00",
-    "audio": "audio/trung-binh-noi-doi/beat-00.wav",
-    "durationSec": 27.6,
-    "durationInFrames": 828
+    "audio": "audio/trung-binh-noi-doi/beat-00.mp3",
+    "durationSec": 24.87,
+    "durationInFrames": 768
   },
   {
     "id": "01",
-    "audio": "audio/trung-binh-noi-doi/beat-01.wav",
-    "durationSec": 27.54,
-    "durationInFrames": 826
+    "audio": "audio/trung-binh-noi-doi/beat-01.mp3",
+    "durationSec": 24.07,
+    "durationInFrames": 744
   },
   {
     "id": "02",
-    "audio": "audio/trung-binh-noi-doi/beat-02.wav",
-    "durationSec": 28.01,
-    "durationInFrames": 840
+    "audio": "audio/trung-binh-noi-doi/beat-02.mp3",
+    "durationSec": 26.18,
+    "durationInFrames": 807
   },
   {
     "id": "03",
-    "audio": "audio/trung-binh-noi-doi/beat-03.wav",
-    "durationSec": 30.89,
-    "durationInFrames": 927
+    "audio": "audio/trung-binh-noi-doi/beat-03.mp3",
+    "durationSec": 30.11,
+    "durationInFrames": 925
   },
   {
     "id": "04",
-    "audio": "audio/trung-binh-noi-doi/beat-04.wav",
-    "durationSec": 28.42,
-    "durationInFrames": 853
+    "audio": "audio/trung-binh-noi-doi/beat-04.mp3",
+    "durationSec": 23.05,
+    "durationInFrames": 713
   },
   {
     "id": "05",
-    "audio": "audio/trung-binh-noi-doi/beat-05.wav",
-    "durationSec": 26.48,
-    "durationInFrames": 794
+    "audio": "audio/trung-binh-noi-doi/beat-05.mp3",
+    "durationSec": 22.84,
+    "durationInFrames": 707
   }
 ]
