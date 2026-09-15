@@ -222,6 +222,20 @@ claude plugin marketplace add /duong/dan/blog2video
 
 Cho skill `video-forge` (cách viết bundle) + workflow `video-pipeline` (batch: bài viết → `content.py` + `thumb.json` + vòng soát giọng). Workflow nhận `ctx` giọng của dự án qua args — engine không giữ giọng của ai.
 
+Thêm skill `promo-forge` cho video giới thiệu sản phẩm không giọng (xem mục dưới).
+
+---
+
+## Video sản phẩm không giọng: `promo/`
+
+Dự án Remotion riêng (Remotion 4.0.351, React 18) cho video promo/demo 2–3 phút: chữ to theo nhịp nhạc, cảnh giao diện dựng lại, clip quay màn hình thật có zoom + gợn sóng bấm, nhiều phiên bản trên cùng timeline. Dùng chung SFX của `assets/sfx`.
+
+```bash
+cd promo && npm install && npm run sync-assets && npm run studio
+```
+
+Quy trình, luật chữ, khớp nhạc, quay clip (Playwright / OpenVid), prompt nhạc: [`promo/PLAYBOOK.md`](promo/PLAYBOOK.md).
+
 ---
 
 ## Không có trong này

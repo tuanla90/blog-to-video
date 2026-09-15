@@ -1,0 +1,11 @@
+node_modules
+out
+# SFX lấy từ ../assets/sfx bằng `npm run sync-assets` (giấy phép Pixabay: không phát tán lại dạng file rời)
+public/sfx
+# Nhạc có bản quyền riêng — không commit
+public/music
+# Clip quay màn hình + ảnh chụp: không commit, giữ trên máy (npm run studio cần có sẵn)
+public/rec
+public/footage
+recorder/node_modules
+recorder/profile

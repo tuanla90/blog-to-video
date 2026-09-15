@@ -1,0 +1,9 @@
+{
+    "name": "promo-recorder",
+    "private": true,
+    "type": "module",
+    "description": "Quay màn hình web bằng Playwright (CDP screencast) + nhật ký con trỏ cho video promo.",
+    "dependencies": {
+        "playwright-core": "^1.55.0"
+    }
+}

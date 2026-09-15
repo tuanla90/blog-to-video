@@ -1,0 +1,28 @@
+{
+    "name": "promo-forge",
+    "private": true,
+    "description": "Video giới thiệu sản phẩm không giọng: chữ to + animation + clip quay thật có zoom + nhạc khớp nhịp (Remotion).",
+    "scripts": {
+        "sync-assets": "node tools/sync-assets.mjs",
+        "studio": "remotion studio src/index.ts --port 3123",
+        "typecheck": "tsc --noEmit -p .",
+        "stills": "node tools/stills.mjs",
+        "render": "remotion render src/index.ts Promo out/promo.mp4 --concurrency=3",
+        "render:dfl": "remotion render src/index.ts PromoDFL out/promo-dfl.mp4 --concurrency=3",
+        "render:internal": "remotion render src/index.ts PromoInternal out/promo-internal.mp4 --concurrency=3"
+    },
+    "dependencies": {
+        "@remotion/bundler": "4.0.351",
+        "@remotion/cli": "4.0.351",
+        "@remotion/google-fonts": "4.0.351",
+        "@remotion/renderer": "4.0.351",
+        "react": "18.3.1",
+        "react-dom": "18.3.1",
+        "remotion": "4.0.351",
+        "simple-icons": "^16.30.0"
+    },
+    "devDependencies": {
+        "@types/react": "18.3.12",
+        "typescript": "5.6.3"
+    }
+}
