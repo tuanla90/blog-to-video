@@ -32,8 +32,10 @@ SOFTWARE.
 
 `assets/lottie/` và `assets/sfx/` là tác phẩm của bên thứ ba, mỗi file theo giấy phép riêng của tác giả gốc.
 
-**Xuất xứ chưa được ghi lại đầy đủ.** Lottie tải từ lottiefiles.com (lọc Free) — điều khoản khác nhau theo tác giả, có cái đòi ghi công. SFX chưa ghi nguồn.
+**SFX:** tải từ [pixabay.com](https://pixabay.com), theo Pixabay Content License — dùng thương mại được, không bắt ghi công, nhưng CẤM phát tán lại chính các tệp đó ở dạng độc lập. Lồng vào video thì hợp lệ; đẩy `assets/sfx/` lên repo public thì không.
 
-Trước khi mở repo ra public hoặc phát hành lại asset, cần rà từng file và ghi nguồn vào `assets/CREDITS.md`. Cho tới lúc đó nên để repo **private**.
+**Lottie: xuất xứ chưa ghi lại đầy đủ.** Tải từ lottiefiles.com (lọc Free) — điều khoản khác nhau theo tác giả, có cái đòi ghi công.
+
+Chi tiết từng tệp ở `assets/CREDITS.md`. Trước khi mở repo ra public hoặc phát hành lại asset, cần rà nốt phần lottie. Cho tới lúc đó nên để repo **private**.
 
 Nếu bạn fork và không chắc: xoá `assets/`, tự tải bộ của bạn, khai lại trong `src/lotties.ts`. Engine chạy bình thường (`audio.whoosh: null` để tắt sfx).

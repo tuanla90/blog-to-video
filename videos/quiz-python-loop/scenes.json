@@ -1,0 +1,133 @@
+{
+  "00": {
+    "bg": "TIN HỌC · ĐỐ VUI",
+    "holdSec": 0.5,
+    "moments": [
+      {
+        "w": 8,
+        "gap": 4,
+        "stack": [
+          { "el": "label", "text": "PYTHON · ĐỌC CODE" },
+          { "el": "text", "value": "Đoạn code này[br]in ra [accent:gì]?", "size": 6.5 },
+          {
+            "el": "list",
+            "at": 12,
+            "items": [
+              "s = 0",
+              "for i in range(1, 6):",
+              "    if i % 2 == 0:  s += i",
+              "    else:           s -= i",
+              "print(s)"
+            ],
+            "color": "accent",
+            "mono": true,
+            "size": 2.8
+          }
+        ]
+      }
+    ]
+  },
+
+  "01": {
+    "bg": "TIN HỌC · ĐỐ VUI",
+    "holdSec": 0.3,
+    "moments": [
+      {
+        "w": 10,
+        "gap": 5,
+        "stack": [
+          { "el": "label", "text": "CHỌN ĐÁP ÁN" },
+          {
+            "el": "chips",
+            "at": 6,
+            "stagger": 8,
+            "gap": 4,
+            "dir": "col",
+            "items": [
+              ["A.  −3", "accent", "circle"],
+              ["B.   3", "muted",  "circle"],
+              ["C.   9", "muted",  "circle"],
+              ["D.  −9", "muted",  "circle"]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "02": {
+    "bg": "TIN HỌC · ĐỐ VUI",
+    "holdSec": 0.5,
+    "moments": [
+      {
+        "w": 10,
+        "gap": 4,
+        "stack": [
+          { "el": "label", "text": "BƯỚC THEO DÕI" },
+          {
+            "el": "cards",
+            "at": 8,
+            "cards": [
+              { "label": "i = 1 (lẻ)", "value": "s = −1", "color": "bad"  },
+              { "label": "i = 2 (chẵn)", "value": "s = +1", "color": "good" },
+              { "label": "i = 3 (lẻ)", "value": "s = −2", "color": "bad"  },
+              { "label": "i = 4 (chẵn)", "value": "s = +2", "color": "good" },
+              { "label": "i = 5 (lẻ)", "value": "s = −3", "color": "bad"  }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+
+  "03": {
+    "bg": "TIN HỌC · ĐỐ VUI",
+    "holdSec": 0.5,
+    "moments": [
+      {
+        "w": 10,
+        "gap": 5,
+        "stack": [
+          { "el": "label", "text": "ĐÁP ÁN" },
+          {
+            "el": "text",
+            "value": "[good:A.  −3] ✓",
+            "size": 9,
+            "gradient": false
+          },
+          {
+            "el": "caption",
+            "at": 18,
+            "text": "[accent:Chẵn cộng · Lẻ trừ] → 2+4 − (1+3+5) = 6−9 = [bad:−3]",
+            "size": 2.6
+          },
+          {
+            "el": "lottie",
+            "name": "check",
+            "at": 22,
+            "size": 10
+          }
+        ]
+      }
+    ]
+  },
+
+  "short-outro": {
+    "bg": "TIN HỌC · ĐỐ VUI",
+    "moments": [
+      {
+        "w": 8,
+        "gap": 4,
+        "stack": [
+          { "el": "text", "value": "Follow để[br]luyện mỗi ngày", "size": 6 },
+          {
+            "el": "cta",
+            "at": 14,
+            "pill": "THEO DÕI NGAY",
+            "icon": "bell-ring"
+          }
+        ]
+      }
+    ]
+  }
+}
