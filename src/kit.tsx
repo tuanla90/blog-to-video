@@ -106,19 +106,27 @@ const Moment: React.FC<{win: Win; gap: number; v: number; bleed?: boolean; back?
   children: React.ReactNode}> =
 ({win, gap, v, bleed, back, place, children}) => {
   const f = useCurrentFrame();
+  const {width: W, height: H} = useVideoConfig();
+  // chừa đáy cho phụ đề: Caption.tsx đặt phụ đề cách đáy 15% (ngang) / 26% (dọc)
+  const padBottom = (H > W ? 0.36 : 0.24) * H;
   const [from, to] = win;
   const IN = Math.min(11, Math.round((to - from) * 0.28));
   const OUT = Math.min(12, Math.round((to - from) * 0.24));   // đuôi fade dài hơn -> khớp XFADE, hoà dần không chớp
   const ease = {...clamp, easing: Easing.out(Easing.cubic)};
   const o = interpolate(f, [from, from + IN, to - OUT, to], [0, 1, 1, 0], clamp);
-  // ảnh (back) nằm dưới, chữ (children) nằm trên + đổ bóng để đọc được trên nền ảnh
+  // ảnh (back) nằm dưới, chữ (children) nằm trên + đổ bóng + một quầng tối mềm bám theo cột chữ
+  // (drop-shadow thôi không đủ trên ảnh sáng/nhiều chi tiết; dải tối theo mép khung thì lệch chỗ chữ).
   if (bleed) return (
     <AbsoluteFill style={{opacity: o}}>
       {back}
-      <AbsoluteFill style={{alignItems: "center", textAlign: "center", padding: "9% 7% 24%",
+      {/* padding % trong CSS tính theo CHIỀU RỘNG -> dùng px theo chiều cao */}
+      <AbsoluteFill style={{alignItems: "center", textAlign: "center",
+        padding: `${0.09 * H}px 7% ${padBottom}px`,
         justifyContent: place === "top" ? "flex-start" : place === "bottom" ? "flex-end" : "center",
         letterSpacing: "-0.015em", filter: `drop-shadow(0 ${0.3 * v}px ${1.2 * v}px rgba(0,0,0,0.85))`}}>
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: gap * v}}>{children}</div>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: gap * v,
+          padding: `${3 * v}px ${9 * v}px`,
+          background: "radial-gradient(closest-side, rgba(0,0,0,0.7), rgba(0,0,0,0.45) 55%, transparent)"}}>{children}</div>
       </AbsoluteFill>
     </AbsoluteFill>
   );
@@ -791,7 +799,9 @@ export const Beat: React.FC<{data: BeatData; customs?: Record<string, React.FC>;
         const last = i === data.moments.length - 1;
         const win: Win = last ? S[i] : [S[i][0], S[i][1] + XFADE];
         const bleed = m.stack.some((e) => FULL_BLEED.has(e.el));
-        const el = (e: ElProps, j: number) => <El key={j} e={e} from={S[i][0]} to={win[1]} v={v} customs={customs} lines={lines} />;
+        // trên nền ảnh, caption xám (mặc định) chìm mất -> mặc định sang màu chữ sáng
+        const el = (e: ElProps, j: number) => <El key={j} e={bleed && e.el === "caption" && !e.color ? {...e, color: "text"} : e}
+          from={S[i][0]} to={win[1]} v={v} customs={customs} lines={lines} />;
         return (
           <Moment key={i} win={win} gap={m.gap ?? 3} v={v} bleed={bleed} place={m.place}
             back={bleed ? m.stack.map((e, j) => (FULL_BLEED.has(e.el) ? el(e, j) : null)) : null}>
