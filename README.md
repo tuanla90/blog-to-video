@@ -128,7 +128,7 @@ PRON = {"SQL": "ét-quèo"}   # đổi cách ĐỌC; caption vẫn giữ chính 
 ```
 
 - `moments` = các nhịp trong beat, `w` là trọng số thời lượng. `stack` = cột element xếp dọc, `at` = frame nó xuất hiện.
-- Element: `text · label · caption · chip · chips · cards · date-cards · bars · line · scatter · waterfall · list · dots · gauge · recap · cta · icons · flow · lottie · sfx · custom`.
+- Element: `text · label · caption · chip · chips · cards · date-cards · bars · line · scatter · waterfall · list · dots · gauge · recap · cta · icons · flow · lottie · sfx · custom`, và hai cảnh ảnh tràn khung `world · specimen` (xem dưới).
 - Rich-text trong `value`: `[accent:…] [good:…] [warn:…] [bad:…] [muted:…] [purple:…]`, và `[br]` để xuống dòng (chạy được cả bên trong span màu).
 - Hình một-lần-dùng: thêm `videos/<slug>/customs.tsx` export map `CUSTOMS`, gọi bằng `{"el":"custom","name":"..."}`.
 
@@ -136,6 +136,38 @@ Hai luật hay bị vi phạm:
 
 1. **Số nói = số item hiện.** Lời đọc "năm thứ" thì list phải đủ 5 dòng.
 2. **Element rộng phải fit cả 16:9 lẫn 9:16.** Bản Short hẹp hơn nhiều — `cards`/`bars`/`recap` dễ tràn.
+
+#### Cảnh ảnh: `world` và `specimen`
+
+Hai element này phủ cả khung, nằm dưới các element chữ cùng moment. Moment chứa chúng chỉ crossfade (không trượt/blur), vì camera đã tự chuyển động. Ảnh đặt trong `public/`. **Mọi toạ độ là toạ độ trên ảnh** (0..1, gốc trên-trái), nên cùng một `scenes.json` chạy được cho cả 16:9 lẫn 9:16.
+
+```json
+{ "el": "world", "aspect": 1.7778, "fx": "snow", "vignette": 0.35,
+  "layers": [
+    { "src": "img/bg.png",  "depth": 0.3 },
+    { "src": "img/mid.png", "depth": 1 },
+    { "src": "img/fg.png",  "depth": 1.6, "sway": { "amp": 1, "period": 4 } } ],
+  "camera":   { "from": { "x": 0.4, "y": 0.5, "zoom": 1 }, "to": { "x": 0.6, "y": 0.5, "zoom": 1.25 }, "ease": "inOut" },
+  "portrait": { "camera": { "from": { "x": 0.3 }, "to": { "x": 0.5, "zoom": 1.15 } } } }
+```
+
+- `camera` chạy từ `from` tới `to` suốt moment. `x,y` = điểm trên ảnh đặt vào giữa khung. `ease`: `inOut · in · out · linear`.
+- `depth`: lớp xa `< 1` trôi ít, lớp gần `> 1` trôi nhiều → parallax. Lớp tự phóng dư để không lộ mép (`keep: false` để tắt).
+- `sway`: lắc lư quanh `origin` (mặc định đáy giữa) — `amp` độ, `period` giây, `bob` nhún dọc. Hợp với cây cỏ, nhân vật tách nền.
+- `fx`: hạt môi trường `snow · dust · embers`. Ảnh một lớp thì viết tắt `"src": "img/x.png"`.
+
+```json
+{ "el": "specimen", "src": "img/pikachu-ref.png", "aspect": 1.7778,
+  "callouts": [
+    { "x": 0.43, "y": 0.64, "zoom": 2.4, "label": "Túi má", "sub": "…", "tag": "📖 POKÉDEX", "color": "warn", "atWord": "má" },
+    { "x": 0.83, "y": 0.35, "label": "Chóp đuôi", "tag": "♀ / ♂", "color": "bad" } ] }
+```
+
+- Camera mở tổng thể → lần lượt đẩy vào từng callout (đường chỉ + thẻ + khoanh sáng) → lùi ra tổng thể, đánh số mọi điểm (`"outro": "hold"` để bỏ bước cuối).
+- Timing từng callout: `atWord`/`atSec` neo theo lời đọc, không neo thì chia theo `w`. `introW`/`outroW` là trọng số hai đoạn tổng thể.
+- `zoom` mặc định 2.2. `side: "left" | "right"` ép phía đặt thẻ (mặc định tự chọn). `tagColor` nếu tag khác màu với callout.
+- Khung dọc mà ảnh ngang: tự `fit: "contain"` + nền mờ chính ảnh ấy; ép bằng `"fit": "cover"`.
+- **Cả hai cảnh đều cần một ảnh gốc độ phân giải cao** — zoom 2.4× ảnh 1920px là đã vỡ trên bản 1080p. Nên sinh ảnh 3000px trở lên.
 
 ### `thumb.json` — thumbnail
 

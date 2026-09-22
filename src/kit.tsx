@@ -16,6 +16,7 @@ import {Lottie} from "@remotion/lottie";
 import {LOTTIES} from "./lotties";
 import {CONFIG} from "./config";
 import {icons as LUCIDE} from "lucide-react";
+import {ElWorld, ElSpecimen, FULL_BLEED} from "./scenes";
 
 const clamp = {extrapolateLeft: "clamp" as const, extrapolateRight: "clamp" as const};
 type Win = [number, number];
@@ -97,14 +98,26 @@ export const useAnchoredSteps = (moments: any[], lines?: any[]): Win[] => {
 };
 
 // ---- Moment: enter (rise+blur in) / hold / exit (rise+blur out) for a window ----
-const Moment: React.FC<{win: Win; gap: number; v: number; children: React.ReactNode}> =
-({win, gap, v, children}) => {
+// bleed=true (moment có ảnh tràn khung — world/specimen): chỉ crossfade, không trượt/phóng/blur,
+// vì camera của cảnh đã tự chuyển động; ảnh mà nhún lên xuống thì trông như lỗi.
+const Moment: React.FC<{win: Win; gap: number; v: number; bleed?: boolean; back?: React.ReactNode; children: React.ReactNode}> =
+({win, gap, v, bleed, back, children}) => {
   const f = useCurrentFrame();
   const [from, to] = win;
   const IN = Math.min(11, Math.round((to - from) * 0.28));
   const OUT = Math.min(12, Math.round((to - from) * 0.24));   // đuôi fade dài hơn -> khớp XFADE, hoà dần không chớp
   const ease = {...clamp, easing: Easing.out(Easing.cubic)};
   const o = interpolate(f, [from, from + IN, to - OUT, to], [0, 1, 1, 0], clamp);
+  // ảnh (back) nằm dưới, chữ (children) nằm trên + đổ bóng để đọc được trên nền ảnh
+  if (bleed) return (
+    <AbsoluteFill style={{opacity: o}}>
+      {back}
+      <AbsoluteFill style={{alignItems: "center", justifyContent: "center", textAlign: "center", padding: "0 7%",
+        letterSpacing: "-0.015em", filter: `drop-shadow(0 ${0.3 * v}px ${1.2 * v}px rgba(0,0,0,0.85))`}}>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: gap * v}}>{children}</div>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
   const ty = interpolate(f, [from, from + IN, to - OUT, to], [36, 0, 0, -26], ease);
   const sc = interpolate(f, [from, from + IN, to - OUT, to], [0.96, 1, 1, 1.035], ease);
   const bl = interpolate(f, [from, from + IN, to - OUT, to], [10, 0, 0, 8], clamp);
@@ -695,10 +708,12 @@ const ElFlow: React.FC<{p: ElProps; from: number; v: number}> = ({p, from, v}) =
 };
 
 // ---------- element dispatch ----------
-const El: React.FC<{e: ElProps; from: number; v: number; customs: Record<string, React.FC>; lines?: any[]}> =
-({e, from, v, customs, lines}) => {
+const El: React.FC<{e: ElProps; from: number; to: number; v: number; customs: Record<string, React.FC>; lines?: any[]}> =
+({e, from, to, v, customs, lines}) => {
   const {fps} = useVideoConfig();
   switch (e.el) {
+    case "world": return <ElWorld p={e} win={[from, to]} v={v} />;
+    case "specimen": return <ElSpecimen p={e} win={[from, to]} v={v} lines={lines} />;
     case "timeline": return <ElTimeline p={e} from={from} v={v} lines={lines} />;
     case "flow": return <ElFlow p={e} from={from} v={v} />;
     case "text": return <Reveal at={e.at} from={from}>{elText(e, v)}</Reveal>;
@@ -769,9 +784,12 @@ export const Beat: React.FC<{data: BeatData; customs?: Record<string, React.FC>;
       {data.moments.map((m, i) => {
         const last = i === data.moments.length - 1;
         const win: Win = last ? S[i] : [S[i][0], S[i][1] + XFADE];
+        const bleed = m.stack.some((e) => FULL_BLEED.has(e.el));
+        const el = (e: ElProps, j: number) => <El key={j} e={e} from={S[i][0]} to={win[1]} v={v} customs={customs} lines={lines} />;
         return (
-          <Moment key={i} win={win} gap={m.gap ?? 3} v={v}>
-            {m.stack.map((e, j) => <El key={j} e={e} from={S[i][0]} v={v} customs={customs} lines={lines} />)}
+          <Moment key={i} win={win} gap={m.gap ?? 3} v={v} bleed={bleed}
+            back={bleed ? m.stack.map((e, j) => (FULL_BLEED.has(e.el) ? el(e, j) : null)) : null}>
+            {m.stack.map((e, j) => (bleed && FULL_BLEED.has(e.el) ? null : el(e, j)))}
           </Moment>
         );
       })}
