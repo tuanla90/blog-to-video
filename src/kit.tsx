@@ -22,8 +22,10 @@ const clamp = {extrapolateLeft: "clamp" as const, extrapolateRight: "clamp" as c
 type Win = [number, number];
 
 // ---- color tokens -> hex (accept raw hex too) ----
+// accent là GETTER (như C trong ui.tsx): bảng này dựng lúc import, TRƯỚC applyConfig() —
+// chép giá trị thẳng thì "accent" trong scenes.json kẹt ở màu mặc định, không theo brand của kênh.
 const COL: Record<string, string> = {
-  accent: C.accent, good: C.good, warn: C.warn, bad: C.bad,
+  get accent() { return C.accent; }, good: C.good, warn: C.warn, bad: C.bad,
   muted: C.muted, purple: C.purple, text: C.text,
 };
 const col = (k?: string) => (k && COL[k]) || k || C.text;
@@ -100,8 +102,9 @@ export const useAnchoredSteps = (moments: any[], lines?: any[]): Win[] => {
 // ---- Moment: enter (rise+blur in) / hold / exit (rise+blur out) for a window ----
 // bleed=true (moment có ảnh tràn khung — world/specimen): chỉ crossfade, không trượt/phóng/blur,
 // vì camera của cảnh đã tự chuyển động; ảnh mà nhún lên xuống thì trông như lỗi.
-const Moment: React.FC<{win: Win; gap: number; v: number; bleed?: boolean; back?: React.ReactNode; children: React.ReactNode}> =
-({win, gap, v, bleed, back, children}) => {
+const Moment: React.FC<{win: Win; gap: number; v: number; bleed?: boolean; back?: React.ReactNode; place?: string;
+  children: React.ReactNode}> =
+({win, gap, v, bleed, back, place, children}) => {
   const f = useCurrentFrame();
   const [from, to] = win;
   const IN = Math.min(11, Math.round((to - from) * 0.28));
@@ -112,7 +115,8 @@ const Moment: React.FC<{win: Win; gap: number; v: number; bleed?: boolean; back?
   if (bleed) return (
     <AbsoluteFill style={{opacity: o}}>
       {back}
-      <AbsoluteFill style={{alignItems: "center", justifyContent: "center", textAlign: "center", padding: "0 7%",
+      <AbsoluteFill style={{alignItems: "center", textAlign: "center", padding: "9% 7% 24%",
+        justifyContent: place === "top" ? "flex-start" : place === "bottom" ? "flex-end" : "center",
         letterSpacing: "-0.015em", filter: `drop-shadow(0 ${0.3 * v}px ${1.2 * v}px rgba(0,0,0,0.85))`}}>
         <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: gap * v}}>{children}</div>
       </AbsoluteFill>
@@ -769,7 +773,9 @@ const El: React.FC<{e: ElProps; from: number; to: number; v: number; customs: Re
 };
 
 // ---------- the beat renderer ----------
-export type BeatData = {bg?: string; moments: {w: number; gap?: number; atSec?: number; atWord?: string; stack: ElProps[]}[]};
+export type BeatData = {bg?: string; moments: {w: number; gap?: number; atSec?: number; atWord?: string;
+  /** chỉ với moment có ảnh tràn khung: đặt cột chữ ở top | center | bottom (chừa vùng caption) */
+  place?: "top" | "center" | "bottom"; stack: ElProps[]}[]};
 
 export const Beat: React.FC<{data: BeatData; customs?: Record<string, React.FC>; lines?: any[]}> =
 ({data, customs = {}, lines}) => {
@@ -787,7 +793,7 @@ export const Beat: React.FC<{data: BeatData; customs?: Record<string, React.FC>;
         const bleed = m.stack.some((e) => FULL_BLEED.has(e.el));
         const el = (e: ElProps, j: number) => <El key={j} e={e} from={S[i][0]} to={win[1]} v={v} customs={customs} lines={lines} />;
         return (
-          <Moment key={i} win={win} gap={m.gap ?? 3} v={v} bleed={bleed}
+          <Moment key={i} win={win} gap={m.gap ?? 3} v={v} bleed={bleed} place={m.place}
             back={bleed ? m.stack.map((e, j) => (FULL_BLEED.has(e.el) ? el(e, j) : null)) : null}>
             {m.stack.map((e, j) => (bleed && FULL_BLEED.has(e.el) ? null : el(e, j)))}
           </Moment>
