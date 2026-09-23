@@ -2,12 +2,14 @@
 //
 //   world    : ảnh nhiều lớp + camera pan/zoom (Ken Burns) + parallax theo độ sâu + lắc lư (sway)
 //   specimen : một ảnh mẫu vật, camera lần lượt đẩy vào từng điểm, đường chỉ + thẻ nhãn
+//   clip     : một đoạn VIDEO — cắt đoạn theo giây, chỉnh tốc độ, vẫn lia/phóng được như world
 //
 // Toạ độ luôn là toạ độ TRÊN ẢNH (0..1, gốc trên-trái), không phải toạ độ màn hình — nên một
 // scenes.json dùng được cho cả 16:9 lẫn 9:16: engine tự tính khung cắt (cover) cho từng tỉ lệ.
 // Hai element này chiếm cả khung: moment chứa chúng chỉ crossfade, không trượt/blur như moment chữ.
 import React from "react";
-import {AbsoluteFill, Img, staticFile, useCurrentFrame, useVideoConfig, interpolate, Easing, random} from "remotion";
+import {AbsoluteFill, Img, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig,
+  interpolate, Easing, random} from "remotion";
 import {C, INTER, MONO} from "./ui";
 import {CONFIG} from "./config";
 
@@ -26,7 +28,7 @@ const lerpCam = (a: Cam, b: Cam, t: number): Cam => ({
   zoom: Math.exp(Math.log(a.zoom) + (Math.log(b.zoom) - Math.log(a.zoom)) * t),
 });
 
-export const FULL_BLEED = new Set(["world", "specimen"]);
+export const FULL_BLEED = new Set(["world", "specimen", "clip"]);
 
 // Đặt ảnh (tỉ lệ `aspect` = rộng/cao) phủ kín khung W×H ở mức zoom cho trước, sao cho điểm ảnh
 // (cam.x, cam.y) rơi vào điểm màn hình `target` (0..1). keep=true: không để lộ mép ảnh.
@@ -149,6 +151,47 @@ export const ElWorld: React.FC<{p: any; win: Win; v: number}> = ({p, win, v}) =>
       })}
       {p.fx ? <Particles kind={p.fx} n={p.fxCount} v={v} /> : null}
       <Vignette amt={p.vignette ?? 0.35} />
+    </AbsoluteFill>
+  );
+};
+
+// =====================================================================================
+// clip — { el:"clip", src, from, to, speed, loop, aspect, camera:{from,to,ease}, portrait, fx, vignette }
+//   from/to : giây TRONG FILE GỐC (cắt đoạn). speed: 1 = nguyên bản, 0.8 = chậm lại (mượt hơn,
+//             hợp khi nguồn 24 hình/giây mà timeline 30). Tiếng luôn tắt — nhạc/tiếng trộn riêng.
+//   Khung hình canh giống world (toạ độ trên ẢNH 0..1) nên vẫn lia/phóng nhẹ được trên video.
+// =====================================================================================
+export const ElClip: React.FC<{p: any; win: Win; v: number}> = ({p, win, v}) => {
+  const f = useCurrentFrame();
+  const {width: W, height: H, fps} = useVideoConfig();
+  const portrait = H > W;
+  const camCfg = (portrait && p.portrait?.camera) || p.camera || {};
+  const a = cam(camCfg.from, {x: 0.5, y: 0.5, zoom: 1});
+  const b = cam(camCfg.to, a);
+  const t = (EASE[camCfg.ease ?? "inOut"] || EASE.inOut)(interpolate(f, win, [0, 1], clamp));
+  const c = lerpCam(a, b, t);
+  const r = place(W, H, p.aspect ?? 16 / 9, c, [0.5, 0.5], p.keep ?? true);
+  const speed = p.speed ?? 1;
+  // from/to là giây trong file gốc; startFrom/endAt đếm bằng frame ở fps của composition
+  // (Remotion 4.0.290 chưa có trimBefore/trimAfter).
+  const startFrom = p.from != null ? Math.round(p.from * fps) : undefined;
+  const endAt = p.to != null ? Math.round(p.to * fps) : undefined;
+  // đoạn ngắn hơn moment thì phát lại từ đầu (OffthreadVideo không có prop loop -> dùng <Loop>)
+  const segFrames = p.from != null && p.to != null ? Math.round(((p.to - p.from) * fps) / speed) : null;
+  const video = (
+    <div style={{position: "absolute", left: r.left, top: r.top, width: r.w, height: r.h}}>
+      <OffthreadVideo src={src(p.src)} muted playbackRate={speed}
+        startFrom={startFrom} endAt={endAt}
+        style={{width: "100%", height: "100%", objectFit: "cover", display: "block"}} />
+    </div>
+  );
+  return (
+    <AbsoluteFill style={{overflow: "hidden", background: "#000"}}>
+      <Sequence from={win[0]} layout="none">
+        {segFrames && p.loop !== false ? <Loop durationInFrames={segFrames} layout="none">{video}</Loop> : video}
+      </Sequence>
+      {p.fx ? <Particles kind={p.fx} n={p.fxCount} v={v} /> : null}
+      <Vignette amt={p.vignette ?? 0.3} />
     </AbsoluteFill>
   );
 };

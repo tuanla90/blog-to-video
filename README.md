@@ -169,6 +169,22 @@ Hai element này phủ cả khung, nằm dưới các element chữ cùng moment
 - Khung dọc mà ảnh ngang: tự `fit: "contain"` + nền mờ chính ảnh ấy; ép bằng `"fit": "cover"`.
 - **Cả hai cảnh đều cần một ảnh gốc độ phân giải cao** — zoom 2.4× ảnh 1920px là đã vỡ trên bản 1080p. Nên sinh ảnh 3000px trở lên.
 
+#### Cảnh video: `clip`
+
+Giống `world` nhưng nguồn là một file video trong `public/`. Cắt đoạn theo **giây trong file gốc**, chỉnh tốc độ, và vẫn lia/phóng được.
+
+```json
+{ "el": "clip", "src": "video/tap-1/rung.mp4",
+  "from": 2.7, "to": 5.0, "speed": 0.85, "aspect": 1.75,
+  "camera": { "from": { "x": 0.45, "zoom": 1.06 }, "to": { "x": 0.55, "zoom": 1.14 } } }
+```
+
+- `from`/`to`: giây trong file gốc. Bỏ trống thì phát từ đầu tới hết.
+- `speed`: 1 là nguyên bản, `0.85` chậm lại (nguồn 24 hình/giây chiếu trên timeline 30 thì chậm nhẹ sẽ mượt hơn).
+- Đoạn ngắn hơn moment thì **tự phát lại**; tắt bằng `"loop": false`.
+- **Tiếng luôn tắt** — nhạc và tiếng động trộn riêng ở `video.config.json`.
+- `aspect` là tỉ lệ thật của video (vd 1344×768 → `1.75`), dùng để tính khung cắt cho 16:9 và 9:16.
+
 ### `thumb.json` — thumbnail
 
 Bắt buộc: `layout`, `category` (khớp một mục trong `categories` của config), `catLabel`, `kicker`. Màu suy theo category — không set tay.
