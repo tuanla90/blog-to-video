@@ -114,22 +114,28 @@ const Moment: React.FC<{win: Win; gap: number; v: number; bleed?: boolean; back?
   const OUT = Math.min(12, Math.round((to - from) * 0.24));   // đuôi fade dài hơn -> khớp XFADE, hoà dần không chớp
   const ease = {...clamp, easing: Easing.out(Easing.cubic)};
   const o = interpolate(f, [from, from + IN, to - OUT, to], [0, 1, 1, 0], clamp);
-  // ảnh (back) nằm dưới, chữ (children) nằm trên + đổ bóng + một quầng tối mềm bám theo cột chữ
-  // (drop-shadow thôi không đủ trên ảnh sáng/nhiều chi tiết; dải tối theo mép khung thì lệch chỗ chữ).
-  if (bleed) return (
-    <AbsoluteFill style={{opacity: o}}>
-      {back}
-      {/* padding % trong CSS tính theo CHIỀU RỘNG -> dùng px theo chiều cao */}
-      <AbsoluteFill style={{alignItems: "center", textAlign: "center",
-        padding: `${0.09 * H}px 7% ${padBottom}px`,
-        justifyContent: place === "top" ? "flex-start" : place === "bottom" ? "flex-end" : "center",
-        letterSpacing: "-0.015em", filter: `drop-shadow(0 ${0.3 * v}px ${1.2 * v}px rgba(0,0,0,0.85))`}}>
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: gap * v,
-          padding: `${3 * v}px ${9 * v}px`,
-          background: "radial-gradient(closest-side, rgba(0,0,0,0.7), rgba(0,0,0,0.45) 55%, transparent)"}}>{children}</div>
+  // Chữ trên ảnh = LOWER-THIRD kiểu phim tài liệu: dồn xuống dải dưới, canh trái, cột hẹp,
+  // một vạch kẻ mảnh làm mốc, nền chỉ là dải tối mỏng ở mép (không phải quầng tròn giữa ảnh).
+  // place:"top" thì lật lên dải trên. Ảnh gần như không bị che.
+  if (bleed) {
+    const top = place === "top";
+    const portrait = H > W;
+    return (
+      <AbsoluteFill style={{opacity: o}}>
+        {back}
+        <AbsoluteFill style={{pointerEvents: "none", background: top
+          ? "linear-gradient(180deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.3) 26%, transparent 46%)"
+          : "linear-gradient(0deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.34) 26%, transparent 48%)"}} />
+        <AbsoluteFill style={{alignItems: "flex-start", textAlign: "left",
+          padding: `${0.07 * H}px 7% ${padBottom}px`,
+          justifyContent: top ? "flex-start" : "flex-end", letterSpacing: "-0.01em"}}>
+          <div style={{display: "flex", flexDirection: "column", alignItems: "flex-start",
+            gap: gap * 0.62 * v, maxWidth: portrait ? "94%" : "56%",
+            borderLeft: `${0.32 * v}px solid ${C.accent}`, paddingLeft: 2.4 * v}}>{children}</div>
+        </AbsoluteFill>
       </AbsoluteFill>
-    </AbsoluteFill>
-  );
+    );
+  }
   const ty = interpolate(f, [from, from + IN, to - OUT, to], [36, 0, 0, -26], ease);
   const sc = interpolate(f, [from, from + IN, to - OUT, to], [0.96, 1, 1, 1.035], ease);
   const bl = interpolate(f, [from, from + IN, to - OUT, to], [10, 0, 0, 8], clamp);
@@ -799,8 +805,12 @@ export const Beat: React.FC<{data: BeatData; customs?: Record<string, React.FC>;
         const last = i === data.moments.length - 1;
         const win: Win = last ? S[i] : [S[i][0], S[i][1] + XFADE];
         const bleed = m.stack.some((e) => FULL_BLEED.has(e.el));
-        // trên nền ảnh, caption xám (mặc định) chìm mất -> mặc định sang màu chữ sáng
-        const el = (e: ElProps, j: number) => <El key={j} e={bleed && e.el === "caption" && !e.color ? {...e, color: "text"} : e}
+        // trên nền ảnh: caption xám (mặc định) chìm mất -> màu chữ sáng; và title KHÔNG gradient
+        // (gradient bạc trên ảnh phim tài liệu trông rẻ tiền) trừ khi scenes.json ép gradient:true
+        const bleedEl = (e: ElProps): ElProps =>
+          e.el === "caption" && !e.color ? {...e, color: "text"}
+          : e.el === "text" && e.gradient == null ? {...e, gradient: false} : e;
+        const el = (e: ElProps, j: number) => <El key={j} e={bleed ? bleedEl(e) : e}
           from={S[i][0]} to={win[1]} v={v} customs={customs} lines={lines} />;
         return (
           <Moment key={i} win={win} gap={m.gap ?? 3} v={v} bleed={bleed} place={m.place}
