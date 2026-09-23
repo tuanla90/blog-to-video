@@ -16,7 +16,7 @@ import {Lottie} from "@remotion/lottie";
 import {LOTTIES} from "./lotties";
 import {CONFIG} from "./config";
 import {icons as LUCIDE} from "lucide-react";
-import {ElWorld, ElSpecimen, ElClip, FULL_BLEED} from "./scenes";
+import {ElWorld, ElSpecimen, ElClip, ElNotePage, FULL_BLEED} from "./scenes";
 
 const clamp = {extrapolateLeft: "clamp" as const, extrapolateRight: "clamp" as const};
 type Win = [number, number];
@@ -733,6 +733,7 @@ const El: React.FC<{e: ElProps; from: number; to: number; v: number; customs: Re
     case "world": return <ElWorld p={e} win={[from, to]} v={v} />;
     case "clip": return <ElClip p={e} win={[from, to]} v={v} />;
     case "specimen": return <ElSpecimen p={e} win={[from, to]} v={v} lines={lines} />;
+    case "notepage": return <ElNotePage p={e} win={[from, to]} v={v} lines={lines} />;
     case "timeline": return <ElTimeline p={e} from={from} v={v} lines={lines} />;
     case "flow": return <ElFlow p={e} from={from} v={v} />;
     case "text": return <Reveal at={e.at} from={from}>{elText(e, v)}</Reveal>;

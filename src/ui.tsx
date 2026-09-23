@@ -2,15 +2,21 @@ import React from "react";
 import {AbsoluteFill, useCurrentFrame, useVideoConfig, interpolate, Easing, random} from "remotion";
 import {loadFont as loadInter} from "@remotion/google-fonts/Inter";
 import {loadFont as loadMono} from "@remotion/google-fonts/JetBrainsMono";
+import {loadFont as loadHand} from "@remotion/google-fonts/PatrickHand";
 import {BRAND} from "./config";
 
 // Vietnamese subset is REQUIRED or dấu becomes tofu boxes.
 const inter = loadInter("normal", {weights: ["400", "600", "700", "800"], subsets: ["latin", "vietnamese"]});
 const mono = loadMono("normal", {weights: ["600", "700", "800"], subsets: ["latin"]});
+// Chữ viết tay (element `notepage`). PatrickHand là một trong số ít font viết tay của Google có
+// subset tiếng Việt — Caveat, Kalam, CaveatBrush đều KHÔNG có, dùng vào là dấu thành ô vuông.
+// Thay được bằng GrapeNuts, PlaypenSans, Itim; đừng thay bằng font không có "vietnamese".
+const hand = loadHand("normal", {weights: ["400"], subsets: ["latin", "vietnamese"]});
 
 export const INTER = `${inter.fontFamily}, sans-serif`;
 // mono is used for numbers/ASCII; Vietnamese glyphs fall back to Inter.
 export const MONO = `${mono.fontFamily}, ${inter.fontFamily}, monospace`;
+export const HAND = `${hand.fontFamily}, ${inter.fontFamily}, cursive`;
 
 // accent là GETTER: bảng màu này dựng ở module scope, mà applyConfig() chỉ chạy sau khi
 // mọi import đã xong -> đọc lười thì call-site `C.accent` khắp kit mới thấy màu của config.

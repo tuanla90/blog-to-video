@@ -3,6 +3,7 @@
 //   world    : ảnh nhiều lớp + camera pan/zoom (Ken Burns) + parallax theo độ sâu + lắc lư (sway)
 //   specimen : một ảnh mẫu vật, camera lần lượt đẩy vào từng điểm, đường chỉ + thẻ nhãn
 //   clip     : một đoạn VIDEO — cắt đoạn theo giây, chỉnh tốc độ, vẫn lia/phóng được như world
+//   notepage : một TRANG GIẤY — chữ viết tay hiện dần vào chỗ trống đã chừa sẵn trên ảnh
 //
 // Toạ độ luôn là toạ độ TRÊN ẢNH (0..1, gốc trên-trái), không phải toạ độ màn hình — nên một
 // scenes.json dùng được cho cả 16:9 lẫn 9:16: engine tự tính khung cắt (cover) cho từng tỉ lệ.
@@ -10,7 +11,7 @@
 import React from "react";
 import {AbsoluteFill, Img, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig,
   interpolate, Easing, random} from "remotion";
-import {C, INTER, MONO} from "./ui";
+import {C, INTER, MONO, HAND} from "./ui";
 import {CONFIG} from "./config";
 
 type Win = [number, number];
@@ -28,7 +29,7 @@ const lerpCam = (a: Cam, b: Cam, t: number): Cam => ({
   zoom: Math.exp(Math.log(a.zoom) + (Math.log(b.zoom) - Math.log(a.zoom)) * t),
 });
 
-export const FULL_BLEED = new Set(["world", "specimen", "clip"]);
+export const FULL_BLEED = new Set(["world", "specimen", "clip", "notepage"]);
 
 // Đặt ảnh (tỉ lệ `aspect` = rộng/cao) phủ kín khung W×H ở mức zoom cho trước, sao cho điểm ảnh
 // (cam.x, cam.y) rơi vào điểm màn hình `target` (0..1). keep=true: không để lộ mép ảnh.
@@ -317,6 +318,82 @@ export const ElSpecimen: React.FC<{p: any; win: Win; v: number; lines?: any[]}> 
       </div>
       <Vignette amt={p.vignette ?? 0.3} />
       {overlay}
+    </AbsoluteFill>
+  );
+};
+
+
+// ---------------------------------------------------------------------------
+// notepage — một trang giấy (ảnh) gần như đứng yên, chữ viết tay hiện dần lên.
+//
+//   { el:"notepage", src:"img/ep/x02-fieldnote.jpg",
+//     notes:[{x, y, text, atWord|atSec, w, size, align, rotate}] }
+//
+// Khác `specimen` ở ba điểm, và đó là lý do nó phải là element riêng:
+//   · không phóng vào từng điểm — cả trang nhìn thấy suốt, chỉ trôi rất chậm cho hình khỏi chết;
+//   · không thẻ, không đường chỉ — chữ nằm thẳng trên giấy, như người ta vừa viết;
+//   · ghi chú TÍCH LẠI, không hiện một cái rồi tắt: cuối cảnh là cả trang đã viết xong.
+//
+// Chữ do đây vẽ chứ không để ảnh sinh ra: mô hình sinh ảnh viết chữ ra ký tự méo (tiếng Việt có
+// dấu méo nặng hơn), và chữ do engine vẽ thì sửa lời không phải sinh lại ảnh, còn bản dịch sang
+// tiếng khác dùng chung y hệt tấm giấy — chỉ đổi lớp chữ.
+//
+// Toạ độ x,y là toạ độ TRÊN ẢNH (0..1, gốc trên-trái), giống world/specimen.
+export const ElNotePage: React.FC<{p: any; win: Win; v: number; lines?: any[]}> = ({p, win, v, lines}) => {
+  const f = useCurrentFrame();
+  const {width: W, height: H, fps} = useVideoConfig();
+  const portrait = H > W;
+  const aspect = p.aspect ?? 16 / 9;
+  const notes: any[] = p.notes || [];
+  const [from, to] = win;
+
+  // trang giấy thì mặc định thấy TRỌN (contain) — cắt mất mép giấy là mất luôn cảm giác "một trang"
+  const camCfg = (portrait && p.portrait?.camera) || p.camera || {};
+  const a = cam(camCfg.from, {x: 0.5, y: 0.5, zoom: p.zoom ?? 1});
+  const b = cam(camCfg.to, {...a, zoom: a.zoom * (p.drift ?? 1.05)});
+  const prog = interpolate(f, [from, to], [0, 1], clamp);
+  const c = lerpCam(a, b, (EASE[p.ease || "inOut"] || EASE.inOut)(prog));
+  const fit: "cover" | "contain" = p.fit ?? "contain";
+  const r = place(W, H, aspect, c, [0.5, 0.5], false, fit);
+
+  // mốc hiện của từng ghi chú: theo từ trong giọng đọc, hoặc theo giây, hoặc chia đều
+  const byWord = wordFrames(notes.map((n) => n.atWord), lines, fps);
+  const span = Math.max(1, to - from);
+  const at = notes.map((n, i) =>
+    typeof n.atSec === "number" ? from + Math.round(n.atSec * fps)
+      : byWord[i] != null ? (byWord[i] as number)
+      : from + Math.round((span * (i + 0.6)) / (notes.length + 1)));
+
+  const WRITE = Math.max(6, Math.round((p.writeSec ?? 0.5) * fps));   // thời gian "viết xong" một dòng
+  const ink = p.ink || "#2c3742";
+
+  return (
+    <AbsoluteFill style={{background: p.bg || "#0b0d10", overflow: "hidden"}}>
+      <Img src={src(p.src)} style={{position: "absolute", left: r.left, top: r.top, width: r.w, height: r.h,
+        objectFit: fit === "contain" ? "contain" : "cover", display: "block"}} />
+      {notes.map((n, i) => {
+        const start = at[i];
+        if (f < start) return null;
+        // mực chạy từ trái sang phải như đầu bút đi, cộng một nhịp đậm dần rất ngắn
+        const wipe = interpolate(f, [start, start + WRITE], [0, 1], clamp);
+        const fade = interpolate(f, [start, start + Math.round(WRITE * 0.4)], [0.35, 1], clamp);
+        // nghiêng nhẹ mỗi dòng một khác cho ra nét tay; random của remotion nên render lại vẫn y hệt
+        const tilt = n.rotate ?? (random(`notepage-${p.src}-${i}`) - 0.5) * 2.4;
+        const align = n.align || "left";
+        return (
+          <div key={i} style={{position: "absolute",
+            left: r.left + n.x * r.w, top: r.top + n.y * r.h,
+            width: (n.w ?? 0.24) * r.w,
+            transform: `translate(${align === "right" ? "-100%" : align === "center" ? "-50%" : "0"}, -50%) rotate(${tilt}deg)`,
+            transformOrigin: "left center",
+            fontFamily: HAND, fontSize: (n.size ?? p.size ?? 2.5) * v, lineHeight: 1.28,
+            color: ink, opacity: fade, textAlign: align as any,
+            clipPath: `inset(-0.4em ${(1 - wipe) * 100}% -0.4em -0.2em)`,
+            whiteSpace: "pre-wrap", wordBreak: "break-word"}}>
+            {n.text}
+          </div>
+        );
+      })}
     </AbsoluteFill>
   );
 };
