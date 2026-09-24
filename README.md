@@ -167,6 +167,8 @@ Hai element này phủ cả khung, nằm dưới các element chữ cùng moment
 - Timing từng callout: `atWord`/`atSec` neo theo lời đọc, không neo thì chia theo `w`. `introW`/`outroW` là trọng số hai đoạn tổng thể.
 - `zoom` mặc định 2.2. `side: "left" | "right"` ép phía đặt thẻ (mặc định tự chọn). `tagColor` nếu tag khác màu với callout.
 - Khung dọc mà ảnh ngang: tự `fit: "contain"` + nền mờ chính ảnh ấy; ép bằng `"fit": "cover"`.
+- **Dừng hình để phân tích** — thay `src` bằng `"video": {"src": "video/x.mp4", "from": 0.5, "to": 4, "speed": 1}`. Video chạy suốt đoạn tổng thể đầu; đúng lúc callout đầu tiên mở (neo nó bằng `atWord` vào chữ đang nói) thì đứng hình ở chính khung ấy, loé nhẹ, bớt màu, tối nền (`dim`, mặc định 0.35), rồi soi như ảnh tĩnh. Khung đứng lấy từ chính video nên không có vết nối. `to` chặn trên: hết nguồn trước khi dừng thì đứng ở `to`.
+- **Ảnh kẹp trong thẻ** — `callout.media: {"src", "aspect", "from", "to", "speed", "caption", "rotate", "age"}`. Một ảnh hoặc một đoạn video lặp, trình bày như tấm ảnh in dán vào thẻ: viền giấy, băng dính, màu ngả (`age` 0..1, mặc định 0.3), hạt phim; `caption` viết tay trên mép giấy. Dùng để đặt một vật mẫu từ nơi khác cạnh điểm đang soi. Thẻ có ảnh tự rộng và đặt cao hơn.
 - **Cả hai cảnh đều cần một ảnh gốc độ phân giải cao** — zoom 2.4× ảnh 1920px là đã vỡ trên bản 1080p. Nên sinh ảnh 3000px trở lên.
 
 #### Cảnh video: `clip`

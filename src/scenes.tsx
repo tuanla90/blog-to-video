@@ -9,7 +9,7 @@
 // scenes.json dùng được cho cả 16:9 lẫn 9:16: engine tự tính khung cắt (cover) cho từng tỉ lệ.
 // Hai element này chiếm cả khung: moment chứa chúng chỉ crossfade, không trượt/blur như moment chữ.
 import React from "react";
-import {AbsoluteFill, Img, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig,
+import {AbsoluteFill, Freeze, Img, Loop, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig,
   interpolate, Easing, random} from "remotion";
 import {C, INTER, MONO, HAND} from "./ui";
 import {CONFIG} from "./config";
@@ -199,10 +199,55 @@ export const ElClip: React.FC<{p: any; win: Win; v: number}> = ({p, win, v}) => 
 
 // =====================================================================================
 // specimen — { el:"specimen", src, aspect, overview:{x,y,zoom}, introW, outroW, outro:"overview"|"hold",
-//              callouts:[{x, y, zoom, label, sub, tag, color, w, atWord, atSec, side}] }
+//              callouts:[{x, y, zoom, label, sub, tag, color, w, atWord, atSec, side, media}] }
+//
+//   video:{src, from, to, speed} thay cho src — DỪNG HÌNH ĐỂ PHÂN TÍCH: video chạy suốt đoạn tổng
+//     thể đầu, tới đúng lúc callout đầu tiên mở (thường neo bằng atWord) thì đứng hình ở khung ấy,
+//     bớt màu, tối nền, rồi soi như ảnh tĩnh. Khung đứng lấy từ chính video nên không có vết nối.
+//     `to` chặn trên: đoạn tổng thể dài hơn nguồn thì đứng ở `to`. `dim` độ tối thêm khi đứng (0.35).
+//   callout.media:{src, aspect, from, to, speed, caption, rotate, age} — ẢNH KẸP TRONG THẺ: một ảnh
+//     hay một đoạn video lặp, trình bày như tấm ảnh in dán vào thẻ (viền giấy, băng dính, màu cũ,
+//     hạt phim), `caption` viết tay trên mép giấy. Dùng để đặt một thứ ở thế giới khác cạnh điểm
+//     đang soi — cùng một bộ phận, một vật mẫu để so. `age` 0..1 độ ngả màu (0.3).
 // =====================================================================================
 const colOf = (k?: string) => ({accent: C.accent, good: C.good, warn: C.warn, bad: C.bad, purple: C.purple,
   muted: C.muted, text: C.text} as Record<string, string>)[k || ""] || k || C.accent;
+
+const isVideo = (s: string) => /\.(mp4|webm|mov|m4v)$/i.test(s);
+
+// Tấm ảnh in kẹp trong thẻ callout. Video thì chạy từ lúc thẻ mở (sa) và lặp đoạn from..to.
+const Pinned: React.FC<{m: any; sa: number; v: number}> = ({m, sa, v}) => {
+  const f = useCurrentFrame();
+  const {fps} = useVideoConfig();
+  const aspect = m.aspect ?? 16 / 9;
+  const speed = m.speed ?? 1;
+  const seg = m.from != null && m.to != null ? Math.round(((m.to - m.from) * fps) / speed) : null;
+  const look = {width: "100%", height: "100%", objectFit: "cover" as const, display: "block",
+    filter: `sepia(${m.age ?? 0.3}) saturate(0.85) contrast(1.06) brightness(0.97)`};
+  const body = isVideo(m.src) ? (() => {
+    const vid = <OffthreadVideo src={src(m.src)} muted playbackRate={speed}
+      startFrom={m.from != null ? Math.round(m.from * fps) : undefined}
+      endAt={m.to != null ? Math.round(m.to * fps) : undefined} style={look} />;
+    return <Sequence from={sa} layout="none">{seg ? <Loop durationInFrames={seg} layout="none">{vid}</Loop> : vid}</Sequence>;
+  })() : <Img src={src(m.src)} style={look} />;
+  const seed = Math.floor(f / 2) % 9;                       // hạt phim đổi mỗi 2 khung — ảnh "sống" như phim cũ
+  return (
+    <div style={{position: "relative", background: "#ECE5D4", padding: `${0.9 * v}px ${0.9 * v}px ${m.caption ? 3.4 * v : 0.9 * v}px`,
+      transform: `rotate(${m.rotate ?? -1.6}deg)`, boxShadow: `0 ${0.5 * v}px ${1.6 * v}px rgba(0,0,0,0.45)`, marginBottom: 1.8 * v}}>
+      <div style={{position: "relative", width: "100%", aspectRatio: String(aspect), overflow: "hidden", background: "#222"}}>
+        {body}
+        <svg width="100%" height="100%" style={{position: "absolute", inset: 0, mixBlendMode: "overlay", opacity: 0.35}}>
+          <filter id={`grain${seed}`}><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={2} seed={seed} /></filter>
+          <rect width="100%" height="100%" filter={`url(#grain${seed})`} />
+        </svg>
+      </div>
+      {m.caption ? <div style={{position: "absolute", left: 1.4 * v, right: 1.4 * v, bottom: 0.5 * v, fontFamily: HAND,
+        fontSize: 2.2 * v, color: "#3A3226", lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden"}}>{m.caption}</div> : null}
+      <div style={{position: "absolute", top: -1.2 * v, left: "50%", width: 8 * v, height: 2.4 * v, marginLeft: -4 * v,
+        background: "rgba(246,236,200,0.62)", transform: `rotate(${(m.rotate ?? -1.6) * -1.4}deg)`}} />
+    </div>
+  );
+};
 
 export const ElSpecimen: React.FC<{p: any; win: Win; v: number; lines?: any[]}> = ({p, win, v, lines}) => {
   const f = useCurrentFrame();
@@ -223,6 +268,16 @@ export const ElSpecimen: React.FC<{p: any; win: Win; v: number; lines?: any[]}> 
   if (k < 0) k = f < seg[0][0] ? 0 : seg.length - 1;
   const ci = k - 1;                                          // callout đang mở (-1 = tổng thể)
   const active = ci >= 0 && ci < calls.length ? calls[ci] : null;
+
+  // dừng hình: video chạy trong đoạn tổng thể đầu, đứng ở khung mở callout đầu tiên
+  const vid = p.video;
+  const vSpeed = vid?.speed ?? 1;
+  const freezeF = seg.length > 1 ? seg[1][0] : win[1];
+  const vEnd = vid?.to != null ? vid.to * fps : Infinity;             // hết nguồn trước khi dừng -> đứng ở `to`
+  const vAt = (fr: number) => (vid?.from ?? 0) * fps + (fr - win[0]) * vSpeed;
+  const frozen = !!vid && (f >= freezeF || vAt(f) >= vEnd);
+  const vFrozen = vid ? Math.max(0, Math.round(Math.min(vAt(Math.min(f, freezeF)), vEnd))) : 0;
+  const dim = vid ? p.dim ?? 0.35 : p.dim ?? 0;
 
   // khung đặt điểm: 16:9 chừa bên phải cho thẻ (side:"left" thì lật); 9:16 chừa phía trên
   const sideOf = (c: any) => c.side ?? (c.x > 0.62 ? "left" : "right");
@@ -253,9 +308,10 @@ export const ElSpecimen: React.FC<{p: any; win: Win; v: number; lines?: any[]}> 
     const color = colOf(active.color);
     const [px, py] = scr(active.x, active.y);
     const left = sideOf(active) === "left";
-    const cardW = (portrait ? 70 : 38) * v;
+    const media = active.media;                               // thẻ có ảnh kẹp thì rộng và đặt cao hơn
+    const cardW = (portrait ? 70 : media ? 34 : 38) * v;
     const cx = portrait ? (W - cardW) / 2 : left ? W * 0.06 : W * 0.6;
-    const cy = portrait ? H * 0.1 : H * 0.34;
+    const cy = portrait ? H * (media ? 0.05 : 0.1) : H * (media ? 0.12 : 0.34);
     const ax = portrait ? W / 2 : left ? cx + cardW : cx;            // điểm neo đường chỉ trên thẻ
     const ay = portrait ? cy + 16 * v : cy + 5 * v;
     const draw = interpolate(f, [sa + T * 0.7, sa + T * 0.7 + 14], [0, 1], clamp);
@@ -264,7 +320,7 @@ export const ElSpecimen: React.FC<{p: any; win: Win; v: number; lines?: any[]}> 
     // spotlight: làm tối nhẹ ngoài vùng quanh điểm
     overlay = (
       <>
-        <AbsoluteFill style={{pointerEvents: "none", opacity: 0.55 * show,
+        <AbsoluteFill style={{pointerEvents: "none", opacity: Math.min(0.95, 0.55 + dim) * show,
           background: `radial-gradient(circle at ${px}px ${py}px, transparent ${ring * 2.2}px, rgba(0,0,0,0.75) ${ring * 7}px)`}} />
         <svg width={W} height={H} style={{position: "absolute", inset: 0, overflow: "visible"}}>
           <line x1={px} y1={py} x2={px + (ax - px) * draw} y2={py + (ay - py) * draw} stroke={color} strokeWidth={0.28 * v}
@@ -276,6 +332,7 @@ export const ElSpecimen: React.FC<{p: any; win: Win; v: number; lines?: any[]}> 
           transform: `translateY(${(1 - appear) * 2 * v}px)`, textAlign: portrait ? "center" : "left", fontFamily: INTER,
           background: "rgba(10,11,15,0.78)", border: `1px solid ${color}66`, borderRadius: 1.6 * v,
           padding: `${2 * v}px ${2.6 * v}px`, boxShadow: `0 ${1.2 * v}px ${4 * v}px rgba(0,0,0,0.5), 0 0 ${3 * v}px ${color}33`}}>
+          {media ? <Pinned m={media} sa={sa} v={v} /> : null}
           {active.tag ? <div style={{display: "inline-block", fontFamily: MONO, fontSize: 1.6 * v, fontWeight: 700, letterSpacing: 2,
             color: active.tagColor ? colOf(active.tagColor) : color,
             border: `1px solid ${active.tagColor ? colOf(active.tagColor) : color}`, borderRadius: 100,
@@ -304,19 +361,31 @@ export const ElSpecimen: React.FC<{p: any; win: Win; v: number; lines?: any[]}> 
     );
   }
 
+  const fill = {width: "100%", height: "100%", objectFit: "cover" as const, display: "block"};
+  const body = vid ? (frozen
+    ? <Freeze frame={vFrozen}><OffthreadVideo src={src(vid.src)} muted style={fill} /></Freeze>
+    : <Sequence from={win[0]} layout="none"><OffthreadVideo src={src(vid.src)} muted playbackRate={vSpeed}
+        startFrom={Math.round((vid.from ?? 0) * fps)} style={fill} /></Sequence>)
+    : <Img src={src(p.src)} style={fill} />;
+  // lúc đứng hình: loé rất nhẹ rồi bớt màu — mắt đọc ra ngay là "dừng lại để nhìn", không cần chữ
+  const fz = vid ? interpolate(f, [freezeF, freezeF + 10], [0, 1], clamp) : 0;
+  const tone = fz ? `saturate(${1 - 0.3 * fz}) brightness(${1 - 0.08 * fz})` : undefined;
+
   return (
     <AbsoluteFill style={{overflow: "hidden", background: p.background ?? "#000"}}>
       {fit === "contain" ? (() => {
         const bg = place(W, H, aspect, {x: 0.5, y: 0.5, zoom: 1.08});
         return <div style={{position: "absolute", left: bg.left, top: bg.top, width: bg.w, height: bg.h,
           filter: `blur(${4 * v}px) brightness(0.45)`}}>
-          <Img src={src(p.src)} style={{width: "100%", height: "100%", display: "block"}} />
+          {vid ? body : <Img src={src(p.src)} style={fill} />}
         </div>;
       })() : null}
-      <div style={{position: "absolute", left: r.left, top: r.top, width: r.w, height: r.h}}>
-        <Img src={src(p.src)} style={{width: "100%", height: "100%", display: "block"}} />
+      <div style={{position: "absolute", left: r.left, top: r.top, width: r.w, height: r.h, filter: tone}}>
+        {body}
       </div>
       <Vignette amt={p.vignette ?? 0.3} />
+      {vid && f >= freezeF ? <AbsoluteFill style={{pointerEvents: "none", background: "#fff",
+        opacity: interpolate(f, [freezeF, freezeF + 5], [0.22, 0], clamp)}} /> : null}
       {overlay}
     </AbsoluteFill>
   );
