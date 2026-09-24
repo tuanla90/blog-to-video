@@ -30,15 +30,25 @@ const holdFrames = (entry: VideoEntry, id: string) =>
 const voiceVol = (audioFrames: number) => (f: number) =>
   Math.max(0, Math.min(1, (f + 1) / 5, (audioFrames - f) / 6));
 
-// vị trí start mỗi beat (có intro + gap) + tổng frame. Beat render đúng độ dài gốc -> KHÔNG lệch sync.
+// Chỗ nối giữa beat i và beat i+1. Beat sau mở một chương (scenes.json có `chapter`) -> thẻ chương;
+// còn lại theo pacing.between: "gap" = khoảng nền như cũ, "cut" = cắt thẳng (phim tài liệu: trong một
+// hồi thì mạch đi liền, chỉ đổi hồi mới dừng lại).
+type Join = {kind: "gap" | "cut" | "chapter"; frames: number};
+const joinAfter = (entry: VideoEntry, i: number): Join => {
+  const next = entry.beats[i + 1];
+  if (!next) return {kind: "cut", frames: 0};
+  if ((entry.scenes[next.id] as BeatData | undefined)?.chapter) return {kind: "chapter", frames: sec(CONFIG.pacing.chapterGap ?? 2.2)};
+  if ((CONFIG.pacing.between ?? "gap") === "cut") return {kind: "cut", frames: 0};
+  return {kind: "gap", frames: sec(CONFIG.pacing.sectionGap)};
+};
+
+// vị trí start mỗi beat (có intro + nối) + tổng frame. Beat render đúng độ dài gốc -> KHÔNG lệch sync.
 const layout = (entry: VideoEntry) => {
   const starts: number[] = [];
   let off = sec(CONFIG.pacing.introPad);
-  const gap = sec(CONFIG.pacing.sectionGap);
-  const last = entry.beats.length - 1;
   entry.beats.forEach((b, i) => {
     starts.push(off);
-    off += b.durationInFrames + holdFrames(entry, b.id) + (i < last ? gap : 0);
+    off += b.durationInFrames + holdFrames(entry, b.id) + joinAfter(entry, i).frames;
   });
   return {starts, beatsEnd: off, total: off + sec(CONFIG.pacing.outroPad)};
 };
@@ -122,12 +132,32 @@ const Pad: React.FC<{brand?: boolean; label?: string}> = ({brand, label}) => {
   );
 };
 
+// thẻ chương: hình beat trước tối dần (bắt đầu `fade` khung trước chỗ nối, đè lên đuôi beat), rồi
+// kicker + title hiện lên giữa nền tối, tắt chữ trước khi beat sau cắt vào. Không nền trang trí, không
+// whoosh — dấu ngắt của phim tài liệu, không phải của video giải thích.
+const ChapterCard: React.FC<{title: string; kicker?: string; fade: number; len: number}> = ({title, kicker, fade, len}) => {
+  const f = useCurrentFrame();
+  const {width: W, height: H} = useVideoConfig();
+  const vmin = Math.min(W, H) / 100;
+  const clamp = {extrapolateLeft: "clamp" as const, extrapolateRight: "clamp" as const};
+  const dark = interpolate(f, [0, Math.max(1, fade)], [0, 1], clamp);
+  const t = interpolate(f, [fade + 4, fade + 18, len - 12, len - 2], [0, 1, 1, 0], clamp);
+  return (
+    <AbsoluteFill style={{background: `rgba(5,7,6,${dark})`, alignItems: "center", justifyContent: "center", textAlign: "center"}}>
+      <div style={{opacity: t, transform: `translateY(${(1 - t) * 0.8 * vmin}px)`, padding: `0 ${8 * vmin}px`}}>
+        {kicker ? <div style={{fontFamily: MONO, fontSize: 2.2 * vmin, letterSpacing: "0.5em", color: C.accent,
+          marginBottom: 2.2 * vmin, paddingLeft: "0.5em"}}>{kicker}</div> : null}
+        <div style={{fontFamily: INTER, fontWeight: 500, fontSize: 4.2 * vmin, letterSpacing: "0.14em",
+          textTransform: "uppercase", color: "#E9EEE9", lineHeight: 1.3}}>{title}</div>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
 const LongForm: React.FC<{entry: VideoEntry}> = ({entry}) => {
   const {starts, beatsEnd, total} = layout(entry);
-  const last = entry.beats.length - 1;
   const introPad = sec(CONFIG.pacing.introPad);
   const outroPad = sec(CONFIG.pacing.outroPad);
-  const gap = sec(CONFIG.pacing.sectionGap);
   const leadIn = sec(CONFIG.pacing.leadIn);
   const whooshLead = sec(CONFIG.pacing.whooshLead);
   const bedVol = useBedVolume(total, 1.2, 4.0);   // fade nhạc dài, tan hẳn ở đuôi (chỗ đặt logo)
@@ -144,16 +174,26 @@ const LongForm: React.FC<{entry: VideoEntry}> = ({entry}) => {
               <Caption id={b.id} timings={entry.timings} />
             </Sequence>
           </Sequence>
-          {i < last && (
-            <Sequence from={starts[i] + b.durationInFrames + holdFrames(entry, b.id)} durationInFrames={gap}>
-              <Pad label={entry.scenes[b.id]?.bg} />
-            </Sequence>
-          )}
+          {(() => {
+            const j = joinAfter(entry, i);
+            const at = starts[i] + b.durationInFrames + holdFrames(entry, b.id);
+            if (j.kind === "gap") return (
+              <Sequence from={at} durationInFrames={j.frames}><Pad label={entry.scenes[b.id]?.bg} /></Sequence>);
+            if (j.kind === "chapter") {
+              const ch = (entry.scenes[entry.beats[i + 1].id] as BeatData).chapter!;
+              const fade = Math.min(sec(0.6), holdFrames(entry, b.id) + sec(0.3));   // tối dần đè lên đuôi beat
+              return (
+                <Sequence from={at - fade} durationInFrames={j.frames + fade}>
+                  <ChapterCard title={ch.title} kicker={ch.kicker} fade={fade} len={j.frames + fade} />
+                </Sequence>);
+            }
+            return null;
+          })()}
         </React.Fragment>
       ))}
       <Sequence from={beatsEnd} durationInFrames={outroPad}><Pad brand /></Sequence>
-      {/* whoosh mỗi lần đổi section, đỉnh sóng trùng nhát cắt (bỏ beat đầu = intro) */}
-      {entry.beats.map((b, i) => (i === 0 ? null :
+      {/* whoosh chỉ ở chỗ nối kiểu "gap" (đỉnh sóng trùng nhát cắt, bỏ beat đầu = intro) */}
+      {entry.beats.map((b, i) => (i === 0 || joinAfter(entry, i - 1).kind !== "gap" ? null :
         <Whoosh key={"wh" + i} from={Math.max(0, starts[i] - whooshLead)} volume={0.28} />
       ))}
       <Sig />

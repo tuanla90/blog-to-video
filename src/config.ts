@@ -43,6 +43,10 @@ export type PacingConfig = {
   introPad: number;
   /** giữa 2 beat */
   sectionGap: number;
+  /** giữa 2 beat thường: "gap" = khoảng nền sectionGap (mặc định) · "cut" = cắt thẳng, không nền, không whoosh */
+  between?: "gap" | "cut";
+  /** thẻ chương (beat có `chapter` trong scenes.json): bao lâu, tính cả đoạn tối dần */
+  chapterGap?: number;
   /** sau beat cuối — chỗ đặt logo, nhạc fade hẳn */
   outroPad: number;
   /** Short: nghỉ giữa cliffhanger và đáp án */
@@ -103,6 +107,8 @@ export const CONFIG: VideoConfig = {
   pacing: {
     introPad: 2.2,
     sectionGap: 0.8,
+    between: "gap",
+    chapterGap: 2.2,
     outroPad: 4.5,
     shortGap: 0.33,
     shortTail: 1.2,

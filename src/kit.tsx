@@ -789,7 +789,10 @@ const El: React.FC<{e: ElProps; from: number; to: number; v: number; customs: Re
 };
 
 // ---------- the beat renderer ----------
-export type BeatData = {bg?: string; moments: {w: number; gap?: number; atSec?: number; atWord?: string;
+export type BeatData = {bg?: string;
+  /** thẻ chương MỞ beat này: trước beat, hình tối dần, hiện kicker + title (Root.tsx · ChapterCard) */
+  chapter?: {title: string; kicker?: string};
+  moments: {w: number; gap?: number; atSec?: number; atWord?: string;
   /** chỉ với moment có ảnh tràn khung: đặt cột chữ ở top | center | bottom (chừa vùng caption) */
   place?: "top" | "center" | "bottom"; stack: ElProps[]}[]};
 

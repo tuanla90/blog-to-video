@@ -37,6 +37,8 @@
       "properties": {
         "introPad": {"type": "number"},
         "sectionGap": {"type": "number"},
+        "between": {"enum": ["gap", "cut"], "default": "gap", "description": "giữa 2 beat thường: khoảng nền sectionGap, hay cắt thẳng"},
+        "chapterGap": {"type": "number", "default": 2.2, "description": "độ dài thẻ chương (beat có chapter trong scenes.json)"},
         "outroPad": {"type": "number"},
         "shortGap": {"type": "number"},
         "shortTail": {"type": "number"},

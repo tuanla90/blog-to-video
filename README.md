@@ -171,6 +171,11 @@ Hai element này phủ cả khung, nằm dưới các element chữ cùng moment
 - **Ảnh kẹp trong thẻ** — `callout.media: {"src", "aspect", "from", "to", "speed", "caption", "rotate", "age"}`. Một ảnh hoặc một đoạn video lặp, trình bày như tấm ảnh in dán vào thẻ: viền giấy, băng dính, màu ngả (`age` 0..1, mặc định 0.3), hạt phim; `caption` viết tay trên mép giấy. Dùng để đặt một vật mẫu từ nơi khác cạnh điểm đang soi. Thẻ có ảnh tự rộng và đặt cao hơn.
 - **Cả hai cảnh đều cần một ảnh gốc độ phân giải cao** — zoom 2.4× ảnh 1920px là đã vỡ trên bản 1080p. Nên sinh ảnh 3000px trở lên.
 
+#### Chuyển cảnh: cắt thẳng và thẻ chương
+
+- `pacing.between` trong `video.config.json`: `"gap"` (mặc định — khoảng nền `sectionGap` + whoosh giữa mọi beat) hoặc `"cut"` (cắt thẳng, không nền, không whoosh).
+- Beat có `"chapter": {"kicker": "V", "title": "..."}` trong `scenes.json` mở một chương: trước beat ấy engine chèn thẻ chương dài `pacing.chapterGap` giây (mặc định 2.2) — hình beat trước tối dần, kicker + title hiện giữa nền tối, rồi beat sau cắt vào. Dùng cho chỗ đổi phần lớn; trong một phần thì để `"cut"`.
+
 #### Cảnh video: `clip`
 
 Giống `world` nhưng nguồn là một file video trong `public/`. Cắt đoạn theo **giây trong file gốc**, chỉnh tốc độ, và vẫn lia/phóng được.
