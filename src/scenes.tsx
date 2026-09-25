@@ -13,6 +13,7 @@ import {AbsoluteFill, Freeze, Img, Loop, OffthreadVideo, Sequence, staticFile, u
   interpolate, Easing, random} from "remotion";
 import {C, INTER, MONO, HAND} from "./ui";
 import {CONFIG} from "./config";
+import {NotebookLayer, pickText, minPx, Mark} from "./notebook";
 
 type Win = [number, number];
 type Cam = {x: number; y: number; zoom: number};
@@ -417,7 +418,11 @@ export const ElNotePage: React.FC<{p: any; win: Win; v: number; lines?: any[]}> 
   const [from, to] = win;
 
   // trang giấy thì mặc định thấy TRỌN (contain) — cắt mất mép giấy là mất luôn cảm giác "một trang"
-  const camCfg = (portrait && p.portrait?.camera) || p.camera || {};
+  // khung dọc 9:16: không nhét cả trang đôi — `short.page` (left|right) hoặc `short.region` cắt đúng một trang
+  const sh = portrait ? p.short : null;
+  const shortCam = sh?.region ? {x: (sh.region[0] + sh.region[2]) / 2, y: (sh.region[1] + sh.region[3]) / 2, zoom: 1 / Math.max(0.1, sh.region[2] - sh.region[0])}
+    : sh?.page ? {x: sh.page === "right" ? 0.75 : 0.25, y: 0.5, zoom: 2} : null;
+  const camCfg = (portrait && p.portrait?.camera) || (shortCam ? {from: shortCam, to: {...shortCam, zoom: shortCam.zoom * 1.03}} : null) || p.camera || {};
   const a = cam(camCfg.from, {x: 0.5, y: 0.5, zoom: p.zoom ?? 1});
   const b = cam(camCfg.to, {...a, zoom: a.zoom * (p.drift ?? 1.05)});
   const prog = interpolate(f, [from, to], [0, 1], clamp);
@@ -455,14 +460,16 @@ export const ElNotePage: React.FC<{p: any; win: Win; v: number; lines?: any[]}> 
             width: (n.w ?? 0.24) * r.w,
             transform: `translate(${align === "right" ? "-100%" : align === "center" ? "-50%" : "0"}, -50%) rotate(${tilt}deg)`,
             transformOrigin: "left center",
-            fontFamily: HAND, fontSize: (n.size ?? p.size ?? 2.5) * v, lineHeight: 1.28,
+            fontFamily: HAND, fontSize: Math.max((n.size ?? p.size ?? 3.2) * v, minPx(W, H, "body")), lineHeight: 1.28,
             color: ink, opacity: fade, textAlign: align as any,
             clipPath: `inset(-0.4em ${(1 - wipe) * 100}% -0.4em -0.2em)`,
             whiteSpace: "pre-wrap", wordBreak: "break-word"}}>
-            {n.text}
+            <Mark kind={n.mark} size={Math.max((n.size ?? p.size ?? 3.2) * v, minPx(W, H, "body")) * 0.8} color={ink} seed={`${p.src}-nm${i}`} />
+            {n.mark === "hypothesis" ? `${pickText(n.text)} (?)` : pickText(n.text)}
           </div>
         );
       })}
+      <NotebookLayer p={{...p, ink}} R={r} from={from} to={to} v={v} lines={lines} />
     </AbsoluteFill>
   );
 };

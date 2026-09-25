@@ -78,6 +78,12 @@ export type CategoryConfig = {
   acc2: string;
 };
 
+/** chữ trên hình: một video chỉ mang MỘT lớp chữ (YouTube multi-audio chỉ đổi track giọng). Chữ khai
+ *  dạng {vi, en} trong scenes.json thì engine chọn theo lang. */
+export type TextConfig = {lang: string};
+/** mực của trang sổ (element notepage): ink = mực chính, accent = màu nhấn (đường năng lượng, ngưỡng) */
+export type NotebookConfig = {ink?: string; accent?: string};
+
 export type VideoConfig = {
   fps: number;
   brand: BrandConfig;
@@ -85,6 +91,8 @@ export type VideoConfig = {
   pacing: PacingConfig;
   thumb: ThumbConfig;
   categories: CategoryConfig[];
+  text?: TextConfig;
+  notebook?: NotebookConfig;
 };
 
 export const CONFIG: VideoConfig = {
@@ -121,6 +129,8 @@ export const CONFIG: VideoConfig = {
     logoWhite: "thumb/logo-white.png",
   },
   categories: [],
+  text: {lang: "vi"},
+  notebook: {},
 };
 
 /** alias tiện tay — CÙNG object với CONFIG.brand, giữ nguyên reference sau applyConfig */
