@@ -33,15 +33,23 @@ FORCE = "--force" in sys.argv
 DUO = {"gap": 0.06, "introPad": 0.1, "outroPad": 1.2, **CONFIG.get("duo", {})}
 CAST = DUO.get("cast", {})
 SCRIPT = json.load(open(os.path.join(VIDEOS, SLUG, "duo.json"), encoding="utf-8"))
-PRON = SCRIPT.get("pron", {})          # đổi cách ĐỌC, bong bóng vẫn giữ chữ gốc
+# đổi cách ĐỌC, bong bóng vẫn giữ chữ gốc. Của tập (cụ thể hơn, vd "COUNT(Diem)") đứng trước từ điển chung
+# `duo.pron` trong config (thuật ngữ dùng mọi tập: range, print, SQL...). Giọng TTS tiếng Việt đọc từ tiếng Anh
+# rất sai, nên phiên âm theo cách học sinh vẫn đọc.
+PRON = {**SCRIPT.get("pron", {}), **{k: v for k, v in DUO.get("pron", {}).items() if k not in SCRIPT.get("pron", {})}}
 AUDIO_DIR = os.path.join(PUBLIC, "audio", SLUG)
 os.makedirs(AUDIO_DIR, exist_ok=True)
 
 
 def spoken(text):
     t = re.sub(r"\[[^\]]*\]", "", text)   # bỏ mọi [tag] còn sót
-    for k, v in PRON.items():
-        t = t.replace(k, v)
+    # khoá dài trước (COUNT(Diem) trước COUNT); khoá là chữ thì chỉ thay nguyên từ (for không ăn vào format)
+    for k in sorted(PRON, key=len, reverse=True):
+        v = PRON[k]
+        if re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", k):
+            t = re.sub(rf"(?<![A-Za-z0-9_]){re.escape(k)}(?![A-Za-z0-9_])", v, t)
+        else:
+            t = t.replace(k, v)
     return t.strip()
 
 
