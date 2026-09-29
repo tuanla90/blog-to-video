@@ -41,10 +41,13 @@ AUDIO_DIR = os.path.join(PUBLIC, "audio", SLUG)
 os.makedirs(AUDIO_DIR, exist_ok=True)
 
 
-def spoken(text):
+def spoken(text, keep=None):
+    """keep: chỉ áp các khoá phát âm có chứa một trong các chuỗi này (giọng đọc tiếng Anh tốt thì bỏ phần còn lại)."""
     t = re.sub(r"\[[^\]]*\]", "", text)   # bỏ mọi [tag] còn sót
     # khoá dài trước (COUNT(Diem) trước COUNT); khoá là chữ thì chỉ thay nguyên từ (for không ăn vào format)
     for k in sorted(PRON, key=len, reverse=True):
+        if keep is not None and not any(x in k for x in keep):
+            continue
         v = PRON[k]
         if re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", k):
             t = re.sub(rf"(?<![A-Za-z0-9_]){re.escape(k)}(?![A-Za-z0-9_])", v, t)
@@ -121,7 +124,40 @@ def estimate_words(path, toks):
     return out
 
 
-PROVIDERS = {"edge": synth_edge, "google": synth_google}
+# ---------------------------------------------------------------- provider: elevenlabs
+
+def synth_elevenlabs(text, v, out):
+    """ElevenLabs /with-timestamps: mốc từng ký tự -> gộp thành từ. Đọc từ tiếng Anh lẫn trong câu Việt tốt.
+    v: {voice: <voice_id, dùng được cả giọng kho chung>, model: eleven_multilingual_v2 | eleven_v3, settings: {...}}"""
+    key = os.environ.get("ELEVENLABS_API_KEY")
+    if not key:
+        raise SystemExit("Thiếu ELEVENLABS_API_KEY trong .env")
+    body = {"text": text, "model_id": v.get("model", "eleven_multilingual_v2")}
+    if v.get("settings"):
+        body["voice_settings"] = v["settings"]
+    req = urllib.request.Request(
+        f"https://api.elevenlabs.io/v1/text-to-speech/{v['voice']}/with-timestamps?output_format=mp3_44100_128",
+        data=json.dumps(body).encode(), headers={"Content-Type": "application/json", "xi-api-key": key})
+    data = json.load(urllib.request.urlopen(req, timeout=120))
+    open(out, "wb").write(base64.b64decode(data["audio_base64"]))
+    al = data.get("alignment") or {}
+    words, cur, s0, e0 = [], "", None, None
+    for ch, s, e in zip(al.get("characters", []), al.get("character_start_times_seconds", []),
+                        al.get("character_end_times_seconds", [])):
+        if ch.isspace():
+            if cur:
+                words.append({"w": cur, "s": round(s0, 3), "e": round(e0, 3)})
+            cur, s0 = "", None
+            continue
+        if s0 is None:
+            s0 = s
+        cur += ch; e0 = e
+    if cur:
+        words.append({"w": cur, "s": round(s0, 3), "e": round(e0, 3)})
+    return words or estimate_words(out, text.split())
+
+
+PROVIDERS = {"edge": synth_edge, "google": synth_google, "elevenlabs": synth_elevenlabs}
 
 
 def fit_display(words, display):
@@ -157,7 +193,8 @@ for i, L in enumerate(SCRIPT["lines"]):
     member = CAST.get(who) or {}
     v = {**(member.get("voice") or {}), **(L.get("voice") or {})}
     prov = v.get("provider", "edge")
-    text = spoken(L["say"])
+    # "pron": ["diem10code"] trong voice = chỉ phiên âm các từ này (vd ElevenLabs đọc SQL/NULL đúng sẵn)
+    text = spoken(L["say"], v.get("pron"))
     h = hashlib.sha1(json.dumps([prov, v, text], sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:10]
     fn = f"duo-{h}.mp3"
     path = os.path.join(AUDIO_DIR, fn)
