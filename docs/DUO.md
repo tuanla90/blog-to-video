@@ -42,6 +42,8 @@ registerRoot(makeRoot(VIDEOS, {duos: DUOS}));
 | `google` | `voice` (vd `vi-VN-Chirp3-HD-Achird`), `rate` (1.1), `lang` | cần `GOOGLE_TTS_API_KEY`. Không trả mốc từ: ước lượng theo độ dài chữ trong đoạn có tiếng |
 | `elevenlabs` | `voice` (voice_id, giọng kho chung dùng thẳng được), `model` (`eleven_multilingual_v2` / `eleven_v3`), `settings` | cần `ELEVENLABS_API_KEY`, tính tiền theo ký tự. Trả mốc từng ký tự, đọc từ tiếng Anh lẫn trong câu Việt tốt nhất |
 
+Mọi provider nhận thêm `tempo` (vd 1.15: tăng tốc hậu kỳ bằng atempo, mốc từ co theo; dùng cho ElevenLabs v3 vì nó bỏ qua speed). Với `eleven_v3`, thẻ cảm xúc trong `say` (`[excited]`, `[laughs]`, `[sighs]`, `[whispers]`, `[mischievously]`...) được giữ để giọng diễn theo, còn bong bóng thoại tự bỏ thẻ.
+
 Mọi provider nhận thêm `pron`: danh sách chuỗi, chỉ áp các mục phát âm chứa chúng (giọng đọc tiếng Anh tốt thì để `["diem10code"]`).
 
 Từ điển phát âm chung cho mọi tập: `duo.pron` trong config, vd `{"SQL": "si-quồ", "NULL": "nâu"}`. `pron` trong `duo.json` của tập đứng trước. Khoá là chữ thì chỉ thay nguyên từ.

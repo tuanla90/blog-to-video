@@ -41,9 +41,10 @@ AUDIO_DIR = os.path.join(PUBLIC, "audio", SLUG)
 os.makedirs(AUDIO_DIR, exist_ok=True)
 
 
-def spoken(text, keep=None):
-    """keep: chỉ áp các khoá phát âm có chứa một trong các chuỗi này (giọng đọc tiếng Anh tốt thì bỏ phần còn lại)."""
-    t = re.sub(r"\[[^\]]*\]", "", text)   # bỏ mọi [tag] còn sót
+def spoken(text, keep=None, tags=False):
+    """keep: chỉ áp các khoá phát âm có chứa một trong các chuỗi này (giọng đọc tiếng Anh tốt thì bỏ phần còn lại).
+    tags: giữ thẻ cảm xúc [excited] [laughs]... (ElevenLabs v3 diễn theo thẻ); giọng khác thì bỏ, không nó đọc to lên."""
+    t = text if tags else re.sub(r"\[[^\]]*\]", "", text)
     # khoá dài trước (COUNT(Diem) trước COUNT); khoá là chữ thì chỉ thay nguyên từ (for không ăn vào format)
     for k in sorted(PRON, key=len, reverse=True):
         if keep is not None and not any(x in k for x in keep):
@@ -54,6 +55,16 @@ def spoken(text, keep=None):
         else:
             t = t.replace(k, v)
     return t.strip()
+
+
+def speedup(path, k, words):
+    """Tăng tốc hậu kỳ (ElevenLabs v3 bỏ qua tham số speed): atempo giữ cao độ, mốc từ co theo."""
+    import subprocess, imageio_ffmpeg
+    tmp = path + ".tmp.mp3"
+    subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), "-y", "-loglevel", "error", "-i", path,
+                    "-filter:a", f"atempo={k}", "-b:a", "128k", tmp], check=True)
+    os.replace(tmp, path)
+    return [{**w, "s": round(w["s"] / k, 3), "e": round(w["e"] / k, 3)} for w in words]
 
 
 def duration(path):
@@ -194,7 +205,8 @@ for i, L in enumerate(SCRIPT["lines"]):
     v = {**(member.get("voice") or {}), **(L.get("voice") or {})}
     prov = v.get("provider", "edge")
     # "pron": ["diem10code"] trong voice = chỉ phiên âm các từ này (vd ElevenLabs đọc SQL/NULL đúng sẵn)
-    text = spoken(L["say"], v.get("pron"))
+    tags = prov == "elevenlabs" and "v3" in v.get("model", "")
+    text = spoken(L["say"], v.get("pron"), tags)
     h = hashlib.sha1(json.dumps([prov, v, text], sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:10]
     fn = f"duo-{h}.mp3"
     path = os.path.join(AUDIO_DIR, fn)
@@ -203,6 +215,9 @@ for i, L in enumerate(SCRIPT["lines"]):
     else:
         print(f"[{i:02d}] {who:<5} {prov}: {text}")
         words = PROVIDERS[prov](text, v, path)
+        words = [w for w in words if not re.fullmatch(r"\[[^\]]*\][,.!?]*", w["w"])]   # thẻ cảm xúc không phải tiếng
+        if float(v.get("tempo", 1)) != 1:
+            words = speedup(path, float(v["tempo"]), words)
         dur = duration(path)
         cache[h] = {"words": words, "dur": dur}
     words = fit_display(words, re.sub(r"\[[^\]]*\]", "", L["say"]).strip())
