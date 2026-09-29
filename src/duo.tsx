@@ -623,6 +623,11 @@ export const DuoShort: React.FC<{entry: DuoEntry}> = ({entry}) => {
   const says = lines.filter((L) => L.kind === "say");
   const talkEnd = says.length ? says[says.length - 1].end : 0;
   const total = entry.timing.total;
+  // cắt nhạc từ đâu: bedCue = giây trong bài nhạc phải rơi đúng lúc bắt đầu đếm ngược (đoạn lắng của bài
+  // khớp khoảnh khắc hồi hộp, mỗi tập đếm ngược ở mốc khác nhau nên tự tính); không có thì bedStart.
+  const cd0 = lines.find((L) => L.kind === "countdown");
+  const au = CONFIG.audio as any;
+  const bedFrom = Math.max(0, Math.round(fps * (au.bedCue != null && cd0 ? au.bedCue - cd0.start : (au.bedStart ?? 0))));
   const bedVolume = (fa: number) => {
     const ts = fa / fps;
     const base = CONFIG.audio.bedVolume;
@@ -657,7 +662,7 @@ export const DuoShort: React.FC<{entry: DuoEntry}> = ({entry}) => {
           <Audio src={staticFile(L.audio)} />
         </Sequence>
       ) : null)}
-      {CONFIG.audio.bed && <Audio src={staticFile(CONFIG.audio.bed)} volume={bedVolume} />}
+      {CONFIG.audio.bed && <Audio src={staticFile(CONFIG.audio.bed)} volume={bedVolume} startFrom={bedFrom} />}
 
       {/* sfx theo sự kiện */}
       {events.map((e, i) => {

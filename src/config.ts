@@ -35,6 +35,10 @@ export type AudioConfig = {
   sfxDir: string;
   /** file whoosh lúc chuyển section (trong sfxDir). null = tắt */
   whoosh: string | null;
+  /** bắt đầu phát nhạc nền từ giây này của bài (bỏ đoạn dạo đầu) */
+  bedStart?: number;
+  /** Short đối đáp: giây trong bài nhạc phải trùng lúc bắt đầu đếm ngược (đè bedStart) */
+  bedCue?: number;
 };
 
 /** nhịp thở của video, tính bằng GIÂY (engine đổi ra frame theo fps) */
