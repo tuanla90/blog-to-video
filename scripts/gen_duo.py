@@ -67,6 +67,19 @@ def speedup(path, k, words):
     return [{**w, "s": round(w["s"] / k, 3), "e": round(w["e"] / k, 3)} for w in words]
 
 
+def voiced_bounds(path, thresh=0.015):
+    """(đầu, cuối) của đoạn có tiếng trong file, theo năng lượng (bao cả tiếng cười, hơi thở)."""
+    import av, numpy as np
+    with av.open(path) as c:
+        st = c.streams.audio[0]
+        sr = st.rate or 44100
+        x = np.concatenate([fr.to_ndarray().mean(axis=0) for fr in c.decode(st)]).astype(np.float64)
+    hop = int(sr * 0.01)
+    rms = np.sqrt(np.convolve(x ** 2, np.ones(hop) / hop, mode="same"))[::hop]
+    on = np.where(rms > rms.max() * thresh)[0]
+    return (on[0] * 0.01, on[-1] * 0.01) if len(on) else (0.0, len(x) / sr)
+
+
 def duration(path):
     import av
     with av.open(path) as c:
@@ -221,8 +234,11 @@ for i, L in enumerate(SCRIPT["lines"]):
         dur = duration(path)
         cache[h] = {"words": words, "dur": dur}
     words = fit_display(words, re.sub(r"\[[^\]]*\]", "", L["say"]).strip())
-    lead = words[0]["s"] if words else 0.0          # im lặng đầu file: cắt bằng cách cho file vào sớm hơn
-    speech_end = words[-1]["e"] if words else dur
+    # mép câu = vùng CÓ TIẾNG thật trong file, không chỉ chữ đầu/chữ cuối: thẻ cảm xúc (cười, hít vào, thở dài)
+    # kêu trước chữ đầu / sau chữ cuối, lấy theo chữ thì câu sau chồng lên tiếng cười câu trước
+    va, vb = voiced_bounds(path)
+    lead = min(words[0]["s"], va) if words else va          # im lặng đầu file: cho file vào sớm hơn
+    speech_end = max(words[-1]["e"], vb) if words else vb
     audio_start = t - lead
     lines.append({
         "kind": "say", "who": who,
