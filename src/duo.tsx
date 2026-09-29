@@ -611,6 +611,21 @@ export const DuoShort: React.FC<{entry: DuoEntry}> = ({entry}) => {
     : <CtaView cta={script.cta} at={vAt} />;
 
   const fr = (s: number) => Math.round(s * fps);
+
+  // nhạc nền: nhỏ dưới giọng, to lên khi đếm ngược (chỉ còn nhạc + tick) và ở khung cuối, vào/ra mềm.
+  // Không dùng loop: bản nhạc phải dài hơn tập (với <Audio loop> Remotion trả frame theo từng vòng).
+  const says = lines.filter((L) => L.kind === "say");
+  const talkEnd = says.length ? says[says.length - 1].end : 0;
+  const total = entry.timing.total;
+  const bedVolume = (fa: number) => {
+    const ts = fa / fps;
+    const base = CONFIG.audio.bedVolume;
+    const lift = lines.some((L) => L.kind === "countdown" && ts >= L.start - 0.1 && ts <= L.end + 0.1) || ts > talkEnd + 0.15;
+    const fadeIn = Math.min(1, ts / 0.25);
+    const fadeOut = Math.min(1, Math.max(0, (total - ts) / 0.6));
+    return base * (lift ? 2.6 : 1) * fadeIn * fadeOut;
+  };
+
   return (
     <AbsoluteFill style={{background: C.bg, fontFamily: INTER, color: C.text, overflow: "hidden"}}>
       <Bg />
@@ -636,7 +651,7 @@ export const DuoShort: React.FC<{entry: DuoEntry}> = ({entry}) => {
           <Audio src={staticFile(L.audio)} />
         </Sequence>
       ) : null)}
-      {CONFIG.audio.bed && <Audio src={staticFile(CONFIG.audio.bed)} loop volume={CONFIG.audio.bedVolume} />}
+      {CONFIG.audio.bed && <Audio src={staticFile(CONFIG.audio.bed)} volume={bedVolume} />}
 
       {/* sfx theo sự kiện */}
       {events.map((e, i) => {
