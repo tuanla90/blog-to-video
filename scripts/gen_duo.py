@@ -226,6 +226,8 @@ def fit_display(words, display):
 # ---------------------------------------------------------------- xếp câu nối câu
 
 cache_path = os.path.join(VIDEOS, SLUG, ".duo-cache.json")
+_tp = os.path.join(VIDEOS, SLUG, "duo.timing.json")
+OLD_LINES = [] if FORCE or not os.path.exists(_tp) else json.load(open(_tp, encoding="utf-8")).get("lines", [])
 cache = {} if FORCE or not os.path.exists(cache_path) else json.load(open(cache_path, encoding="utf-8"))
 
 t = DUO["introPad"]
@@ -243,12 +245,30 @@ for i, L in enumerate(SCRIPT["lines"]):
     # "pron": ["diem10code"] trong voice = chỉ phiên âm các từ này (vd ElevenLabs đọc SQL/NULL đúng sẵn)
     tags = prov == "elevenlabs" and "v3" in v.get("model", "")
     text = spoken(L["say"], v.get("pron"), tags)
-    h = hashlib.sha1(json.dumps([prov, v, text], sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:10]
+    # khoá cache CHỈ gồm thứ làm đổi tiếng đọc (nhà cung cấp, giọng, mô hình, tốc độ...) + câu gửi đi.
+    # "pron", "name" không vào khoá: sửa danh sách phiên âm mà câu không đổi thì không sinh lại (tốn tiền, đổi bản đọc).
+    av = {k: v[k] for k in sorted(v) if k not in ("pron", "name")}
+    vk = hashlib.sha1(json.dumps([prov, av], sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:8]
+    h = hashlib.sha1(json.dumps([prov, av, text], sort_keys=True, ensure_ascii=False).encode()).hexdigest()[:10]
     fn = f"duo-{h}.mp3"
-    path = os.path.join(AUDIO_DIR, fn)
-    if h in cache and os.path.exists(path):
-        words, dur = cache[h]["words"], cache[h]["dur"]
+    e = cache.get(h)
+    path = os.path.join(AUDIO_DIR, (e or {}).get("file", fn))
+    prev = OLD_LINES[i] if i < len(OLD_LINES) else None
+    disp = re.sub(r"\[[^\]]*\]", "", L["say"]).split()
+    if e and os.path.exists(path):
+        words, dur = e["words"], e["dur"]
+    elif (prev and prev.get("kind") == "say" and prev.get("who") == who and prev.get("audio")
+          and os.path.exists(os.path.join(PUBLIC, prev["audio"]))
+          and prev.get("vk", vk) == vk
+          and (prev.get("tts") == text if "tts" in prev else [w["w"] for w in prev.get("words", [])] == disp)):
+        # câu không đổi so với lần trước (file mốc giờ cũ): dùng lại đúng bản đọc đã duyệt, không gọi TTS
+        path = os.path.join(PUBLIC, prev["audio"])
+        words = [{**w, "s": round(w["s"] - prev["audioStart"], 3), "e": round(w["e"] - prev["audioStart"], 3)} for w in prev["words"]]
+        dur = duration(path)
+        cache[h] = {"words": words, "dur": dur, "file": os.path.basename(path)}
+        print(f"[{i:02d}] {who:<5} dùng lại bản đọc cũ")
     else:
+        path = os.path.join(AUDIO_DIR, fn)
         print(f"[{i:02d}] {who:<5} {prov}: {text}")
         words = PROVIDERS[prov](text, v, path)
         words = [w for w in words if not re.fullmatch(r"\[[^\]]*\][,.!?]*", w["w"])]   # thẻ cảm xúc không phải tiếng
@@ -257,7 +277,7 @@ for i, L in enumerate(SCRIPT["lines"]):
         if float(v.get("tempo", 1)) != 1:
             words = speedup(path, float(v["tempo"]), words)
         dur = duration(path)
-        cache[h] = {"words": words, "dur": dur}
+        cache[h] = {"words": words, "dur": dur, "file": fn}
     words = fit_display(words, re.sub(r"\[[^\]]*\]", "", L["say"]).strip())
     # mép câu = vùng CÓ TIẾNG thật trong file, không chỉ chữ đầu/chữ cuối: thẻ cảm xúc (cười, hít vào, thở dài)
     # kêu trước chữ đầu / sau chữ cuối, lấy theo chữ thì câu sau chồng lên tiếng cười câu trước
@@ -267,7 +287,8 @@ for i, L in enumerate(SCRIPT["lines"]):
     audio_start = t - lead
     lines.append({
         "kind": "say", "who": who,
-        "audio": f"audio/{SLUG}/{fn}",
+        "audio": f"audio/{SLUG}/{os.path.basename(path)}",
+        "vk": vk, "tts": text,
         "audioStart": round(audio_start, 3),
         "start": round(t, 3),
         "end": round(audio_start + speech_end, 3),
