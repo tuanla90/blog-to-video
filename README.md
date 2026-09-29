@@ -226,6 +226,17 @@ Thêm skill `promo-forge` cho video giới thiệu sản phẩm không giọng (
 
 ---
 
+## Short đối đáp hai nhân vật: `duo`
+
+Kiểu Short 9:16 riêng: hai mascot thay nhau nói, bảng đố ở giữa (đề, code, 4 đáp án, đếm ngược, lật đáp án, giải thích), bong bóng thoại chạy theo từng tiếng, mascot đổi biểu cảm liên tục. Một tập = một file `videos/<slug>/duo.json`; giọng từng nhân vật (ElevenLabs v3 có thẻ cảm xúc / Google / Edge) và nhạc nền tự khớp.
+
+```bash
+npx blog2video duo <slug>      # giọng từng câu + mốc giờ (có cache)
+npx blog2video registry        # mảng DUOS, composition <slug>-Duo
+```
+
+Cách viết kịch bản, lệnh hình, giao diện `theme: "semanio"`: [`docs/DUO.md`](docs/DUO.md). Dự án dùng thật: `diem10code-shorts` (có quy trình giao cho AI khác làm tập mới).
+
 ## Video sản phẩm không giọng: `promo/`
 
 Dự án Remotion riêng (Remotion 4.0.351, React 18) cho video promo/demo 2–3 phút: chữ to theo nhịp nhạc, cảnh giao diện dựng lại, clip quay màn hình thật có zoom + gợn sóng bấm, nhiều phiên bản trên cùng timeline. Dùng chung SFX của `assets/sfx`.
