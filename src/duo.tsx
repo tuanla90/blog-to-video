@@ -20,12 +20,46 @@ import React, {useMemo} from "react";
 import {AbsoluteFill, Audio, Img, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig, Easing} from "remotion";
 import {icons as LUCIDE} from "lucide-react";
 import {C, INTER, MONO, Bg, Sparks} from "./ui";
+import {loadFont as loadBVP} from "@remotion/google-fonts/BeVietnamPro";
 import {CONFIG} from "./config";
 import type {CastMember} from "./config";
 import type {DuoEntry} from "./types";
 
 const clamp = {extrapolateLeft: "clamp" as const, extrapolateRight: "clamp" as const};
 const YELLOW = "#FDE047";
+const BVP = `${loadBVP("normal", {weights: ["500", "600", "700", "800"], subsets: ["latin", "vietnamese"]}).fontFamily}, sans-serif`;
+
+// ---------------------------------------------------------------- giao diện
+// `duo.theme` trong config: "dark" (mặc định, nền tối + vàng) hoặc "semanio" (nền sáng, gradient tím -> hồng,
+// Be Vietnam Pro, bám theo promo Semanio ở blog2video/promo/src/theme.ts). Mọi màu của duo lấy từ đây.
+const GRAD = "linear-gradient(135deg, #6D5DF6 0%, #E86FC6 100%)";
+type Theme = {light: boolean; font: string; ink: string; soft: string; kicker: string; hl: string; accent: string;
+  good: string; goodGrad: string; bad: string; warn: string;
+  card: string; cardBorder: string; cardShadow: string; codeBg: string; codeBorder: string;
+  opt: string; optBorder: string; letterBg: string; exItem: string; exLatest: string; exBorder: string; exLatestBorder: string;
+  bubble: string; pill: string; pillInk: string; ring: string; ringTrack: string; ringFill: string; bar: string;
+  bigGrad: string; bigGlow: string; floor: string; emoteStroke: string; mascotShadow: string};
+const DARK: Theme = {light: false, font: INTER, ink: "#fff", soft: C.muted, kicker: YELLOW, hl: YELLOW, accent: C.accent,
+  good: C.good, goodGrad: `linear-gradient(160deg, ${C.good}, #047857)`, bad: C.bad, warn: C.warn,
+  card: "linear-gradient(165deg, rgba(30,27,60,0.92), rgba(14,12,28,0.94))", cardBorder: `2px solid ${C.accent}55`,
+  cardShadow: "0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08)",
+  codeBg: "rgba(8,8,16,0.92)", codeBorder: "2px solid #2A2D46",
+  opt: "rgba(22,20,42,0.95)", optBorder: "#3B3F66", letterBg: `${C.accent}33`,
+  exItem: "rgba(22,20,42,0.85)", exLatest: `${C.accent}30`, exBorder: "#2A2D46", exLatestBorder: C.accent,
+  bubble: "rgba(11,10,20,0.9)", pill: YELLOW, pillInk: "#0B0A14", ring: YELLOW, ringTrack: "#2A2D46", ringFill: "rgba(11,10,20,0.92)",
+  bar: `linear-gradient(90deg, ${C.accent}, ${YELLOW})`, bigGrad: `linear-gradient(180deg, #FFFFFF 10%, ${C.bad} 95%)`,
+  bigGlow: `${C.bad}66`, floor: `${C.accent}55`, emoteStroke: "#0B0A14", mascotShadow: ""};
+const SEMANIO: Theme = {light: true, font: BVP, ink: "#1B1838", soft: "#66628C", kicker: "#D857B0", hl: "#6D5DF6", accent: "#6D5DF6",
+  good: "#0E9F6E", goodGrad: "linear-gradient(160deg, #10B981, #0E7A5F)", bad: "#E5484D", warn: "#E8870E",
+  card: "#FFFFFF", cardBorder: "2px solid #D8D5F0", cardShadow: "0 18px 50px rgba(75,59,211,0.14)",
+  codeBg: "#1E1B3A", codeBorder: "2px solid #2F2A5E",
+  opt: "#FFFFFF", optBorder: "#D8D5F0", letterBg: GRAD,
+  exItem: "#FFFFFF", exLatest: "#F2F1FC", exBorder: "#E4E1F7", exLatestBorder: "#6D5DF6",
+  bubble: "#FFFFFF", pill: GRAD, pillInk: "#FFFFFF", ring: "#6D5DF6", ringTrack: "#E4E1F7", ringFill: "#FFFFFF",
+  bar: "linear-gradient(90deg, #6D5DF6, #E86FC6)", bigGrad: "linear-gradient(135deg, #6D5DF6 10%, #E86FC6 90%)",
+  bigGlow: "rgba(109,93,246,0.35)", floor: "rgba(109,93,246,0.28)", emoteStroke: "#FFFFFF",
+  mascotShadow: " drop-shadow(0 10px 18px rgba(34,26,102,0.28))"};
+const th = (): Theme => ((CONFIG.duo as any).theme === "semanio" ? SEMANIO : DARK);
 
 type TWord = {w: string; s: number; e: number};
 type TLine = {kind: "say" | "countdown"; who?: string; audio?: string; audioStart?: number;
@@ -53,8 +87,9 @@ const faceOf = (m: CastMember, name?: string) => {
 
 const colOf = (k: string) => {
   const cast = CONFIG.duo.cast;
-  const map: Record<string, string> = {accent: C.accent, good: C.good, bad: C.bad, warn: C.warn, muted: C.muted,
-    yellow: YELLOW, ...Object.fromEntries(Object.entries(cast).map(([id, m]) => [id, m.color]))};
+  const T = th();
+  const map: Record<string, string> = {accent: T.accent, good: T.good, bad: T.bad, warn: T.warn, muted: T.soft,
+    yellow: T.light ? "#D857B0" : YELLOW, ...Object.fromEntries(Object.entries(cast).map(([id, m]) => [id, m.color]))};
   return map[k] || k;
 };
 
@@ -172,7 +207,9 @@ const EMOTE: Record<string, {text?: string; icon?: string; color: string}> = {
 
 const Emote: React.FC<{face: string; at: number; side: "left" | "right"; size: number}> = ({face, at, side, size}) => {
   const f = useCurrentFrame();
-  const e = EMOTE[face];
+  const e0 = EMOTE[face];
+  const DEEP: Record<string, string> = {[YELLOW]: "#F59E0B", "#7DD3FC": "#0EA5E9", "#93C5FD": "#3B82F6", "#F9A8D4": "#EC4899"};
+  const e = e0 && th().light ? {...e0, color: DEEP[e0.color] ?? e0.color} : e0;
   const sp = useSpring(at, {damping: 8, stiffness: 300, mass: 0.5});
   const dt = f - at;
   if (!e || dt < 0 || dt > 30) return null;
@@ -185,7 +222,7 @@ const Emote: React.FC<{face: string; at: number; side: "left" | "right"; size: n
       filter: `drop-shadow(0 0 12px ${e.color}aa)`}}>
       {e.text ? (
         <div style={{fontFamily: INTER, fontWeight: 900, fontSize: size, color: e.color, lineHeight: 1,
-          WebkitTextStroke: "4px #0B0A14", paintOrder: "stroke"}}>{e.text}</div>
+          WebkitTextStroke: `4px ${th().emoteStroke}`, paintOrder: "stroke"}}>{e.text}</div>
       ) : <Icon name={e.icon!} size={size * 0.9} color={e.color} stroke={3} />}
     </div>
   );
@@ -240,14 +277,15 @@ const Mascot: React.FC<{id: string; m: CastMember; faces: {t: number; face: stri
   const H = height * 0.275;
   const cx = (left ? 0.29 : 0.71) * width + (left ? 1 : -1) * 26 * focus + (1 - enter) * (left ? -600 : 600);
   const scale = (0.86 + 0.2 * focus) * popS;
-  const lit = 0.62 + 0.38 * focus;
+  const T = th();
+  const lit = T.light ? 0.82 + 0.18 * focus : 0.62 + 0.38 * focus;
 
   return (
     <div style={{position: "absolute", left: cx, bottom: height * 0.095, height: H,
       transform: `translateX(-50%) translateX(${shake}px) translateY(${-jump + breathe - bob * 10}px)`}}>
       <div style={{height: "100%", transform: `scale(${scale * (1 - 0.03 * bob)}, ${scale * (1 + 0.035 * bob)})`,
         transformOrigin: "50% 100%", filter: `brightness(${lit}) saturate(${0.75 + 0.25 * focus})
-          drop-shadow(0 0 ${22 * focus}px ${m.color}88)`}}>
+          drop-shadow(0 0 ${22 * focus}px ${m.color}88)${T.mascotShadow}`}}>
         <Img src={staticFile(`${m.dir}/${face}.png`)} style={{height: "100%", width: "auto", transform: left ? "none" : "scaleX(-1)"}} />
       </div>
       {fc && <Emote face={fc.face} at={faceAt} side={m.side} size={H * 0.26} />}
@@ -284,20 +322,23 @@ const Bubble: React.FC<{lines: TLine[]}> = ({lines}) => {
   const sp = spring({frame: f - at, fps, config: {damping: 11, stiffness: 320, mass: 0.45}});
   const left = m.side === "left";
   const fs = width * 0.066;
+  const T = th();
+  const deep = m.deep ?? m.color;   // tông đậm: đọc rõ trên nền trắng
   return (
     <div style={{position: "absolute", left: "50%", top: height * 0.56, width: width * 0.86,
       transform: `translateX(-50%) translateX(${(left ? -1 : 1) * width * 0.02}px) scale(${0.93 + 0.07 * sp})`,
       transformOrigin: left ? "20% 100%" : "80% 100%"}}>
-      <div style={{position: "relative", background: "rgba(11,10,20,0.9)", border: `5px solid ${m.color}`,
+      <div style={{position: "relative", background: T.bubble, border: `5px solid ${m.color}`,
         borderRadius: 34, padding: `${fs * 0.34}px ${fs * 0.5}px`, textAlign: "center",
-        boxShadow: `0 10px 40px rgba(0,0,0,0.55), 0 0 36px ${m.color}55`}}>
-        <div style={{position: "absolute", top: -fs * 0.42, [left ? "left" : "right"]: 40, background: m.color,
-          color: "#0B0A14", fontFamily: INTER, fontWeight: 900, fontSize: fs * 0.42, letterSpacing: 3,
-          padding: `${fs * 0.06}px ${fs * 0.3}px`, borderRadius: 999}}>{m.name}</div>
-        <div style={{fontFamily: INTER, fontWeight: 800, fontSize: fs, lineHeight: 1.18, color: "#fff"}}>
+        boxShadow: T.light ? `0 14px 36px rgba(34,26,102,0.18), 0 0 30px ${m.color}40` : `0 10px 40px rgba(0,0,0,0.55), 0 0 36px ${m.color}55`}}>
+        {/* nhãn tên: nền màu đậm của nhân vật, chữ trắng đậm */}
+        <div style={{position: "absolute", top: -fs * 0.56, [left ? "left" : "right"]: 36, background: deep,
+          color: "#fff", fontFamily: T.font, fontWeight: 800, fontSize: fs * 0.56, letterSpacing: 3,
+          padding: `${fs * 0.08}px ${fs * 0.38}px`, borderRadius: 999, boxShadow: `0 6px 16px ${deep}66`}}>{m.name}</div>
+        <div style={{fontFamily: T.font, fontWeight: 800, fontSize: fs, lineHeight: 1.18, color: T.ink}}>
           {ch.c.map((w, i) => {
             const on = t >= w.s - 0.03 && t <= w.e + 0.05;
-            return <span key={i} style={{color: on ? YELLOW : "#fff", margin: "0 0.14em", display: "inline-block",
+            return <span key={i} style={{color: on ? (T.light ? deep : T.hl) : T.ink, margin: "0 0.14em", display: "inline-block",
               transform: `scale(${on ? 1.06 : 1})`}}>{w.w}</span>;
           })}
         </div>
@@ -312,8 +353,7 @@ const Bubble: React.FC<{lines: TLine[]}> = ({lines}) => {
 // ---------------------------------------------------------------- bảng đố
 
 const Card: React.FC<{children: React.ReactNode; style?: any}> = ({children, style}) => (
-  <div style={{background: "linear-gradient(165deg, rgba(30,27,60,0.92), rgba(14,12,28,0.94))",
-    border: `2px solid ${C.accent}55`, borderRadius: 36, boxShadow: `0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08)`,
+  <div style={{background: th().card, border: th().cardBorder, borderRadius: 36, boxShadow: th().cardShadow,
     ...style}}>{children}</div>
 );
 
@@ -348,14 +388,14 @@ const HookView: React.FC<{hook: any; at: number}> = ({hook, at}) => {
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 20}}>
       <Enter at={at} dx={0}>
-        <div style={{fontFamily: MONO, color: YELLOW, fontSize: width * 0.036, letterSpacing: 8, fontWeight: 800}}>{hook.kicker}</div>
+        <div style={{fontFamily: MONO, color: th().kicker, fontSize: width * 0.036, letterSpacing: 8, fontWeight: 800}}>{hook.kicker}</div>
       </Enter>
       <Enter at={at} dx={0}>
-        <div style={{fontFamily: INTER, fontWeight: 900, fontSize: width * bigSize, lineHeight: 0.95, letterSpacing: "-0.04em", whiteSpace: "nowrap",
-          backgroundImage: `linear-gradient(180deg, #FFFFFF 10%, ${C.bad} 95%)`, WebkitBackgroundClip: "text",
-          color: "transparent", filter: `drop-shadow(0 0 40px ${C.bad}66)`}}>{cnt}</div>
+        <div style={{fontWeight: 900, fontSize: width * bigSize, lineHeight: 0.95, letterSpacing: "-0.04em", whiteSpace: "nowrap",
+          backgroundImage: th().bigGrad, WebkitBackgroundClip: "text", fontFamily: th().font,
+          color: "transparent", filter: `drop-shadow(0 0 40px ${th().bigGlow})`}}>{cnt}</div>
       </Enter>
-      <div style={{fontFamily: INTER, fontWeight: 900, fontSize: width * textSize, lineHeight: 1.12, color: "#fff",
+      <div style={{fontFamily: th().font, fontWeight: 800, fontSize: width * textSize, lineHeight: 1.12, color: th().ink,
         opacity: interpolate(f - at - 10, [0, 3], [0, 1], clamp), transform: `scale(${2.2 - 1.2 * slam})`}}>
         {rich(hook.text)}
       </div>
@@ -366,8 +406,8 @@ const HookView: React.FC<{hook: any; at: number}> = ({hook, at}) => {
 const CodeBlock: React.FC<{lines: string[]; at: number; fs: number}> = ({lines, at, fs}) => {
   const f = useCurrentFrame();
   return (
-    <Card style={{padding: `${fs * 0.55}px ${fs * 0.7}px`, textAlign: "left", background: "rgba(8,8,16,0.92)",
-      border: "2px solid #2A2D46"}}>
+    <Card style={{padding: `${fs * 0.55}px ${fs * 0.7}px`, textAlign: "left", background: th().codeBg,
+      border: th().codeBorder}}>
       <div style={{display: "flex", gap: 10, marginBottom: fs * 0.4}}>
         {["#FF5F57", "#FEBC2E", "#28C840"].map((c) => <div key={c} style={{width: 16, height: 16, borderRadius: 8, background: c}} />)}
       </div>
@@ -398,8 +438,9 @@ const Option: React.FC<{i: number; text: string; at: number; picks: Ev[]; reveal
   const right = i === answer;
   const on = rv >= 0;
   const wrongPicked = on && !right && picked;
-  const bg = on && right ? `linear-gradient(160deg, ${C.good}, #047857)` : "rgba(22,20,42,0.95)";
-  const border = on ? (right ? C.good : wrongPicked ? C.bad : "#2A2D46") : picked ? picked.color : "#3B3F66";
+  const T = th();
+  const bg = on && right ? T.goodGrad : T.opt;
+  const border = on ? (right ? T.good : wrongPicked ? T.bad : T.optBorder) : picked ? picked.color : T.optBorder;
   const dim = on && !right && !wrongPicked ? 0.35 : 1;
   const pulse = on && right ? 1 + 0.08 * Math.sin(Math.min(rv, 12) / 12 * Math.PI) : 1;
   const shake = wrongPicked && rv < 16 ? Math.sin(rv * 2.4) * 12 * (1 - rv / 16) : 0;
@@ -408,17 +449,17 @@ const Option: React.FC<{i: number; text: string; at: number; picks: Ev[]; reveal
       transform: `scale(${(0.6 + 0.4 * sp) * pulse}) translateX(${shake}px)`}}>
       <div style={{display: "flex", alignItems: "center", gap: fs * 0.4, padding: `${fs * 0.34}px ${fs * 0.4}px`,
         borderRadius: 26, background: bg, border: `4px solid ${border}`,
-        boxShadow: picked || (on && right) ? `0 0 30px ${border}88` : "0 8px 24px rgba(0,0,0,0.4)"}}>
+        boxShadow: picked || (on && right) ? `0 0 30px ${border}88` : T.light ? "0 8px 22px rgba(75,59,211,0.12)" : "0 8px 24px rgba(0,0,0,0.4)"}}>
         <div style={{width: fs * 1.25, height: fs * 1.25, borderRadius: "50%", flexShrink: 0, display: "flex",
-          alignItems: "center", justifyContent: "center", background: on && right ? "#fff" : `${C.accent}33`,
-          color: on && right ? "#047857" : "#fff", fontFamily: INTER, fontWeight: 900, fontSize: fs * 0.7}}>
-          {on && right ? <Icon name="check" size={fs * 0.8} color="#047857" stroke={4} /> : wrongPicked ? <Icon name="x" size={fs * 0.8} color={C.bad} stroke={4} /> : LETTERS[i]}
+          alignItems: "center", justifyContent: "center", background: on && right ? "#fff" : wrongPicked && T.light ? T.bad : T.letterBg,
+          color: on && right ? "#047857" : "#fff", fontFamily: T.font, fontWeight: 800, fontSize: fs * 0.7}}>
+          {on && right ? <Icon name="check" size={fs * 0.8} color="#047857" stroke={4} /> : wrongPicked ? <Icon name="x" size={fs * 0.8} color={T.light ? "#fff" : T.bad} stroke={4} /> : LETTERS[i]}
         </div>
-        <div style={{fontFamily: MONO, fontWeight: 800, fontSize: fs, color: "#fff", whiteSpace: "nowrap"}}>{text}</div>
+        <div style={{fontFamily: MONO, fontWeight: 800, fontSize: fs, color: on && right ? "#fff" : T.ink, whiteSpace: "nowrap"}}>{text}</div>
       </div>
       {picked && (
-        <div style={{position: "absolute", top: -fs * 0.45, right: -fs * 0.2, background: picked.color, color: "#0B0A14",
-          fontFamily: INTER, fontWeight: 900, fontSize: fs * 0.52, padding: `4px ${fs * 0.28}px`, borderRadius: 999,
+        <div style={{position: "absolute", top: -fs * 0.45, right: -fs * 0.2, background: picked.deep ?? picked.color, color: "#fff",
+          fontFamily: T.font, fontWeight: 800, fontSize: fs * 0.52, padding: `4px ${fs * 0.28}px`, borderRadius: 999,
           boxShadow: `0 0 20px ${picked.color}`,
           transform: `scale(${spring({frame: f - Math.round(mine[mine.length - 1].t * fps), fps, config: {damping: 8, stiffness: 300}})})`}}>
           {picked.name}
@@ -429,19 +470,40 @@ const Option: React.FC<{i: number; text: string; at: number; picks: Ev[]; reveal
   );
 };
 
+// Bảng đố phải vừa vùng giữa (header ở trên, bong bóng + mascot ở dưới) với MỌI đề: đề dài, code 8 dòng, dòng code dài.
+// Ước lượng chiều cao từ độ dài chữ (không đo DOM: render từng khung phải tất định), rồi co cả cỡ chữ theo k.
+const plain = (s: string) => String(s).replace(/\[br\]/g, " ").replace(/\[[a-z#0-9]+:([^\]]*)\]/g, "$1");
+const BOARD_H = 0.425;   // phần chiều cao khung dành cho bảng đố
+const textH = (txt: string, size: number, boxW: number, lh: number, cw = 0.56) => {
+  const lines = String(txt).split("[br]").reduce((n, part) => n + Math.max(1, Math.ceil(plain(part).length * cw * size / boxW)), 0);
+  return lines * lh * size;
+};
+/** cỡ chữ code: to nhất có thể mà dòng dài nhất vẫn nằm gọn trong khung */
+const codeFont = (code: string[] | undefined, fs: number, boxW: number) =>
+  !code?.length ? fs : Math.min(fs, (boxW - 1.4 * fs) / (Math.max(...code.map((l) => l.length)) * 0.61));
+const codeH = (code: string[] | undefined, cfs: number) => (!code?.length ? 0 : code.length * 1.42 * cfs + 1.5 * cfs + 16);
+
 const QuestionView: React.FC<{q: any; at: number; optAt?: number; picks: Ev[]; reveal?: number}> = ({q, at, optAt, picks, reveal}) => {
-  const {width, fps} = useVideoConfig();
-  const fs = width * 0.046;
+  const {width, height, fps} = useVideoConfig();
+  const boxW = width * 0.88;
+  // chiều cao ở cỡ gốc (tính cả 4 đáp án ngay từ đầu để bảng không co giật lúc đáp án hiện ra)
+  const need = (k: number) => {
+    const P = width * 0.064 * k, fs = width * 0.046 * k, cfs = codeFont(q.code, fs, boxW);
+    return textH(q.prompt, P, boxW, 1.18) + codeH(q.code, cfs) + 2 * (fs * 1.93 + 8) + 26 * k + 8 + 30 * k * (q.code ? 2 : 1);
+  };
+  const k = Math.min(1, (height * BOARD_H * 0.97) / need(1));
+  const fs = width * 0.046 * k;
+  const cfs = codeFont(q.code, fs, boxW);
   return (
-    <div style={{display: "flex", flexDirection: "column", gap: 30, width: "100%"}}>
+    <div style={{display: "flex", flexDirection: "column", gap: 30 * k, width: "100%"}}>
       <Enter at={at}>
-        <div style={{fontFamily: INTER, fontWeight: 900, fontSize: width * 0.064, lineHeight: 1.15, color: "#fff", textAlign: "center"}}>
+        <div style={{fontFamily: th().font, fontWeight: 800, fontSize: width * 0.064 * k, lineHeight: 1.18, color: th().ink, textAlign: "center"}}>
           {rich(q.prompt)}
         </div>
       </Enter>
-      {q.code && <Enter at={at + 2}><CodeBlock lines={q.code} at={at + 2} fs={fs} /></Enter>}
+      {q.code && <Enter at={at + 2}><CodeBlock lines={q.code} at={at + 2} fs={cfs} /></Enter>}
       {optAt != null && (
-        <div style={{display: "grid", gridTemplateColumns: "1fr 1fr", gap: 26, marginTop: 8}}>
+        <div style={{display: "grid", gridTemplateColumns: "1fr 1fr", gap: 26 * k, marginTop: 8}}>
           {q.options.map((o: string, i: number) => (
             <Option key={i} i={i} text={o} at={Math.round(optAt * fps)} picks={picks} reveal={reveal} answer={q.answer} fs={fs} />
           ))}
@@ -453,30 +515,40 @@ const QuestionView: React.FC<{q: any; at: number; optAt?: number; picks: Ev[]; r
 
 const ExplainView: React.FC<{q: any; items: string[]; times: number[]; at: number}> = ({q, items, times, at}) => {
   const f = useCurrentFrame();
-  const {width, fps} = useVideoConfig();
-  const fs = width * 0.045;
+  const {width, height, fps} = useVideoConfig();
+  const boxW = width * 0.88;
+  const need = (k: number) => {
+    const fs = width * 0.045 * k, cfs = codeFont(q.code, width * 0.033 * k, boxW);
+    const itemW = boxW - fs * 1.1 - 20 - 54;
+    return width * 0.05 * k * 1.5 + codeH(q.code, cfs)
+      + items.reduce((h, it) => h + textH(it, fs, itemW, 1.22) + 34, 0) + 24 * k * (items.length + (q.code ? 1 : 0));
+  };
+  const k = Math.min(1, (height * BOARD_H * 0.97) / need(1));
+  const fs = width * 0.045 * k;
+  const cfs = codeFont(q.code, width * 0.033 * k, boxW);
   const shown = times.length;
   return (
-    <div style={{display: "flex", flexDirection: "column", gap: 24, width: "100%"}}>
+    <div style={{display: "flex", flexDirection: "column", gap: 24 * k, width: "100%"}}>
       <Enter at={at} dx={0}>
         <div style={{display: "flex", alignItems: "center", justifyContent: "center", gap: 20}}>
-          <div style={{fontFamily: MONO, color: YELLOW, fontWeight: 800, letterSpacing: 6, fontSize: width * 0.036}}>VÌ SAO</div>
-          <div style={{fontFamily: MONO, fontWeight: 800, fontSize: width * 0.05, color: "#fff", background: `linear-gradient(160deg, ${C.good}, #047857)`,
+          <div style={{fontFamily: MONO, color: th().kicker, fontWeight: 800, letterSpacing: 6, fontSize: width * 0.036 * k}}>VÌ SAO</div>
+          <div style={{fontFamily: MONO, fontWeight: 800, fontSize: width * 0.05 * k, color: "#fff", background: th().goodGrad,
             padding: "6px 26px", borderRadius: 20}}>{LETTERS[q.answer]}. {q.options[q.answer]}</div>
         </div>
       </Enter>
-      {q.code && <Enter at={at}><CodeBlock lines={q.code} at={at - 30} fs={width * 0.033} /></Enter>}
+      {q.code && <Enter at={at}><CodeBlock lines={q.code} at={at - 30} fs={cfs} /></Enter>}
       {items.slice(0, shown).map((it, i) => {
         const a = Math.round(times[i] * fps);
         const latest = i === shown - 1;
         return (
           <Enter key={i} at={a} dx={160}>
             <div style={{display: "flex", alignItems: "center", gap: 20, padding: "14px 24px", borderRadius: 24,
-              background: latest ? `${C.accent}30` : "rgba(22,20,42,0.85)", border: `3px solid ${latest ? C.accent : "#2A2D46"}`,
+              background: latest ? th().exLatest : th().exItem, border: `3px solid ${latest ? th().exLatestBorder : th().exBorder}`,
+              boxShadow: th().light ? "0 8px 22px rgba(75,59,211,0.10)" : "none",
               opacity: latest ? 1 : interpolate(f - a, [0, 8], [1, 0.6], clamp)}}>
-              <div style={{width: fs * 1.1, height: fs * 1.1, borderRadius: "50%", background: C.accent, color: "#fff", flexShrink: 0,
-                display: "flex", alignItems: "center", justifyContent: "center", fontFamily: INTER, fontWeight: 900, fontSize: fs * 0.62}}>{i + 1}</div>
-              <div style={{fontFamily: INTER, fontWeight: 800, fontSize: fs, color: "#fff", lineHeight: 1.2}}>{rich(it)}</div>
+              <div style={{width: fs * 1.1, height: fs * 1.1, borderRadius: "50%", background: th().light ? GRAD : C.accent, color: "#fff", flexShrink: 0,
+                display: "flex", alignItems: "center", justifyContent: "center", fontFamily: th().font, fontWeight: 800, fontSize: fs * 0.62}}>{i + 1}</div>
+              <div style={{fontFamily: th().font, fontWeight: 700, fontSize: fs, color: th().ink, lineHeight: 1.22}}>{rich(it)}</div>
             </div>
           </Enter>
         );
@@ -493,19 +565,21 @@ const CtaView: React.FC<{cta: any; at: number}> = ({cta, at}) => {
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center", gap: 34, textAlign: "center"}}>
       <Enter at={at} dx={0}>
-        <div style={{fontFamily: INTER, fontWeight: 900, fontSize: width * 0.13, letterSpacing: "-0.03em", color: "#fff"}}>
-          {wm.pre}<span style={{color: C.accent, filter: `drop-shadow(0 0 30px ${C.accent})`}}>{wm.em}</span>{wm.post}
+        <div style={{fontFamily: th().font, fontWeight: 800, fontSize: width * 0.13, letterSpacing: "-0.03em", color: th().ink}}>
+          {wm.pre}<span style={th().light ? {backgroundImage: GRAD, WebkitBackgroundClip: "text", color: "transparent"}
+            : {color: C.accent, filter: `drop-shadow(0 0 30px ${C.accent})`}}>{wm.em}</span>{wm.post}
         </div>
       </Enter>
       <Enter at={at + 4} dx={0}>
-        <div style={{fontFamily: INTER, fontWeight: 800, fontSize: width * 0.06, color: "#fff", lineHeight: 1.2}}>{rich(cta.line)}</div>
+        <div style={{fontFamily: th().font, fontWeight: 800, fontSize: width * 0.06, color: th().ink, lineHeight: 1.2}}>{rich(cta.line)}</div>
       </Enter>
       <Enter at={at + 8} dx={0}>
-        <div style={{fontFamily: MONO, fontWeight: 800, fontSize: width * 0.052, color: "#0B0A14", background: YELLOW,
-          padding: "16px 44px", borderRadius: 999, boxShadow: `0 0 ${30 + 30 * g}px ${YELLOW}88`}}>{cta.pill}</div>
+        <div style={{fontFamily: MONO, fontWeight: 800, fontSize: width * 0.052, color: th().pillInk, background: th().pill,
+          padding: "16px 44px", borderRadius: 999,
+          boxShadow: `0 0 ${30 + 30 * g}px ${th().light ? "rgba(216,87,176,0.45)" : YELLOW + "88"}`}}>{cta.pill}</div>
       </Enter>
       {cta.sub && <Enter at={at + 12} dx={0}>
-        <div style={{fontFamily: INTER, fontWeight: 700, fontSize: width * 0.04, color: C.muted}}>{cta.sub}</div>
+        <div style={{fontFamily: th().font, fontWeight: 600, fontSize: width * 0.04, color: th().soft}}>{cta.sub}</div>
       </Enter>}
     </div>
   );
@@ -520,19 +594,46 @@ const Countdown: React.FC<{L: TLine}> = ({L}) => {
   const left = L.end - t;
   const n = Math.max(1, Math.ceil(left - 0.001));
   const sp = spring({frame: f - Math.round((L.start + (total - n)) * fps), fps, config: {damping: 8, stiffness: 320, mass: 0.5}});
-  const R = width * 0.13;
+  const {height} = useVideoConfig();
+  const R = width * 0.1;
   const p = left / total;
   const circ = 2 * Math.PI * R;
+  // nằm ở chỗ bong bóng thoại: lúc đếm ngược không ai nói nên chỗ đó luôn trống, không che đề dù đề dài
   return (
-    <div style={{position: "absolute", right: -width * 0.02, top: "26%", width: R * 2.3, height: R * 2.3,
-      display: "flex", alignItems: "center", justifyContent: "center"}}>
+    <div style={{position: "absolute", left: "50%", top: height * 0.6, width: R * 2.3, height: R * 2.3,
+      transform: "translate(-50%, -50%)", display: "flex", alignItems: "center", justifyContent: "center",
+      filter: th().light ? "drop-shadow(0 12px 24px rgba(75,59,211,0.25))" : "none"}}>
       <svg width={R * 2.3} height={R * 2.3} style={{position: "absolute", transform: "rotate(-90deg)"}}>
-        <circle cx={R * 1.15} cy={R * 1.15} r={R} fill="rgba(11,10,20,0.92)" stroke="#2A2D46" strokeWidth={14} />
-        <circle cx={R * 1.15} cy={R * 1.15} r={R} fill="none" stroke={YELLOW} strokeWidth={14} strokeLinecap="round"
+        <circle cx={R * 1.15} cy={R * 1.15} r={R} fill={th().ringFill} stroke={th().ringTrack} strokeWidth={14} />
+        <circle cx={R * 1.15} cy={R * 1.15} r={R} fill="none" stroke={th().ring} strokeWidth={14} strokeLinecap="round"
           strokeDasharray={circ} strokeDashoffset={circ * (1 - p)} />
       </svg>
-      <div style={{fontFamily: INTER, fontWeight: 900, fontSize: R * 1.25, color: YELLOW, transform: `scale(${0.6 + 0.4 * sp})`}}>{n}</div>
+      <div style={{fontFamily: th().font, fontWeight: 800, fontSize: R * 1.25, color: th().ring, transform: `scale(${0.6 + 0.4 * sp})`}}>{n}</div>
     </div>
+  );
+};
+
+// ---------------------------------------------------------------- nền sáng (theme semanio)
+
+const LightStage: React.FC = () => {
+  const f = useCurrentFrame();
+  const {width, height} = useVideoConfig();
+  const d = Math.sin(f / 45) * 70;
+  const sweep = ((f % 150) / 150) * (width + 1400) - 700;
+  return (
+    <AbsoluteFill style={{background: "#F7F6FE", overflow: "hidden"}}>
+      <div style={{position: "absolute", width: 1300, height: 1300, left: -520 + d, top: -560 + d * 0.4, borderRadius: "50%",
+        background: "radial-gradient(circle, rgba(109,93,246,0.30) 0%, rgba(109,93,246,0) 65%)"}} />
+      <div style={{position: "absolute", width: 1400, height: 1400, right: -640 - d, bottom: height * 0.1 - 700 - d * 0.3, borderRadius: "50%",
+        background: "radial-gradient(circle, rgba(232,111,198,0.26) 0%, rgba(232,111,198,0) 65%)"}} />
+      <div style={{position: "absolute", inset: -200,
+        backgroundImage: "linear-gradient(rgba(75,59,211,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(75,59,211,0.06) 1px, transparent 1px)",
+        backgroundSize: "80px 80px", transform: `translate(${(f * 1.2) % 80}px, ${(f * 0.6) % 80}px)`,
+        maskImage: "radial-gradient(ellipse at center, #000 30%, transparent 75%)",
+        WebkitMaskImage: "radial-gradient(ellipse at center, #000 30%, transparent 75%)"}} />
+      <div style={{position: "absolute", top: -300, left: sweep, width: 260, height: height + 600, transform: "rotate(18deg)",
+        background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent)"}} />
+    </AbsoluteFill>
   );
 };
 
@@ -542,22 +643,26 @@ const Header: React.FC<{ep?: number; topic?: string; total: number}> = ({ep, top
   const f = useCurrentFrame();
   const {width, durationInFrames} = useVideoConfig();
   const d = CONFIG.duo;
-  const fs = width * 0.034;
+  const fs = width * 0.04;
   void total;
+  const series = `${d.series}${ep != null ? ` #${String(ep).padStart(2, "0")}` : ""}`;
+  // nhãn chủ đề co chữ cho vừa phần còn lại của hàng (chủ đề dài cỡ nào cũng không tràn, không xuống dòng)
+  const seriesW = series.length * 0.66 * fs + 40 + 3 * series.length;
+  const room = width * 0.88 - seriesW - 20 - 36;
+  const tfs = topic ? Math.min(fs * 0.8, room / (topic.length * 0.62 + topic.length * 2 / fs)) : 0;
   return (
     <>
       <div style={{position: "absolute", top: 0, left: 0, height: 10, width: `${(f / durationInFrames) * 100}%`,
-        background: `linear-gradient(90deg, ${C.accent}, ${YELLOW})`, boxShadow: `0 0 18px ${C.accent}`}} />
+        background: th().bar, boxShadow: `0 0 18px ${th().accent}`}} />
       <div style={{position: "absolute", top: width * 0.075, left: width * 0.06, right: width * 0.06,
         display: "flex", alignItems: "center", justifyContent: "space-between"}}>
         <div style={{display: "flex", alignItems: "center", gap: 14}}>
-          <div style={{fontFamily: INTER, fontWeight: 900, fontSize: fs, letterSpacing: 3, color: "#0B0A14",
-            background: YELLOW, padding: "8px 20px", borderRadius: 14, whiteSpace: "nowrap", flexShrink: 0}}>{d.series}{ep != null ? ` #${String(ep).padStart(2, "0")}` : ""}</div>
-          {topic && <div style={{fontFamily: MONO, fontWeight: 700, fontSize: fs * 0.8, color: "#fff", letterSpacing: 2,
-            border: `2px solid ${C.accent}`, padding: "6px 16px", borderRadius: 14, background: `${C.accent}22`, whiteSpace: "nowrap"}}>{topic}</div>}
+          <div style={{fontFamily: th().font, fontWeight: 800, fontSize: fs, letterSpacing: 3, color: th().pillInk,
+            background: th().pill, padding: "8px 20px", borderRadius: 14, whiteSpace: "nowrap", flexShrink: 0}}>{series}</div>
         </div>
-        {/* chủ đề dài thì bỏ tên miền ở góc (tên miền đã có ở cảnh chốt), không để huy hiệu xuống dòng */}
-        {(topic || "").length <= 14 && <div style={{fontFamily: MONO, fontWeight: 700, fontSize: fs * 0.78, color: C.muted, whiteSpace: "nowrap"}}>{d.handle}</div>}
+          {topic && <div style={{fontFamily: MONO, fontWeight: 700, fontSize: tfs, color: th().light ? "#4B3BD3" : "#fff", letterSpacing: 2,
+            border: `2px solid ${th().accent}${th().light ? "66" : ""}`, padding: "6px 16px", borderRadius: 14,
+            background: th().light ? "#FFFFFF" : `${C.accent}22`, whiteSpace: "nowrap"}}>{topic}</div>}
       </div>
     </>
   );
@@ -640,21 +745,21 @@ export const DuoShort: React.FC<{entry: DuoEntry}> = ({entry}) => {
   };
 
   return (
-    <AbsoluteFill style={{background: C.bg, fontFamily: INTER, color: C.text, overflow: "hidden"}}>
-      <Bg />
+    <AbsoluteFill style={{background: th().light ? "#F7F6FE" : C.bg, fontFamily: th().font, color: th().ink, overflow: "hidden"}}>
+      {th().light ? <LightStage /> : <Bg />}
       {/* sàn sáng dưới chân hai nhân vật */}
       <div style={{position: "absolute", left: "-10%", right: "-10%", bottom: height * 0.07, height: height * 0.14,
-        background: `radial-gradient(50% 50% at 50% 50%, ${C.accent}55, transparent 70%)`}} />
+        background: `radial-gradient(50% 50% at 50% 50%, ${th().floor}, transparent 70%)`}} />
       <AbsoluteFill style={{transform: `translate(${sx}px, ${sy}px) scale(${cam})`}}>
         <div style={{position: "absolute", left: width * 0.06, right: width * 0.06, top: height * 0.115, height: height * 0.425,
           display: "flex", alignItems: "center", justifyContent: "center"}}>
           <div key={view ? view.type + view.t : "none"} style={{width: "100%"}}>{board}</div>
-          {cd && <Countdown L={cd} />}
         </div>
         {ids.map((id) => (
           <Mascot key={id} id={id} m={cast[id]} faces={faces[id]} lines={lines} speakers={speakers} bumps={bumps} />
         ))}
         <Bubble lines={lines} />
+        {cd && <Countdown L={cd} />}
       </AbsoluteFill>
       <Header ep={script.ep} topic={script.topic} total={entry.timing.total} />
 

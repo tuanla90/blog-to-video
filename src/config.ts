@@ -84,6 +84,8 @@ export type CastMember = {
   name: string;
   /** màu nhận diện: viền bong bóng, huy hiệu chọn đáp án */
   color: string;
+  /** tông đậm của màu nhận diện: nhãn tên (chữ trắng), chữ đang đọc trên nền sáng */
+  deep?: string;
   side: "left" | "right";
   /** thư mục ảnh biểu cảm trong public/, mỗi biểu cảm một file <tên>.png */
   dir: string;
@@ -99,6 +101,8 @@ export type CastMember = {
 
 /** Short đối đáp: hai nhân vật thay nhau nói, xem src/duo.tsx */
 export type DuoConfig = {
+  /** giao diện: "dark" (nền tối, nhấn vàng) hoặc "semanio" (nền sáng, gradient tím -> hồng, Be Vietnam Pro) */
+  theme?: "dark" | "semanio";
   /** tên series trên huy hiệu góc trên, vd "BẪY ĐỀ THI" */
   series: string;
   /** chữ ký / tên miền ở góc trên-phải */
