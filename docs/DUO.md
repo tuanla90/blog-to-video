@@ -42,7 +42,7 @@ registerRoot(makeRoot(VIDEOS, {duos: DUOS}));
 | `google` | `voice` (vd `vi-VN-Chirp3-HD-Achird`), `rate` (1.1), `lang` | cần `GOOGLE_TTS_API_KEY`. Không trả mốc từ: ước lượng theo độ dài chữ trong đoạn có tiếng |
 | `elevenlabs` | `voice` (voice_id, giọng kho chung dùng thẳng được), `model` (`eleven_multilingual_v2` / `eleven_v3`), `settings` | cần `ELEVENLABS_API_KEY`, tính tiền theo ký tự. Trả mốc từng ký tự, đọc từ tiếng Anh lẫn trong câu Việt tốt nhất |
 
-Mọi provider nhận thêm `tempo` (vd 1.15: tăng tốc hậu kỳ bằng atempo, mốc từ co theo; dùng cho ElevenLabs v3 vì nó bỏ qua speed). Với `eleven_v3`, thẻ cảm xúc trong `say` (`[excited]`, `[laughs]`, `[sighs]`, `[whispers]`, `[mischievously]`...) được giữ để giọng diễn theo, còn bong bóng thoại tự bỏ thẻ.
+Mọi provider nhận thêm `tempo` (vd 1.15: tăng tốc hậu kỳ bằng atempo, mốc từ co theo; dùng cho ElevenLabs v3 vì nó bỏ qua speed). Thẻ cách-nói (không phải cười/hít/thở dài) mà sinh tiếng lạ trước chữ đầu > 0.15s thì bị cắt tự động; `[curious]`, `[confident]` hay bị đọc lọt, tránh dùng. Với `eleven_v3`, thẻ cảm xúc trong `say` (`[excited]`, `[laughs]`, `[sighs]`, `[whispers]`, `[mischievously]`...) được giữ để giọng diễn theo, còn bong bóng thoại tự bỏ thẻ.
 
 Mọi provider nhận thêm `pron`: danh sách chuỗi, chỉ áp các mục phát âm chứa chúng (giọng đọc tiếng Anh tốt thì để `["diem10code"]`).
 
@@ -82,7 +82,7 @@ Lệnh hình (`do`), thêm `@tiếng` để neo vào đúng tiếng đó:
 
 | lệnh | |
 |---|---|
-| `hook` | cảnh mở: số lớn đếm lên + câu đập vào |
+| `hook` | cảnh mở: số lớn đếm lên + câu đập vào. Lệnh của câu đầu (không neo @) bật ở khung 0, trước giọng `introPad` giây |
 | `question` | đề + khối code gõ ra |
 | `options` | bốn đáp án bật ra |
 | `pick:A` | người nói chọn A (huy hiệu tên + viền màu nhân vật) |

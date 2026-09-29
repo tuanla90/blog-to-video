@@ -57,6 +57,29 @@ def spoken(text, keep=None, tags=False):
     return t.strip()
 
 
+# thẻ PHÁT RA TIẾNG có chủ đích (cười, hít vào, thở dài): tiếng trước chữ đầu là đúng, giữ nguyên
+VOCAL_TAGS = {"laughs", "laughing", "chuckles", "giggles", "gasps", "sighs", "exhales", "inhales", "snorts", "whistles"}
+
+
+def trim_leak(path, text, words):
+    """ElevenLabs v3 hay đọc lọt thẻ cách-nói (vd [curious] ra tiếng "cơ sờ") trước chữ đầu. Thẻ đầu câu không
+    phải loại phát tiếng mà trước chữ đầu có tiếng > 0.15s -> cắt bỏ đoạn đó, mốc từ lùi theo."""
+    m = re.match(r"\s*\[([^\]]+)\]", text)
+    if not m or not words or m.group(1).strip().lower() in VOCAL_TAGS:
+        return words
+    va, _ = voiced_bounds(path)
+    cut = words[0]["s"] - 0.05
+    if words[0]["s"] - va <= 0.15 or cut <= 0:
+        return words
+    import subprocess, imageio_ffmpeg
+    tmp = path + ".tmp.mp3"
+    subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), "-y", "-loglevel", "error", "-ss", f"{cut:.3f}", "-i", path,
+                    "-b:a", "128k", tmp], check=True)
+    os.replace(tmp, path)
+    print(f"   cắt {cut:.2f}s tiếng lọt của thẻ [{m.group(1)}]")
+    return [{**w, "s": round(w["s"] - cut, 3), "e": round(w["e"] - cut, 3)} for w in words]
+
+
 def speedup(path, k, words):
     """Tăng tốc hậu kỳ (ElevenLabs v3 bỏ qua tham số speed): atempo giữ cao độ, mốc từ co theo."""
     import subprocess, imageio_ffmpeg
@@ -229,6 +252,8 @@ for i, L in enumerate(SCRIPT["lines"]):
         print(f"[{i:02d}] {who:<5} {prov}: {text}")
         words = PROVIDERS[prov](text, v, path)
         words = [w for w in words if not re.fullmatch(r"\[[^\]]*\][,.!?]*", w["w"])]   # thẻ cảm xúc không phải tiếng
+        if tags:
+            words = trim_leak(path, text, words)
         if float(v.get("tempo", 1)) != 1:
             words = speedup(path, float(v["tempo"]), words)
         dur = duration(path)

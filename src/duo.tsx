@@ -115,6 +115,8 @@ const buildEvents = (script: any, lines: TLine[]) => {
     for (const a of acts) {
       const [head, at] = a.split("@");
       const [type, arg] = head.split(":");
+      // lệnh hình của câu đầu (không neo @) bật ngay khung 0: hình vào trước, giọng theo sau introPad
+      if (i === 0 && !at) { ev.push({t: 0, type, arg, who: S.who}); continue; }
       // jump/shake nhận tên nhân vật: "shake:sola"; không ghi thì là người đang nói
       const who = (type === "jump" || type === "shake") && arg ? arg : S.who;
       ev.push({t: wordTime(L, at), type, arg, who});
