@@ -26,7 +26,7 @@ registerRoot(makeRoot(VIDEOS, {duos: DUOS}));
 
 | Field | |
 |---|---|
-| `series` | chữ trên huy hiệu góc trên, vd `BẪY ĐỀ THI` (số tập lấy từ `ep`) |
+| `series` | chữ trên huy hiệu góc trên, ngắn (vd `BẪY`), hiện thành `BẪY #01` với số tập lấy từ `ep`. Tập nào khác loạt thì ghi `"series"` riêng trong `duo.json` |
 | `handle` | tên miền góc trên-phải |
 | `gap` | nghỉ giữa hai câu, giây. Mặc định 0.06 |
 | `introPad`, `outroPad` | trước câu đầu / giữ khung cuối |

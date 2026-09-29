@@ -639,13 +639,13 @@ const LightStage: React.FC = () => {
 
 // ---------------------------------------------------------------- khung trên
 
-const Header: React.FC<{ep?: number; topic?: string; total: number}> = ({ep, topic, total}) => {
+const Header: React.FC<{ep?: number; topic?: string; series?: string; total: number}> = ({ep, topic, series: own, total}) => {
   const f = useCurrentFrame();
   const {width, durationInFrames} = useVideoConfig();
   const d = CONFIG.duo;
   const fs = width * 0.04;
   void total;
-  const series = `${d.series}${ep != null ? ` #${String(ep).padStart(2, "0")}` : ""}`;
+  const series = `${own ?? d.series}${ep != null ? ` #${String(ep).padStart(2, "0")}` : ""}`;
   // nhãn chủ đề co chữ cho vừa phần còn lại của hàng (chủ đề dài cỡ nào cũng không tràn, không xuống dòng)
   const seriesW = series.length * 0.66 * fs + 40 + 3 * series.length;
   const room = width * 0.88 - seriesW - 20 - 36;
@@ -745,7 +745,8 @@ export const DuoShort: React.FC<{entry: DuoEntry}> = ({entry}) => {
   };
 
   return (
-    <AbsoluteFill style={{background: th().light ? "#F7F6FE" : C.bg, fontFamily: th().font, color: th().ink, overflow: "hidden"}}>
+    <AbsoluteFill style={{background: th().light ? "#F7F6FE" : C.bg, fontFamily: th().font, color: th().ink, overflow: "hidden",
+      fontVariantLigatures: "none", fontFeatureSettings: '"liga" 0, "calt" 0, "clig" 0'}}>
       {th().light ? <LightStage /> : <Bg />}
       {/* sàn sáng dưới chân hai nhân vật */}
       <div style={{position: "absolute", left: "-10%", right: "-10%", bottom: height * 0.07, height: height * 0.14,
@@ -761,7 +762,7 @@ export const DuoShort: React.FC<{entry: DuoEntry}> = ({entry}) => {
         <Bubble lines={lines} />
         {cd && <Countdown L={cd} />}
       </AbsoluteFill>
-      <Header ep={script.ep} topic={script.topic} total={entry.timing.total} />
+      <Header ep={script.ep} topic={script.topic} series={script.series} total={entry.timing.total} />
 
       {/* giọng */}
       {lines.map((L, i) => L.kind === "say" && L.audio ? (
