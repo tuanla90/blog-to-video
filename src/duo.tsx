@@ -338,17 +338,22 @@ const HookView: React.FC<{hook: any; at: number}> = ({hook, at}) => {
   const cur = interpolate(f - at, [0, 14], [0, n], {...clamp, easing: Easing.out(Easing.cubic)});
   const cnt = isNaN(n) ? hook.big : cur.toFixed(dec).replace(".", ",") + m![2];
   const slam = useSpring(at + 10, {damping: 9, stiffness: 260, mass: 0.7});
+  // chữ to co theo độ dài để luôn nằm một dòng ("70%" to hết cỡ, "5 dòng" nhỏ lại)
+  const bigLen = String(hook.big).length;
+  const bigSize = bigLen <= 4 ? 0.3 : Math.max(0.15, (0.3 * 4.4) / bigLen);
+  const textLen = String(hook.text).replace(/\[[a-z#0-9]+:|\]/g, "").length;
+  const textSize = textLen <= 26 ? 0.078 : Math.max(0.058, (0.078 * 26) / textLen);
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 20}}>
       <Enter at={at} dx={0}>
         <div style={{fontFamily: MONO, color: YELLOW, fontSize: width * 0.036, letterSpacing: 8, fontWeight: 800}}>{hook.kicker}</div>
       </Enter>
       <Enter at={at} dx={0}>
-        <div style={{fontFamily: INTER, fontWeight: 900, fontSize: width * 0.3, lineHeight: 0.95, letterSpacing: "-0.04em",
+        <div style={{fontFamily: INTER, fontWeight: 900, fontSize: width * bigSize, lineHeight: 0.95, letterSpacing: "-0.04em", whiteSpace: "nowrap",
           backgroundImage: `linear-gradient(180deg, #FFFFFF 10%, ${C.bad} 95%)`, WebkitBackgroundClip: "text",
           color: "transparent", filter: `drop-shadow(0 0 40px ${C.bad}66)`}}>{cnt}</div>
       </Enter>
-      <div style={{fontFamily: INTER, fontWeight: 900, fontSize: width * 0.078, lineHeight: 1.12, color: "#fff",
+      <div style={{fontFamily: INTER, fontWeight: 900, fontSize: width * textSize, lineHeight: 1.12, color: "#fff",
         opacity: interpolate(f - at - 10, [0, 3], [0, 1], clamp), transform: `scale(${2.2 - 1.2 * slam})`}}>
         {rich(hook.text)}
       </div>
@@ -545,11 +550,12 @@ const Header: React.FC<{ep?: number; topic?: string; total: number}> = ({ep, top
         display: "flex", alignItems: "center", justifyContent: "space-between"}}>
         <div style={{display: "flex", alignItems: "center", gap: 14}}>
           <div style={{fontFamily: INTER, fontWeight: 900, fontSize: fs, letterSpacing: 3, color: "#0B0A14",
-            background: YELLOW, padding: "8px 20px", borderRadius: 14}}>{d.series}{ep != null ? ` #${String(ep).padStart(2, "0")}` : ""}</div>
+            background: YELLOW, padding: "8px 20px", borderRadius: 14, whiteSpace: "nowrap", flexShrink: 0}}>{d.series}{ep != null ? ` #${String(ep).padStart(2, "0")}` : ""}</div>
           {topic && <div style={{fontFamily: MONO, fontWeight: 700, fontSize: fs * 0.8, color: "#fff", letterSpacing: 2,
-            border: `2px solid ${C.accent}`, padding: "6px 16px", borderRadius: 14, background: `${C.accent}22`}}>{topic}</div>}
+            border: `2px solid ${C.accent}`, padding: "6px 16px", borderRadius: 14, background: `${C.accent}22`, whiteSpace: "nowrap"}}>{topic}</div>}
         </div>
-        <div style={{fontFamily: MONO, fontWeight: 700, fontSize: fs * 0.78, color: C.muted}}>{d.handle}</div>
+        {/* chủ đề dài thì bỏ tên miền ở góc (tên miền đã có ở cảnh chốt), không để huy hiệu xuống dòng */}
+        {(topic || "").length <= 14 && <div style={{fontFamily: MONO, fontWeight: 700, fontSize: fs * 0.78, color: C.muted, whiteSpace: "nowrap"}}>{d.handle}</div>}
       </div>
     </>
   );
