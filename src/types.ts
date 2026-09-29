@@ -10,6 +10,9 @@ export type Word = {w: string; s: number; e: number};
 /** 1 dòng caption + các từ của nó — sinh bởi align.py */
 export type Line = {text: string; start: number; end: number; words: Word[]};
 
+/** 1 Short đối đáp trong registry: kịch bản duo.json + mốc giờ duo.timing.json (gen_duo.py sinh) */
+export type DuoEntry = {slug: string; script: any; timing: any};
+
 /** 1 video hoàn chỉnh trong registry (src/videos.gen.ts sinh ra mảng này) */
 export type VideoEntry = {
   slug: string;

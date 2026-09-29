@@ -74,6 +74,40 @@ export type CategoryConfig = {
   acc2: string;
 };
 
+/** một nhân vật trong Short đối đáp (duo) */
+export type CastMember = {
+  /** tên hiện trên bong bóng thoại */
+  name: string;
+  /** màu nhận diện: viền bong bóng, huy hiệu chọn đáp án */
+  color: string;
+  side: "left" | "right";
+  /** thư mục ảnh biểu cảm trong public/, mỗi biểu cảm một file <tên>.png */
+  dir: string;
+  /** các biểu cảm có thật trong dir */
+  faces: string[];
+  /** biểu cảm thiếu -> biểu cảm gần nghĩa (gọi tên nào cũng ra ảnh có thật) */
+  alias?: Record<string, string>;
+  /** biểu cảm mặc định khi chưa có lệnh nào */
+  idle?: string;
+  /** giọng — chỉ gen_duo.py đọc: {provider: "edge"|"google", voice, rate, pitch} */
+  voice?: Record<string, any>;
+};
+
+/** Short đối đáp: hai nhân vật thay nhau nói, xem src/duo.tsx */
+export type DuoConfig = {
+  /** tên series trên huy hiệu góc trên, vd "BẪY ĐỀ THI" */
+  series: string;
+  /** chữ ký / tên miền ở góc trên-phải */
+  handle: string;
+  /** nghỉ giữa hai câu thoại (giây) */
+  gap: number;
+  /** trước câu đầu */
+  introPad: number;
+  /** giữ khung cuối */
+  outroPad: number;
+  cast: Record<string, CastMember>;
+};
+
 export type VideoConfig = {
   fps: number;
   brand: BrandConfig;
@@ -81,6 +115,7 @@ export type VideoConfig = {
   pacing: PacingConfig;
   thumb: ThumbConfig;
   categories: CategoryConfig[];
+  duo: DuoConfig;
 };
 
 export const CONFIG: VideoConfig = {
@@ -115,6 +150,14 @@ export const CONFIG: VideoConfig = {
     logoWhite: "thumb/logo-white.png",
   },
   categories: [],
+  duo: {
+    series: "",
+    handle: "",
+    gap: 0.06,
+    introPad: 0.1,
+    outroPad: 1.2,
+    cast: {},
+  },
 };
 
 /** alias tiện tay — CÙNG object với CONFIG.brand, giữ nguyên reference sau applyConfig */

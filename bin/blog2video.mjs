@@ -18,6 +18,7 @@ const USAGE = `blog2video — dây chuyền bài viết -> video
   sync-assets          copy lottie của engine vào public/ (chạy trước lần render đầu)
   scaffold <slug>      chưa có voice: audio câm + timing ước lượng -> xem trước được ngay
   audio <slug>         TTS ElevenLabs -> mp3 + beats.json + timings.json
+  duo <slug> [--force] Short đối đáp: TTS từng câu theo giọng từng nhân vật -> duo.timing.json
   align <slug>         căn caption theo năng lượng (chỉ cần khi audio không có timestamp)
   registry [slug...]   sinh src/videos.gen.ts từ các bundle hoàn chỉnh
   thumb [slug...]      sinh thumbnail 1280x720 từ thumb.json
@@ -115,6 +116,7 @@ switch (cmd) {
   case "scaffold": runPy("scaffold.py", rest); break;
   case "audio":    runPy("gen_audio.py", rest); break;
   case "align":    runPy("align.py", rest); break;
+  case "duo":      runPy("gen_duo.py", rest); break;
   case "build":    runPy("build.py", rest); break;
   case "registry": runNode("gen-registry.mjs", rest); break;
   case "thumb":    runNode("gen-thumb.mjs", rest); break;

@@ -63,7 +63,7 @@ export const useSteps = (weights: number[]): Win[] => {
 // atWord: tìm tuần tự (theo thứ tự moment) từ khoá trong các từ -> dùng start của từ đó (+ LEAD_IN).
 export const useAnchoredSteps = (moments: any[], lines?: any[]): Win[] => {
   const {durationInFrames: D, fps} = useVideoConfig();
-  const LEAD = Math.round(0.4 * fps);
+  const LEAD = Math.round(CONFIG.pacing.leadIn * fps);   // cùng nguồn với Root.tsx + gen_audio.py
   const words = (lines || []).flatMap((L: any) => L.words || []);
   let cursor = 0;
   const anchor: (number | null)[] = moments.map((m) => {
@@ -617,7 +617,7 @@ const ElTimeline: React.FC<{p: ElProps; from: number; v: number; lines?: any[]}>
   const at = p.at ?? 6, stag = p.stagger ?? 30;
   const n = marks.length || 1;
   const W = 86 * v;
-  const LEAD = Math.round(0.4 * fps);
+  const LEAD = Math.round(CONFIG.pacing.leadIn * fps);   // cùng nguồn với Root.tsx + gen_audio.py
   const words = lines ? lines.flatMap((L: any) => L.words || []) : [];
   let cur = 0;                                   // con trỏ tuần tự (mark sau tìm sau mark trước)
   const frames = marks.map((m: any, i: number) => {

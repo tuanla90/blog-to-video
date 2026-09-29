@@ -12,17 +12,29 @@ import {pathToFileURL} from "node:url";
 import {findProjectRoot, loadConfig, p} from "./lib/project.mjs";
 
 const REQUIRED = ["scenes.json", "beats.json", "timings.json", "outro.json"];
+// Short đối đáp (duo.json + duo.timing.json) đi riêng một mảng DUOS, xem src/duo.tsx.
 
 export const genRegistry = (only = []) => {
   const cfg = loadConfig(findProjectRoot());
   const videosDir = p(cfg, "videos");
   const srcDir = p(cfg, "src");
 
-  const slugs = readdirSync(videosDir)
+  const all = readdirSync(videosDir).filter((name) =>
+    (!only.length || only.includes(name)) && statSync(join(videosDir, name)).isDirectory());
+  const isDuo = (name) => existsSync(join(videosDir, name, "duo.json"));
+  const duos = all.filter((name) => {
+    if (!isDuo(name)) return false;
+    if (!existsSync(join(videosDir, name, "duo.timing.json"))) {
+      console.warn(`bỏ qua duo "${name}" — chưa có duo.timing.json (chạy: blog2video duo ${name})`);
+      return false;
+    }
+    return true;
+  }).sort();
+
+  const slugs = all
     .filter((name) => {
-      if (only.length && !only.includes(name)) return false;
+      if (isDuo(name)) return false;
       const dir = join(videosDir, name);
-      if (!statSync(dir).isDirectory()) return false;
       const missing = REQUIRED.filter((f) => !existsSync(join(dir, f)));
       if (missing.length) {
         console.warn(`bỏ qua "${name}" — thiếu ${missing.join(", ")}`);
@@ -65,22 +77,34 @@ export const genRegistry = (only = []) => {
     })
     .join("\n");
 
+  const duoImports = duos.map((slug) => {
+    const v = id(slug);
+    return `import duo_${v} from "${rel}/${slug}/duo.json";\nimport duoT_${v} from "${rel}/${slug}/duo.timing.json";`;
+  }).join("\n");
+  const duoEntries = duos.map((slug) => `  {slug: "${slug}", script: duo_${id(slug)}, timing: duoT_${id(slug)}},`).join("\n");
+
   const out = `// SINH TỰ ĐỘNG bởi blog2video — đừng sửa tay.
 // Chạy lại: npx blog2video registry
 import type {BeatData} from "blog2video/kit";
-import type {Beat, Line, VideoEntry} from "blog2video/types";
+import type {Beat, Line, VideoEntry, DuoEntry} from "blog2video/types";
 ${imports}
+${duoImports}
 
 export type {Beat, Line, VideoEntry} from "blog2video/types";
 
 export const VIDEOS: VideoEntry[] = [
 ${entries}
 ];
+
+export const DUOS: DuoEntry[] = [
+${duoEntries}
+];
 `;
 
   mkdirSync(srcDir, {recursive: true});
   writeFileSync(join(srcDir, "videos.gen.ts"), out, "utf-8");
-  console.log(`đã ghi ${cfg.paths.src}/videos.gen.ts — ${slugs.length} video: ${slugs.join(", ") || "(rỗng)"}`);
+  console.log(`đã ghi ${cfg.paths.src}/videos.gen.ts — ${slugs.length} video: ${slugs.join(", ") || "(rỗng)"}` +
+    (duos.length ? ` · ${duos.length} duo: ${duos.join(", ")}` : ""));
   return slugs;
 };
 

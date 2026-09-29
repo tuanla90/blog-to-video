@@ -15,10 +15,11 @@ import {Beat as BeatScene, BeatData} from "./kit";
 import {Caption} from "./Caption";
 import {C, INTER, MONO, Bg, titleGrad} from "./ui";
 import {BRAND, CONFIG, sec} from "./config";
-import type {VideoEntry} from "./types";
+import {DuoShort, duoFrames} from "./duo";
+import type {VideoEntry, DuoEntry} from "./types";
 
 export {applyConfig, CONFIG, BRAND} from "./config";
-export type {VideoEntry, Beat, Line, Word} from "./types";
+export type {VideoEntry, DuoEntry, Beat, Line, Word} from "./types";
 
 const root = () => ({background: C.bg, fontFamily: INTER, color: C.text});
 const sfx = (name: string) => staticFile(`${CONFIG.audio.sfxDir}/${name}`);
@@ -228,8 +229,9 @@ const DemoKit: React.FC = () => (
   </AbsoluteFill>
 );
 
-/** Dựng RemotionRoot từ registry. `demo: false` để bỏ composition "demo-kit". */
-export const makeRoot = (videos: VideoEntry[], opts: {demo?: boolean} = {}): React.FC => {
+/** Dựng RemotionRoot từ registry. `demo: false` để bỏ composition "demo-kit".
+ *  `duos`: các Short đối đáp (videos/<slug>/duo.json), mỗi tập một composition "<slug>-Duo" 1080x1920. */
+export const makeRoot = (videos: VideoEntry[], opts: {demo?: boolean; duos?: DuoEntry[]} = {}): React.FC => {
   const showDemo = opts.demo !== false;
   return () => {
     const fps = CONFIG.fps;
@@ -253,6 +255,11 @@ export const makeRoot = (videos: VideoEntry[], opts: {demo?: boolean} = {}): Rea
               )}
             </React.Fragment>
           );
+        })}
+        {(opts.duos ?? []).map((entry) => {
+          const Duo: React.FC = () => <DuoShort entry={entry} />;
+          return <Composition key={entry.slug + "-Duo"} id={`${entry.slug}-Duo`} component={Duo}
+            durationInFrames={duoFrames(entry)} fps={fps} width={1080} height={1920} />;
         })}
       </>
     );
