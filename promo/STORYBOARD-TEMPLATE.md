@@ -22,8 +22,8 @@ Cùng bộ khung với video Semanio DFL (`kit.tsx`: Stage, Headline, Shake, Bur
 
 | # | id | Chữ to (mỗi dòng một nhịp) | Hình hiện theo nhịp |
 |---|---|---|---|
-| 1 | `hook` | Cần gấp báo cáo 12 cột đúng mẫu NHNN · Phải lập phiếu nhờ IT kéo số · Xếp cuối hàng, nhích lên từng ngày · Gần tới lượt, sửa một tiêu chí là về cuối hàng | Phiếu vào cuối hàng chờ có sẵn 5 phiếu → nhích lên #2 → bay về cuối |
-| 2 | `turn` | Hết cảnh gửi phiếu chờ IT · SEMANTIX · Hỏi một câu, ra đúng mẫu báo cáo | Logo |
+| 1 | `hook` | Cần gấp báo cáo 12 cột đúng mẫu NHNN · Phải lập phiếu nhờ team Data/Tech kéo số · Xếp cuối hàng, nhích lên từng ngày · Gần tới lượt, sửa một tiêu chí là về cuối hàng | Phiếu vào cuối hàng chờ có sẵn 5 phiếu → nhích lên #2 → bay về cuối |
+| 2 | `turn` | Hết cảnh gửi phiếu chờ team Data/Tech · SEMANTIX · Hỏi một câu, ra đúng mẫu báo cáo | Logo |
 | 3 | `semBiz` | Phòng tự đặt tiêu chí bằng lời · AI dựng thành tiêu chí dùng chung · Thử ngay trên vài khách hàng · Có người duyệt, cả phòng dùng chung | Câu nói → hai cụm chữ bay thành chip → vạch quét đóng dấu Có/Không → con dấu ĐÃ DUYỆT → đường nối ra cả phòng |
 | 4 | `chatAsk` | Dán nguyên yêu cầu vào khung chat · AI dùng đúng tiêu chí phòng đã duyệt · Ra đúng 12 cột theo mẫu NHNN · Rồi đi tiếp một trong ba ngả | Khung chat hai bên: bong bóng yêu cầu → chấm đang gõ → các bước AI → tin kết quả 12/12 cột + 3 nút (= 3 ngả) |
 | 5 | `chatDrill` | Ngả 1 · Hỏi tiếp ngay trong khung chat · AI vẽ biểu đồ, chỉ ra điểm cần lưu ý | Cùng khung chat: câu hỏi → biểu đồ + nhận xét |
@@ -31,7 +31,7 @@ Cùng bộ khung với video Semanio DFL (`kit.tsx`: Stage, Headline, Shake, Bur
 | 7 | `share` | Ngả 3 · Tạo mẫu ngay từ kết quả này · Thêm ô nhập để mỗi kỳ tự đổi · Chia sẻ cho cả phòng dùng chung | Chat cuộn ngược lên tin kết quả, bấm nút 3 → thẻ mẫu, ô nhập hiện dần, chia sẻ |
 | 8 | `excelJinja` | Dùng luôn file Excel mẫu quen thuộc · Đặt ô giữ chỗ vào dòng dữ liệu · Gắn file vào mẫu, lần tải sau tự điền số | File mẫu → chip tên cột → Gắn vào mẫu |
 | 9 | `portalBiz` | Đồng nghiệp mở Cổng Dữ Liệu · Chọn mẫu, điền vài ô nhập · Gõ thêm điều kiện bằng lời, AI hiểu ngay · Bấm tải, ô giữ chỗ thành số thật | Lưới 6 mẫu → bấm FATCA mới ra ô nhập → gõ điều kiện → file mở có chip → chip thành số |
-| 10 | `recapBiz` | Nghiệp vụ tự lấy số, đúng mẫu, không chờ IT | Trước (17 ngày, gạch đỏ) → Nay (Ngay khi cần) + 3 giá trị |
+| 10 | `recapBiz` | Nghiệp vụ tự lấy số, đúng mẫu, không chờ team Data/Tech | Trước (17 ngày, gạch đỏ) → Nay (Ngay khi cần) + 3 giá trị |
 | 11 | `outro` | SEMANTIX · Hỏi một câu, ra đúng mẫu báo cáo | Link |
 
 ### Góp ý vòng 4b (23/10 tối, user duyệt trên Studio)
@@ -66,7 +66,7 @@ Cùng bộ khung với video Semanio DFL (`kit.tsx`: Stage, Headline, Shake, Bur
 
 ### Bản Full (BA / Power User) — vòng 5 (24/10): mang luật bản Biz sang
 - Mạch mới (17 cảnh, 5946 khung ≈ 3:18): hook → turnFull (logo + 3 thẻ) → compareBefore (kiến trúc dữ liệu) → compareAfter (quy trình) → model → relations → semBiz (Column Builder) → chatAsk → chatDrill → chatSchedule → share → params → excel → jinja → portalBiz → recap (6 bước theo vai) → outro.
-- Hai sơ đồ so sánh **được thêm lại** theo yêu cầu user (sếp thích, đưa duyệt thử): giữ nguyên nội dung, chỉ tô một cụm mỗi tiêu đề và đổi tiếng "bùm" thành pop. Nền cột / làn đổi từ trắng mờ sang tô đặc nhạt (cột kiến trúc tím #E5E0F7, làn quy trình cũ vàng #FBEFC6, làn người dùng tím #E7E1FD, làn IT xanh #E0ECFD) để thẻ trắng nổi lên (user: "nền trắng quá, khó nhìn").
+- Hai sơ đồ so sánh **được thêm lại** theo yêu cầu user (sếp thích, đưa duyệt thử): giữ nguyên nội dung, chỉ tô một cụm mỗi tiêu đề và đổi tiếng "bùm" thành pop. Nền cột / làn đổi từ trắng mờ sang tô đặc nhạt (cột kiến trúc tím #E5E0F7, làn quy trình cũ vàng #FBEFC6, làn người dùng tím #E7E1FD, làn team Data/Tech xanh #E0ECFD) để thẻ trắng nổi lên (user: "nền trắng quá, khó nhìn").
 - Bỏ: ba cảnh chuẩn hoá dạng thẻ (semanticDef/Test/Gov), các cảnh nền tối (ask, hub, askDrill, schedule), cảnh 3 thẻ kiểm soát (control), Cổng Dữ Liệu kiểu cũ. Code của các cảnh này vẫn còn trong repo nếu cần lại.
 - Dùng chung giao diện giả lập với Biz: Column Builder, khung chat hai bên, ngả 3 từ khung chat, Cổng Dữ Liệu từng bước (Entity khớp file tải).
 - Ô nhập của mẫu (params) không còn câu SQL / `@tham_so`: AI liệt kê "2025 / 26.000 đang gõ cứng → Ô nhập Năm báo cáo / Tỷ giá", thẻ ô nhập không hiện mã.
@@ -117,7 +117,7 @@ Cùng bộ khung với video Semanio DFL (`kit.tsx`: Stage, Headline, Shake, Bur
 
 | # | id | Khung | Vai trò hiển thị | Chữ trên hình | Diễn biến chính |
 |---|---|---|---|---|---|
-| 1 | `hook` | 285 | — | Cần một bảng số theo mẫu Excel · Gửi yêu cầu sang IT · Rồi xếp hàng chờ · Đổi một cột, chờ thêm vòng nữa | Phiếu xuất báo cáo FATCA vào Hàng chờ IT, lịch bóc, bị trả về khi đổi cột |
+| 1 | `hook` | 285 | — | Cần một bảng số theo mẫu Excel · Gửi yêu cầu sang team Data/Tech · Rồi xếp hàng chờ · Đổi một cột, chờ thêm vòng nữa | Phiếu xuất báo cáo FATCA vào Hàng chờ team Data/Tech, lịch bóc, bị trả về khi đổi cột |
 | 2 | `turn` | 175 | 3 nhóm vai trò | Đổi cách lấy dữ liệu · SEMANTIX · Tự hỏi, tự dựng mẫu, tự tải | Logo Semantix + 3 thẻ phân vai: BA/Data dựng nền · NV+BA+TP chuẩn hoá · 90% NV tự hỏi & tải |
 | 3 | `semanticDef` | 255 | Cán bộ Nghiệp vụ + Semantix AI | Nghiệp vụ tự tạo tiêu chí chuẩn bằng lời · AI dựng công thức, kiểm thử từng khách hàng | Tạo chiều `"Flag thuộc FATCA"` → AI sinh `CASE WHEN` → Nghiệp vụ hỏi liệt kê KH để rà từng dòng (case by case) → bấm Xác nhận & Gửi BA |
 | 4 | `semanticGov` | 255 | BA Data Sign-off · Trưởng phòng duyệt | BA Data rà tình huống biên, không phải map từ đầu · Có BA xác nhận, Trưởng phòng duyệt làm chuẩn chung | 3 thẻ tiến trình: Nghiệp vụ đã confirm mẫu → BA Data thêm 2 edge case (`record_status <> 'REVE'`, `ROW_NUMBER = 1`) & Sign-off → Trưởng phòng Approve cho cả phòng |

@@ -166,7 +166,7 @@ export const PortalBizScene: React.FC = () => {
             {f >= T.chips && (
                 <div style={{ position: 'absolute', left: SHEET_AT.x, top: 760, display: 'flex', gap: 14, zIndex: 95, opacity: ease(f, [T.chips, T.chips + 10], [0, 1]) }}>
                     <Chip tone="green" style={{ fontSize: 25, padding: '10px 18px' }}><Ico k="check" size={22} stroke={3} />Cả 2 dòng đều Loại KH = Entity, đúng điều kiện đã gõ</Chip>
-                    <Chip tone="violet" style={{ fontSize: 25, padding: '10px 18px' }}><Ico k="send" size={22} />Không cần phiếu IT</Chip>
+                    <Chip tone="violet" style={{ fontSize: 25, padding: '10px 18px' }}><Ico k="send" size={22} />Không cần phiếu gửi team Data/Tech</Chip>
                 </div>
             )}
             <PathCursor from={40} to={T.download + 16} clicks={[T.pick, T.focus, T.analyze, T.download]} keys={[

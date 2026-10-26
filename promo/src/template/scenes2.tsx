@@ -569,7 +569,7 @@ export const PortalScene: React.FC = () => {
             <Headline text="Gõ thêm điều kiện bằng lời, AI hiểu ngay" at={T.type - 2} out={T.sheet + 4} size={fit('Gõ thêm điều kiện bằng lời, AI hiểu ngay', 90)} top={54} accent={['bằng lời']} />
             {mode === 'biz'
                 ? <Headline text="Bấm tải, ô giữ chỗ thành số thật" at={T.sheet + 8} size={fit('Bấm tải, ô giữ chỗ thành số thật', 96)} top={58} accent={['thành số thật']} />
-                : <Headline text="Tải Excel đúng mẫu, không cần phiếu IT" at={T.sheet + 8} size={fit('Tải Excel đúng mẫu, không cần phiếu IT', 92)} top={58} accent={['đúng mẫu', 'không cần phiếu IT']} />}
+                : <Headline text="Tải Excel đúng mẫu, không cần phiếu gửi team Data/Tech" at={T.sheet + 8} size={fit('Tải Excel đúng mẫu, không cần phiếu gửi team Data/Tech', 92)} top={58} accent={['đúng mẫu', 'không cần phiếu gửi team Data/Tech']} />}
             <div style={{ position: 'absolute', inset: 0, opacity: 1 - behind * 0.85, filter: behind > 0.01 ? `blur(${behind * 6}px)` : undefined }}>
                 <AppWindow title="Cổng Dữ Liệu" icon="download" barColor={C.navy} style={{ left: 110, top: 176, width: 1700, height: 820, opacity: win, transform: `translateY(${(1 - win) * 60}px)` }}>
                     <div style={{ padding: '18px 30px 0', fontSize: 20, color: C.steel }}>Chọn mẫu của phòng, điền ô nhập, bấm tải</div>
@@ -660,7 +660,7 @@ export const PortalScene: React.FC = () => {
                 <div style={{ position: 'absolute', left: 80, top: 750, display: 'flex', gap: 12, zIndex: 95, opacity: ease(f, [chipsAt, chipsAt + 10], [0, 1]) }}>
                     <Badge kind="sim" size={16} />
                     <Chip tone="green" style={{ fontSize: 24, padding: '10px 18px' }}><Ico k="check" size={22} stroke={3} />Chỉ khách tổ chức, đúng điều kiện đã gõ</Chip>
-                    {mode === 'biz' && <Chip tone="violet" style={{ fontSize: 24, padding: '10px 18px' }}><Ico k="send" size={22} />Không cần phiếu IT</Chip>}
+                    {mode === 'biz' && <Chip tone="violet" style={{ fontSize: 24, padding: '10px 18px' }}><Ico k="send" size={22} />Không cần phiếu gửi team Data/Tech</Chip>}
                 </div>
             )}
             <PathCursor from={14} to={T.open + 8} clicks={[T.focus, T.analyze, T.click, T.open]} keys={[[14, 1100, 1040], [T.focus - 6, 1150, 664], [T.analyze - 10, 1150, 664], [T.analyze - 2, 1676, 664], [T.click - 10, 1676, 664], [T.click - 2, 1500, 888], [T.open - 10, 1500, 888], [T.open - 2, 1440, 982], [T.open + 8, 1440, 982]]} />

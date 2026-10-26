@@ -26,17 +26,21 @@ export const CMP_BEFORE = {
 
 /**
  * Mốc frame cho Cảnh Quy Trình (`CompareAfterScene`):
- *  - Nhịp 1 (0..195): Quy trình cũ — User & IT đẩy phiếu qua lại 6 bước, kẹt ở khâu chờ backlog
- *  - Nhịp 2 (195..430): Quy trình mới — User làm chủ mạch 4 bước, IT/CĐS dựng nền phía dưới
+ *  - Nhịp 1 (0..195): Quy trình cũ — User & team Data/Tech đẩy phiếu qua lại, Làm rõ ⇄ Phát triển nhiều vòng,
+ *    nghiệm thu lộ gap thì quay lại Làm rõ; kết bằng dải cảnh báo
+ *  - Nhịp 2 (195..430): Quy trình mới — User làm chủ mạch 4 bước, team Data/Tech · CĐS dựng nền phía dưới
  */
 export const CMP_AFTER = {
     oldLane: 14,
-    oldStep1: 24,
-    oldStep2: 48,
-    oldStep3: 72,
-    oldStep4: 96,
+    oldStep1: 20,
+    oldStep2: 40,
+    oldStep3: 60,
+    oldStep4: 80,
+    oldClarify: 98,
     oldStep5: 122,
-    oldStep6: 146,
+    oldRework: 138,
+    oldStep6: 152,
+    oldWarn: 166,
     newStart: 196,
     newIt1: 212,
     newUser1: 238,
@@ -44,6 +48,7 @@ export const CMP_AFTER = {
     newUser3: 290,
     newUser4: 316,
     newSupport: 342,
+    newNote: 368,
 }
 
 const popAt = (f: number, at: number, fps: number) =>
@@ -507,9 +512,39 @@ const FlowNode: React.FC<{
     )
 }
 
+/** Nhãn đầu làn (icon + tên vai + vai trò); tên dài như "Team Data/Tech" tự xuống dòng trong cột nhãn. */
+const LaneLabel: React.FC<{ top: number; h: number; icon: IconKind; iconBg: string; iconFg: string; title: string; sub: string; subColor: string }> = ({ top, h, icon, iconBg, iconFg, title, sub, subColor }) => (
+    <div style={{ position: 'absolute', left: 22, top, height: h, width: 196, display: 'flex', alignItems: 'center', gap: 12 }}>
+        <span style={{ width: 46, height: 46, borderRadius: 14, background: iconBg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <Ico k={icon} size={24} color={iconFg} />
+        </span>
+        <div style={{ minWidth: 0 }}>
+            <div style={{ fontFamily: FONT, fontSize: 20, fontWeight: 800, color: INK, lineHeight: 1.15 }}>{title}</div>
+            <div style={{ fontFamily: FONT, fontSize: 14.5, fontWeight: 700, color: subColor, marginTop: 2, lineHeight: 1.2 }}>{sub}</div>
+        </div>
+    </div>
+)
+
+/** Dải chú thích dưới mỗi quy trình (cảnh báo ở quy trình cũ, kết luận ở quy trình mới). */
+const NoteBar: React.FC<{ top: number; p: number; tone: 'warn' | 'ok'; text: string }> = ({ top, p, tone, text }) => {
+    const warn = tone === 'warn'
+    return (
+        <div style={{
+            position: 'absolute', left: 0, top, width: 1780, height: 48, boxSizing: 'border-box',
+            borderRadius: 14, padding: '0 22px', display: 'flex', alignItems: 'center', gap: 12,
+            background: warn ? '#FFF6E0' : '#F3F0FF', border: `1.5px solid ${warn ? '#F0CF6E' : '#B6A5FA'}`,
+            opacity: Math.min(1, p * 1.6), transform: `translateY(${(1 - p) * 10}px)`,
+        }}>
+            <Ico k={warn ? 'shieldAlert' : 'badgeCheck'} size={24} color={warn ? '#B45309' : '#5B3FD6'} />
+            <span style={{ fontFamily: FONT, fontSize: 19, fontWeight: 700, color: INK }}>{text}</span>
+        </div>
+    )
+}
+
 /**
  * Màn 2 (`CompareAfterScene`):
- * Sơ đồ Swimlane Quy trình — Từ Quy trình phát triển chờ IT sang Self-service trên Semantix.
+ * Sơ đồ Swimlane Quy trình — Từ Quy trình phát triển chờ team Data/Tech sang Self-service trên Semantix.
+ * Quy trình cũ có hai vòng lặp: Làm rõ yêu cầu ⇄ Phát triển (chấm chạy qua lại) và Nghiệm thu ⇢ Làm rõ (gap lộ ra ở UAT).
  */
 export const CompareAfterScene: React.FC = () => {
     const f = useCurrentFrame()
@@ -519,8 +554,11 @@ export const CompareAfterScene: React.FC = () => {
     const o2 = popAt(f, CMP_AFTER.oldStep2, fps)
     const o3 = popAt(f, CMP_AFTER.oldStep3, fps)
     const o4 = popAt(f, CMP_AFTER.oldStep4, fps)
+    const oC = popAt(f, CMP_AFTER.oldClarify, fps)
     const o5 = popAt(f, CMP_AFTER.oldStep5, fps)
+    const oR = popAt(f, CMP_AFTER.oldRework, fps)
     const o6 = popAt(f, CMP_AFTER.oldStep6, fps)
+    const oW = popAt(f, CMP_AFTER.oldWarn, fps)
 
     const newIn = ease(f, [CMP_AFTER.newStart - 6, CMP_AFTER.newStart + 12], [0, 1])
     const nIt1 = popAt(f, CMP_AFTER.newIt1, fps)
@@ -529,6 +567,7 @@ export const CompareAfterScene: React.FC = () => {
     const nU3 = popAt(f, CMP_AFTER.newUser3, fps)
     const nU4 = popAt(f, CMP_AFTER.newUser4, fps)
     const nSup = popAt(f, CMP_AFTER.newSupport, fps)
+    const nNote = popAt(f, CMP_AFTER.newNote, fps)
 
     const c1 = 230
     const c2 = 540
@@ -536,38 +575,59 @@ export const CompareAfterScene: React.FC = () => {
     const c4 = 1160
     const c5 = 1470
     const boxW = 262
-    const boxH = 104
+    const boxH = 100
+
+    // Hai làn trong mỗi khối: làn trên (User) và làn dưới (team Data/Tech); thẻ nằm giữa làn.
+    const laneH = 136
+    const laneU = 46
+    const laneD = 194
+    const yU = laneU + (laneH - boxH) / 2
+    const yD = laneD + (laneH - boxH) / 2
+    const midU = yU + boxH / 2
+    const midD = yD + boxH / 2
+    const noteTop = laneD + laneH + 12
 
     const pulse = 0.5 + 0.5 * Math.sin(f / 6)
+
+    // Chấm chạy qua lại giữa Làm rõ yêu cầu (trên) và Phát triển (dưới): xuống theo mũi trái, lên theo mũi phải.
+    const pingX = c3 + boxW / 2
+    const pingTop = yU + boxH + 4
+    const pingBot = yD - 4
+    const pingPeriod = 36
+    const pingT = ((f - CMP_AFTER.oldClarify) % pingPeriod + pingPeriod) % pingPeriod / pingPeriod
+    const pingDown = pingT < 0.5
+    const pingY = pingDown
+        ? interpolate(pingT, [0, 0.5], [pingTop, pingBot])
+        : interpolate(pingT, [0.5, 1], [pingBot, pingTop])
 
     return (
         <Stage>
             <Headline
-                text="Quy trình cũ: Qua lại nhiều bước, chờ IT xếp lịch"
+                text="Quy trình cũ: Qua lại nhiều vòng, chờ team Data/Tech xếp lịch"
                 at={0}
                 out={CMP_AFTER.newStart - 6}
-                size={fit('Quy trình cũ: Qua lại nhiều bước, chờ IT xếp lịch', 84)}
+                size={fit('Quy trình cũ: Qua lại nhiều vòng, chờ team Data/Tech xếp lịch', 84)}
                 top={46}
-                accent={['Qua lại nhiều bước']}
+                accent={['Qua lại nhiều vòng']}
             />
             <Headline
-                text="Quy trình mới: Nghiệp vụ làm chủ, IT hỗ trợ nền tảng"
+                text="Quy trình mới: Nghiệp vụ làm chủ, team Data/Tech hỗ trợ nền tảng"
                 at={CMP_AFTER.newStart}
-                size={fit('Quy trình mới: Nghiệp vụ làm chủ, IT hỗ trợ nền tảng', 84)}
+                size={fit('Quy trình mới: Nghiệp vụ làm chủ, team Data/Tech hỗ trợ nền tảng', 84)}
                 top={46}
                 accent={['Nghiệp vụ làm chủ']}
             />
 
             {/* =========================================================
-                KHỐI 1: QUY TRÌNH CŨ (CHỜ IT PHÁT TRIỂN)
+                KHỐI 1: QUY TRÌNH CŨ (CHỜ TEAM DATA/TECH PHÁT TRIỂN)
                ========================================================= */}
-            <div style={{ position: 'absolute', left: 70, top: 156, width: 1780, height: 396 }}>
+            <div style={{ position: 'absolute', left: 70, top: 152, width: 1780, height: noteTop + 48 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
                     <span style={{
                         padding: '5px 16px', borderRadius: 99, background: '#FEF3C7', border: '1.5px solid #F59E0B',
                         fontFamily: FONT, fontSize: 18, fontWeight: 800, color: '#9A3412',
                     }}>
-                        Quy trình cũ · Theo luồng phát triển IT
+                        Quy trình cũ · Theo luồng phát triển của team Data/Tech
                     </span>
                     {o6 > 0.2 && (
                         <span style={{
@@ -583,86 +643,86 @@ export const CompareAfterScene: React.FC = () => {
 
                 {/* Swimlane User */}
                 <div style={{
-                    position: 'absolute', left: 0, top: 46, width: 1780, height: 144,
+                    position: 'absolute', left: 0, top: laneU, width: 1780, height: laneH,
                     borderRadius: 20, background: '#FBEFC6', border: '1.5px solid #F0CF6E',
                 }} />
-                <div style={{ position: 'absolute', left: 22, top: 88, display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <span style={{ width: 46, height: 46, borderRadius: 14, background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Ico k="userCheck" size={24} color="#9A3412" />
-                    </span>
-                    <div>
-                        <div style={{ fontFamily: FONT, fontSize: 20, fontWeight: 800, color: INK }}>User</div>
-                        <div style={{ fontFamily: FONT, fontSize: 14.5, fontWeight: 700, color: '#9A3412' }}>Bên yêu cầu</div>
-                    </div>
-                </div>
+                <LaneLabel top={laneU} h={laneH} icon="userCheck" iconBg="#FFFFFF" iconFg="#9A3412" title="User" sub="Bên yêu cầu" subColor="#9A3412" />
 
-                {/* Swimlane IT */}
+                {/* Swimlane team Data/Tech */}
                 <div style={{
-                    position: 'absolute', left: 0, top: 206, width: 1780, height: 144,
+                    position: 'absolute', left: 0, top: laneD, width: 1780, height: laneH,
                     borderRadius: 20, background: '#FBEFC6', border: '1.5px solid #F0CF6E',
                 }} />
-                <div style={{ position: 'absolute', left: 22, top: 248, display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <span style={{ width: 46, height: 46, borderRadius: 14, background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Ico k="users" size={24} color="#9A3412" />
-                    </span>
-                    <div>
-                        <div style={{ fontFamily: FONT, fontSize: 20, fontWeight: 800, color: INK }}>IT</div>
-                        <div style={{ fontFamily: FONT, fontSize: 14.5, fontWeight: 700, color: '#9A3412' }}>Bên phát triển</div>
-                    </div>
-                </div>
+                <LaneLabel top={laneD} h={laneH} icon="users" iconBg="#FFFFFF" iconFg="#9A3412" title="Team Data/Tech" sub="Bên phát triển" subColor="#9A3412" />
 
-                {/* Ô đồng hồ chờ đợi nhấp nháy trực quan */}
+                {/* Ô chờ: chờ xếp backlog (làn User) nhấp nháy, chờ nghiệm thu (làn dưới) */}
                 <div style={{
-                    position: 'absolute', left: c2, top: 66, width: boxW * 2 + 48, height: boxH,
-                    borderRadius: 18, border: '2px dashed #EF4444',
+                    position: 'absolute', left: c2, top: yU, width: boxW, height: boxH, boxSizing: 'border-box',
+                    borderRadius: 18, border: '2px dashed #EF4444', padding: '0 16px',
                     background: `rgba(254,226,226,${0.45 + 0.25 * pulse})`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12,
                     opacity: Math.min(1, o3 * 1.8),
                 }}>
                     <Ico k="clock" size={24} color="#DC2626" />
-                    <span style={{ fontFamily: FONT, fontSize: 18.5, fontWeight: 800, color: '#B91C1C' }}>
-                        Chờ IT xếp backlog & viết code
+                    <span style={{ fontFamily: FONT, fontSize: 17.5, fontWeight: 800, color: '#B91C1C', lineHeight: 1.25 }}>
+                        Chờ team Data/Tech<br />xếp backlog
                     </span>
                 </div>
 
                 <div style={{
-                    position: 'absolute', left: c4, top: 226, width: boxW, height: boxH,
+                    position: 'absolute', left: c4, top: yD, width: boxW, height: boxH, boxSizing: 'border-box',
                     borderRadius: 18, border: '2px dashed #D97706', background: 'rgba(254,243,199,0.5)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
                     opacity: Math.min(1, o5 * 1.8),
                 }}>
                     <Ico k="clock" size={22} color="#B45309" />
                     <span style={{ fontFamily: FONT, fontSize: 17.5, fontWeight: 800, color: '#9A3412' }}>
-                        Chờ nghiệm thu
+                        Chờ user nghiệm thu
                     </span>
                 </div>
 
-                {/* 6 bước zíc-zắc */}
-                <FlowNode x={c1} y={66} w={boxW} h={boxH} tone="old" p={o1} icon="send" title="Đưa yêu cầu" sub="Báo cáo mới" />
-                <FlowNode x={c1} y={226} w={boxW} h={boxH} tone="old" p={o2} icon="inbox" title="Nhận yêu cầu" sub="Từ nghiệp vụ" />
-                <FlowNode x={c2} y={226} w={boxW} h={boxH} tone="old" p={o3} icon="history" title="Xếp backlog" sub="Chờ nguồn lực" />
-                <FlowNode x={c3} y={226} w={boxW} h={boxH} tone="old" p={o4} icon="table" title="Phát triển" sub="Phân tích & code" />
-                <FlowNode x={c4} y={66} w={boxW} h={boxH} tone="old" p={o5} icon="badgeCheck" title="Nghiệm thu" sub="Test kết quả" />
-                <FlowNode x={c5} y={226} w={boxW} h={boxH} tone="old" p={o6} icon="play" title="Go-live" sub="Đưa vào dùng" />
+                {/* 7 bước: hai vòng lặp Làm rõ ⇄ Phát triển và Nghiệm thu ⇢ Làm rõ */}
+                <FlowNode x={c1} y={yU} w={boxW} h={boxH} tone="old" p={o1} icon="send" title="Đưa yêu cầu" sub="Báo cáo mới" />
+                <FlowNode x={c1} y={yD} w={boxW} h={boxH} tone="old" p={o2} icon="inbox" title="Nhận yêu cầu" sub="Từ nghiệp vụ" />
+                <FlowNode x={c2} y={yD} w={boxW} h={boxH} tone="old" p={o3} icon="history" title="Xếp backlog" sub="Chờ nguồn lực" />
+                <FlowNode x={c3} y={yD} w={boxW} h={boxH} tone="old" p={o4} icon="table" title="Phát triển" sub="Phân tích & code" />
+                <FlowNode x={c3} y={yU} w={boxW} h={boxH} tone="old" p={oC} icon="chat" title="Làm rõ yêu cầu" sub="Hỏi lại nhiều vòng" />
+                <FlowNode x={c4} y={yU} w={boxW} h={boxH} tone="old" p={o5} icon="badgeCheck" title="Nghiệm thu" sub="Gap lộ ra, làm lại" />
+                <FlowNode x={c5} y={yD} w={boxW} h={boxH} tone="old" p={o6} icon="play" title="Go-live" sub="Đưa vào dùng" />
 
-                <svg width={1780} height={370} style={{ position: 'absolute', left: 0, top: 0, pointerEvents: 'none' }}>
+                <svg width={1780} height={noteTop} style={{ position: 'absolute', left: 0, top: 0, pointerEvents: 'none' }}>
                     <defs>
                         <marker id="arrOldFlow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
                             <path d="M0,0 L8,4 L0,8 Z" fill="#D97706" />
                         </marker>
+                        <marker id="arrOldBack" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                            <path d="M0,0 L8,4 L0,8 Z" fill="#DC2626" />
+                        </marker>
                     </defs>
-                    {o2 > 0.1 && <line x1={c1 + boxW / 2} y1={170} x2={c1 + boxW / 2} y2={220} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" opacity={o2} />}
-                    {o3 > 0.1 && <line x1={c1 + boxW} y1={278} x2={c2 - 6} y2={278} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" opacity={o3} />}
-                    {o4 > 0.1 && <line x1={c2 + boxW} y1={278} x2={c3 - 6} y2={278} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" opacity={o4} />}
-                    {o5 > 0.1 && <path d={`M ${c3 + boxW} 278 L ${c4 - 22} 278 L ${c4 - 22} 118 L ${c4 - 6} 118`} stroke="#D97706" strokeWidth="2.4" fill="none" markerEnd="url(#arrOldFlow)" opacity={o5} />}
-                    {o6 > 0.1 && <path d={`M ${c4 + boxW} 118 L ${c5 - 22} 118 L ${c5 - 22} 278 L ${c5 - 6} 278`} stroke="#D97706" strokeWidth="2.4" fill="none" markerEnd="url(#arrOldFlow)" opacity={o6} />}
+                    {o2 > 0.1 && <line x1={c1 + boxW / 2} y1={yU + boxH} x2={c1 + boxW / 2} y2={yD - 6} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" opacity={o2} />}
+                    {o3 > 0.1 && <line x1={c1 + boxW} y1={midD} x2={c2 - 6} y2={midD} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" opacity={o3} />}
+                    {o4 > 0.1 && <line x1={c2 + boxW} y1={midD} x2={c3 - 6} y2={midD} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" opacity={o4} />}
+                    {/* Làm rõ ⇄ Phát triển: mũi xuống bên trái, mũi lên bên phải, chấm chạy qua lại */}
+                    {oC > 0.1 && (
+                        <g opacity={oC}>
+                            <line x1={pingX - 30} y1={pingTop} x2={pingX - 30} y2={pingBot - 4} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" />
+                            <line x1={pingX + 30} y1={pingBot} x2={pingX + 30} y2={pingTop + 4} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" />
+                            <circle cx={pingDown ? pingX - 30 : pingX + 30} cy={pingY} r={5.5} fill="#DC2626" />
+                        </g>
+                    )}
+                    {o5 > 0.1 && <path d={`M ${c3 + boxW} ${midD} L ${c4 - 22} ${midD} L ${c4 - 22} ${yU + 74} L ${c4 - 6} ${yU + 74}`} stroke="#D97706" strokeWidth="2.4" fill="none" markerEnd="url(#arrOldFlow)" opacity={o5} />}
+                    {/* Nghiệm thu ⇢ Làm rõ: gap lộ ra ở UAT, quay lại vòng làm rõ */}
+                    {oR > 0.1 && <line x1={c4} y1={yU + 26} x2={c3 + boxW + 6} y2={yU + 26} stroke="#DC2626" strokeWidth="2.6" strokeDasharray="6 5" strokeDashoffset={-f * 0.6} markerEnd="url(#arrOldBack)" opacity={oR} />}
+                    {o6 > 0.1 && <path d={`M ${c4 + boxW} ${midU} L ${c5 - 22} ${midU} L ${c5 - 22} ${midD} L ${c5 - 6} ${midD}`} stroke="#D97706" strokeWidth="2.4" fill="none" markerEnd="url(#arrOldFlow)" opacity={o6} />}
                 </svg>
+
+                <NoteBar top={noteTop} p={oW} tone="warn" text="Phân tích nghiệp vụ phải trao đổi qua lại nhiều vòng, tốn thời gian; dù vậy vẫn có thể còn gap, đến UAT mới phát hiện" />
             </div>
 
             {/* =========================================================
                 KHỐI 2: QUY TRÌNH MỚI (SELF-SERVICE TRÊN SEMANTIX)
                ========================================================= */}
-            <div style={{ position: 'absolute', left: 70, top: 558, width: 1780, height: 396, opacity: newIn }}>
+            <div style={{ position: 'absolute', left: 70, top: 556, width: 1780, height: noteTop + 48, opacity: newIn }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 12 }}>
                     <span style={{
                         padding: '5px 16px', borderRadius: 99, background: GRAD_H,
@@ -686,65 +746,51 @@ export const CompareAfterScene: React.FC = () => {
 
                 {/* Swimlane User (Owner) */}
                 <div style={{
-                    position: 'absolute', left: 0, top: 46, width: 1780, height: 144,
+                    position: 'absolute', left: 0, top: laneU, width: 1780, height: laneH,
                     borderRadius: 20, background: '#E7E1FD', border: '2px solid #B6A5FA',
                 }} />
-                <div style={{ position: 'absolute', left: 22, top: 88, display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <span style={{ width: 46, height: 46, borderRadius: 14, background: GRAD, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Ico k="userCheck" size={24} color="#fff" />
-                    </span>
-                    <div>
-                        <div style={{ fontFamily: FONT, fontSize: 20, fontWeight: 800, color: INK }}>User</div>
-                        <div style={{ fontFamily: FONT, fontSize: 14.5, fontWeight: 800, color: '#5B3FD6' }}>Owner làm chủ</div>
-                    </div>
-                </div>
+                <LaneLabel top={laneU} h={laneH} icon="userCheck" iconBg={GRAD} iconFg="#fff" title="User" sub="Owner làm chủ" subColor="#5B3FD6" />
 
-                {/* Swimlane IT/CĐS (Hỗ trợ) */}
+                {/* Swimlane team Data/Tech · CĐS (Hỗ trợ) */}
                 <div style={{
-                    position: 'absolute', left: 0, top: 206, width: 1780, height: 144,
+                    position: 'absolute', left: 0, top: laneD, width: 1780, height: laneH,
                     borderRadius: 20, background: '#E0ECFD', border: '1.5px solid #A8C8F6',
                 }} />
-                <div style={{ position: 'absolute', left: 22, top: 248, display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <span style={{ width: 46, height: 46, borderRadius: 14, background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <Ico k="shield" size={24} color="#1D4ED8" />
-                    </span>
-                    <div>
-                        <div style={{ fontFamily: FONT, fontSize: 20, fontWeight: 800, color: INK }}>IT / CĐS</div>
-                        <div style={{ fontFamily: FONT, fontSize: 14.5, fontWeight: 700, color: '#1D4ED8' }}>Hỗ trợ nền tảng</div>
-                    </div>
-                </div>
+                <LaneLabel top={laneD} h={laneH} icon="shield" iconBg="#FFFFFF" iconFg="#1D4ED8" title="Team Data/Tech" sub="& CĐS hỗ trợ" subColor="#1D4ED8" />
 
                 {/* Các bước thẳng mạch của User Owner */}
-                <FlowNode x={c1} y={226} w={boxW} h={boxH} tone="support" p={nIt1} icon="database" title="Kết nối Data Mart" sub="Bảng & quan hệ" />
-                <FlowNode x={c2} y={66} w={boxW} h={boxH} tone="new" p={nU1} step="BƯỚC 1" icon="sparkles" title="Khai báo ngữ nghĩa" sub="Chỉ tiêu, công thức" />
-                <FlowNode x={c3} y={66} w={boxW} h={boxH} tone="new" p={nU2} step="BƯỚC 2" icon="chat" title="Prompt yêu cầu" sub="Hỏi bằng tiếng Việt" />
-                <FlowNode x={c4} y={66} w={boxW} h={boxH} tone="new" p={nU3} step="BƯỚC 3" icon="bot" title="AI dựng báo cáo" sub="Ra bảng & biểu đồ" />
-                <FlowNode x={c5} y={66} w={boxW} h={boxH} tone="new" p={nU4} step="BƯỚC 4" icon="fileSheet" title="Save Template" sub="Tái sử dụng mọi kỳ" />
+                <FlowNode x={c1} y={yD} w={boxW} h={boxH} tone="support" p={nIt1} icon="database" title="Kết nối Data Mart" sub="Bảng & quan hệ" />
+                <FlowNode x={c2} y={yU} w={boxW} h={boxH} tone="new" p={nU1} step="BƯỚC 1" icon="sparkles" title="Khai báo ngữ nghĩa" sub="Chỉ tiêu, công thức" />
+                <FlowNode x={c3} y={yU} w={boxW} h={boxH} tone="new" p={nU2} step="BƯỚC 2" icon="chat" title="Prompt yêu cầu" sub="Hỏi bằng tiếng Việt" />
+                <FlowNode x={c4} y={yU} w={boxW} h={boxH} tone="new" p={nU3} step="BƯỚC 3" icon="bot" title="AI dựng báo cáo" sub="Ra bảng & biểu đồ" />
+                <FlowNode x={c5} y={yU} w={boxW} h={boxH} tone="new" p={nU4} step="BƯỚC 4" icon="fileSheet" title="Save Template" sub="Tái sử dụng mọi kỳ" />
 
-                {/* 2 bước hỗ trợ nền của IT/CĐS */}
-                <FlowNode x={c2} y={226} w={boxW} h={boxH} tone="support" p={nSup} icon="shield" title="Verify logic" sub="Rà tình huống biên" />
-                <FlowNode x={c5} y={226} w={boxW} h={boxH} tone="support" p={nSup} icon="lock" title="Vận hành hệ thống" sub="An toàn & phân quyền" />
+                {/* 2 bước hỗ trợ nền của team Data/Tech · CĐS */}
+                <FlowNode x={c2} y={yD} w={boxW} h={boxH} tone="support" p={nSup} icon="shield" title="Verify logic" sub="Rà tình huống biên" />
+                <FlowNode x={c5} y={yD} w={boxW} h={boxH} tone="support" p={nSup} icon="lock" title="Vận hành hệ thống" sub="An toàn & phân quyền" />
 
-                <svg width={1780} height={370} style={{ position: 'absolute', left: 0, top: 0, pointerEvents: 'none' }}>
+                <svg width={1780} height={noteTop} style={{ position: 'absolute', left: 0, top: 0, pointerEvents: 'none' }}>
                     <defs>
                         <marker id="arrNewFlow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
                             <path d="M0,0 L8,4 L0,8 Z" fill="#6D5DF6" />
                         </marker>
                     </defs>
-                    {nU1 > 0.1 && <path d={`M ${c1 + boxW} 278 L ${c2 - 22} 278 L ${c2 - 22} 118 L ${c2 - 6} 118`} stroke="#6D5DF6" strokeWidth="2.8" fill="none" markerEnd="url(#arrNewFlow)" opacity={nU1} />}
-                    {nU2 > 0.1 && <line x1={c2 + boxW} y1={118} x2={c3 - 6} y2={118} stroke="#6D5DF6" strokeWidth="3" markerEnd="url(#arrNewFlow)" opacity={nU2} />}
-                    {nU3 > 0.1 && <line x1={c3 + boxW} y1={118} x2={c4 - 6} y2={118} stroke="#6D5DF6" strokeWidth="3" markerEnd="url(#arrNewFlow)" opacity={nU3} />}
-                    {nU4 > 0.1 && <line x1={c4 + boxW} y1={118} x2={c5 - 6} y2={118} stroke="#6D5DF6" strokeWidth="3" markerEnd="url(#arrNewFlow)" opacity={nU4} />}
+                    {nU1 > 0.1 && <path d={`M ${c1 + boxW} ${midD} L ${c2 - 22} ${midD} L ${c2 - 22} ${midU} L ${c2 - 6} ${midU}`} stroke="#6D5DF6" strokeWidth="2.8" fill="none" markerEnd="url(#arrNewFlow)" opacity={nU1} />}
+                    {nU2 > 0.1 && <line x1={c2 + boxW} y1={midU} x2={c3 - 6} y2={midU} stroke="#6D5DF6" strokeWidth="3" markerEnd="url(#arrNewFlow)" opacity={nU2} />}
+                    {nU3 > 0.1 && <line x1={c3 + boxW} y1={midU} x2={c4 - 6} y2={midU} stroke="#6D5DF6" strokeWidth="3" markerEnd="url(#arrNewFlow)" opacity={nU3} />}
+                    {nU4 > 0.1 && <line x1={c4 + boxW} y1={midU} x2={c5 - 6} y2={midU} stroke="#6D5DF6" strokeWidth="3" markerEnd="url(#arrNewFlow)" opacity={nU4} />}
                     {nSup > 0.1 && (
                         <>
-                            <line x1={c2 + boxW / 2} y1={170} x2={c2 + boxW / 2} y2={226} stroke="#3B82F6" strokeWidth="2.4" strokeDasharray="6 5" opacity={nSup} />
-                            <line x1={c5 + boxW / 2} y1={170} x2={c5 + boxW / 2} y2={226} stroke="#3B82F6" strokeWidth="2.4" strokeDasharray="6 5" opacity={nSup} />
+                            <line x1={c2 + boxW / 2} y1={yU + boxH} x2={c2 + boxW / 2} y2={yD} stroke="#3B82F6" strokeWidth="2.4" strokeDasharray="6 5" opacity={nSup} />
+                            <line x1={c5 + boxW / 2} y1={yU + boxH} x2={c5 + boxW / 2} y2={yD} stroke="#3B82F6" strokeWidth="2.4" strokeDasharray="6 5" opacity={nSup} />
                         </>
                     )}
                 </svg>
+
+                <NoteBar top={noteTop} p={nNote} tone="ok" text="User nắm rõ yêu cầu của chính mình nên tự làm trực tiếp: không cần trao đổi qua lại, không còn gap phát hiện muộn ở UAT" />
             </div>
 
-            <Tag text={`So sánh Quy trình · Từ chờ IT phát triển sang Self-service trên ${BRAND}`} />
+            <Tag text={`So sánh Quy trình · Từ chờ team Data/Tech phát triển sang Self-service trên ${BRAND}`} />
         </Stage>
     )
 }

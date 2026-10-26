@@ -17,7 +17,7 @@ export const Tag: React.FC<{ text?: string }> = ({ text = `Minh hoạ giao diệ
     return <div style={{ position: 'absolute', right: 40, bottom: 16, fontSize: 18, color: dark ? '#A9A3D6' : C.steel, opacity: 0.85 }}>{text}</div>
 }
 
-// ─── 1 · Nỗi đau: phiếu vào cuối hàng chờ IT, nhích lên từng ngày, sửa tiêu chí là về cuối ─
+// ─── 1 · Nỗi đau: phiếu vào cuối hàng chờ team Data/Tech, nhích lên từng ngày, sửa tiêu chí là về cuối ─
 type Tk = { id: number; label: string; join: number; done?: number }
 /** Hàng chờ có sẵn trước khi gửi phiếu; phiếu trên cùng lần lượt xong. */
 const PRE_QUEUE: Tk[] = [
@@ -116,7 +116,7 @@ export const HookScene: React.FC = () => {
         <Stage>
             <Shake hits={[HOOK.change + 2]} amp={7}>
                 <Headline text="Cần gấp báo cáo 12 cột đúng mẫu NHNN" at={0} out={88} size={fit('Cần gấp báo cáo 12 cột đúng mẫu NHNN', 96)} top={80} accent={['12 cột đúng mẫu NHNN']} />
-                <Headline text="Phải lập phiếu nhờ IT kéo số" at={90} out={148} size={fit('Phải lập phiếu nhờ IT kéo số', 96)} top={80} accent={['lập phiếu nhờ IT']} />
+                <Headline text="Phải lập phiếu nhờ team Data/Tech kéo số" at={90} out={148} size={fit('Phải lập phiếu nhờ team Data/Tech kéo số', 96)} top={80} accent={['lập phiếu nhờ team Data/Tech']} />
                 <Headline text="Xếp cuối hàng, nhích lên từng ngày" at={150} out={324} size={fit('Xếp cuối hàng, nhích lên từng ngày', 96)} top={80} accent={['nhích lên từng ngày']} />
                 <Headline text="Gần tới lượt, sửa một tiêu chí là về cuối hàng" at={326} size={fit('Gần tới lượt, sửa một tiêu chí là về cuối hàng', 90)} top={80} accent={['về cuối hàng']} />
 
@@ -160,9 +160,9 @@ export const HookScene: React.FC = () => {
                     border: isPiledUp ? `2.5px solid ${C.red}` : `1px solid ${C.rule}`,
                     opacity: Math.min(1, queueIn * 1.5), transform: `translateX(${(1 - queueIn) * 500}px)`,
                 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 25, fontWeight: 800, color: INK }}>
-                        <Ico k="clock" size={28} color={isPiledUp ? C.red : C.navy} />Hàng chờ IT
-                        <span style={{ marginLeft: 'auto', padding: '5px 14px', borderRadius: 999, fontSize: 19, fontWeight: 800, background: isPiledUp ? '#FDECEA' : '#F1F0F8', color: isPiledUp ? C.red : C.steel }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 23, fontWeight: 800, color: INK, whiteSpace: 'nowrap' }}>
+                        <Ico k="clock" size={28} color={isPiledUp ? C.red : C.navy} />Hàng chờ team Data/Tech
+                        <span style={{ marginLeft: 'auto', padding: '5px 12px', borderRadius: 999, fontSize: 17, fontWeight: 800, background: isPiledUp ? '#FDECEA' : '#F1F0F8', color: isPiledUp ? C.red : C.steel }}>
                             {total} yêu cầu{isPiledUp ? ' · Dồn ứ' : ''}
                         </span>
                     </div>
@@ -251,10 +251,10 @@ export const TurnScene: React.FC = () => {
                     return <div key={i} style={{ ...panelStyle, left: 860 + Math.cos(a) * 900 * p, top: 500 + Math.sin(a) * 600 * p, width: 220, height: 64, borderRadius: 14, opacity: 1 - p, transform: `rotate(${(i - 2.5) * 30 * p}deg)` }} />
                 })}
                 <Headline
-                    text="Hết cảnh gửi phiếu xếp hàng chờ IT"
+                    text="Hết cảnh gửi phiếu xếp hàng chờ team Data/Tech"
                     at={0}
                     out={74 + d}
-                    size={fit('Hết cảnh gửi phiếu xếp hàng chờ IT', 108)}
+                    size={fit('Hết cảnh gửi phiếu xếp hàng chờ team Data/Tech', 108)}
                     top={410}
                     accent={['Hết cảnh']}
                 />

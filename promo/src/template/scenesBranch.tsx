@@ -498,7 +498,7 @@ export const JinjaExcelScene: React.FC = () => {
 
 // ─── Tổng kết bản Biz: giá trị mang lại, Trước → Nay ─────────────────────────────
 export const RECAP_T = { before: 15, strike: 36, arrow: 48, after: 60, pills: 96, pillGap: 15 }
-const BEFORE_LINES = ['Lập phiếu nhờ IT kéo số', 'Sửa tiêu chí là chờ lại từ đầu']
+const BEFORE_LINES = ['Lập phiếu nhờ team Data/Tech kéo số', 'Sửa tiêu chí là chờ lại từ đầu']
 const AFTER_LINES = ['Tự hỏi, ra đúng 12 cột mẫu', 'Mẫu dùng chung, kỳ sau tự tải']
 const RECAP_PILLS: [IconKind, string][] = [['users', 'Một tiêu chí cho cả phòng'], ['badgeCheck', 'Có người duyệt'], ['lock', 'Chỉ dùng cột được phép']]
 
@@ -513,7 +513,7 @@ export const RecapBizScene: React.FC = () => {
     const lineIn = (at: number, i: number) => ease(f, [at + 14 + i * 8, at + 24 + i * 8], [0, 1])
     return (
         <Stage>
-            <Headline text="Nghiệp vụ tự lấy số, đúng mẫu, không chờ IT" at={0} size={fit('Nghiệp vụ tự lấy số, đúng mẫu, không chờ IT', 92)} top={100} accent={['không chờ IT']} />
+            <Headline text="Nghiệp vụ tự lấy số, đúng mẫu, không chờ team Data/Tech" at={0} size={fit('Nghiệp vụ tự lấy số, đúng mẫu, không chờ team Data/Tech', 92)} top={100} accent={['không chờ team Data/Tech']} />
             {/* Trước */}
             <div style={{ ...panelStyle, left: 170, top: 290, width: 640, height: 420, padding: '30px 40px', boxSizing: 'border-box', background: '#F7F7FB', opacity: Math.min(1, before * 2), transform: `translateX(${(1 - before) * -60}px)` }}>
                 <span style={{ padding: '6px 18px', borderRadius: 999, background: '#E5E3F2', color: C.steel, fontSize: 22, fontWeight: 800 }}>Trước</span>
@@ -538,7 +538,7 @@ export const RecapBizScene: React.FC = () => {
             <div style={{ ...panelStyle, left: 1110, top: 290, width: 640, height: 420, padding: '30px 40px', boxSizing: 'border-box', border: '3px solid #C4B5FD', boxShadow: '0 30px 80px rgba(109,93,246,0.25)', opacity: Math.min(1, after * 2), transform: `scale(${0.9 + 0.1 * after})` }}>
                 <span style={{ padding: '6px 18px', borderRadius: 999, background: GRAD_H, color: '#fff', fontSize: 22, fontWeight: 800 }}>Nay</span>
                 <div style={{ marginTop: 22, fontSize: 76, fontWeight: 800, lineHeight: 1.1, whiteSpace: 'nowrap', backgroundImage: GRAD_H, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent' }}>Ngay khi cần</div>
-                <div style={{ fontSize: 22, color: C.steel, marginTop: 16 }}>tự lấy số, không cần phiếu IT</div>
+                <div style={{ fontSize: 22, color: C.steel, marginTop: 16 }}>tự lấy số, không cần phiếu gửi team Data/Tech</div>
                 {AFTER_LINES.map((t, i) => (
                     <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: i ? 12 : 26, fontSize: 27, fontWeight: 800, color: INK, opacity: lineIn(T.after, i) }}>
                         <Ico k="check" size={26} color={C.emerald} stroke={3} />{t}
