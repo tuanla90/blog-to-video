@@ -1,5 +1,5 @@
 import React from 'react'
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion'
+import { Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from 'remotion'
 import { C, FONT } from '../theme'
 import { ease, INK, panelStyle, Stage } from '../promo/kit'
 import { BRAND } from './data'
@@ -26,29 +26,54 @@ export const CMP_BEFORE = {
 
 /**
  * Mốc frame cho Cảnh Quy Trình (`CompareAfterScene`):
- *  - Nhịp 1 (0..195): Quy trình cũ — User & team Data/Tech đẩy phiếu qua lại, Làm rõ ⇄ Phát triển nhiều vòng,
- *    nghiệm thu lộ gap thì quay lại Làm rõ; kết bằng dải cảnh báo
- *  - Nhịp 2 (195..430): Quy trình mới — User làm chủ mạch 4 bước, team Data/Tech · CĐS dựng nền phía dưới
+ *  - Nhịp 1 (0..255): Quy trình cũ — một phiếu yêu cầu chạy đúng luồng: Đưa → Nhận → chờ backlog → Phát triển,
+ *    Làm rõ ⇄ Phát triển hai vòng, Nghiệm thu lộ gap → quay lại Làm rõ (vòng 3) → Phát triển → Nghiệm thu đạt → Go-live;
+ *    mỗi thẻ hiện ra đúng lúc phiếu tới; kết bằng dải cảnh báo
+ *  - Nhịp 2 (256..430): Quy trình mới — User làm chủ mạch 4 bước, team Data/Tech · CĐS dựng nền phía dưới
  */
 export const CMP_AFTER = {
     oldLane: 14,
-    oldStep1: 20,
-    oldStep2: 40,
-    oldStep3: 60,
-    oldStep4: 80,
-    oldClarify: 98,
-    oldStep5: 122,
-    oldRework: 138,
-    oldStep6: 152,
-    oldWarn: 166,
-    newStart: 196,
-    newIt1: 212,
-    newUser1: 238,
-    newUser2: 264,
-    newUser3: 290,
-    newUser4: 316,
-    newSupport: 342,
-    newNote: 368,
+    oldStep1: 16,
+    oldStep2: 26,
+    oldStep3: 44,
+    oldStep4: 84,
+    oldClarify: 100,
+    oldStep5: 156,
+    oldGap: 176,
+    oldRework: 182,
+    oldPass: 224,
+    oldStep6: 230,
+    oldWarn: 244,
+    newStart: 256,
+    newIt1: 266,
+    newUser1: 282,
+    newUser2: 298,
+    newUser3: 314,
+    newUser4: 330,
+    newSupport: 346,
+    newNote: 366,
+}
+
+/** Đường phiếu yêu cầu đi trong quy trình cũ: mỗi chặng [khung bắt đầu, khung tới, các điểm (toạ độ trong khối cũ)]. */
+type Leg = [number, number, [number, number][]]
+/** Vị trí phiếu tại khung f: trong chặng thì nội suy theo độ dài đường gấp khúc, giữa hai chặng thì đứng ở điểm cuối chặng trước. */
+const tokenAt = (f: number, legs: Leg[]): [number, number] => {
+    let pos = legs[0][2][0]
+    for (const [a, b, pts] of legs) {
+        if (f < a) break
+        if (f >= b) { pos = pts[pts.length - 1]; continue }
+        const t = ease(f, [a, b], [0, 1], Easing.inOut(Easing.cubic))
+        const lens = pts.slice(1).map((p, i) => Math.hypot(p[0] - pts[i][0], p[1] - pts[i][1]))
+        let d = t * lens.reduce((s, l) => s + l, 0)
+        for (let i = 0; i < lens.length; i++) {
+            if (d <= lens[i] || i === lens.length - 1) {
+                const k = lens[i] ? Math.min(1, d / lens[i]) : 1
+                return [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k]
+            }
+            d -= lens[i]
+        }
+    }
+    return pos
 }
 
 const popAt = (f: number, at: number, fps: number) =>
@@ -589,16 +614,51 @@ export const CompareAfterScene: React.FC = () => {
 
     const pulse = 0.5 + 0.5 * Math.sin(f / 6)
 
-    // Chấm chạy qua lại giữa Làm rõ yêu cầu (trên) và Phát triển (dưới): xuống theo mũi trái, lên theo mũi phải.
+    // Làm rõ yêu cầu (trên) ⇄ Phát triển (dưới): xuống theo mũi trái, lên theo mũi phải.
     const pingX = c3 + boxW / 2
     const pingTop = yU + boxH + 4
     const pingBot = yD - 4
-    const pingPeriod = 36
-    const pingT = ((f - CMP_AFTER.oldClarify) % pingPeriod + pingPeriod) % pingPeriod / pingPeriod
-    const pingDown = pingT < 0.5
-    const pingY = pingDown
-        ? interpolate(pingT, [0, 0.5], [pingTop, pingBot])
-        : interpolate(pingT, [0.5, 1], [pingBot, pingTop])
+
+    // Phiếu yêu cầu chạy đúng luồng; mỗi thẻ ở trên pop ngay trước lúc phiếu tới.
+    const cx = (c: number) => c + boxW / 2
+    const up: [number, number][] = [[pingX, midD], [pingX + 30, pingBot], [pingX + 30, pingTop], [pingX, midU]]
+    const down: [number, number][] = [[pingX, midU], [pingX - 30, pingTop], [pingX - 30, pingBot], [pingX, midD]]
+    const toUat: [number, number][] = [[pingX, midD], [c4 - 22, midD], [c4 - 22, yU + 74], [cx(c4), midU]]
+    const legs: Leg[] = [
+        [26, 40, [[cx(c1), midU], [cx(c1), midD]]],
+        [44, 58, [[cx(c1), midD], [cx(c2), midD]]],
+        // 58..84 nằm chờ ở Xếp backlog
+        [84, 98, [[cx(c2), midD], [pingX, midD]]],
+        [100, 112, up], [114, 126, down],
+        [128, 140, up], [142, 154, down],
+        [156, 172, toUat],
+        // 172..184 nghiệm thu lộ gap → quay lại Làm rõ theo mũi đứt
+        [184, 196, [[cx(c4), midU], [c4, yU + 26], [c3 + boxW, yU + 26], [pingX, midU]]],
+        [198, 208, down],
+        [210, CMP_AFTER.oldPass, toUat],
+        [CMP_AFTER.oldPass + 4, 240, [[cx(c4), midU], [c5 - 22, midU], [c5 - 22, midD], [cx(c5), midD]]],
+    ]
+    const [tx, ty] = tokenAt(f, legs)
+    // Phiếu nằm dưới thẻ: chỉ lộ ra khi chạy trên mũi tên giữa hai thẻ, vào thẻ nào thì thẻ đó sáng viền.
+    const tokenIn = Math.min(ease(f, [20, 26], [0, 1]), 1 - ease(f, [244, 252], [0, 1]))
+    const stays: { x: number; y: number; at: [number, number][]; color?: (f: number) => string }[] = [
+        { x: c1, y: yU, at: [[16, 28]] },
+        { x: c1, y: yD, at: [[38, 46]] },
+        { x: c2, y: yD, at: [[56, 86]] },
+        { x: c3, y: yD, at: [[96, 102], [124, 130], [152, 158], [206, 212]] },
+        { x: c3, y: yU, at: [[110, 116], [138, 144], [194, 200]] },
+        { x: c4, y: yU, at: [[170, 186], [CMP_AFTER.oldPass - 2, CMP_AFTER.oldPass + 6]], color: t => (t < CMP_AFTER.oldPass - 2 ? '#DC2626' : C.emerald) },
+        { x: c5, y: yD, at: [[238, 270]] },
+    ]
+    const glowOf = (at: [number, number][]) => Math.max(0, ...at.map(([a, b]) => Math.min(ease(f, [a, a + 4], [0, 1]), 1 - ease(f, [b, b + 10], [0, 1]))))
+    // Vòng làm rõ: đếm số lần phiếu lên tới Làm rõ yêu cầu
+    const roundAt = [112, 140, 196]
+    const round = roundAt.filter(at => f >= at).length
+    const roundPop = popAt(f, roundAt[Math.max(0, round - 1)], fps)
+    const gapPop = popAt(f, CMP_AFTER.oldGap, fps)
+    const passed = f >= CMP_AFTER.oldPass
+    const passPop = popAt(f, CMP_AFTER.oldPass, fps)
+    const gapShake = f >= CMP_AFTER.oldGap && f < CMP_AFTER.oldGap + 10 ? Math.sin(f * 2.4) * 4 * (1 - (f - CMP_AFTER.oldGap) / 10) : 0
 
     return (
         <Stage>
@@ -681,6 +741,18 @@ export const CompareAfterScene: React.FC = () => {
                     </span>
                 </div>
 
+                {/* Phiếu yêu cầu: vẽ dưới các thẻ nên chỉ thấy khi chạy trên mũi tên */}
+                {tokenIn > 0.01 && (
+                    <div style={{
+                        position: 'absolute', left: tx - 15, top: ty - 15, width: 30, height: 30, borderRadius: 99,
+                        background: f >= 182 && f < 198 ? '#DC2626' : '#EA580C', border: '3px solid #fff', boxSizing: 'border-box',
+                        boxShadow: '0 0 14px rgba(234,88,12,0.65)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        opacity: tokenIn,
+                    }}>
+                        <Ico k="fileText" size={14} color="#fff" stroke={2.6} />
+                    </div>
+                )}
+
                 {/* 7 bước: hai vòng lặp Làm rõ ⇄ Phát triển và Nghiệm thu ⇢ Làm rõ */}
                 <FlowNode x={c1} y={yU} w={boxW} h={boxH} tone="old" p={o1} icon="send" title="Đưa yêu cầu" sub="Báo cáo mới" />
                 <FlowNode x={c1} y={yD} w={boxW} h={boxH} tone="old" p={o2} icon="inbox" title="Nhận yêu cầu" sub="Từ nghiệp vụ" />
@@ -702,12 +774,11 @@ export const CompareAfterScene: React.FC = () => {
                     {o2 > 0.1 && <line x1={c1 + boxW / 2} y1={yU + boxH} x2={c1 + boxW / 2} y2={yD - 6} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" opacity={o2} />}
                     {o3 > 0.1 && <line x1={c1 + boxW} y1={midD} x2={c2 - 6} y2={midD} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" opacity={o3} />}
                     {o4 > 0.1 && <line x1={c2 + boxW} y1={midD} x2={c3 - 6} y2={midD} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" opacity={o4} />}
-                    {/* Làm rõ ⇄ Phát triển: mũi xuống bên trái, mũi lên bên phải, chấm chạy qua lại */}
+                    {/* Làm rõ ⇄ Phát triển: mũi xuống bên trái, mũi lên bên phải */}
                     {oC > 0.1 && (
                         <g opacity={oC}>
                             <line x1={pingX - 30} y1={pingTop} x2={pingX - 30} y2={pingBot - 4} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" />
                             <line x1={pingX + 30} y1={pingBot} x2={pingX + 30} y2={pingTop + 4} stroke="#D97706" strokeWidth="2.4" markerEnd="url(#arrOldFlow)" />
-                            <circle cx={pingDown ? pingX - 30 : pingX + 30} cy={pingY} r={5.5} fill="#DC2626" />
                         </g>
                     )}
                     {o5 > 0.1 && <path d={`M ${c3 + boxW} ${midD} L ${c4 - 22} ${midD} L ${c4 - 22} ${yU + 74} L ${c4 - 6} ${yU + 74}`} stroke="#D97706" strokeWidth="2.4" fill="none" markerEnd="url(#arrOldFlow)" opacity={o5} />}
@@ -715,6 +786,38 @@ export const CompareAfterScene: React.FC = () => {
                     {oR > 0.1 && <line x1={c4} y1={yU + 26} x2={c3 + boxW + 6} y2={yU + 26} stroke="#DC2626" strokeWidth="2.6" strokeDasharray="6 5" strokeDashoffset={-f * 0.6} markerEnd="url(#arrOldBack)" opacity={oR} />}
                     {o6 > 0.1 && <path d={`M ${c4 + boxW} ${midU} L ${c5 - 22} ${midU} L ${c5 - 22} ${midD} L ${c5 - 6} ${midD}`} stroke="#D97706" strokeWidth="2.4" fill="none" markerEnd="url(#arrOldFlow)" opacity={o6} />}
                 </svg>
+
+                {/* Viền sáng ở thẻ phiếu đang nằm */}
+                {stays.map(({ x, y, at, color }, i) => {
+                    const g = glowOf(at)
+                    if (g <= 0.01) return null
+                    const col = color ? color(f) : '#EA580C'
+                    return <div key={i} style={{ position: 'absolute', left: x - 5, top: y - 5, width: boxW + 10, height: boxH + 10, borderRadius: 22, border: `3px solid ${col}`, boxShadow: `0 0 ${22 * g}px ${col}`, opacity: g, pointerEvents: 'none' }} />
+                })}
+
+                {/* Đếm vòng làm rõ yêu cầu */}
+                {round > 0 && (
+                    <span style={{
+                        position: 'absolute', left: c3 + boxW - 92, top: yU - 16, display: 'inline-flex', alignItems: 'center', gap: 5,
+                        padding: '3px 11px', borderRadius: 99, background: '#DC2626', color: '#fff',
+                        fontFamily: FONT, fontSize: 15, fontWeight: 800, boxShadow: '0 4px 12px rgba(220,38,38,0.3)',
+                        transform: `scale(${0.7 + 0.3 * roundPop})`,
+                    }}>
+                        <Ico k="history" size={14} color="#fff" stroke={2.6} />Vòng {round}
+                    </span>
+                )}
+
+                {/* Nghiệm thu: lần đầu lộ gap, lần sau đạt */}
+                {gapPop > 0.02 && (
+                    <span style={{
+                        position: 'absolute', left: c4 + boxW - (passed ? 74 : 92), top: yU - 16, display: 'inline-flex', alignItems: 'center', gap: 5,
+                        padding: '3px 11px', borderRadius: 99, background: passed ? C.emerald : '#DC2626', color: '#fff',
+                        fontFamily: FONT, fontSize: 15, fontWeight: 800,
+                        transform: `translateX(${gapShake}px) scale(${passed ? 0.7 + 0.3 * passPop : 0.7 + 0.3 * gapPop})`,
+                    }}>
+                        <Ico k={passed ? 'check' : 'shieldAlert'} size={14} color="#fff" stroke={2.6} />{passed ? 'Đạt' : 'Lộ gap'}
+                    </span>
+                )}
 
                 <NoteBar top={noteTop} p={oW} tone="warn" text="Phân tích nghiệp vụ phải trao đổi qua lại nhiều vòng, tốn thời gian; dù vậy vẫn có thể còn gap, đến UAT mới phát hiện" />
             </div>
