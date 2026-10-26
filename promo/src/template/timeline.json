@@ -1,5 +1,5 @@
 {
-    "_note": "Nguồn duy nhất cho thứ tự + thời lượng cảnh bản Biz. Mỗi cảnh trừ cảnh cuối: dur - xf phải là bội số 2 phách (30 khung ở 120 BPM) để mọi lần chuyển cảnh rơi đúng phách. Nhạc: music.file vào sau cảnh đầu music.delay khung, cắt music.trimBefore khung đầu bài để phách 1 rơi đúng khung 0 (Calculated_Ascent: 119,99 BPM, phách đầu 0,06 s). accents = khung trong cảnh trùng mốc đổi đoạn của bài (ghi chú để canh, không tự động). section = đoạn nhạc tính theo giây của bài. mood = kiểu nhạc cho tools/gen_score.py (nhạc tổng hợp dự phòng, không còn dùng mặc định).",
+    "_note": "Nguồn duy nhất cho thứ tự + thời lượng cảnh bản Biz. Mỗi cảnh trừ cảnh cuối: dur - xf phải là bội số 2 phách (30 khung ở 120 BPM) để mọi lần chuyển cảnh rơi đúng phách. Nhạc: music.file vào sau cảnh đầu music.delay khung, cắt music.trimBefore khung đầu bài để phách 1 rơi đúng khung 0 (Calculated_Ascent: 119,99 BPM, phách đầu 0,06 s). accents = khung trong cảnh trùng mốc đổi đoạn của bài (ghi chú để canh, không tự động). section = đoạn nhạc tính theo giây của bài. mood = kiểu nhạc cho tools/gen_score.py (nhạc tổng hợp dự phòng, không còn dùng mặc định). music.segments (tuỳ chọn) = dựng lại bài theo ô nhịp: các đoạn [giây trong bài từ, đến) đặt nối nhau, đan tiếng ở chỗ nối; section/accents của từng cảnh vẫn tính theo giây trong bài.",
     "bpm": 120,
     "fps": 30,
     "lead": 36,
@@ -8,7 +8,17 @@
         "file": "music/calculated-ascent.mp3",
         "delay": 30,
         "trimBefore": 2,
-        "sections": "0 intro · 10 trống vào · 12 build · 18 hụt · 20 DROP · 34 fill · 36 full · 44-52 lắng · 52 DROP · 58 fill · 60 full · 74 fill · 76 full · 84-92 lắng · 92 build · 104 hụt · 108 DROP cuối · 122 tắt dần · 124 hết"
+        "sections": "0 intro · 10 trống vào · 12 build · 18 hụt · 20 DROP · 34 fill · 36 full · 44-52 lắng · 52 DROP · 58 fill · 60 full · 74 fill · 76 full · 84-92 lắng · 92 build · 104 hụt · 108 DROP cuối · 122 tắt dần · 124 hết · DỰNG LẠI 26/10 (thêm 2 sơ đồ so sánh, +28 s): bài 0→46 (hook, logo, DROP 20 vào sơ đồ kiến trúc, fill 34 vào sơ đồ quy trình, lắng 44) rồi nối 18→124 (hụt 18 cuối sơ đồ quy trình, DROP 20 vào semBiz như cũ)",
+        "segments": [
+            [
+                0,
+                46
+            ],
+            [
+                18,
+                124
+            ]
+        ]
     },
     "biz": [
         {
@@ -16,77 +26,123 @@
             "dur": 400,
             "mood": "tension",
             "section": "0-12 intro, trống vào lúc sửa tiêu chí",
-            "accents": [330]
+            "accents": [
+                330
+            ]
         },
         {
             "id": "turn",
             "dur": 250,
             "mood": "reveal",
             "section": "12-20 build + hụt trước drop",
-            "accents": [0, 120]
+            "accents": [
+                0,
+                120
+            ]
+        },
+        {
+            "id": "compareBefore",
+            "dur": 430,
+            "mood": "groove",
+            "section": "20-34 DROP vào đúng lúc hiện sơ đồ kiến trúc dữ liệu",
+            "accents": [
+                0
+            ]
+        },
+        {
+            "id": "compareAfter",
+            "dur": 430,
+            "mood": "build",
+            "section": "34-46 fill vào sơ đồ quy trình, full 36, lắng 44; nối sang 18-20 hụt ở cuối cảnh rồi DROP 20 vào semBiz",
+            "accents": [
+                0,
+                60,
+                360
+            ]
         },
         {
             "id": "semBiz",
             "dur": 490,
             "mood": "groove",
             "section": "20-36 DROP vào đúng lúc hiện màn Column Builder",
-            "accents": [0, 405]
+            "accents": [
+                0,
+                405
+            ]
         },
         {
             "id": "chatAsk",
             "dur": 400,
             "mood": "groove",
             "section": "36-49 full, ba ngả rơi vào đoạn lắng 44",
-            "accents": [195, 285]
+            "accents": [
+                195,
+                285
+            ]
         },
         {
             "id": "chatDrill",
             "dur": 280,
             "mood": "groove",
             "section": "49-58 biểu đồ hiện đúng DROP 52",
-            "accents": [90]
+            "accents": [
+                90
+            ]
         },
         {
             "id": "chatSchedule",
             "dur": 370,
             "mood": "breakdown",
             "section": "58-70 vào sau fill",
-            "accents": [165, 225]
+            "accents": [
+                165,
+                225
+            ]
         },
         {
             "id": "share",
             "dur": 310,
             "mood": "groove",
             "section": "70-80",
-            "accents": [240]
+            "accents": [
+                240
+            ]
         },
         {
             "id": "excelJinja",
             "dur": 310,
             "mood": "build",
             "section": "80-90 gắn mẫu trong đoạn lắng 84-92",
-            "accents": [225]
+            "accents": [
+                225
+            ]
         },
         {
             "id": "portalBiz",
             "dur": 490,
             "mood": "build",
             "section": "90-106 build, điền số ở 102",
-            "accents": [360]
+            "accents": [
+                360
+            ]
         },
         {
             "id": "recapBiz",
             "dur": 250,
             "mood": "full",
             "section": "106-114 'Nay' bật đúng DROP cuối 108",
-            "accents": [60]
+            "accents": [
+                60
+            ]
         },
         {
             "id": "outro",
             "dur": 300,
             "mood": "end",
             "section": "114-124 kết cùng lúc bài tắt",
-            "accents": [0]
+            "accents": [
+                0
+            ]
         }
     ]
 }

@@ -18,12 +18,14 @@ Cùng bộ khung với video Semanio DFL (`kit.tsx`: Stage, Headline, Shake, Bur
 - Đặt lịch gửi email từ hội thoại vẫn là **lộ trình** → giữ nhãn "Sắp ra mắt".
 - Số liệu mô phỏng phải tự khớp: khách cá nhân EUR có số dư 52.000 EUR (≈ 57.200 USD, vượt ngưỡng 50.000 USD).
 
-### Bảng cảnh — `PromoTemplateBiz` (vòng 4c, ≈ 2:03, thứ tự + dur ở `src/template/timeline.json`)
+### Bảng cảnh — `PromoTemplateBiz` (26/10, ≈ 2:34, thứ tự + dur ở `src/template/timeline.json`; nhạc dựng lại bài 0→46 + 18→124)
 
 | # | id | Chữ to (mỗi dòng một nhịp) | Hình hiện theo nhịp |
 |---|---|---|---|
 | 1 | `hook` | Cần gấp báo cáo 12 cột đúng mẫu NHNN · Phải lập phiếu nhờ team Data/Tech kéo số · Xếp cuối hàng, nhích lên từng ngày · Gần tới lượt, sửa một tiêu chí là về cuối hàng | Phiếu vào cuối hàng chờ có sẵn 5 phiếu → nhích lên #2 → bay về cuối |
 | 2 | `turn` | Hết cảnh gửi phiếu chờ team Data/Tech · SEMANTIX · Hỏi một câu, ra đúng mẫu báo cáo | Logo |
+| 2a | `compareBefore` | Trước đây: dữ liệu phân mảnh · Có Semantix: Chuẩn hoá Data Mart, báo cáo tự động | Sơ đồ kiến trúc dữ liệu trước / sau (giống bản Full), vào đúng DROP 20 |
+| 2b | `compareAfter` | Quy trình cũ: Qua lại nhiều vòng, chờ team Data/Tech xếp lịch · Quy trình mới: Nghiệp vụ làm chủ, team Data/Tech hỗ trợ nền tảng | Phiếu chạy đúng luồng cũ (Làm rõ ⇄ Phát triển, lộ gap ở UAT, quay lại) → quy trình mới 4 bước; hụt nhạc cuối cảnh rồi DROP vào semBiz |
 | 3 | `semBiz` | Phòng tự đặt tiêu chí bằng lời · AI dựng thành tiêu chí dùng chung · Thử ngay trên vài khách hàng · Có người duyệt, cả phòng dùng chung | Câu nói → hai cụm chữ bay thành chip → vạch quét đóng dấu Có/Không → con dấu ĐÃ DUYỆT → đường nối ra cả phòng |
 | 4 | `chatAsk` | Dán nguyên yêu cầu vào khung chat · AI dùng đúng tiêu chí phòng đã duyệt · Ra đúng 12 cột theo mẫu NHNN · Rồi đi tiếp một trong ba ngả | Khung chat hai bên: bong bóng yêu cầu → chấm đang gõ → các bước AI → tin kết quả 12/12 cột + 3 nút (= 3 ngả) |
 | 5 | `chatDrill` | Ngả 1 · Hỏi tiếp ngay trong khung chat · AI vẽ biểu đồ, chỉ ra điểm cần lưu ý | Cùng khung chat: câu hỏi → biểu đồ + nhận xét |

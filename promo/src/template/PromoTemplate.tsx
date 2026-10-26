@@ -23,14 +23,17 @@ import timeline from './timeline.json'
  */
 const XF = 10
 const LEAD = 36
-/** Nhạc bản Biz: bài trong timeline.json (Calculated_Ascent, 120 BPM), lưới cảnh canh theo các đoạn của bài; bản Full chưa có nhạc. */
+/**
+ * Nhạc bản Biz: bài trong timeline.json (Calculated_Ascent, 120 BPM), lưới cảnh canh theo các đoạn của bài. Từ 26/10
+ * dựng lại theo ô nhịp (bài 0→46 rồi 18→124) để chèn hai sơ đồ so sánh sau logo mà semBiz vẫn vào đúng DROP 20.
+ */
 /**
  * Nhạc nền: bài vào sau cảnh đầu `delay` khung, cắt `trimBefore` khung đầu bài để phách 1 rơi đúng khung 0.
  * `segments` (tuỳ chọn): dựng lại bài theo ô nhịp — các đoạn [giây trong bài từ, đến) đặt nối nhau từ giây 0
  * của nhạc, đan tiếng MUSIC_XFADE khung ở mỗi chỗ nối.
  */
 type Music = { file: string; delay: number; trimBefore: number; segments?: [number, number][] }
-const BIZ_MUSIC: Music = timeline.music
+const BIZ_MUSIC: Music = { ...timeline.music, segments: timeline.music.segments as [number, number][] }
 /**
  * Nhạc bản Full: Velocity_of_Ascent (120,01 BPM, phách đầu 0,06 s, dài 176 s) dựng lại theo ô nhịp cho vừa 3:12
  * của video (lặp 4 ô verse trước drop 1 và 8 ô groove trước drop cuối). Mốc theo giây nhạc (= giây video kể từ hook
@@ -207,7 +210,7 @@ export const SCENES_FULL: Scene[] = [
 
 /** Bản Biz cho cán bộ nghiệp vụ: thứ tự + thời lượng lấy từ timeline.json (chung với tools/gen_score.py). */
 const BIZ_BY_ID: Record<string, Scene> = Object.fromEntries([
-    SCENE_HOOK_MUSIC, SCENE_TURN_BIZ, SCENE_SEM_BIZ, SCENE_CHAT_ASK, SCENE_CHAT_DRILL, SCENE_CHAT_SCH, SCENE_BUTTON,
+    SCENE_HOOK_MUSIC, SCENE_TURN_BIZ, SCENE_COMPARE_BEFORE, SCENE_COMPARE_AFTER, SCENE_SEM_BIZ, SCENE_CHAT_ASK, SCENE_CHAT_DRILL, SCENE_CHAT_SCH, SCENE_BUTTON,
     SCENE_JINJA, SCENE_PORTAL_BIZ, SCENE_RECAP_BIZ, SCENE_OUTRO,
 ].map(s => [s.id, s]))
 export const SCENES_BIZ: Scene[] = timeline.biz.map(({ id, dur }) => ({ ...BIZ_BY_ID[id], dur }))
