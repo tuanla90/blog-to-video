@@ -1,0 +1,92 @@
+{
+    "_note": "Nguồn duy nhất cho thứ tự + thời lượng cảnh bản Biz. Mỗi cảnh trừ cảnh cuối: dur - xf phải là bội số 2 phách (30 khung ở 120 BPM) để mọi lần chuyển cảnh rơi đúng phách. Nhạc: music.file vào sau cảnh đầu music.delay khung, cắt music.trimBefore khung đầu bài để phách 1 rơi đúng khung 0 (Calculated_Ascent: 119,99 BPM, phách đầu 0,06 s). accents = khung trong cảnh trùng mốc đổi đoạn của bài (ghi chú để canh, không tự động). section = đoạn nhạc tính theo giây của bài. mood = kiểu nhạc cho tools/gen_score.py (nhạc tổng hợp dự phòng, không còn dùng mặc định).",
+    "bpm": 120,
+    "fps": 30,
+    "lead": 36,
+    "xf": 10,
+    "music": {
+        "file": "music/calculated-ascent.mp3",
+        "delay": 30,
+        "trimBefore": 2,
+        "sections": "0 intro · 10 trống vào · 12 build · 18 hụt · 20 DROP · 34 fill · 36 full · 44-52 lắng · 52 DROP · 58 fill · 60 full · 74 fill · 76 full · 84-92 lắng · 92 build · 104 hụt · 108 DROP cuối · 122 tắt dần · 124 hết"
+    },
+    "biz": [
+        {
+            "id": "hook",
+            "dur": 400,
+            "mood": "tension",
+            "section": "0-12 intro, trống vào lúc sửa tiêu chí",
+            "accents": [330]
+        },
+        {
+            "id": "turn",
+            "dur": 250,
+            "mood": "reveal",
+            "section": "12-20 build + hụt trước drop",
+            "accents": [0, 120]
+        },
+        {
+            "id": "semBiz",
+            "dur": 490,
+            "mood": "groove",
+            "section": "20-36 DROP vào đúng lúc hiện màn Column Builder",
+            "accents": [0, 405]
+        },
+        {
+            "id": "chatAsk",
+            "dur": 400,
+            "mood": "groove",
+            "section": "36-49 full, ba ngả rơi vào đoạn lắng 44",
+            "accents": [195, 285]
+        },
+        {
+            "id": "chatDrill",
+            "dur": 280,
+            "mood": "groove",
+            "section": "49-58 biểu đồ hiện đúng DROP 52",
+            "accents": [90]
+        },
+        {
+            "id": "chatSchedule",
+            "dur": 370,
+            "mood": "breakdown",
+            "section": "58-70 vào sau fill",
+            "accents": [165, 225]
+        },
+        {
+            "id": "share",
+            "dur": 310,
+            "mood": "groove",
+            "section": "70-80",
+            "accents": [240]
+        },
+        {
+            "id": "excelJinja",
+            "dur": 310,
+            "mood": "build",
+            "section": "80-90 gắn mẫu trong đoạn lắng 84-92",
+            "accents": [225]
+        },
+        {
+            "id": "portalBiz",
+            "dur": 490,
+            "mood": "build",
+            "section": "90-106 build, điền số ở 102",
+            "accents": [360]
+        },
+        {
+            "id": "recapBiz",
+            "dur": 250,
+            "mood": "full",
+            "section": "106-114 'Nay' bật đúng DROP cuối 108",
+            "accents": [60]
+        },
+        {
+            "id": "outro",
+            "dur": 300,
+            "mood": "end",
+            "section": "114-124 kết cùng lúc bài tắt",
+            "accents": [0]
+        }
+    ]
+}

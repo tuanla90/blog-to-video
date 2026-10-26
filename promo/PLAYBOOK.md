@@ -79,6 +79,7 @@ Remotion ra âm RMS ~−23, đỉnh −4,2 dBFS → nghe nhỏ trên loa hội t
 - **Đổi thời lượng một cảnh = bù đúng số khung ở cảnh khác**, nếu không mọi mốc sau lệch nhạc.
 - SFX: `SFX_GAIN 0.55` chung + `SFX_TRIM` hạ riêng tiếng chói (`wrong 0.35`, `type 0.55`, `riser 0.6`, `ding 0.8`). Không đặt "ting" dày đặc; không "ting" lúc hiện link cuối.
 - Không commit file nhạc (bản quyền riêng) — đặt vào `public/music/` rồi đặt `MUSIC_SRC`.
+- **Chưa có bài phù hợp → tự dựng nhạc khớp phách** (video template, 23/10): khai thứ tự + thời lượng cảnh ở một file JSON dùng chung (`src/template/timeline.json`: bpm, mood, accents), ép mỗi cảnh dài bội số 2 phách (120 BPM = 15 khung/phách) và để composition báo lỗi nếu lệch, rồi `python -I tools/gen_score.py` tổng hợp nhạc bằng numpy/scipy (trống + hợp âm bắt đầu lại ở đầu mỗi cảnh, nhấn ở `accents`, kết bằng hợp âm ngân). Kiểm khách quan: cú đánh mạnh có ở mọi điểm cắt, độ to theo mạch (mở đầu nhỏ, đoạn lặng, tổng kết to).
 
 **Prompt tạo nhạc (Suno / Udio / MusicGen):**
 
@@ -174,6 +175,11 @@ Python cần `av`, `numpy`, `Pillow` (đặt `PROMO_PY_SITE` nếu các gói n�
 - Không tô nổi một mục trong danh sách nếu không có lý do kể chuyện.
 - Các phần trên/dưới của một cảnh phải **nối ý với nhau** (vd dải nghiệp vụ ở trên → 3 ý "mở rộng thế nào" ở dưới, không phải 3 ý bảo mật rời rạc).
 - Tránh từ kỹ thuật với khán giả kinh doanh ("SQL" ở phần định vị).
+- **Mỗi tiêu đề chỉ tô MỘT cụm liền nhau**, ở chỗ quan trọng nhất (user 23/10): Headline của kit tô mọi từ trùng với từ nào đó trong `accent` nên câu bị loang lổ ("lập phiếu" ... "IT"); video template dùng Headline riêng trong `src/template/ui.tsx` (tô đúng cụm `accent[0]`, lần đầu). Không gắn nhãn "Mô phỏng" vàng lên từng khung — một dòng chú thích nhỏ ở góc là đủ.
+- **Chữ nhiều thì nhịp chậm lại** (đủ thời gian đọc); muốn giữ nhịp 2–4 giây một ý thì phải làm hình dễ hiểu, bớt chữ (user, 23/10).
+- **Nội dung đến đâu hiện đến đó**: phần tử chưa được tiêu đề nhắc thì chưa hiện; không xếp thẻ hứa hẹn trước khi tới phần đó.
+- **Không hiện chi tiết code** với khán giả nghiệp vụ: ô giữ chỗ vẽ thành chip mang tên cột (không `{{ Main.cif }}`, không `{nam_bao_cao}`), không SQL/JSON/chuỗi cron; gõ dở thì chưa hiện, đủ tên mới bật chip.
+- Đo nhịp bằng số: render bản 1/4 (`--scale=0.25 --muted`) rồi `python -I tools/holds.py <mp4> <cảnh.json>` đếm đoạn đứng yên ≥ 1,5 giây (tỷ lệ điểm ảnh đổi mạnh, vì nền Stage luôn trôi); cắt đuôi cảnh và dời mốc thay vì tua.
 - Hook: nỗi đau cụ thể của khán giả (bản dự thi: nhiều ngày khớp số cuối kỳ; bản ngân hàng: hàng chục yêu cầu số liệu xếp hàng) + **lịch bóc** vắt qua kỳ chốt số, bắt đầu ngày thường, nhịp lật chậm → nhanh → chậm.
 
 ### Tính trung thực
