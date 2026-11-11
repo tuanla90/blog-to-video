@@ -13,7 +13,8 @@ import {AbsoluteFill, Freeze, Img, Loop, OffthreadVideo, Sequence, staticFile, u
   interpolate, Easing, random} from "remotion";
 import {C, INTER, MONO, HAND} from "./ui";
 import {CONFIG} from "./config";
-import {NotebookLayer, pickText, minPx, Mark} from "./notebook";
+import {NotebookLayer, pickText, minPx, Mark, integ, handFamily, InkDefs, InkString, inkLayer, Stitch, frameAt, wordEnd} from "./notebook";
+import {PenBlock, usePenFont} from "./pen";
 
 type Win = [number, number];
 type Cam = {x: number; y: number; zoom: number};
@@ -439,37 +440,63 @@ export const ElNotePage: React.FC<{p: any; win: Win; v: number; lines?: any[]}> 
       : from + Math.round((span * (i + 0.6)) / (notes.length + 1)));
 
   const WRITE = Math.max(6, Math.round((p.writeSec ?? 0.5) * fps));   // thời gian "viết xong" một dòng
-  const ink = p.ink || "#2c3742";
+  const nb = (CONFIG as any).notebook || {};
+  const ink = p.ink || nb.ink || "#2c3742";
+  const ig = integ(p), fam = handFamily(p), stitch = p.stitch ?? nb.stitch;
+  const cps = p.cps ?? nb.cps ?? 12;   // tốc độ viết tay (chữ/giây) khi ghi chú không neo `toWord`
+  const penCfg = p.pen ?? nb.pen, penFont = usePenFont(penCfg);
+  const pen = ig && penFont && penCfg !== false ? {font: penFont, pencil: penCfg?.pencil !== false} : null;
+  const markProg = (m: any) => {
+    if (!m) return 0;
+    if (m.done) return 1;
+    const s0 = frameAt(m, lines, fps, from);
+    return s0 == null ? 0 : interpolate(f, [s0, s0 + Math.round((m.dur ?? 0.6) * fps)], [0, 1], clamp);
+  };
 
   return (
     <AbsoluteFill style={{background: p.bg || "#0b0d10", overflow: "hidden"}}>
       <Img src={src(p.src)} style={{position: "absolute", left: r.left, top: r.top, width: r.w, height: r.h,
         objectFit: fit === "contain" ? "contain" : "cover", display: "block"}} />
       {notes.map((n, i) => {
-        const start = at[i];
+        const start = n.done ? from : at[i];
         if (f < start) return null;
-        // mực chạy từ trái sang phải như đầu bút đi, cộng một nhịp đậm dần rất ngắn
-        const wipe = interpolate(f, [start, start + WRITE], [0, 1], clamp);
-        const fade = interpolate(f, [start, start + Math.round(WRITE * 0.4)], [0.35, 1], clamp);
+        const txt = n.mark === "hypothesis" ? `${pickText(n.text)} (?)` : pickText(n.text);
+        // bật integrate: viết từng chữ cái, xong đúng lúc lời đọc tới `toWord` (hoặc `toSec`); không neo thì theo
+        // tốc độ tay `cps`. Tắt: mực chạy từ trái sang phải như cũ, cộng một nhịp đậm dần rất ngắn.
+        const endW = !ig ? null : typeof n.toSec === "number" ? from + Math.round(n.toSec * fps) : wordEnd(n.toWord, lines, fps, start);
+        const dur = !ig ? WRITE : Math.max(WRITE, endW != null ? endW - start : Math.round((txt.length / cps) * fps));
+        const wipe = n.done ? 1 : interpolate(f, [start, start + dur], [0, 1], clamp);
+        const fade = n.done || ig ? 1 : interpolate(f, [start, start + Math.round(WRITE * 0.4)], [0.35, 1], clamp);
         // nghiêng nhẹ mỗi dòng một khác cho ra nét tay; random của remotion nên render lại vẫn y hệt
         const tilt = n.rotate ?? (random(`notepage-${p.src}-${i}`) - 0.5) * 2.4;
         const align = n.align || "left";
+        if (pen) {           // có xương chữ: chữ lộ dần theo đường bút, bút chì đi theo ngòi
+          const fs = Math.max((n.size ?? p.size ?? 3.2) * v, minPx(W, H, "body")), ms = fs * 0.8;
+          return <PenBlock key={i} text={txt} font={pen.font} size={fs} maxW={(n.w ?? 0.24) * r.w} lh={1.28} align={align}
+            color={ink} fam={fam} t={wipe} st={markProg(n.strike)} ut={markProg(n.underline)} seed={`${p.src}-n${i}`}
+            jitter={ig!.jitter} ink={inkLayer(ig)} pencil={pen.pencil} wob={Math.sin(f / 7)} indent={n.mark ? ms * 1.4 : 0}
+            pos={{position: "absolute", left: r.left + n.x * r.w, top: r.top + n.y * r.h, transformOrigin: "left center",
+              transform: `translate(${align === "right" ? "-100%" : align === "center" ? "-50%" : "0"}, -50%) rotate(${tilt}deg)`}}
+            prefix={n.mark ? (b) => <Mark kind={n.mark} size={ms} color={ink} seed={`${p.src}-nm${i}`} at={[0, b - ms * 0.92]} /> : undefined} />;
+        }
         return (
           <div key={i} style={{position: "absolute",
             left: r.left + n.x * r.w, top: r.top + n.y * r.h,
             width: (n.w ?? 0.24) * r.w,
             transform: `translate(${align === "right" ? "-100%" : align === "center" ? "-50%" : "0"}, -50%) rotate(${tilt}deg)`,
             transformOrigin: "left center",
-            fontFamily: HAND, fontSize: Math.max((n.size ?? p.size ?? 3.2) * v, minPx(W, H, "body")), lineHeight: 1.28,
+            fontFamily: fam, fontSize: Math.max((n.size ?? p.size ?? 3.2) * v, minPx(W, H, "body")), lineHeight: 1.28,
             color: ink, opacity: fade, textAlign: align as any,
-            clipPath: `inset(-0.4em ${(1 - wipe) * 100}% -0.4em -0.2em)`,
+            ...(ig ? inkLayer(ig) : {clipPath: `inset(-0.4em ${(1 - wipe) * 100}% -0.4em -0.2em)`}),
             whiteSpace: "pre-wrap", wordBreak: "break-word"}}>
             <Mark kind={n.mark} size={Math.max((n.size ?? p.size ?? 3.2) * v, minPx(W, H, "body")) * 0.8} color={ink} seed={`${p.src}-nm${i}`} />
-            {n.mark === "hypothesis" ? `${pickText(n.text)} (?)` : pickText(n.text)}
+            <InkString text={txt} seed={`${p.src}-n${i}`} ig={ig} t={wipe} st={markProg(n.strike)} ut={markProg(n.underline)} color={ink} />
           </div>
         );
       })}
+      <InkDefs ig={ig} />
       <NotebookLayer p={{...p, ink}} R={r} from={from} to={to} v={v} lines={lines} />
+      {stitch ? <Stitch cfg={stitch} f={f} id={ig?.fid || "nbStitch"} /> : null}
     </AbsoluteFill>
   );
 };

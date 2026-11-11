@@ -12,6 +12,7 @@
 import React from "react";
 import {Composition, Sequence, Audio, AbsoluteFill, staticFile, useCurrentFrame, useVideoConfig, interpolate} from "remotion";
 import {Beat as BeatScene, BeatData} from "./kit";
+import {resolvePages} from "./notebook";
 import {Caption} from "./Caption";
 import {C, INTER, MONO, Bg, titleGrad} from "./ui";
 import {BRAND, CONFIG, sec} from "./config";
@@ -278,7 +279,8 @@ export const makeRoot = (videos: VideoEntry[], opts: {demo?: boolean} = {}): Rea
         {showDemo && (
           <Composition id="demo-kit" component={DemoKit} durationInFrames={420} fps={fps} width={1920} height={1080} />
         )}
-        {videos.map((entry) => {
+        {videos.map((entry0) => {
+          const entry = resolvePages(entry0);   // notepage `reopen`: cảnh sau nhận lại trang đã viết ở cảnh trước
           const total = layout(entry).total;
           const sl = shortLayout(entry);
           const Long: React.FC = () => <LongForm entry={entry} />;
